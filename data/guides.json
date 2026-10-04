@@ -1,0 +1,73 @@
+[
+ {
+  "slug": "navigating-kolkata",
+  "title": "Navigating Kolkata During Durga Puja",
+  "intro": "During Puja week, road traffic is heavily regulated with arterial roads converted to pedestrian zones. Kolkata's 5 operational Metro lines (including the underwater Green Line tunnel and Airport Yellow Line) plus Eastern & South Eastern Suburban Railways are your fastest, most reliable transport options.",
+  "sections": [
+   {
+    "title": "Interactive Metro & Railway Map",
+    "body": [
+     "Loading Kolkata Transit & Metro GIS Network...",
+     "Initializing 58 stations across 5 operational metro lines"
+    ]
+   },
+   {
+    "title": "Kolkata Metro Network Corridors",
+    "body": [
+     "All 5 operational lines mapped with exact GIS coordinates, platforms, and interchange points.",
+     "ব্লু লাইন (উত্তর-দক্ষিণ)",
+     "গ্রিন লাইন (পূর্ব-পশ্চিম)",
+     "পার্পল লাইন (জোকা-মাঝেরহাট)"
+    ]
+   },
+   {
+    "title": "Key Interchange & Junction Hubs",
+    "body": [
+     "Seamless transfer points between Metro lines and Indian Railways suburban terminals.",
+     "⇄ Blue Line ↔ Green Line",
+     "Largest station on the network (2 island + 2 side platforms); Green Line link opened 6-Mar-2024",
+     "⇄ Blue Line ↔ Orange Line"
+    ]
+   },
+   {
+    "title": "Additional Public Transit Options",
+    "body": [
+     "WBTC Special Puja Circular Buses, Ganges River Ferries, and Auto-rickshaw hubs.",
+     "The original Kolkata Metro runs from Noapara in the north to Kavi Subhash (New Garia) in the south, passing through the heart of the city. This is the most convenient way to travel between pandals in North, Central, and South Kolkata.",
+     "Operating Hours: 6:45 AM to 10:45 PM (Extended to 11:45 PM during Puja)",
+     "The newer East-West Metro connects Salt Lake Sector V (IT hub) to Esplanade in Central Kolkata, passing under the Hooghly river to Howrah. Excellent for visitors staying in Salt Lake or New Town."
+    ]
+   }
+  ]
+ },
+ {
+  "slug": "accommodation",
+  "title": "Where to Stay in Kolkata for Durga Puja",
+  "intro": "Hotels fill up months in advance for Puja week. Here is a curated selection of accommodations located near major Metro lines and pandal hubs.",
+  "sections": []
+ },
+ {
+  "slug": "food-trail",
+  "title": "Kolkata Durga Puja Food Trail",
+  "intro": "Durga Puja in Kolkata is as much a festival of gastronomy as it is of worship. From Puchka to Biryani, discover the iconic food stops along the pandal routes.",
+  "sections": []
+ },
+ {
+  "slug": "emergency",
+  "title": "Emergency Contacts & Helplines",
+  "intro": "24/7 Police control rooms, medical emergency numbers, fire brigade stations, and central help desks active throughout Durga Puja week.",
+  "sections": []
+ },
+ {
+  "slug": "etiquette",
+  "title": "Puja Etiquette & Festival Norms",
+  "intro": "Durga Puja is both an open public art festival and a sacred spiritual event. Simple guidelines to ensure a respectful experience for everyone.",
+  "sections": []
+ },
+ {
+  "slug": "photography",
+  "title": "Durga Puja Photography & Lighting Tips",
+  "intro": "Kolkata Durga Puja is a paradise for visual storytellers. Here is how to capture the festival gracefully while respecting sacred traditions and crowd safety.",
+  "sections": []
+ }
+]
