@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import fs from "fs";
 import path from "path";
 import ClientNav from "../components/ClientNav";
+import GalleryMotion from "../components/GalleryMotion";
 import AudioPlayer from "../components/AudioPlayer";
 import "./globals.css";
 
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div dangerouslySetInnerHTML={{ __html: CHROME_FOOT }} />
         <AudioPlayer tracks={TRACKS} />
         <ClientNav />
+        <GalleryMotion />
       </body>
     </html>
   );

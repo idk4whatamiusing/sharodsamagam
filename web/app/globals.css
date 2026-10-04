@@ -1,3 +1,8 @@
 @import "tailwindcss";
 
 /* Original compiled theme (fonts, variables, utilities) also loaded in layout via <link> */
+
+@keyframes scrollCol {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
