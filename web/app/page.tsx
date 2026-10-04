@@ -1,7 +1,6 @@
-import fs from "fs";
-import path from "path";
+import { mirrorHtml } from "../lib/mirror";
 
 export default function Home() {
-  const html = fs.readFileSync(path.join(process.cwd(), "mirror", "index.html"), "utf8");
-  return <div dangerouslySetInnerHTML={{ __html: html }} />;
+  const html = mirrorHtml("index");
+  return <div dangerouslySetInnerHTML={{ __html: html || "" }} />;
 }

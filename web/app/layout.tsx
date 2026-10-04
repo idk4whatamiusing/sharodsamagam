@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
+import fs from "fs";
+import path from "path";
 import "./globals.css";
+
+const MIRROR = path.join(process.cwd(), "mirror");
+const CHROME_HEAD = fs.readFileSync(path.join(MIRROR, "_chrome_head.html"), "utf8");
+const CHROME_FOOT = fs.readFileSync(path.join(MIRROR, "_chrome_foot.html"), "utf8");
 
 export const metadata: Metadata = {
   title: "Durga Puja Kolkata 2026",
@@ -17,7 +23,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="stylesheet" href="/static/css/0k7ka7ov05b06.css" data-precedence="next" />
         <link rel="stylesheet" href="/static/css/19rhlcx2srev9.css" data-precedence="next" />
       </head>
-      <body className="bg-[#FFFDF5] text-[#2C1210] antialiased min-h-screen flex flex-col">{children}</body>
+      <body className="bg-[#FFFDF5] text-[#2C1210] antialiased min-h-screen flex flex-col">
+        <div dangerouslySetInnerHTML={{ __html: CHROME_HEAD }} />
+        {children}
+        <div dangerouslySetInnerHTML={{ __html: CHROME_FOOT }} />
+      </body>
     </html>
   );
 }
