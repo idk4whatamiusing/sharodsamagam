@@ -1,1 +1,3 @@
-/* Theme provided by mirrored compiled stylesheets in public/_next/static/chunks */
+@import "tailwindcss";
+
+/* Original compiled theme (fonts, variables, utilities) also loaded in layout via <link> */
