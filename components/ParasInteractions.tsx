@@ -90,10 +90,26 @@ export default function ParasInteractions() {
       }
       document.body.classList.toggle("paras-list-mode", mode === "list");
     };
+    let mode = "grid" as "grid" | "list";
+    const paint = () => {
+      main.querySelectorAll<HTMLButtonElement>("button").forEach((b) => {
+        const t = b.innerText.trim();
+        if (t === "Grid") {
+          b.style.background = mode === "grid" ? "#D90429" : "";
+          b.style.color = mode === "grid" ? "#fff" : "";
+          b.style.borderColor = mode === "grid" ? "#D90429" : "";
+        }
+        if (t === "List") {
+          b.style.background = mode === "list" ? "#D90429" : "";
+          b.style.color = mode === "list" ? "#fff" : "";
+          b.style.borderColor = mode === "list" ? "#D90429" : "";
+        }
+      });
+    };
     main.querySelectorAll<HTMLButtonElement>("button").forEach((b) => {
       const t = b.innerText.trim();
-      if (t === "Grid") b.addEventListener("click", () => toggle("grid"));
-      if (t === "List") b.addEventListener("click", () => toggle("list"));
+      if (t === "Grid") b.addEventListener("click", () => { mode = "grid"; toggle("grid"); paint(); });
+      if (t === "List") b.addEventListener("click", () => { mode = "list"; toggle("list"); paint(); });
     });
 
     // 4) Suggest / Add goes to upload

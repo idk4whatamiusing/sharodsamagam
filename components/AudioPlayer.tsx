@@ -2,6 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 
+const dhakGlobal: { el: HTMLAudioElement | null } = { el: null };
+const audioGlobal: { el: HTMLAudioElement | null } = { el: null };
+
 type Track = { title: string; artist: string; filename: string; durationLabel: string };
 
 const TABS = ["All", "Hits", "mahalaya", "traditional"];
@@ -19,14 +22,19 @@ export default function AudioPlayer({ tracks }: { tracks: Track[] }) {
   const current = tracks[idx];
 
   useEffect(() => {
-    if (!dhakRef.current) {
-      dhakRef.current = new Audio("/sounds/dhak1.mp3");
-      dhakRef.current.loop = true;
-      dhakRef.current.volume = 0.5;
+    if (!dhakGlobal.el) {
+      dhakGlobal.el = new Audio("/sounds/dhak1.mp3");
+      dhakGlobal.el.loop = true;
+      dhakGlobal.el.volume = 0.5;
     }
+    dhakRef.current = dhakGlobal.el;
+    if (!audioGlobal.el) audioGlobal.el = new Audio();
+    audioRef.current = audioGlobal.el;
+    audioGlobal.el.onended = () => play((idx + 1) % tracks.length);
+    setPlaying(!audioGlobal.el.paused);
     try {
       if (localStorage.getItem("dhak_pref") === "playing") {
-        dhakRef.current.play().catch(() => {});
+        dhakGlobal.el.play().catch(() => {});
         setDhakOn(true);
       }
     } catch {}
@@ -57,11 +65,10 @@ export default function AudioPlayer({ tracks }: { tracks: Track[] }) {
     }
   };
   const toggleDhak = () => {
-    const d = dhakRef.current!;
-    if (dhakOn) { d.pause(); setDhakOn(false); try { localStorage.setItem("dhak_pref", "muted"); } catch {} }
-    else { d.play().catch(() => {}); setDhakOn(true); try { localStorage.setItem("dhak_pref", "playing"); } catch {} }
+    const dhak = dhakGlobal.el!;
+    if (dhakOn) { dhak.pause(); setDhakOn(false); try { localStorage.setItem("dhak_pref", "muted"); } catch {} }
+    else { dhak.play().catch(() => {}); setDhakOn(true); try { localStorage.setItem("dhak_pref", "playing"); } catch {} }
   };
-
   const fmt = (s: number) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
   const filtered = tracks.filter((t) => (tab === "All" ? true : t.artist.toLowerCase().includes(tab) || t.title.toLowerCase().includes(tab)));
   const seek = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,7 +83,6 @@ export default function AudioPlayer({ tracks }: { tracks: Track[] }) {
 
   return (
     <>
-      <audio ref={audioRef} onEnded={() => play((idx + 1) % tracks.length)} />
       <button onClick={toggleDhak} aria-label="Dhak"
         className={`fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full shadow-xl border-2 border-white flex items-center justify-center text-lg ${dhakOn ? "bg-[#D90429] text-white" : "bg-white text-[#2C1210]"}`}>🥁</button>
       <button onClick={() => setOpen(!open)} aria-label="Playlist"
