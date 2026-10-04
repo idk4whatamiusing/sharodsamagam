@@ -35,7 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="bg-[#FFFDF5] text-[#2C1210] antialiased min-h-screen flex flex-col">
         <div dangerouslySetInnerHTML={{ __html: CHROME_HEAD }} />
-        {children}
+        <div className="flex-grow" style={{ minHeight: "100vh" }}>{children}</div>
         <div dangerouslySetInnerHTML={{ __html: CHROME_FOOT }} />
         <AudioPlayer tracks={TRACKS} />
         <ClientNav />
