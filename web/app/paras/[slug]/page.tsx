@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import Link from "next/link";
+import MapView from "../../../components/MapView";
 
 const ZONE_COLORS: Record<string, string> = {
   north: "#4F46E5",
@@ -76,9 +77,13 @@ export default async function PandalPage({ params }: { params: Promise<{ slug: s
         </section>
 
         {p.lat != null && p.lng != null && (
-          <p className="mt-6 text-xs text-[#2C1210]/60 font-mono">
-            {p.lat.toFixed(5)}, {p.lng.toFixed(5)} · {p.address}
-          </p>
+          <div className="mt-8">
+            <h2 className="font-serif text-xl font-bold mb-3">Location</h2>
+            <MapView points={[{ lat: p.lat, lng: p.lng, name: p.name }]} height={320} />
+            <p className="mt-2 text-xs text-[#2C1210]/60 font-mono">
+              {p.lat.toFixed(5)}, {p.lng.toFixed(5)} · {p.address}
+            </p>
+          </div>
         )}
       </div>
     </main>
