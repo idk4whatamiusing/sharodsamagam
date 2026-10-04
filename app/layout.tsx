@@ -5,6 +5,7 @@ import ClientNav from "../components/ClientNav";
 import GalleryMotion from "../components/GalleryMotion";
 import RevealScroll from "../components/RevealScroll";
 import AudioPlayer from "../components/AudioPlayer";
+import ParasInteractions from "../components/ParasInteractions";
 import "./globals.css";
 
 const MIRROR = path.join(process.cwd(), "mirror");
@@ -43,6 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ClientNav />
         <GalleryMotion />
         <RevealScroll />
+        <ParasInteractions />
       </body>
     </html>
   );

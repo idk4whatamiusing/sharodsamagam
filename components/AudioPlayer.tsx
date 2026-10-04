@@ -64,6 +64,15 @@ export default function AudioPlayer({ tracks }: { tracks: Track[] }) {
 
   const fmt = (s: number) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
   const filtered = tracks.filter((t) => (tab === "All" ? true : t.artist.toLowerCase().includes(tab) || t.title.toLowerCase().includes(tab)));
+  const seek = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const v = Number(e.target.value);
+    setElapsed(v);
+    if (audioRef.current) audioRef.current.currentTime = v;
+  };
+  const setVol = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const v = Number(e.target.value);
+    if (audioRef.current) audioRef.current.volume = v;
+  };
 
   return (
     <>
@@ -85,15 +94,17 @@ export default function AudioPlayer({ tracks }: { tracks: Track[] }) {
           </div>
           <div className="p-4 border-b border-[#EAD5A0] space-y-3">
             <div className="flex items-center gap-3">
+              <button onClick={() => play((idx - 1 + tracks.length) % tracks.length)} className="w-8 h-8 rounded-full bg-stone-100 text-[#2C1210] flex items-center justify-center" aria-label="Prev">⏮</button>
               <button onClick={toggle} className="w-11 h-11 rounded-full bg-[#D90429] text-white font-bold flex items-center justify-center">{playing ? "❚❚" : "▶"}</button>
+              <button onClick={() => play((idx + 1) % tracks.length)} className="w-8 h-8 rounded-full bg-stone-100 text-[#2C1210] flex items-center justify-center" aria-label="Next">⏭</button>
               <div className="min-w-0 flex-1">
                 <p className="font-serif font-bold text-[#2C1210] truncate">{current ? current.title : "—"}</p>
                 <p className="text-[11px] text-[#2C1210]/60">{current ? current.artist : ""}</p>
                 <p className="text-[10px] font-mono text-[#2C1210]/50">#{idx + 1} of {tracks.length} · {fmt(elapsed)} / {current ? current.durationLabel : "—"}</p>
               </div>
             </div>
-            <div className="w-full h-1.5 rounded-full bg-stone-100 overflow-hidden"><div className="h-full bg-[#D90429]" style={{ width: `${current ? (elapsed / 210) * 100 : 0}%` }} /></div>
-            <div className="flex items-center gap-2 text-xs text-[#2C1210]/70"><span>🔊</span><div className="flex-1 h-1.5 rounded-full bg-stone-100"><div className="h-full w-[80%] bg-amber-500 rounded-full" /></div><span>80%</span></div>
+            <input type="range" min={0} max={current ? 210 : 0} step={1} value={Math.min(elapsed, 209)} onChange={seek} className="w-full accent-[#D90429]" aria-label="Seek" />
+            <div className="flex items-center gap-2 text-xs text-[#2C1210]/70"><span>🔊</span><input type="range" min={0} max={1} step={0.05} defaultValue={0.8} onChange={setVol} className="flex-1 accent-amber-500" aria-label="Volume" /><span>80%</span></div>
           </div>
           <div className="px-4 py-3 border-b border-[#EAD5A0] flex items-center justify-between">
             <p className="font-serif font-black text-[#2C1210]">PLAYLIST ({tracks.length})</p>

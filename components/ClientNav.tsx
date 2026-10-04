@@ -29,19 +29,48 @@ export default function ClientNav() {
         const span = div.querySelector("span:first-of-type") as HTMLElement | null;
         const active = href === "/" ? path === "/" : path.startsWith(href);
         if (active) {
-          div.style.background = "#D90429";
-          div.style.borderColor = "#D90429";
-          if (span) span.style.color = "#fff";
-        } else {
+          div.className = "relative px-3.5 sm:px-4.5 py-1 sm:py-1.5 rounded-full bg-gradient-to-b from-[#D90429] via-[#C0041F] to-[#900215] text-white border border-[#FFB800]/70 flex items-center justify-center transition-all duration-300 shadow-xs";
           div.style.background = "";
-          div.style.borderColor = "";
-          if (span) span.style.color = "";
+          if (span) { (span as HTMLElement).style.color = "#fff"; }
+        } else {
+          div.className = "relative px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full border border-transparent transition-all duration-300 hover:bg-[#D90429] hover:text-white flex items-center justify-center";
+          div.style.background = "";
+          if (span) { (span as HTMLElement).style.color = ""; }
         }
       });
     };
     highlight();
+
+    // MORE dropdown
+    const moreBtn = Array.from(document.querySelectorAll("button")).find(
+      (b) => b.textContent?.trim().includes("MORE")
+    );
+    let panel: HTMLElement | null = document.getElementById("our-more-panel");
+    if (!panel) {
+      panel = document.createElement("div");
+      panel.id = "our-more-panel";
+      panel.style.cssText = "position:fixed;top:64px;right:12px;z-index:60;display:none;";
+      panel.innerHTML = `<div style="background:#fff;border:1px solid #EAD5A0;border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.15);padding:8px 0;min-width:200px;font-size:13px;">
+        ${[["/events","Event Calendar"],["/points-of-interest","Points of Interest"],["/procession","Immersion Carnival"],["/connect","Social Wall & Feed"],["/announcements","Official Bulletin"],["/about-us","About"],["/copyright","Copyright & Takedowns"]].map(([h,l])=>`<a href="${h}" data-more-link style="display:block;padding:8px 16px;font-family:serif;font-weight:bold;color:#2C1210;">${l}</a>`).join("")}
+      </div>`;
+      document.body.appendChild(panel);
+      panel.querySelectorAll("a[data-more-link]").forEach((a) =>
+        a.addEventListener("click", (e) => {
+          e.preventDefault();
+          panel!.style.display = "none";
+          router.push((a as HTMLAnchorElement).getAttribute("href") || "/");
+        })
+      );
+    }
+    const togglePanel = () => {
+      if (!panel) return;
+      panel.style.display = panel.style.display === "block" ? "none" : "block";
+    };
+    moreBtn?.addEventListener("click", togglePanel);
+
     return () => {
       document.removeEventListener("click", handler);
+      moreBtn?.removeEventListener("click", togglePanel);
     };
   }, [router, pathname]);
   return null;
