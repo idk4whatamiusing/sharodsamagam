@@ -1,4 +1,7 @@
-@import "tailwindcss";
+@import "tailwindcss" source(none);
+
+@source "./**/*.{tsx,ts}";
+@source "../components/**/*.{tsx,ts}";
 
 /* Original compiled theme (fonts, variables, utilities) also loaded in layout via <link> */
 
