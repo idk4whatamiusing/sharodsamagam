@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import ClientNav from "../components/ClientNav";
 import GalleryMotion from "../components/GalleryMotion";
+import RevealScroll from "../components/RevealScroll";
 import AudioPlayer from "../components/AudioPlayer";
 import "./globals.css";
 
@@ -19,7 +20,7 @@ const TRACKS = (() => {
 })();
 
 export const metadata: Metadata = {
-  title: "Durga Puja Kolkata 2026",
+  title: "Sharodsamagam 2026",
   description: "Sharodotsav 2026 — the premier digital companion to Kolkata's grandest festival.",
 };
 
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <AudioPlayer tracks={TRACKS} />
         <ClientNav />
         <GalleryMotion />
+        <RevealScroll />
       </body>
     </html>
   );

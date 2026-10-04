@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Durga Puja Kolkata 2026",
-    short_name: "Durga Puja Kolkata",
+    name: "Sharodsamagam 2026",
+    short_name: "Sharodsamagam",
     description: "Sharodotsav 2026 — pandal directory, live map, panjika and city guide.",
     start_url: "/",
     display: "standalone",
