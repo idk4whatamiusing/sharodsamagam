@@ -6,6 +6,7 @@ import GalleryMotion from "../components/GalleryMotion";
 import RevealScroll from "../components/RevealScroll";
 import AudioPlayer from "../components/AudioPlayer";
 import ParasInteractions from "../components/ParasInteractions";
+import MapInjector from "../components/MapInjector";
 import "./globals.css";
 
 const MIRROR = path.join(process.cwd(), "mirror");
@@ -45,6 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <GalleryMotion />
         <RevealScroll />
         <ParasInteractions />
+        <MapInjector />
       </body>
     </html>
   );

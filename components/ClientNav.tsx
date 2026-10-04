@@ -41,9 +41,30 @@ export default function ClientNav() {
     };
     highlight();
 
+    // footer More-accordion toggles
+    document.querySelectorAll<HTMLButtonElement>('button[aria-expanded="false"]').forEach((b) => {
+      if (b.closest("nav") || b.id === "kolkata-map" || b.id === "pandal-map") return;
+      b.addEventListener("click", () => {
+        const next = b.parentElement?.nextElementSibling as HTMLElement | null ?? b.nextElementSibling as HTMLElement | null;
+        const expanded = b.getAttribute("aria-expanded") === "true";
+        b.setAttribute("aria-expanded", expanded ? "false" : "true");
+        if (next) next.style.display = expanded ? "none" : "";
+      });
+    });
+
+    // save pandal toggles
+    document.querySelectorAll<HTMLButtonElement>('button[aria-label*="Save"]').forEach((b) =>
+      b.addEventListener("click", () => {
+        const saved = b.dataset.saved === "1";
+        b.dataset.saved = saved ? "0" : "1";
+        b.style.background = saved ? "" : "#FFF1F2";
+        b.style.borderColor = saved ? "" : "#D90429";
+      })
+    );
+
     // MORE dropdown
     const moreBtn = Array.from(document.querySelectorAll("button")).find(
-      (b) => b.textContent?.trim().includes("MORE")
+      (b) => /more/i.test(b.textContent || "") && b.closest("nav") !== null || b.getAttribute("aria-label")?.includes("more")
     );
     let panel: HTMLElement | null = document.getElementById("our-more-panel");
     if (!panel) {
