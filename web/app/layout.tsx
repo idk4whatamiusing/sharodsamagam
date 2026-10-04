@@ -1,11 +1,20 @@
 import type { Metadata } from "next";
 import fs from "fs";
 import path from "path";
+import AudioPlayer from "../components/AudioPlayer";
 import "./globals.css";
 
 const MIRROR = path.join(process.cwd(), "mirror");
 const CHROME_HEAD = fs.readFileSync(path.join(MIRROR, "_chrome_head.html"), "utf8");
 const CHROME_FOOT = fs.readFileSync(path.join(MIRROR, "_chrome_foot.html"), "utf8");
+const TRACKS = (() => {
+  try {
+    const j = JSON.parse(fs.readFileSync(path.join(process.cwd(), "data", "music.json"), "utf8"));
+    return j.tracks.map((t: { title: string; artist: string; filename: string; durationLabel: string }) => ({
+      title: t.title, artist: t.artist, filename: t.filename, durationLabel: t.durationLabel,
+    }));
+  } catch { return []; }
+})();
 
 export const metadata: Metadata = {
   title: "Durga Puja Kolkata 2026",
@@ -27,6 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div dangerouslySetInnerHTML={{ __html: CHROME_HEAD }} />
         {children}
         <div dangerouslySetInnerHTML={{ __html: CHROME_FOOT }} />
+        <AudioPlayer tracks={TRACKS} />
       </body>
     </html>
   );
