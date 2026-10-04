@@ -57,6 +57,7 @@ export default function ParasInteractions() {
         mode === "list"
           ? "flex flex-col gap-3"
           : "grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6";
+      document.body.classList.toggle("paras-list-mode", mode === "list");
     };
     main.querySelectorAll<HTMLButtonElement>("button").forEach((b) => {
       const t = b.innerText.trim();

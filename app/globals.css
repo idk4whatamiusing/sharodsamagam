@@ -9,3 +9,18 @@
   0% { transform: translateY(0); }
   100% { transform: translateY(-50%); }
 }
+
+body.paras-list-mode article {
+  flex-direction: row !important;
+  align-items: stretch;
+}
+body.paras-list-mode article > div:first-child {
+  width: 20rem;
+  max-width: 40%;
+  aspect-ratio: 1 !important;
+  flex-shrink: 0;
+}
+body.paras-list-mode article > div:nth-child(2) {
+  flex: 1;
+  justify-content: center;
+}
