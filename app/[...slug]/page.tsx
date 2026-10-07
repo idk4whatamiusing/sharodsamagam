@@ -15,8 +15,8 @@ export default async function MirrorPage({ params }: { params: Promise<{ slug: s
   if (!html) return <div>Not found: {rel}</div>;
   if (rel === "map") {
     html = html.replace(
-      /<div class="w-full h-full bg-\[#FFFBF0\][\s\S]*?<\/div><!--\/\$-->/,
-      '<div id="kolkata-map" style="width:100%;height:70vh;min-height:450px"></div><!--/$-->'
+      /<div class="w-full h-full bg-\[#FFFBF0\][\s\S]*?Loading Kolkata Map\.\.\.<\/p><\/div>/,
+      '<div id="kolkata-map" style="width:100%;height:70vh;min-height:450px"></div>'
     );
   } else if (rel.startsWith("paras/")) {
     const slug = rel.slice("paras/".length);
