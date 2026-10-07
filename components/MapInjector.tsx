@@ -20,6 +20,7 @@ export default function MapInjector() {
         const pts = await res.json();
         const g = L.featureGroup();
         for (const pt of pts) {
+          if (pt.lat == null || pt.lng == null) continue;
           const m = L.circleMarker([pt.lat, pt.lng], { radius: 4, color: "#D90429", fillColor: "#FFB800", fillOpacity: 0.9 });
           m.bindPopup(`<a href="/paras/${pt.slug}">${pt.name}</a>`);
           g.addLayer(m);
