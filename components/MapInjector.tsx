@@ -12,9 +12,10 @@ export default function MapInjector() {
       const L = await import("leaflet");
       if (k) {
         const map = L.map(k as HTMLElement).setView([22.57, 88.36], 12);
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-          maxZoom: 19,
-          attribution: "&copy; OpenStreetMap",
+        L.tileLayer("/tiles/{z}/{x}/{y}.png", {
+          maxZoom: 18,
+          maxNativeZoom: 16,
+          attribution: "&copy; OpenStreetMap (offline cache)",
         }).addTo(map);
         const res = await fetch("/points.json");
         const pts = await res.json();
@@ -31,7 +32,7 @@ export default function MapInjector() {
         const lat = parseFloat(p.dataset.lat || "22.57");
         const lng = parseFloat(p.dataset.lng || "88.36");
         const map = L.map(p as HTMLElement).setView([lat, lng], 15);
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19 }).addTo(map);
+        L.tileLayer("/tiles/{z}/{x}/{y}.png", { maxZoom: 18, maxNativeZoom: 16 }).addTo(map);
         L.marker([lat, lng]).addTo(map);
       }
     })();
