@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import fs from "fs";
 import path from "path";
+import Script from "next/script";
 import ClientNav from "../components/ClientNav";
 import GalleryMotion from "../components/GalleryMotion";
 import RevealScroll from "../components/RevealScroll";
@@ -33,9 +34,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className="merriweather_56ab4c38-module__2_Pdpa__variable figtree_b7e2f034-module__w_Yhsq__variable yatra_one_633d4550-module__1954vW__variable noto_serif_bengali_200af96a-module__4siQzG__variable fragment_mono_4699eca3-module__SiQ6WW__variable"
     >
       <head>
-        <link rel="stylesheet" href="/static/css/0-x9199av3pjd.css" data-precedence="next" />
-        <link rel="stylesheet" href="/static/css/0k7ka7ov05b06.css" data-precedence="next" />
-        <link rel="stylesheet" href="/static/css/19rhlcx2srev9.css" data-precedence="next" />
+        {/* Hand-written <link> tags must NOT carry data-precedence: React's
+            client head reconciler hoists precedence-tagged resources and then
+            fails to match the server's ordering against <meta charset>,
+            throwing a root-level hydration mismatch (React #418). Plain
+            links render in place and hydrate cleanly. */}
+        <link rel="stylesheet" href="/static/css/0-x9199av3pjd.css" />
+        <link rel="stylesheet" href="/static/css/0k7ka7ov05b06.css" />
+        <link rel="stylesheet" href="/static/css/19rhlcx2srev9.css" />
       </head>
       <body className="bg-[#FFFDF5] text-[#2C1210] antialiased min-h-screen flex flex-col">
         <div dangerouslySetInnerHTML={{ __html: CHROME_HEAD }} />
@@ -47,7 +53,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <RevealScroll />
         <ParasInteractions />
         <MapInjector />
-        <script dangerouslySetInnerHTML={{ __html: `if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}` }} />
+        {/* A raw <script> child of a React component is never executed during
+            client rendering, so the worker was never registered after a
+            soft navigation. next/script handles the client mount properly. */}
+        <Script id="sw-register" strategy="afterInteractive">
+          {`if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/sw.js').catch(function () {});
+  });
+}`}
+        </Script>
       </body>
     </html>
   );

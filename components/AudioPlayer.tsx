@@ -15,7 +15,9 @@ export default function AudioPlayer({ tracks }: { tracks: Track[] }) {
   const [idx, setIdx] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [dhakOn, setDhakOn] = useState(false);
-  const [open, setOpen] = useState(true);
+  // Collapsed by default — the panel must never auto-open on reload.
+  // An explicit user toggle is remembered, but a fresh visit always starts shut.
+  const [open, setOpen] = useState(false);
   const [tab, setTab] = useState("All");
   const [elapsed, setElapsed] = useState(0);
 
