@@ -2,6 +2,9 @@ import fs from "fs";
 import path from "path";
 import { mirrorHtml, listRoutes } from "../../lib/mirror";
 
+// Every mirror route is known at build time, so nothing is rendered on demand.
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return listRoutes()
     .filter((r) => r !== "index" && !r.startsWith("_"))

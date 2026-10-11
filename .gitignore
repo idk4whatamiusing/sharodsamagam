@@ -1,3 +1,6 @@
 node_modules/
 data/raw/
 .next/
+out/
+.wrangler/
+.local_song_backup/

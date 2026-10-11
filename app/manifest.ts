@@ -1,5 +1,8 @@
 import type { MetadataRoute } from "next";
 
+// Required for `output: "export"` — the manifest is a build-time file.
+export const dynamic = "force-static";
+
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Sharodsamagam 2026",

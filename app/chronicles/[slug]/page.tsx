@@ -2,6 +2,8 @@ import fs from "fs";
 import path from "path";
 import Link from "next/link";
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   const posts = JSON.parse(
     fs.readFileSync(path.join(process.cwd(), "data", "chronicles.json"), "utf8")
