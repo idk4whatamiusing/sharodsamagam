@@ -1,13 +1,18 @@
 import { chromium } from "playwright";
 const B = process.env.BASE || "http://127.0.0.1:8899";
-// dpdns.org's delegation for meridian.dpdns.org exists on only ONE of the
-// four parent nameservers (ns1). ns2/ns3/ns4 return NOERROR-with-no-answer,
-// so resolvers that pick one of them cache a negative result and the host
-// intermittently fails to resolve - roughly 20-35% of the time in practice.
-// Pin the host in the browser so these checks measure the site, not DigitalPlat's DNS.
-const launchArgs = process.env.PIN_DNS
-  ? [`--host-resolver-rules=MAP ${process.env.PIN_DNS} 104.21.6.21`]
-  : [];
+// dpdns.org carries the delegation for its subdomains on only ONE of the four
+// parent nameservers (ns1). ns2/ns3/ns4 answer NOERROR-with-no-records, so
+// resolvers landing on one of those cache a negative result and the host
+// intermittently fails to resolve. Pin it to a known-good address so these
+// checks measure the site rather than DigitalPlat's DNS.
+let launchArgs = [];
+if (process.env.PIN_DNS) {
+  const { resolve4 } = await import("node:dns").then((m) => m.promises);
+  const ip = (await resolve4(process.env.PIN_DNS))[0];
+  if (!ip) throw new Error(`could not resolve ${process.env.PIN_DNS} to pin`);
+  console.log(`pinning ${process.env.PIN_DNS} -> ${ip}`);
+  launchArgs = [`--host-resolver-rules=MAP ${process.env.PIN_DNS} ${ip}`];
+}
 const b = await chromium.launch({
   executablePath: "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser",
   headless: true,

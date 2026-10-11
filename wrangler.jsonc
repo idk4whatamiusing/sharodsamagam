@@ -11,7 +11,7 @@
   },
   "routes": [
     {
-      "pattern": "meridian.dpdns.org",
+      "pattern": "sharodsamagam.dpdns.org",
       "custom_domain": true
     }
   ],

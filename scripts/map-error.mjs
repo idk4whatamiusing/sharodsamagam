@@ -1,13 +1,21 @@
 import { chromium } from "playwright";
 import { rmSync } from "fs";
+import { resolve4 } from "node:dns/promises";
+
+const HOST = process.env.PIN_DNS || "sharodsamagam.dpdns.org";
+const BASE = process.env.BASE_URL || `https://${HOST}`;
+const ip = (await resolve4(HOST))[0];
+console.log(`pinning ${HOST} -> ${ip}`);
+
 rmSync("/tmp/pw-err", { recursive: true, force: true });
 const ctx = await chromium.launchPersistentContext("/tmp/pw-err", {
   viewport: { width: 1200, height: 800 },
-  serviceWorkers: "block",          // <-- the missing piece
+  serviceWorkers: "block",          // <-- otherwise the SW fetches outside page routing
+  args: [`--host-resolver-rules=MAP ${HOST} ${ip}`],
 });
 const p = ctx.pages()[0] || (await ctx.newPage());
 await p.route(/arcgisonline/, r => r.abort("blockedbyclient"));
-await p.goto("https://meridian.dpdns.org/map/", { waitUntil: "domcontentloaded" });
+await p.goto(`${BASE}/map/`, { waitUntil: "domcontentloaded" });
 await p.waitForTimeout(9000);
 
 const r = await p.evaluate(() => {
