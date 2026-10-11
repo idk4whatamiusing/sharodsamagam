@@ -6,10 +6,6 @@
 /_next/static/*
   Cache-Control: public, max-age=31536000, immutable
 
-# Slippy map tiles are addressed by /z/x/y — stable for a festival season.
-/tiles/*
-  Cache-Control: public, max-age=31536000, immutable
-
 /Songs/*
   Cache-Control: public, max-age=31536000, immutable
 

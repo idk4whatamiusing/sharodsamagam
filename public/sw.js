@@ -4,20 +4,24 @@
 //   - navigations      -> network-first, fall back to the cached shell offline
 //   - /_next/static/*  -> cache-first (content-hashed, immutable)
 //   - /tiles/*         -> cache-first (addressed by z/x/y, stable)
+//   - audio            -> cache-first
 //   - everything else  -> network-first, fall back to cache
 //
-// The previous version used cache-first for *every* request, which meant a
-// visitor who loaded the site before a deploy kept getting the old HTML and
-// the old /points.json from an orphaned cache forever. Old cache versions are
-// now explicitly deleted on activate.
+// Anything not matching CACHE_VERSION is deleted on activate, and the
+// registrar component purges foreign caches on page load. A cache-first
+// policy for *every* request (an earlier revision) pinned visitors to
+// stale HTML and a stale /points.json indefinitely after a deploy.
 
-const CACHE_VERSION = 'sharodsamagam-v3';
+const CACHE_VERSION = 'sharodsamagam-v5';
 const SHELL_CACHE = `${CACHE_VERSION}-shell`;
 const ASSET_CACHE = `${CACHE_VERSION}-assets`;
+const TILE_CACHE = `${CACHE_VERSION}-tiles`;
 
 const SHELL = ['/', '/map/', '/paras/', '/panzika/', '/chronicles/'];
-
 const PRECACHE_URLS = ['/points.json', '/manifest.webmanifest'];
+
+const TILE_HOSTS = ['server.arcgisonline.com'];
+const MAX_PRECACHED_TILES = 3000;
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -40,9 +44,34 @@ self.addEventListener('activate', (event) => {
     (async () => {
       const keys = await caches.keys();
       await Promise.all(
-        keys.filter((k) => k !== SHELL_CACHE && k !== ASSET_CACHE).map((k) => caches.delete(k))
+        keys
+          .filter((k) => k !== SHELL_CACHE && k !== ASSET_CACHE && k !== TILE_CACHE)
+          .map((k) => caches.delete(k))
       );
       await self.clients.claim();
+    })()
+  );
+});
+
+// Fills the tile cache in the background so the map works with no network,
+// but never blocks page load on it.
+self.addEventListener('message', (event) => {
+  if (event.data?.type !== 'precache-tiles') return;
+  const urls = Array.isArray(event.data.urls) ? event.data.urls.slice(0, MAX_PRECACHED_TILES) : [];
+  event.waitUntil(
+    (async () => {
+      const cache = await caches.open(TILE_CACHE);
+      let done = 0;
+      const step = async (i) => {
+        const batch = urls.slice(i, i + 12);
+        await Promise.all(
+          batch.map((u) => cache.add(new Request(u, { cache: 'reload' })).catch(() => {}))
+        );
+        done += batch.length;
+        event.source?.postMessage({ type: 'precache-progress', done, total: urls.length });
+        if (done < urls.length) await step(i + 12);
+      };
+      if (urls.length) await step(0);
     })()
   );
 });
@@ -74,7 +103,24 @@ self.addEventListener('fetch', (event) => {
   if (request.method !== 'GET') return;
 
   const url = new URL(request.url);
-  if (url.origin !== self.location.origin) return; // let OSM tiles go straight to the network
+
+  // Third-party basemap tiles: cache-first so panning back over ground the
+  // user has already seen costs nothing and still works when flaky.
+  if (TILE_HOSTS.includes(url.hostname)) {
+    event.respondWith(
+      (async () => {
+        const cache = await caches.open(TILE_CACHE);
+        const hit = await cache.match(request);
+        if (hit) return hit;
+        const res = await fetch(request);
+        if (res.ok) cache.put(request, res.clone());
+        return res;
+      })()
+    );
+    return;
+  }
+
+  if (url.origin !== self.location.origin) return;
 
   if (request.mode === 'navigate') {
     event.respondWith(networkFirst(request));
@@ -83,7 +129,6 @@ self.addEventListener('fetch', (event) => {
 
   if (
     url.pathname.startsWith('/_next/static/') ||
-    url.pathname.startsWith('/tiles/') ||
     url.pathname.startsWith('/Songs/') ||
     url.pathname.startsWith('/sounds/')
   ) {

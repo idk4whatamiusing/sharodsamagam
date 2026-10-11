@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import fs from "fs";
 import path from "path";
-import Script from "next/script";
+import ServiceWorkerRegistrar from "../components/ServiceWorkerRegistrar";
 import ClientNav from "../components/ClientNav";
 import GalleryMotion from "../components/GalleryMotion";
 import RevealScroll from "../components/RevealScroll";
@@ -53,16 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <RevealScroll />
         <ParasInteractions />
         <MapInjector />
-        {/* A raw <script> child of a React component is never executed during
-            client rendering, so the worker was never registered after a
-            soft navigation. next/script handles the client mount properly. */}
-        <Script id="sw-register" strategy="afterInteractive">
-          {`if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function () {
-    navigator.serviceWorker.register('/sw.js').catch(function () {});
-  });
-}`}
-        </Script>
+        <ServiceWorkerRegistrar />
       </body>
     </html>
   );

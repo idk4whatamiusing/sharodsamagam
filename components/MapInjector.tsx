@@ -4,8 +4,26 @@ import { useEffect } from "react";
 import "leaflet/dist/leaflet.css";
 
 const KOLKATA: [number, number] = [22.57, 88.36];
-const TILE_URL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
-const TILE_ATTR = "&copy; OpenStreetMap contributors";
+
+// Esri World Street Map: no API key, unrestricted zoom, and no bulk-download
+// policy to trip over. Note Esri's REST tile template takes {y} before {x},
+// unlike the XYZ convention.
+//
+// (OpenStreetMap's own tile server is deliberately not used here: it
+// returns HTTP 200 with an "Access blocked" placeholder tile to anything it
+// considers abusive, and bulk-downloading for offline caches is explicitly
+// outside their tile usage policy.)
+const TILE_URL =
+  "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}";
+const TILE_OPTS = {
+  maxZoom: 19,
+  attribution:
+    "Tiles &copy; Esri &mdash; Esri, HERE, Garmin, USGS, NPS and FAO",
+};
+
+// Esri will happily serve tiles the browser has already seen, so the service
+// worker keeps a cache-first copy for repeat views.
+const TILE_HOST = "server.arcgisonline.com";
 
 export default function MapInjector() {
   useEffect(() => {
@@ -43,7 +61,7 @@ export default function MapInjector() {
       if (k) {
         const map = init(k, KOLKATA, 12);
         if (!map) return;
-        L.tileLayer(TILE_URL, { maxZoom: 19, attribution: TILE_ATTR }).addTo(map);
+        L.tileLayer(TILE_URL, TILE_OPTS).addTo(map);
 
         const res = await fetch("/points.json");
         const pts = (await res.json()) as {
@@ -81,7 +99,7 @@ export default function MapInjector() {
         const lng = parseFloat(p.dataset.lng || String(KOLKATA[1]));
         const map = init(p, [lat, lng], 15);
         if (!map) return;
-        L.tileLayer(TILE_URL, { maxZoom: 19 }).addTo(map);
+        L.tileLayer(TILE_URL, TILE_OPTS).addTo(map);
         L.marker([lat, lng], { icon: pin }).addTo(map);
       }
     })().catch(() => {
