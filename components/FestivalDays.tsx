@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { DAYS_BY_KEY, FESTIVAL_DAYS, type FestivalDay } from "../lib/festivalDays";
 
 const CAL_ICON =
@@ -78,6 +79,9 @@ function panelHtml(d: FestivalDay): string {
 }
 
 export default function FestivalDays() {
+  // Re-bind on every route change; the layout outlives the page children.
+  const pathname = usePathname();
+
   useEffect(() => {
     const panel = document.querySelector<HTMLElement>("[data-fday-panel]");
     const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-fday]"));
@@ -141,7 +145,7 @@ export default function FestivalDays() {
     select(FESTIVAL_DAYS[0].key);
 
     return () => tabs.forEach((t) => t.removeEventListener("click", onClick));
-  }, []);
+  }, [pathname]);
 
   return null;
 }

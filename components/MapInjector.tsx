@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import "leaflet/dist/leaflet.css";
 
 const KOLKATA: [number, number] = [22.57, 88.36];
@@ -71,12 +72,21 @@ const BLOCKED_HINT =
   "Allow server.arcgisonline.com, then retry.";
 
 export default function MapInjector() {
+  // The root layout persists across client-side navigation while the page
+  // children swap underneath it. Without this dependency the effect runs
+  // once on the first page, never finds #kolkata-map, and the map is dead
+  // for the rest of the session (full page loads masked it).
+  const pathname = usePathname();
+
   useEffect(() => {
     const k = document.getElementById("kolkata-map");
     const p = document.getElementById("pandal-map");
     if (!k && !p) return;
 
     let disposed = false;
+    // Every map built by this run, so teardown can actually release them.
+    // Leaflet keeps window and DOM listeners alive until .remove().
+    const built: import("leaflet").Map[] = [];
 
     (async () => {
       const L = await import("leaflet");
@@ -100,7 +110,9 @@ export default function MapInjector() {
       const init = (el: HTMLElement, view: [number, number], zoom: number) => {
         const container = el as HTMLElement & { _leaflet_id?: number };
         if (container._leaflet_id != null) return null;
-        return L.map(el).setView(view, zoom);
+        const map = L.map(el).setView(view, zoom);
+        built.push(map);
+        return map;
       };
 
       // Builds a tile layer that reports failure rather than failing silently.
@@ -184,8 +196,14 @@ export default function MapInjector() {
 
     return () => {
       disposed = true;
+      // Without this every navigation leaks another Leaflet instance,
+      // because the effect now re-runs on each route change.
+      built.forEach((m) => {
+        try { m.remove(); } catch { /* already torn down with its node */ }
+      });
+      built.length = 0;
     };
-  }, []);
+  }, [pathname]);
 
   return null;
 }

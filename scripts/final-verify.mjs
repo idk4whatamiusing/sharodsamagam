@@ -76,6 +76,74 @@ const sync = await (async () => {
 ok(sync, "dhak state synced mobile -> desktop");
 ok(merr.length === 0, "mobile console clean" + (merr.length ? ": " + merr.join(" | ") : ""));
 
+// ---------- client-side navigation ----------
+// The layout persists across router.push navigation while page children swap
+// underneath it. Any page-scoped component whose effect has a [] dependency
+// array runs exactly once and is dead for the rest of the session. Full page
+// loads hide this completely, so it must be exercised explicitly.
+console.log("\n== CLIENT-SIDE NAVIGATION ==");
+{
+  const nav = await b.newPage({ viewport: { width: 1440, height: 900 } });
+  const nerr = [];
+  nav.on("pageerror", (e) => nerr.push(e.message.slice(0, 100)));
+  nav.on("console", (c) => c.type() === "error" && nerr.push(c.text().slice(0, 100)));
+
+  await nav.goto(B + "/", { waitUntil: "networkidle" });
+  await nav.waitForTimeout(2000);
+  ok(await nav.evaluate(() => /\d/.test(document.querySelector("[data-countdown-slot]")?.innerText || "")), "home on load: countdown live");
+
+  // home -> /map via the navbar link
+  await nav.evaluate(() => {
+    const a = [...document.querySelectorAll("a")].find((x) => x.getAttribute("href") === "/map");
+    a ? a.click() : (window.__noMapLink = true);
+  });
+  await nav.waitForTimeout(4500);
+  ok(!(await nav.evaluate(() => !!window.__noMapLink)), "nav link /map present");
+  ok(await nav.evaluate(() => location.pathname.startsWith("/map")), "client-navigated to /map/");
+  const m1 = await nav.evaluate(() => ({
+    div: !!document.getElementById("kolkata-map"),
+    pane: !!document.querySelector(".leaflet-pane"),
+    tiles: document.querySelectorAll(".leaflet-tile-loaded").length,
+    markers: document.querySelectorAll(".leaflet-overlay-pane path").length,
+  }));
+  ok(m1.div && m1.pane && m1.tiles > 0 && m1.markers > 100, `map rendered after client nav (tiles=${m1.tiles}, markers=${m1.markers})`);
+
+  // /map -> home again
+  await nav.evaluate(() => {
+    const a = [...document.querySelectorAll("a")].find((x) => x.getAttribute("href") === "/");
+    a ? a.click() : (window.__noHomeLink = true);
+  });
+  await nav.waitForTimeout(3000);
+  const h = await nav.evaluate(() => {
+    const s = document.querySelector("[data-countdown-slot]");
+    const tabs = [...document.querySelectorAll("[data-fday]")];
+    return { digits: /\d/.test(s?.innerText || ""), tabs: tabs.length };
+  });
+  ok(h.digits, "countdown re-armed after navigating back");
+  ok(h.tabs === 5, `day tabs present after navigating back (${h.tabs})`);
+  await nav.evaluate(() => document.querySelector('[data-fday="dashami"]')?.click());
+  await nav.waitForTimeout(500);
+  ok(
+    await nav.evaluate(() => document.querySelector("[data-fday-panel] h3")?.textContent === "Vijaya Dashami"),
+    "day switch still works after navigating back"
+  );
+
+  // home -> /paras/<slug> mini-map, then away
+  await nav.evaluate(() => {
+    const a = [...document.querySelectorAll("a")].find((x) => (x.getAttribute("href") || "").startsWith("/paras/") && x.getAttribute("href") !== "/paras/");
+    a ? a.click() : (window.__noPandal = true);
+  });
+  await nav.waitForTimeout(4000);
+  const pm = await nav.evaluate(() => ({
+    div: !!document.getElementById("pandal-map"),
+    pane: !!document.querySelector(".leaflet-pane"),
+    marker: document.querySelectorAll(".leaflet-marker-icon").length,
+  }));
+  ok(pm.div && pm.pane && pm.marker > 0, `pandal mini-map rendered after client nav (marker=${pm.marker})`);
+  ok(nerr.length === 0, "client-nav console clean" + (nerr.length ? ": " + [...new Set(nerr)].join(" | ") : ""));
+  await nav.close();
+}
+
 // ---------- other pages ----------
 console.log("\n== REGRESSION ==");
 for (const [name, url] of [["/", "/"], ["/paras/", "/paras/"], ["/map/", "/map/"], ["/panzika/", "/panzika/"]]) {

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { usePathname } from "next/navigation";
 
 const dhakGlobal: { el: HTMLAudioElement | null } = { el: null };
 const audioGlobal: { el: HTMLAudioElement | null } = { el: null };
@@ -27,12 +28,17 @@ export default function AudioPlayer({ tracks }: { tracks: Track[] }) {
   // after mount and rendered into with a portal. Deferred so the portal is
   // never part of the server render and cannot cause a hydration mismatch.
   const [navSlot, setNavSlot] = useState<HTMLElement | null>(null);
+  const pathname = usePathname();
 
   const current = tracks[idx];
 
   useEffect(() => {
     setNavSlot(document.getElementById("mobile-nav-actions"));
-  }, []);
+    // Same latent bug as the page-scoped components: the layout outlives the
+    // page, so the slot node is only guaranteed to be looked up on entry.
+    // The audio setup effects below must stay dependency-free or playback
+    // state resets on every navigation.
+  }, [pathname]);
 
   useEffect(() => {
     if (!dhakGlobal.el) {

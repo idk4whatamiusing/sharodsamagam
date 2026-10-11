@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 // Maha Shashthi, Friday 16 October 2026, 00:00 in Asia/Kolkata.
 // Mahalaya (10 Oct) has already passed by the time this ships, so counting
@@ -24,6 +25,10 @@ function parts(ms: number) {
 const pad = (n: number) => String(n).padStart(2, "0");
 
 export default function Countdown() {
+  // The layout survives client-side navigation, so this must re-scan for
+  // its slot whenever the route changes — not just on the first page load.
+  const pathname = usePathname();
+
   useEffect(() => {
     const slots = Array.from(
       document.querySelectorAll<HTMLElement>("[data-countdown-slot]")
@@ -92,7 +97,7 @@ export default function Countdown() {
       cancelAnimationFrame(raf);
       clearTimeout(timer);
     };
-  }, []);
+  }, [pathname]);
 
   return null;
 }
