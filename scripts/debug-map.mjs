@@ -21,7 +21,7 @@ page.on("response", (r) => {
   if (r.status() >= 400) failed.push(`HTTP ${r.status()} ${r.url().slice(0, 140)}`);
 });
 
-await page.goto(url, { waitUntil: "networkidle", timeout: 60000 });
+await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60000 });
 await page.waitForTimeout(4000);
 
 const probe = await page.evaluate((sel) => {

@@ -14,7 +14,7 @@ async function report(label) {
   const errs = [];
   page.on("console", (m) => m.type() === "error" && errs.push(m.text().slice(0, 120)));
   page.on("pageerror", (e) => errs.push("pageerror: " + e.message.slice(0, 120)));
-  await page.goto(B + "/map/", { waitUntil: "networkidle", timeout: 60000 });
+  await page.goto(B + "/map/", { waitUntil: "domcontentloaded", timeout: 60000 });
   await page.waitForTimeout(3500);
   const info = await page.evaluate(async () => {
     const regs = await navigator.serviceWorker.getRegistrations();

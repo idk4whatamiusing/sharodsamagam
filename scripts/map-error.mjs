@@ -7,7 +7,7 @@ const ctx = await chromium.launchPersistentContext("/tmp/pw-err", {
 });
 const p = ctx.pages()[0] || (await ctx.newPage());
 await p.route(/arcgisonline/, r => r.abort("blockedbyclient"));
-await p.goto("https://meridian.dpdns.org/map/", { waitUntil: "networkidle" });
+await p.goto("https://meridian.dpdns.org/map/", { waitUntil: "domcontentloaded" });
 await p.waitForTimeout(9000);
 
 const r = await p.evaluate(() => {

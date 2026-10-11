@@ -1,16 +1,42 @@
 import { chromium } from "playwright";
 const B = process.env.BASE || "http://127.0.0.1:8899";
-const b = await chromium.launch({ executablePath: "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser", headless: true });
+// dpdns.org's delegation for meridian.dpdns.org exists on only ONE of the
+// four parent nameservers (ns1). ns2/ns3/ns4 return NOERROR-with-no-answer,
+// so resolvers that pick one of them cache a negative result and the host
+// intermittently fails to resolve - roughly 20-35% of the time in practice.
+// Pin the host in the browser so these checks measure the site, not DigitalPlat's DNS.
+const launchArgs = process.env.PIN_DNS
+  ? [`--host-resolver-rules=MAP ${process.env.PIN_DNS} 104.21.6.21`]
+  : [];
+const b = await chromium.launch({
+  executablePath: "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser",
+  headless: true,
+  args: launchArgs,
+});
 let fail = 0;
 const ok = (c, m) => { console.log((c ? "  PASS " : "  FAIL ") + m); if (!c) fail++; };
+
+// "networkidle" never settles once the service worker keeps tile connections
+// warm, but "domcontentloaded" returns before React has hydrated - which
+// makes every assertion race hydration. Wait for a real hydration sentinel
+// instead: the audio player lives in the layout and portals its buttons into
+// the navbar on mount, so those buttons existing means the tree is live.
+async function ready(page, url) {
+  await page.goto(url, { waitUntil: "domcontentloaded", timeout: 90000 });
+  await page.waitForFunction(
+    () => !!document.querySelector("#mobile-nav-actions button"),
+    null,
+    { timeout: 30000 }
+  );
+  await page.waitForTimeout(700); // let pathname-driven effects settle
+}
 
 // ---------- mobile ----------
 const m = await b.newPage({ viewport: { width: 390, height: 844 } });
 const merr = [];
 m.on("pageerror", e => merr.push(e.message.slice(0,120)));
 m.on("console", c => c.type()==="error" && merr.push(c.text().slice(0,120)));
-await m.goto(B + "/", { waitUntil: "networkidle" });
-await m.waitForTimeout(2500);
+await ready(m, B + "/");
 
 console.log("\n== COUNTDOWN ==");
 const cd1 = await m.evaluate(() => document.querySelector("[data-countdown-slot]")?.innerText);
@@ -88,8 +114,7 @@ console.log("\n== CLIENT-SIDE NAVIGATION ==");
   nav.on("pageerror", (e) => nerr.push(e.message.slice(0, 100)));
   nav.on("console", (c) => c.type() === "error" && nerr.push(c.text().slice(0, 100)));
 
-  await nav.goto(B + "/", { waitUntil: "networkidle" });
-  await nav.waitForTimeout(2000);
+  await ready(nav, B + "/");
   ok(await nav.evaluate(() => /\d/.test(document.querySelector("[data-countdown-slot]")?.innerText || "")), "home on load: countdown live");
 
   // home -> /map via the navbar link
@@ -100,6 +125,14 @@ console.log("\n== CLIENT-SIDE NAVIGATION ==");
   await nav.waitForTimeout(4500);
   ok(!(await nav.evaluate(() => !!window.__noMapLink)), "nav link /map present");
   ok(await nav.evaluate(() => location.pathname.startsWith("/map")), "client-navigated to /map/");
+  // Wait for the map rather than sleeping: the effect re-runs on route change
+  // and then has to dynamically import Leaflet and fetch points.json.
+  const mapUp = await nav
+    .waitForFunction(() => !!document.querySelector(".leaflet-pane"), null, { timeout: 20000 })
+    .then(() => true)
+    .catch(() => false);
+  ok(mapUp, "leaflet pane attached after client nav");
+  await nav.waitForTimeout(2500);
   const m1 = await nav.evaluate(() => ({
     div: !!document.getElementById("kolkata-map"),
     pane: !!document.querySelector(".leaflet-pane"),
@@ -134,6 +167,12 @@ console.log("\n== CLIENT-SIDE NAVIGATION ==");
     a ? a.click() : (window.__noPandal = true);
   });
   await nav.waitForTimeout(4000);
+  const miniUp = await nav
+    .waitForFunction(() => !!document.querySelector("#pandal-map .leaflet-pane"), null, { timeout: 20000 })
+    .then(() => true)
+    .catch(() => false);
+  ok(miniUp, "pandal mini-map pane attached after client nav");
+  await nav.waitForTimeout(1500);
   const pm = await nav.evaluate(() => ({
     div: !!document.getElementById("pandal-map"),
     pane: !!document.querySelector(".leaflet-pane"),
@@ -151,8 +190,9 @@ for (const [name, url] of [["/", "/"], ["/paras/", "/paras/"], ["/map/", "/map/"
   const errs = [];
   p.on("pageerror", e => errs.push(e.message.slice(0,100)));
   p.on("console", c => c.type()==="error" && errs.push(c.text().slice(0,100)));
-  await p.goto(B + url, { waitUntil: "networkidle", timeout: 60000 });
-  await p.waitForTimeout(3000);
+  // "networkidle" is unreliable here: the service worker keeps tile
+  // connections warm, so the page can never settle within the timeout.
+  await ready(p, B + url);
   ok(errs.length === 0, `${name} console clean` + (errs.length ? ": " + [...new Set(errs)].join(" | ") : ""));
   await p.close();
 }

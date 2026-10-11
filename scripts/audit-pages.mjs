@@ -13,7 +13,7 @@ for (const p of pages) {
   page.on("console", (m) => m.type() === "error" && errs.push(m.text().slice(0, 160)));
   page.on("pageerror", (e) => errs.push("pageerror: " + e.message.slice(0, 160)));
   page.on("response", (r) => r.status() >= 400 && bad.push(`${r.status()} ${r.url().slice(-60)}`));
-  await page.goto(B + p, { waitUntil: "networkidle", timeout: 60000 });
+  await page.goto(B + p, { waitUntil: "domcontentloaded", timeout: 60000 });
   await page.waitForTimeout(3000);
   const probe = await page.evaluate(() => ({
     leafletPane: !!document.querySelector(".leaflet-pane"),
@@ -35,7 +35,7 @@ for (const p of pages) {
 // mobile check on the map
 const m = await ctx.newPage();
 await m.setViewportSize({ width: 390, height: 844 });
-await m.goto(B + "/map/", { waitUntil: "networkidle" });
+await m.goto(B + "/map/", { waitUntil: "domcontentloaded" });
 await m.waitForTimeout(3000);
 console.log("\n=== /map/ mobile 390px ===");
 console.log(
