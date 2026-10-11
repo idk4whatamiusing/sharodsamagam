@@ -1,0 +1,51 @@
+# Cache policy for Sharodsamagam on Cloudflare Workers Static Assets.
+# Default for every asset is `max-age=0, must-revalidate`, which means a
+# revalidation round-trip to origin on each visit. These rules give the
+# content-addressed / large binary paths a long immutable lifetime.
+
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Slippy map tiles are addressed by /z/x/y — stable for a festival season.
+/tiles/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/Songs/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/sounds/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Uploaded photos and scraped media: long-lived but not content-addressed.
+/gallery/*
+  Cache-Control: public, max-age=604800
+
+/r2/*
+  Cache-Control: public, max-age=604800
+
+/pandals/*
+  Cache-Control: public, max-age=604800
+
+/hero_slides/*
+  Cache-Control: public, max-age=604800
+
+/idols/*
+  Cache-Control: public, max-age=604800
+
+# Original compiled theme assets (CSS/fonts) are NOT hashed, so they must
+# be revalidated often enough to pick up a redesign.
+/static/*
+  Cache-Control: public, max-age=86400, must-revalidate
+
+# Data files the client fetches directly.
+/points.json
+  Cache-Control: public, max-age=3600
+
+# The service worker itself must never be served stale, or clients get
+# pinned to an old cache version indefinitely.
+/sw.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin

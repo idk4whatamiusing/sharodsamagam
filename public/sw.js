@@ -1,8 +1,10 @@
-const CACHE_VERSION = 'sharodsamagam-offline-v1';
+const CACHE_VERSION = 'sharodsamagam-offline-v2';
 const TILE_CACHE = `${CACHE_VERSION}-tiles`;
 const SHELL_CACHE = `${CACHE_VERSION}-shell`;
 
-const SHELL = ['/', '/map', '/paras', '/panzika', '/chronicles', '/points.json'];
+// Trailing slashes match how the static export lays out /map/index.html etc.
+// Without them each entry costs an extra 307 redirect on cold cache.
+const SHELL = ['/', '/map/', '/paras/', '/panzika/', '/chronicles/', '/points.json'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(
