@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 const dhakGlobal: { el: HTMLAudioElement | null } = { el: null };
 const audioGlobal: { el: HTMLAudioElement | null } = { el: null };
@@ -21,7 +22,17 @@ export default function AudioPlayer({ tracks }: { tracks: Track[] }) {
   const [tab, setTab] = useState("All");
   const [elapsed, setElapsed] = useState(0);
 
+  // The mobile navbar ships an empty action slot beside the wordmark. The
+  // slot lives in raw mirror HTML (not React-managed), so it is resolved
+  // after mount and rendered into with a portal. Deferred so the portal is
+  // never part of the server render and cannot cause a hydration mismatch.
+  const [navSlot, setNavSlot] = useState<HTMLElement | null>(null);
+
   const current = tracks[idx];
+
+  useEffect(() => {
+    setNavSlot(document.getElementById("mobile-nav-actions"));
+  }, []);
 
   useEffect(() => {
     if (!dhakGlobal.el) {
@@ -85,10 +96,34 @@ export default function AudioPlayer({ tracks }: { tracks: Track[] }) {
 
   return (
     <>
+      {/* Floating controls for desktop. Hidden below lg because the mobile
+          navbar carries its own copy in #mobile-nav-actions. */}
       <button onClick={toggleDhak} aria-label="Dhak"
-        className={`fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full shadow-xl border-2 border-white flex items-center justify-center text-lg ${dhakOn ? "bg-[#D90429] text-white" : "bg-white text-[#2C1210]"}`}>🥁</button>
+        className={`hidden lg:flex fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full shadow-xl border-2 border-white items-center justify-center text-lg ${dhakOn ? "bg-[#D90429] text-white" : "bg-white text-[#2C1210]"}`}>🥁</button>
       <button onClick={() => setOpen(!open)} aria-label="Playlist"
-        className="fixed bottom-6 left-6 z-50 w-12 h-12 rounded-full bg-white border border-[#EAD5A0] shadow-xl flex items-center justify-center text-lg">🎵</button>
+        className="hidden lg:flex fixed bottom-6 left-6 z-50 w-12 h-12 rounded-full bg-white border border-[#EAD5A0] shadow-xl items-center justify-center text-lg">🎵</button>
+
+      {/* Same controls, same handlers, same state — rendered into the mobile
+          navbar. The parent header is `lg:hidden`, so these disappear on
+          desktop with no extra breakpoint logic here. */}
+      {navSlot &&
+        createPortal(
+          <>
+            <button onClick={toggleDhak} aria-label="Dhak" aria-pressed={dhakOn} title={dhakOn ? "Mute dhak" : "Play dhak"}
+              className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-sm sm:text-base shrink-0 transition-transform active:scale-95 border ${
+                dhakOn
+                  ? "bg-[#D90429] text-white border-[#D90429]"
+                  : "bg-white/70 text-[#2C1210] border-[#E5C880]"
+              }`}>🥁</button>
+            <button onClick={() => setOpen(!open)} aria-label="Playlist" aria-pressed={open} title={open ? "Hide playlist" : "Open playlist"}
+              className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-sm sm:text-base shrink-0 transition-transform active:scale-95 border ${
+                open
+                  ? "bg-[#D90429] text-white border-[#D90429]"
+                  : "bg-white/70 text-[#2C1210] border-[#E5C880]"
+              }`}>🎵</button>
+          </>,
+          navSlot
+        )}
 
       {open && (
         <aside className="fixed right-4 top-20 bottom-20 w-[320px] max-w-[88vw] z-50 bg-white border border-[#EAD5A0] rounded-3xl shadow-2xl flex flex-col overflow-hidden">

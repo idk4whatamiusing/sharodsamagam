@@ -23,7 +23,52 @@ const TILE_OPTS = {
 
 // Esri will happily serve tiles the browser has already seen, so the service
 // worker keeps a cache-first copy for repeat views.
-const TILE_HOST = "server.arcgisonline.com";
+
+// A map that silently fails to draw is indistinguishable from a map that
+// never initialised, which makes every support question a guessing game.
+// This paints an explicit, recoverable notice instead.
+function failureNotice(host: HTMLElement, detail: string, retry?: () => void) {
+  if (host.querySelector("[data-map-error]")) return;
+  const wrap = document.createElement("div");
+  wrap.setAttribute("data-map-error", "");
+  wrap.setAttribute("role", "alert");
+  wrap.style.cssText =
+    "position:absolute;inset:0;z-index:1200;display:flex;flex-direction:column;" +
+    "align-items:center;justify-content:center;gap:.5rem;padding:1rem;text-align:center;" +
+    "background:repeating-linear-gradient(45deg,#FFFDF5,#FFFDF5 12px,#FFF6E5 12px,#FFF6E5 24px)";
+
+  const title = document.createElement("p");
+  title.style.cssText =
+    "font:800 1rem/1.3 Georgia,serif;color:#2C1210;margin:0";
+  title.textContent = "Map tiles could not be loaded";
+
+  const body = document.createElement("p");
+  body.style.cssText =
+    "font:500 .8rem/1.5 system-ui,sans-serif;color:#2C1210;opacity:.7;margin:0;max-width:34ch";
+  body.textContent = detail;
+
+  wrap.append(title, body);
+
+  if (retry) {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.textContent = "Retry";
+    btn.style.cssText =
+      "margin-top:.25rem;padding:.5rem 1.1rem;border-radius:9999px;cursor:pointer;" +
+      "font:700 .8rem/1 system-ui,sans-serif;color:#fff;background:#D90429;border:1px solid #FFB800";
+    btn.onclick = () => {
+      wrap.remove();
+      retry();
+    };
+    wrap.append(btn);
+  }
+
+  host.append(wrap);
+}
+
+const BLOCKED_HINT =
+  "A network filter or privacy shield may be blocking the map tile server. " +
+  "Allow server.arcgisonline.com, then retry.";
 
 export default function MapInjector() {
   useEffect(() => {
@@ -58,10 +103,34 @@ export default function MapInjector() {
         return L.map(el).setView(view, zoom);
       };
 
+      // Builds a tile layer that reports failure rather than failing silently.
+      const tilesFor = (host: HTMLElement, map: import("leaflet").Map) => {
+        const layer = L.tileLayer(TILE_URL, TILE_OPTS);
+        let failures = 0;
+        let reported = false;
+        layer.on("tileerror", () => {
+          failures += 1;
+          // One bad tile is normal (edge of coverage); a run of them is not.
+          if (reported || failures < 8) return;
+          reported = true;
+          failureNotice(host, BLOCKED_HINT, () => {
+            failures = 0;
+            reported = false;
+            map.removeLayer(layer);
+            tilesFor(host, map);
+          });
+        });
+        layer.on("tileload", () => {
+          failures = 0;
+          host.querySelector("[data-map-error]")?.remove();
+        });
+        return layer.addTo(map);
+      };
+
       if (k) {
         const map = init(k, KOLKATA, 12);
         if (!map) return;
-        L.tileLayer(TILE_URL, TILE_OPTS).addTo(map);
+        tilesFor(k, map);
 
         const res = await fetch("/points.json");
         const pts = (await res.json()) as {
@@ -99,11 +168,18 @@ export default function MapInjector() {
         const lng = parseFloat(p.dataset.lng || String(KOLKATA[1]));
         const map = init(p, [lat, lng], 15);
         if (!map) return;
-        L.tileLayer(TILE_URL, TILE_OPTS).addTo(map);
+        tilesFor(p, map);
         L.marker([lat, lng], { icon: pin }).addTo(map);
       }
-    })().catch(() => {
-      /* map is progressive enhancement — never break the page over it */
+    })().catch((err: unknown) => {
+      // Progressive enhancement — but never fail silently.
+      const host = k || p;
+      if (!host) return;
+      console.error("[map] initialisation failed", err);
+      failureNotice(
+        host,
+        "The interactive map could not start in this browser. Everything else on the page still works.",
+      );
     });
 
     return () => {

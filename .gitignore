@@ -4,3 +4,4 @@ data/raw/
 out/
 .wrangler/
 .local_song_backup/
+tsconfig.tsbuildinfo/

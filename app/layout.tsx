@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import fs from "fs";
 import path from "path";
 import ServiceWorkerRegistrar from "../components/ServiceWorkerRegistrar";
+import Countdown from "../components/Countdown";
+import FestivalDays from "../components/FestivalDays";
 import ClientNav from "../components/ClientNav";
 import GalleryMotion from "../components/GalleryMotion";
 import RevealScroll from "../components/RevealScroll";
@@ -11,7 +13,13 @@ import MapInjector from "../components/MapInjector";
 import "./globals.css";
 
 const MIRROR = path.join(process.cwd(), "mirror");
-const CHROME_HEAD = fs.readFileSync(path.join(MIRROR, "_chrome_head.html"), "utf8");
+const CHROME_HEAD = fs.readFileSync(path.join(MIRROR, "_chrome_head.html"), "utf8").replace(
+  // The mobile navbar reserves an empty slot to the right of the wordmark
+  // (`justify-between` on the pill puts it at the right-hand end). Tag it so
+  // the audio player can portal its controls in there on small screens.
+  '<div class="relative z-10 flex items-center gap-1 sm:gap-2 shrink-0"></div>',
+  '<div id="mobile-nav-actions" class="relative z-10 flex items-center gap-1 sm:gap-2 shrink-0"></div>'
+);
 const CHROME_FOOT = fs.readFileSync(path.join(MIRROR, "_chrome_foot.html"), "utf8");
 const TRACKS = (() => {
   try {
@@ -53,6 +61,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <RevealScroll />
         <ParasInteractions />
         <MapInjector />
+        <Countdown />
+        <FestivalDays />
         <ServiceWorkerRegistrar />
       </body>
     </html>
