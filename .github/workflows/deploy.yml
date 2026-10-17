@@ -63,13 +63,18 @@ jobs:
             exit 0
           fi
           echo "::add-mask::$TOKEN"
-          # Verify before deploying so a revoked token fails loudly here
-          # rather than silently at the deploy step.
+          # Verify before deploying so a bad token fails loudly here rather
+          # than silently at the deploy step.
+          #
+          # NOTE: account-scoped tokens do NOT authenticate against
+          # /user/tokens/verify - that endpoint rejects them with
+          # "1000 Invalid API Token" even when the token is perfectly valid.
+          # The account-scoped verify endpoint is the correct one.
           if curl -sf -H "Authorization: Bearer $TOKEN" \
-               https://api.cloudflare.com/client/v4/user/tokens/verify > /dev/null; then
+               "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT/tokens/verify" > /dev/null; then
             echo "ready=true" >> "$GITHUB_OUTPUT"
           else
-            echo "::error title=Invalid token::CLOUDFLARE_API_TOKEN was rejected by the Cloudflare API. It may have been revoked or mistyped."
+            echo "::error title=Invalid token::CLOUDFLARE_API_TOKEN was rejected by the Cloudflare API. Check that the secret is current and has Workers Scripts:Edit."
             echo "ready=false" >> "$GITHUB_OUTPUT"
           fi
 
