@@ -1,5 +1,5 @@
 import { chromium } from "playwright";
-import { rmSync } from "fs";
+import { rmSync, existsSync } from "fs";
 import { resolve4 } from "node:dns/promises";
 
 const HOST = process.env.PIN_DNS || "sharodsamagam.dpdns.org";
@@ -8,7 +8,9 @@ const ip = (await resolve4(HOST))[0];
 console.log(`pinning ${HOST} -> ${ip}`);
 
 rmSync("/tmp/pw-err", { recursive: true, force: true });
+const BRAVE = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser";
 const ctx = await chromium.launchPersistentContext("/tmp/pw-err", {
+  ...(existsSync(BRAVE) ? { executablePath: BRAVE } : {}),
   viewport: { width: 1200, height: 800 },
   serviceWorkers: "block",          // <-- otherwise the SW fetches outside page routing
   args: [`--host-resolver-rules=MAP ${HOST} ${ip}`],

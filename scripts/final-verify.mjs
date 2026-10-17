@@ -1,4 +1,5 @@
 import { chromium } from "playwright";
+import { existsSync } from "node:fs";
 const B = process.env.BASE || "http://127.0.0.1:8899";
 // dpdns.org carries the delegation for its subdomains on only ONE of the four
 // parent nameservers (ns1). ns2/ns3/ns4 answer NOERROR-with-no-records, so
@@ -13,8 +14,12 @@ if (process.env.PIN_DNS) {
   console.log(`pinning ${process.env.PIN_DNS} -> ${ip}`);
   launchArgs = [`--host-resolver-rules=MAP ${process.env.PIN_DNS} ${ip}`];
 }
+// Prefer the locally installed Brave so we exercise the browser the user
+// actually uses, but fall back to Playwright's bundled Chromium - which is
+// what CI installs, and what exists on any machine without Brave.
+const BRAVE = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser";
 const b = await chromium.launch({
-  executablePath: "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser",
+  ...(existsSync(BRAVE) ? { executablePath: BRAVE } : {}),
   headless: true,
   args: launchArgs,
 });
