@@ -1,10 +1,4 @@
-const FIXED_DAYS = [
-  { name: "Maha Shashthi", date: "16 Oct", bn: "মহাষষ্ঠী", desc: "বোধন ও অধিবাস — The start of Durga Puja. Maa Durga is welcomed and awakened with evening Bodhon.", bhog: "Luchi, Chholar Dal, Sandesh & Malpua", key: "Bel tolai Bodhon & Dhak beats", rites: [["Kalparambha", "Morning · 06:15 AM"], ["Bodhon & Amantran", "Evening · 05:45 PM"], ["Adhibas", "Evening · 07:15 PM"]] },
-  { name: "Maha Saptami", date: "17–18 Oct", bn: "সপ্তমী", desc: "Navapatrika Snan — bathing of the Nabapatrika (Kola Bou) and Pran Pratistha.", bhog: "Khichuri, Labra, Begun Bhaja", key: "Navapatrika & Pran Pratistha", rites: [["Navapatrika Snan", "Morning · 06:00 AM"], ["Pran Pratistha", "Morning · 08:30 AM"], ["Sandhi Aarati", "Evening · 06:00 PM"]] },
-  { name: "Maha Ashtami", date: "19 Oct", bn: "অষ্টমী", desc: "Kumari Puja & the midnight Sandhi Puja junction rites with 108 lotuses and 108 diyas.", bhog: "Khichuri with Mishti Doi", key: "Sandhi Puja 08:54 – 09:42 PM", rites: [["Kumari Puja", "Morning"], ["Pushpanjali", "Morning"], ["Sandhi Puja", "08:54 – 09:42 PM"], ["Dhunuchi Naach & Aarati", "Evening"]] },
-  { name: "Maha Nabami", date: "20 Oct", bn: "নবমী", desc: "Anjali followed by grand Dhunuchi Naach — the evening of incense dance and aarati.", bhog: "Basanti Pulao, Kosha Mangsho", key: "Maha Anjali & Dhunuchi", rites: [["Pushpanjali", "Morning"], ["Maha Anjali", "Evening · 05:30 PM"], ["Dhunuchi Naach", "Late Evening"]] },
-  { name: "Vijaya Dashami", date: "21 Oct", bn: "দশমী", desc: "Sindoor Khela — Bengali women smear each other with vermilion in a bittersweet farewell.", bhog: "Mishti Doi, Payesh, Sandesh", key: "Sindoor Khela & Biday", rites: [["Sindoor Khela", "Morning · 09:00 AM"], ["Dhunuchi & Biday", "Afternoon"], ["Immersion Processions", "Evening onwards"]] },
-];
+import { FESTIVAL_DAYS } from "../../lib/festivalDays";
 
 export default function PanzikaPage() {
   return (
@@ -26,8 +20,8 @@ export default function PanzikaPage() {
 
         <h2 className="mt-12 font-serif text-2xl font-black">Devi Paksha Schedule</h2>
         <div className="mt-4 space-y-4">
-          {FIXED_DAYS.map((d) => (
-            <section key={d.name} className="rounded-3xl border border-[#EAD5A0] bg-white p-6">
+          {FESTIVAL_DAYS.map((d) => (
+            <section key={d.key} className="rounded-3xl border border-[#EAD5A0] bg-white p-6">
               <div className="flex items-baseline gap-3">
                 <h3 className="font-serif text-xl font-black text-[#D90429]">{d.name}</h3>
                 <span className="text-sm font-serif">{d.bn}</span>
@@ -42,7 +36,7 @@ export default function PanzikaPage() {
                   </p>
                 ))}
               </div>
-              <p className="mt-3 text-xs text-[#2C1210]/70"><b>Bhog:</b> {d.bhog} · <b>Key:</b> {d.key}</p>
+              <p className="mt-3 text-xs text-[#2C1210]/70"><b>Bhog:</b> {d.bhog} · <b>Key:</b> {d.highlight}</p>
             </section>
           ))}
         </div>

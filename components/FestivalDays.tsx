@@ -4,6 +4,10 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { DAYS_BY_KEY, FESTIVAL_DAYS, type FestivalDay } from "../lib/festivalDays";
 
+/** The panzika dataset stores rites as [label, time] tuples. */
+const timingsOf = (d: FestivalDay) =>
+  d.rites.map(([label, time]) => ({ label, time }));
+
 const CAL_ICON =
   '<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="currentColor" viewBox="0 0 256 256"><path d="M208,28H188V24a12,12,0,0,0-24,0v4H92V24a12,12,0,0,0-24,0v4H48A20,20,0,0,0,28,48V208a20,20,0,0,0,20,20H208a20,20,0,0,0,20-20V48A20,20,0,0,0,208,28ZM68,52a12,12,0,0,0,24,0h72a12,12,0,0,0,24,0v16H68ZM52,204V100h152v104Zm60-80v56a12,12,0,0,1-24,0V143.32a12,12,0,0,1-9.37-22l16-8A12,12,0,0,1,112,124Zm61.49,33.88L163.9,168H168a12,12,0,0,1,0,24H136a12,12,0,0,1-8.71-20.25L155.45,142a4,4,0,0,0,.55-2,12,12,0,0,0-7.47-2,12,12,0,0,1-20.78-12A28,28,0,0,1,180,140a27.77,27.77,0,0,1-5.64,16.86A10.63,10.63,0,0,1,173.49,157.88Z"></path></svg>';
 
@@ -25,7 +29,7 @@ const esc = (s: string) =>
 
 /** Rebuilds the detail panel for a day, matching the scraped Shashthi markup. */
 function panelHtml(d: FestivalDay): string {
-  const rows = d.timings
+  const rows = timingsOf(d)
     .map(
       (t) =>
         '<div class="flex items-center justify-between gap-1.5 p-1 min-[360px]:p-1.5 rounded-lg bg-white/95 border border-[#E5C880]/50 text-xs shadow-xs">' +
@@ -56,16 +60,16 @@ function panelHtml(d: FestivalDay): string {
     "</span>" +
     '<span class="text-[9.5px] font-mono font-bold text-[#D97706] flex items-center gap-1 whitespace-nowrap">' +
     CAL_ICON +
-    esc(d.date) +
+    esc(d.longDate) +
     "</span></div></div>" +
     '<div><h3 class="font-serif font-black text-base min-[360px]:text-lg text-[#2C1210] leading-tight">' +
-    esc(d.title) +
+    esc(d.name) +
     '</h3><p class="text-[10.5px] min-[360px]:text-[11px] font-semibold text-[#D97706] mt-0.5">' +
-    esc(d.bengali) +
+    esc(d.bnFull) +
     "</p></div>" +
     '<div class="border-l-2 border-[#D90429] pl-2.5 py-0.5">' +
     '<p class="text-[10.5px] min-[360px]:text-xs leading-relaxed text-[#2C1210]/90 font-serif italic line-clamp-2">"' +
-    esc(d.description) +
+    esc(d.desc) +
     '"</p></div>' +
     '<div class="bg-[#FFF8EC] border border-[#E5C880] rounded-xl p-1.5 min-[360px]:p-2 space-y-1 shadow-xs">' +
     '<div class="flex items-center justify-between border-b border-[#E5C880]/50 pb-1">' +
@@ -87,12 +91,10 @@ export default function FestivalDays() {
     const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-fday]"));
     if (!panel || !tabs.length) return;
 
-    // Every day renders through panelHtml(), including Shashthi. Its content
-    // is taken verbatim from the scraped panel, but routing it through the
-    // same builder means all five days share the row-overflow and wrapping
-    // fixes instead of only the four authored ones.
+    // Every day renders through panelHtml() from the shared dataset, so the
+    // home page and /panzika can never drift apart.
     const select = (key: string) => {
-      const day = DAYS_BY_KEY[key];
+      const day = DAYS_BY_KEY[key as FestivalDay["key"]];
       if (!day) return;
 
       panel.innerHTML = panelHtml(day);
@@ -114,7 +116,7 @@ export default function FestivalDays() {
             (isActive ? "text-[#FFB800]" : "text-[#D97706]");
         }
         if (nameEl) {
-          nameEl.textContent = day.title.replace(/^Maha /, "").replace("Vijaya Dashami", "Dashami");
+          nameEl.textContent = day.name.replace(/^Maha /, "").replace("Vijaya Dashami", "Dashami");
           nameEl.className =
             "font-serif font-black text-[11px] min-[360px]:text-xs leading-tight mt-0.5 " +
             (isActive
@@ -122,7 +124,7 @@ export default function FestivalDays() {
               : "text-[#2C1210]");
         }
         if (bnEl) {
-          bnEl.textContent = day.bengali.split(" · ")[1] ?? day.bengali;
+          bnEl.textContent = day.bnFull.split(" · ")[1] ?? day.bnFull;
           bnEl.className =
             "text-[7px] font-semibold tracking-tight mt-0.5 truncate max-w-[66px] " +
             (isActive ? "text-amber-200" : "text-[#2C1210]/60");

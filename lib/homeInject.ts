@@ -59,6 +59,20 @@ export function injectFestivalDayHooks(html: string): string {
   return result;
 }
 
+// The scraped hero carries a hardcoded "8 Days to Mahalaya" pill. Mahalaya
+// was 10 Oct 2026, so that string is permanently wrong. Swap the text node
+// for a tagged slot and let FestivalStatus fill it in at runtime - a static
+// export cannot compute it at build time without going stale immediately.
+const MAHALAYA_TEXT = '8<!-- --> Days to Mahalaya';
+
+export function injectFestivalStatusSlot(html: string): string {
+  if (!html.includes(MAHALAYA_TEXT)) return html;
+  return html.replace(
+    MAHALAYA_TEXT,
+    '<span data-mahalaya-status>Sharodotsav 2026</span>'
+  );
+}
+
 const COUNTDOWN_SKELETON_OPEN =
   '<div class="flex items-center justify-between sm:justify-around py-1">';
 const COUNTDOWN_SKELETON_CLOSE = '<p class="text-[8px] text-amber-200/50 font-mono pt-0.5">Sharodotsav 2026</p>';
