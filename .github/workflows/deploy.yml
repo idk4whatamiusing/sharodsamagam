@@ -1,0 +1,89 @@
+name: deploy
+
+# Auto-deploy to Cloudflare Workers, gated on the Playwright suite passing
+# against the built artifact. Deploys are skipped (not failed) when no API
+# token is configured, so the pipeline goes green from the first run and
+# starts deploying as soon as the secret is added.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify-and-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static export
+        run: npm run build
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Serve the built site
+        run: |
+          cd out
+          nohup python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/serve.log 2>&1 &
+          for i in $(seq 1 30); do
+            if curl -sf http://127.0.0.1:4173/ > /dev/null; then break; fi
+            sleep 1
+          done
+          curl -sf http://127.0.0.1:4173/ > /dev/null || { echo "server failed to start"; cat /tmp/serve.log; exit 1; }
+
+      - name: Run verification suite
+        env:
+          BASE: http://127.0.0.1:4173
+        run: node scripts/final-verify.mjs
+
+      - name: Configure Cloudflare credentials
+        id: creds
+        env:
+          TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "::notice title=Deploy skipped::No CLOUDFLARE_API_TOKEN secret configured. Build and tests passed; nothing was deployed."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "::add-mask::$TOKEN"
+          # Verify before deploying so a revoked token fails loudly here
+          # rather than silently at the deploy step.
+          if curl -sf -H "Authorization: Bearer $TOKEN" \
+               https://api.cloudflare.com/client/v4/user/tokens/verify > /dev/null; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::error title=Invalid token::CLOUDFLARE_API_TOKEN was rejected by the Cloudflare API. It may have been revoked or mistyped."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Deploy to Cloudflare Workers
+        if: steps.creds.outputs.ready == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx wrangler deploy
+
+      - name: Summary
+        run: |
+          if [ "${{ steps.creds.outputs.ready }}" = "true" ]; then
+            echo "### Deployed to Cloudflare Workers ✅" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "### Build + tests passed. Deploy skipped — no valid API token configured." >> "$GITHUB_STEP_SUMMARY"
+          fi

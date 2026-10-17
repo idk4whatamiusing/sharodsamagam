@@ -5,3 +5,10 @@ out/
 .wrangler/
 .local_song_backup/
 tsconfig.tsbuildinfo/
+
+# Secrets - this repo is PUBLIC. Never commit these.
+.env
+.env.*
+!.env.example
+*.pem
+*.key

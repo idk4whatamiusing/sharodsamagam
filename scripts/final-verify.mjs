@@ -44,12 +44,24 @@ m.on("console", c => c.type()==="error" && merr.push(c.text().slice(0,120)));
 await ready(m, B + "/");
 
 console.log("\n== COUNTDOWN ==");
-const cd1 = await m.evaluate(() => document.querySelector("[data-countdown-slot]")?.innerText);
-await m.waitForTimeout(2200);
-const cd2 = await m.evaluate(() => document.querySelector("[data-countdown-slot]")?.innerText);
-ok(!!cd1 && /\d/.test(cd1), "countdown renders digits: " + cd1?.replace(/\n/g," "));
-ok(cd1 !== cd2, "countdown is ticking");
-ok(/Maha Shashthi/.test(cd1||""), "countdown names its target");
+const cd1 = await m.evaluate(() => document.querySelector("[data-countdown-slot]")?.innerText || "");
+// Maha Shashthi is a fixed date (16 Oct 2026). Once it passes the widget is
+// supposed to settle into its terminal "is live" state, so the assertions
+// have to branch rather than assume a ticking clock forever.
+const isLive = /is live/i.test(cd1);
+if (isLive) {
+  ok(true, "countdown is in its post-festival state: " + cd1.replace(/\n/g, " ").slice(0, 46));
+  const cd1b = await m.evaluate(() => document.querySelector("[data-countdown-slot]")?.innerText || "");
+  await m.waitForTimeout(2200);
+  const cd2 = await m.evaluate(() => document.querySelector("[data-countdown-slot]")?.innerText || "");
+  ok(cd1b === cd2 && cd1 === cd2, "post-festival state is stable (not ticking)");
+} else {
+  await m.waitForTimeout(2200);
+  const cd2 = await m.evaluate(() => document.querySelector("[data-countdown-slot]")?.innerText || "");
+  ok(/\d/.test(cd1), "countdown renders digits: " + cd1.replace(/\n/g, " "));
+  ok(cd1 !== cd2, "countdown is ticking");
+  ok(/Maha Shashthi/.test(cd1), "countdown names its target");
+}
 
 console.log("\n== DAY SWITCH (all 5) ==");
 for (const [key, title] of [["shashthi","Maha Shashthi"],["saptami","Maha Saptami"],["ashtami","Maha Ashtami"],["nabami","Maha Nabami"],["dashami","Vijaya Dashami"]]) {
