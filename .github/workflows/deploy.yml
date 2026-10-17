@@ -55,7 +55,10 @@ jobs:
         id: creds
         env:
           TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          # Not a secret - it appears in wrangler.jsonc and in R2 endpoint
+          # URLs. Hardcoded as a fallback so a missing repository secret can
+          # never silently turn into "invalid token" and skip the deploy.
+          ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID || 'a3e11fe1b443619336af948c81b66375' }}
         run: |
           if [ -z "$TOKEN" ]; then
             echo "::notice title=Deploy skipped::No CLOUDFLARE_API_TOKEN secret configured. Build and tests passed; nothing was deployed."
