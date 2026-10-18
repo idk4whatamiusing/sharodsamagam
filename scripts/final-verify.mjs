@@ -95,6 +95,65 @@ for (const [key, title] of [["shashthi","Maha Shashthi"],["saptami1","Maha Sapta
   ok(r.pillLines < 24, `${key}: tithi pill single line (${r.pillLines}px)`);
 }
 
+console.log("\n== HERO CARD ==");
+{
+  const p = await b.newPage({ viewport: { width: 1440, height: 1000 } });
+  await ready(p, B + "/");
+
+  const card = await p.evaluate(() => {
+    const strip = document.querySelector("[data-zone-breakdown]");
+    const tiles = strip ? [...strip.querySelectorAll("a")] : [];
+    const nums = tiles.map((a) => Number(a.querySelector("span").textContent));
+    const statCard = strip ? strip.closest("div.space-y-2\\.5") : null;
+    return {
+      tiles: tiles.length,
+      sum: nums.reduce((a, b) => a + b, 0),
+      labels: tiles.map((a) => a.querySelectorAll("span")[1].textContent.trim()),
+      allLinked: tiles.every((a) => (a.getAttribute("href") || "").startsWith("/paras")),
+      arrows: document.querySelectorAll('[aria-label="Previous slide"],[aria-label="Next slide"]').length,
+      skeletons: statCard ? statCard.querySelectorAll(".animate-pulse.rounded").length : -1,
+      stats: statCard
+        ? [...statCard.querySelectorAll(".group\\/stat p")].map((x) => x.textContent.trim())
+        : [],
+      caption: (() => {
+        const el = [...document.querySelectorAll("p")].find(
+          (n) => /Sharodsamagam 2026 · Kolkata/.test(n.textContent)
+        );
+        return el ? el.textContent.trim() : null;
+      })(),
+      brand: document.body.innerText.includes("Sharodotsav"),
+    };
+  });
+  ok(card.tiles === 6, `zone breakdown lists six zones (${card.tiles})`);
+  ok(card.sum === 776, `zone counts total the dataset (${card.sum})`);
+  ok(card.allLinked, "every zone tile links to the directory");
+  ok(card.arrows === 0, "dead carousel arrows removed");
+  ok(card.skeletons === 0, "loading skeletons resolved");
+  ok(card.caption === "Sharodsamagam 2026 · Kolkata", `caption branded (${card.caption})`);
+  ok(!card.brand, "no 'Sharodotsav' left on the page");
+  ok(card.stats[0] === "776" && card.stats[2] === "6", `stats match data (${card.stats.join("/")})`);
+
+  // The phase pill must name the day the shared dataset says, not a
+  // hand-maintained list that drifts when days are split.
+  const pill = await p.evaluate(() => document.querySelector("[data-mahalaya-status]")?.textContent || "");
+  const expected = (() => {
+    const d = new Date();
+    const days = [
+      ["2026-10-16", "Maha Shashthi"], ["2026-10-17", "Maha Saptami"],
+      ["2026-10-18", "Maha Saptami"], ["2026-10-19", "Maha Ashtami"],
+      ["2026-10-20", "Maha Nabami"], ["2026-10-21", "Vijaya Dashami"],
+    ];
+    const iso = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+    const hit = days.find(([iso2]) => iso2 === iso);
+    return hit ? `Day ${days.findIndex(([x]) => x === iso) + 1} of 6 · ${hit[1]}` : null;
+  })();
+  ok(
+    expected === null || pill === expected,
+    `phase pill matches the calendar (got "${pill}", want "${expected}")`
+  );
+  await p.close();
+}
+
 console.log("\n== NAVBAR BUTTONS ==");
 ok(await m.evaluate(() => !!document.getElementById("mobile-nav-actions")), "slot present");
 ok(await m.evaluate(() => document.querySelectorAll("#mobile-nav-actions button").length) === 2, "2 buttons in slot");

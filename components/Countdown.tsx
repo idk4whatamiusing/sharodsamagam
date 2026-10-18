@@ -46,7 +46,7 @@ export default function Countdown() {
         slots.forEach((slot) => {
           slot.innerHTML =
             '<div class="py-2 text-center">' +
-            '<p class="font-serif font-black text-sm text-[#FFB800] leading-tight">Sharodotsav 2026 is live</p>' +
+            '<p class="font-serif font-black text-sm text-[#FFB800] leading-tight">Sharodsamagam 2026 is live</p>' +
             '<p class="text-[8px] text-amber-200/50 font-mono pt-0.5">Maa Durga has arrived</p>' +
             "</div>";
         });

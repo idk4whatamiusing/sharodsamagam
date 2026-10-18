@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Sharodsamagam 2026",
     short_name: "Sharodsamagam",
-    description: "Sharodotsav 2026 — pandal directory, live map, panjika and city guide.",
+    description: "Sharodsamagam 2026 — pandal directory, live map, panjika and city guide.",
     start_url: "/",
     display: "standalone",
     background_color: "#FFFDF5",

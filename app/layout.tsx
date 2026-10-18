@@ -33,7 +33,7 @@ const TRACKS = (() => {
 
 export const metadata: Metadata = {
   title: "Sharodsamagam 2026",
-  description: "Sharodotsav 2026 — the premier digital companion to Kolkata's grandest festival.",
+  description: "Sharodsamagam 2026 — the premier digital companion to Kolkata's grandest festival.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

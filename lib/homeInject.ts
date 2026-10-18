@@ -8,6 +8,9 @@
  * sections and risking visual drift from the original design.
  */
 
+import fs from "fs";
+import path from "path";
+
 const DAY_TAB_OPEN =
   '<button type="button" class="group relative w-full flex-1';
 
@@ -128,4 +131,133 @@ export function injectCountdownSlot(html: string): string {
     '<div data-countdown-slot class="block"></div>' +
     html.slice(end + COUNTDOWN_SKELETON_CLOSE.length)
   );
+}
+
+// --- hero carousel card -------------------------------------------------
+
+const CARD_LABEL = "01 · PANDAL DIRECTORY";
+
+/** Zone display colours, matching the badges ParasInteractions paints. */
+const ZONE_COLOR: Record<string, string> = {
+  south: "#D90429",
+  north: "#4F46E5",
+  east: "#059669",
+  howrah: "#0891B2",
+  central: "#D97706",
+  others: "#475569",
+};
+
+const ZONE_LABEL: Record<string, string> = {
+  south: "South",
+  north: "North",
+  east: "East",
+  howrah: "Howrah",
+  central: "Central",
+  others: "Others",
+};
+
+function zoneCounts(): { zone: string; label: string; color: string; n: number }[] {
+  const file = path.join(process.cwd(), "data", "pandals.json");
+  const pandals = JSON.parse(fs.readFileSync(file, "utf8")) as { zone?: string }[];
+  const counts = new Map<string, number>();
+  for (const p of pandals) {
+    const z = p.zone || "others";
+    counts.set(z, (counts.get(z) ?? 0) + 1);
+  }
+  return [...counts.entries()]
+    .map(([zone, n]) => ({
+      zone,
+      n,
+      label: ZONE_LABEL[zone] ?? zone,
+      color: ZONE_COLOR[zone] ?? "#475569",
+    }))
+    .sort((a, b) => b.n - a.n || a.zone.localeCompare(b.zone));
+}
+
+/** Removes a `<div>` block whose opening tag is `openTag` and which holds no nested divs. */
+function dropDivBlock(html: string, openTag: string, from: number): string {
+  const start = html.indexOf(openTag, from);
+  if (start === -1) return html;
+  const end = html.indexOf("</div>", start);
+  if (end === -1) return html;
+  return html.slice(0, start) + html.slice(end + "</div>".length);
+}
+
+/**
+ * Rebuilds the hero's "01 · PANDAL DIRECTORY" card.
+ *
+ * Three defects, all from the scrape rather than from the original's design:
+ *
+ *  1. The card body was a loading skeleton - four empty icon/label
+ *     placeholders. That is the original app's Suspense fallback: the real
+ *     content sat in a client-side bailout template that RSC sanitisation
+ *     removed, so the fallback shipped instead. No capture of the site has
+ *     ever contained the real slides. Replaced with the real zone breakdown,
+ *     counted from data/pandals.json, which needs no invented content.
+ *
+ *  2. It advertised a seven-slide carousel with prev/next arrows, but only
+ *     slide one was ever captured. Six dots and both arrows pointed at
+ *     nothing. Removed rather than left as controls that do nothing.
+ *
+ *  3. The caption carried the original's own brand, "Sharodotsav", and the
+ *     stats were stale. Corrected against the real dataset.
+ */
+export function injectHeroCard(html: string): string {
+  const cardAt = html.indexOf(CARD_LABEL);
+  if (cardAt === -1) return html;
+
+  let out = html;
+
+  // 1. Dead carousel chrome: the arrow pair and the seven slide dots.
+  out = dropDivBlock(out, '<div class="flex items-center gap-1">', cardAt);
+  out = dropDivBlock(
+    out,
+    '<div class="hidden sm:flex items-center justify-center gap-1.5 pt-1.5 pb-0.5">',
+    cardAt
+  );
+
+  // 2. The skeleton body -> real zone counts.
+  const zones = zoneCounts();
+  const skeletonOpen =
+    '<div class="flex items-center justify-between sm:justify-around py-1">';
+  const skeletonStart = out.indexOf(skeletonOpen, cardAt);
+  const skeletonEnd = out.indexOf(
+    '<div class="pt-1.5 border-t border-white/10 flex flex-wrap items-center justify-between gap-1.5">',
+    skeletonStart
+  );
+  if (skeletonStart !== -1 && skeletonEnd > skeletonStart) {
+    const tiles = zones
+      .map(
+        (z) =>
+          `<a href="/paras" class="group/z flex flex-col items-center justify-center rounded-lg bg-white/5 border border-white/10 hover:border-[#FFB800]/60 hover:bg-white/10 py-1.5 px-1 transition-all duration-200">` +
+          `<span class="font-serif font-black text-[#FFB800] text-sm sm:text-base leading-none" style="color:${z.color}">${z.n}</span>` +
+          `<span class="text-[8px] font-mono font-bold uppercase tracking-wider text-amber-100/70 mt-0.5 truncate max-w-full">${z.label}</span>` +
+          `</a>`
+      )
+      .join("");
+    out =
+      out.slice(0, skeletonStart) +
+      `<div class="grid grid-cols-3 gap-1.5 py-1" data-zone-breakdown>${tiles}</div>` +
+      out.slice(skeletonEnd);
+  }
+
+  // 3. Brand. The original's name appears in the caption and in several
+  //    other places on the page; ours is Sharodsamagam throughout.
+  out = out.split("Sharodotsav").join("Sharodsamagam");
+
+  // 4. Stale stats. The card said "700+" and "5 Zones"; the dataset has
+  //    776 pandals across 6 zones.
+  const statOpen =
+    '<div class="hidden sm:grid grid-cols-2 gap-2.5 pt-1">';
+  const statStart = out.indexOf(statOpen, cardAt);
+  if (statStart !== -1) {
+    const block = out.slice(statStart, statStart + 1600);
+    const pandalCount = zones.reduce((a, z) => a + z.n, 0);
+    const patched = block
+      .replace(">700+</p>", `>${pandalCount}</p>`)
+      .replace(">5</p>", `>${zones.length}</p>`);
+    out = out.slice(0, statStart) + patched + out.slice(statStart + 1600);
+  }
+
+  return out;
 }
