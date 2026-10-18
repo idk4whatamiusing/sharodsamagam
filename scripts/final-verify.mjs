@@ -270,6 +270,127 @@ console.log("\n== CLIENT-SIDE NAVIGATION ==");
   await nav.close();
 }
 
+// ---------- paras directory ----------
+console.log("\n== PARAS DIRECTORY ==");
+{
+  const p = await b.newPage({ viewport: { width: 1440, height: 1000 } });
+  const errs = [];
+  p.on("pageerror", e => errs.push(e.message.slice(0, 100)));
+  p.on("console", c => (c.type() === "error" || c.type() === "warning") && errs.push(c.text().slice(0, 100)));
+  await ready(p, B + "/paras/");
+
+  const CARD = 'a.block.h-full[href^="/paras/"]';
+
+  // The listing used to render its 24 cards twice, stacked, at every
+  // breakpoint - so the header count is pinned as a regression guard.
+  const initial = await p.evaluate((sel) => ({
+    cards: document.querySelectorAll(sel).length,
+    h1: document.querySelectorAll("h1").length,
+    count: document.querySelector("[data-paras-count]")?.textContent || "",
+  }), CARD);
+  ok(initial.h1 === 1, `single heading, no duplicated listing (h1=${initial.h1})`);
+  ok(initial.cards === 24, `starts with the server-rendered page (${initial.cards})`);
+  ok(/Showing 24 of 776/.test(initial.count), `count states the real size (${initial.count})`);
+
+  // Scroll the sentinel until it reports exhaustion.
+  for (let i = 0; i < 60; i++) {
+    await p.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await p.waitForTimeout(220);
+    const done = await p.evaluate(() => {
+      const s = document.querySelector("[data-paras-sentinel]");
+      return !s || s.style.display === "none";
+    });
+    if (done) break;
+  }
+
+  const loaded = await p.evaluate(async (sel) => {
+    const cards = [...document.querySelectorAll(sel)];
+    const hrefs = new Set(cards.map((a) => a.getAttribute("href")));
+    const data = await (await fetch("/paras.json")).json();
+    return {
+      dom: cards.length,
+      distinct: hrefs.size,
+      expected: data.length,
+      missing: data.filter((x) => !hrefs.has("/paras/" + x.slug)).length,
+      count: document.querySelector("[data-paras-count]")?.textContent || "",
+    };
+  }, CARD);
+  ok(loaded.dom === loaded.expected, `all ${loaded.expected} cards load (${loaded.dom})`);
+  ok(loaded.distinct === loaded.expected, `no duplicate cards (${loaded.distinct} distinct)`);
+  ok(loaded.missing === 0, `every pandal present (${loaded.missing} missing)`);
+  ok(/Showing all 776/.test(loaded.count), `count reaches the end (${loaded.count})`);
+
+  const visible = () =>
+    p.evaluate((sel) => [...document.querySelectorAll(sel)].filter((a) => a.style.display !== "none").length, CARD);
+  const clickChip = async (label) => {
+    await p.evaluate((l) => {
+      const btn = [...document.querySelectorAll("main button")].find(
+        (x) => x.innerText.trim().toLowerCase().replace(/\d+\s*$/, "").trim() === l
+      );
+      btn?.click();
+    }, label);
+    await p.waitForTimeout(320);
+  };
+
+  // Zone totals must equal the dataset, not just the first 24.
+  const expectedZones = await p.evaluate(async () => {
+    const d = await (await fetch("/paras.json")).json();
+    const c = {};
+    d.forEach((x) => (c[x.zone] = (c[x.zone] || 0) + 1));
+    return c;
+  });
+  for (const [zone, n] of Object.entries(expectedZones)) {
+    await clickChip(zone);
+    const got = await visible();
+    ok(got === n, `zone ${zone}: ${got}/${n}`);
+  }
+  await clickChip("all");
+  ok((await visible()) === loaded.expected, "All restores every card");
+
+  // These two used to be tested as zone names, matched nothing, and blanked
+  // the entire grid.
+  await clickChip("featured");
+  const feat = await visible();
+  ok(feat > 0 && feat < loaded.expected, `Featured filters instead of blanking (${feat})`);
+  await clickChip("saved");
+  ok((await visible()) === 0, "Saved with nothing saved shows none, without hiding the grid");
+  await clickChip("all");
+
+  // Search must reach beyond the server-rendered 24.
+  const midName = await p.evaluate(async () => (await (await fetch("/paras.json")).json())[400].name);
+  await p.evaluate((t) => {
+    const i = document.querySelector('input[placeholder*="Search pandal"]');
+    i.value = t;
+    i.dispatchEvent(new Event("input", { bubbles: true }));
+  }, midName);
+  await p.waitForTimeout(500);
+  ok((await visible()) === 1, `search reaches a pandal outside the first 24 (${midName.slice(0, 30)})`);
+
+  // Saved must survive a reload.
+  await p.evaluate(() => {
+    const i = document.querySelector('input[placeholder*="Search pandal"]');
+    i.value = "";
+    i.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  await p.waitForTimeout(250);
+  await p.evaluate(() => {
+    document.querySelector('a.block.h-full[href^="/paras/"] [aria-label="Save Pandal"]').click();
+  });
+  await p.waitForTimeout(300);
+  await p.reload({ waitUntil: "load" });
+  await p.waitForTimeout(1200);
+  const badge = await p.evaluate(() => {
+    const btn = [...document.querySelectorAll("main button")].find((x) =>
+      x.innerText.trim().toLowerCase().startsWith("saved")
+    );
+    return btn ? btn.innerText.replace(/\s+/g, " ") : "";
+  });
+  ok(/Saved\s*1/.test(badge), `Saved persists across reload (${badge})`);
+
+  ok(errs.length === 0, "paras console clean" + (errs.length ? ": " + [...new Set(errs)].join(" | ") : ""));
+  await p.close();
+}
+
 // ---------- panzika ----------
 console.log("\n== PANZIKA ==");
 {

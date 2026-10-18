@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { mirrorHtml, listRoutes } from "../../lib/mirror";
+import { injectParasListing } from "../../lib/parasInject";
 
 // Every mirror route is known at build time, so nothing is rendered on demand.
 export const dynamicParams = false;
@@ -21,6 +22,14 @@ export default async function MirrorPage({ params }: { params: Promise<{ slug: s
       /<div class="w-full h-full bg-\[#FFFBF0\][\s\S]*?Loading Kolkata Map\.\.\.<\/p><\/div>/,
       '<div id="kolkata-map" style="width:100%;height:70vh;min-height:450px"></div>'
     );
+  } else if (rel === "paras") {
+    // The listing shipped 24 cards and a dead scroll sentinel. Replace it
+    // with a slot the client fills from public/paras.json.
+    const cards = JSON.parse(
+      fs.readFileSync(path.join(process.cwd(), "public", "paras.json"), "utf8")
+    ) as unknown[];
+    const shown = (html.match(/<a class="block h-full" href="\/paras\//g) || []).length;
+    html = injectParasListing(html, cards.length, shown);
   } else if (rel.startsWith("paras/")) {
     const slug = rel.slice("paras/".length);
     const pandals = JSON.parse(

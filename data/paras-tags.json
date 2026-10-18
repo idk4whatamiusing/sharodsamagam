@@ -1,0 +1,2886 @@
+{
+  "_provenance": {
+    "source": "https://www.durgapujakolkata.in/paras",
+    "harvested": "2026-10-18T13:14:51.216Z",
+    "note": "Card tags read from the original by scrolling its directory. Re-run scripts/harvest-paras-tags.mjs to refresh."
+  },
+  "tags": {
+    "ultadanga-pallyshree": [
+      "traditional",
+      "community-favorite"
+    ],
+    "uddipani-park-circus-sarbojanin-durgotsab": [
+      "award-winner",
+      "historical"
+    ],
+    "shyampukur-sanghatirtha-durga-puja-samity-sanghatirtha": [
+      "award-winner",
+      "theme-based"
+    ],
+    "chotushkone-park-saradia-sammilani": [
+      "award-winner",
+      "theme-based"
+    ],
+    "64-pally-durgotsav-committee": [
+      "award-winner",
+      "theme-based"
+    ],
+    "ariadaha-jubak-sangha": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "ramkrishapur-sarbojanin-durgotsab": [
+      "award-winner",
+      "historical"
+    ],
+    "alpha-atheletic-association": [
+      "traditional",
+      "community-favorite"
+    ],
+    "adi-lake-pally": [
+      "traditional",
+      "community-favorite"
+    ],
+    "debdaru-fatak-sarbojanin-durgotsab": [
+      "award-winner",
+      "theme-based"
+    ],
+    "hartaki-bagan-sarbojanin-durgotsab": [
+      "award-winner",
+      "historical"
+    ],
+    "barisha-tarun-tirtha": [
+      "traditional",
+      "community-favorite"
+    ],
+    "beleghata-sarbojanin-durga-puja-committee": [
+      "community-favorite",
+      "traditional"
+    ],
+    "behala-29-palli": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "nirvik-sangha": [
+      "award-winner",
+      "theme-based"
+    ],
+    "keshtopur-prafulla-kanan-paschim-adhibasi-brinda": [
+      "award-winner",
+      "historical"
+    ],
+    "sobhabazar-burtolla-sarbojanin-durgotsab": [
+      "traditional",
+      "community-favorite"
+    ],
+    "ajeyo-sanhati": [
+      "award-winner",
+      "theme-based"
+    ],
+    "tekiapara-sarbojanin-durgotsab-committee": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "jorabagan-chhatra-sanghaati": [
+      "community-favorite",
+      "traditional"
+    ],
+    "udayan-sangha": [
+      "community-favorite",
+      "traditional"
+    ],
+    "hatibagan-sarbojonin-durgotsab-committee": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "boral-sukanta-sangha": [
+      "community-favorite",
+      "traditional"
+    ],
+    "beliaghata-nabamilan": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "golf-green-sarodotsava-committee-phase-ii": [
+      "award-winner",
+      "theme-based"
+    ],
+    "bhowanipore-sanatan-dharmautsahini-sobha": [
+      "award-winner",
+      "historical"
+    ],
+    "sarbojanin-sree-sree-durgotsav-baguiati-sports-council": [
+      "traditional",
+      "community-favorite"
+    ],
+    "sitala-maitri-sangha": [
+      "award-winner",
+      "theme-based"
+    ],
+    "raja-raj-ballav-street-sadanga-durgoutsav-samiti": [
+      "award-winner",
+      "historical"
+    ],
+    "kendua-shanti-sangha": [
+      "award-winner",
+      "theme-based"
+    ],
+    "chandranath-chatterjee-street-sarbojanin": [
+      "award-winner",
+      "historical"
+    ],
+    "beleghata-sarkar-bazar-vivekananda-sangha": [
+      "community-favorite",
+      "traditional"
+    ],
+    "barisha-yubak-brinda": [
+      "award-winner",
+      "historical"
+    ],
+    "shyampukur-adi-sarbojanin-durgotsab-comm": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "telengabagan-sarbojanin-durgotsab": [
+      "award-winner",
+      "theme-based"
+    ],
+    "bantra-mohila-sangha": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "the-newalipore-association": [
+      "award-winner",
+      "theme-based"
+    ],
+    "behala-natun-sangha-puja-committee": [
+      "award-winner",
+      "theme-based"
+    ],
+    "salkia-bharat-sangha": [
+      "traditional",
+      "community-favorite"
+    ],
+    "beadon-row-suchetana-organization": [
+      "community-favorite",
+      "traditional"
+    ],
+    "dum-dum-park-sarbojanin-durga-puja-samity": [
+      "traditional",
+      "community-favorite"
+    ],
+    "manicktala-14er-pally-sadharan-durga-utsab": [
+      "award-winner",
+      "theme-based"
+    ],
+    "subal-smriti-sangha-bantra-sarbojonin-durgotsab": [
+      "award-winner",
+      "theme-based"
+    ],
+    "joyrampur-sarbojanin-durgpuja-committee": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "bhowanipore-swadhin-sangha": [
+      "community-favorite",
+      "traditional"
+    ],
+    "jhawtala-sarbojanin": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "sarbodaya-sammilani": [
+      "award-winner",
+      "theme-based"
+    ],
+    "mitali-kankurghachi": [
+      "award-winner",
+      "historical"
+    ],
+    "mechua-bazar-sarbojanik-durgapuja-samity": [
+      "traditional",
+      "community-favorite"
+    ],
+    "khidderpore-abhiyan": [
+      "traditional",
+      "community-favorite"
+    ],
+    "krishnabagan-junior-sangha": [
+      "traditional",
+      "community-favorite"
+    ],
+    "tangra-gholpara-sarbojanin": [
+      "traditional",
+      "community-favorite"
+    ],
+    "salkia-sadharan-durga-puja-jatadhari-park": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "tala-prattoy": [
+      "award-winner",
+      "theme-based"
+    ],
+    "bijoypur-sarbojanin-durgapuja-committee": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "ramakrishna-atheletic-club": [
+      "community-favorite",
+      "traditional"
+    ],
+    "golaghata-sammelani": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "simla-sporting-club": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "shastribagan-durgotsob-committee": [
+      "community-favorite",
+      "traditional"
+    ],
+    "simla-byayam-samity": [
+      "award-winner",
+      "theme-based"
+    ],
+    "sodepur-club": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "dakshin-dari-youths": [
+      "community-favorite",
+      "traditional"
+    ],
+    "nalin-sarkar-street": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "kidderpore-gopal-doctor-roadjubak-sangha": [
+      "award-winner",
+      "theme-based"
+    ],
+    "hindusthan-park-sarbojanin-durgotsab-committee": [
+      "award-winner",
+      "historical"
+    ],
+    "jawpur-bayam-samiti": [
+      "award-winner",
+      "historical"
+    ],
+    "purbanchal-prabhati-sangha": [
+      "award-winner",
+      "theme-based"
+    ],
+    "bhowanipore-sarbojanin-durgotsab": [
+      "traditional",
+      "community-favorite"
+    ],
+    "pally-mangal-samity": [
+      "community-favorite",
+      "traditional"
+    ],
+    "grey-street-satadal": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "forward-club": [
+      "award-winner",
+      "historical"
+    ],
+    "santragachi-south-howrah-vivekananda-foudation": [
+      "community-favorite",
+      "traditional"
+    ],
+    "durgapuja-agrani-beleghata": [
+      "award-winner",
+      "historical"
+    ],
+    "olabibitola-sarbojanin-durgotsab-samity": [
+      "traditional",
+      "community-favorite"
+    ],
+    "kakurgachi-chalantika-club": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "bhowanipore-75-palli": [
+      "award-winner",
+      "theme-based"
+    ],
+    "dilip-smriti-sangha": [
+      "award-winner",
+      "theme-based"
+    ],
+    "shyamsquare-sarbojanin-duegapuja-o-pradarshani": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "manicktala-chaltabagan-loha-patty": [
+      "community-favorite",
+      "traditional"
+    ],
+    "ramgarh-jayasrinagar-association": [
+      "award-winner",
+      "theme-based"
+    ],
+    "vivekananda-sarbojanin-durgotsab": [
+      "award-winner",
+      "historical"
+    ],
+    "alipore-78-pally-sarbojonin-durgotsav-committee": [
+      "award-winner",
+      "theme-based"
+    ],
+    "sree-sangha-puja-committee": [
+      "traditional",
+      "community-favorite"
+    ],
+    "shibpur-sastitala-baroary-samity": [
+      "traditional",
+      "community-favorite"
+    ],
+    "pallir-yubak-brinda": [
+      "community-favorite",
+      "traditional"
+    ],
+    "ultadanga-sangrami-sarbojanin-durgotsab": [
+      "award-winner",
+      "historical"
+    ],
+    "barisha-club": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "salkia-santi-sangha": [
+      "community-favorite",
+      "traditional"
+    ],
+    "sammilita-malapara-sarbojanin-durgotsab": [
+      "traditional",
+      "community-favorite"
+    ],
+    "shyama-palli-shyama-sangha": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "karbagan-sarbojanin-durgotsab-committee": [
+      "award-winner",
+      "historical"
+    ],
+    "milan-chakra": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "nabin-pally-sarbojanin-durgotsav-hatibagan-nabinpally": [
+      "community-favorite",
+      "traditional"
+    ],
+    "sebak-sangha": [
+      "award-winner",
+      "historical"
+    ],
+    "wellington-nagarik-kalyan-samity": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "behala-mukul-sangha": [
+      "award-winner",
+      "historical"
+    ],
+    "ekush-pally-sarbojanin-durgotsab-samiti": [
+      "traditional",
+      "community-favorite"
+    ],
+    "beleghata-balakbrinda-club": [
+      "community-favorite",
+      "traditional"
+    ],
+    "kasba-rathtala-club": [
+      "award-winner",
+      "theme-based"
+    ],
+    "chakraberia-sarbojanin-durgotsab": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "chetla-sarbasadharaner-durgotsab": [
+      "traditional",
+      "community-favorite"
+    ],
+    "howrah-botanica-majherhat-sarbojanin-durgapuja": [
+      "traditional",
+      "community-favorite"
+    ],
+    "mohan-bagan-barwari": [
+      "award-winner",
+      "theme-based"
+    ],
+    "saraswat-sammilani": [
+      "award-winner",
+      "theme-based"
+    ],
+    "bantra-nabin-sangha": [
+      "community-favorite",
+      "traditional"
+    ],
+    "haridevpur-adarsha-samity": [
+      "award-winner",
+      "historical"
+    ],
+    "sontoshpur-sarbojanin-durgotsab": [
+      "award-winner",
+      "historical"
+    ],
+    "beliaghata-33-no-palli-bashi-brinda": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "bosepukur-talbagan": [
+      "community-favorite",
+      "traditional"
+    ],
+    "behala-mitra-sangha": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "lake-town-adhibashi-brinda": [
+      "community-favorite",
+      "traditional"
+    ],
+    "putiary-sarbojonin-durgotsab-committee": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "sanghamitra": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "tentulberia-shibtalapark-sarbojanin-durgotsab": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "kidderpore-pally-saradiya": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "kasba-r-k-chatterjee-road-adhibasi-brinda": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "pratapaditya-road-tricone-park-barowari": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "25-pally-club": [
+      "traditional",
+      "community-favorite"
+    ],
+    "rammohan-sammilani": [
+      "traditional",
+      "community-favorite"
+    ],
+    "sarkar-bagan-sammilita-sangha-durga-puja": [
+      "award-winner",
+      "historical"
+    ],
+    "naba-jagrata-sangha": [
+      "community-favorite",
+      "traditional"
+    ],
+    "durbar-mahila-samanyay-committee": [
+      "award-winner",
+      "historical"
+    ],
+    "lake-gardens-peoples-association": [
+      "award-winner",
+      "historical"
+    ],
+    "sarbojanin-durgoutsav-committee": [
+      "community-favorite",
+      "traditional"
+    ],
+    "rajdanga-amra-kajan-kalyan-samiti": [
+      "award-winner",
+      "theme-based"
+    ],
+    "74-palli-sarbojanin-durgotsab-kidderpore": [
+      "traditional",
+      "community-favorite"
+    ],
+    "ballygunge-sporting-association": [
+      "community-favorite",
+      "traditional"
+    ],
+    "kashi-bose-lane-durga-puja-samity": [
+      "award-winner",
+      "theme-based"
+    ],
+    "dakshin-pally-sarbojanin-durgotsav-committtee": [
+      "traditional",
+      "community-favorite"
+    ],
+    "dakshin-rabindrapally-sarbojanin-durgapuja-committee": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "maniktala-anchalik-samity": [
+      "traditional",
+      "community-favorite"
+    ],
+    "nager-bazar-jessore-road-adhibasi-brinda": [
+      "community-favorite",
+      "traditional"
+    ],
+    "kidderpore-bijoyee-sangha": [
+      "award-winner",
+      "historical"
+    ],
+    "ballygunge-cultural-association": [
+      "community-favorite",
+      "traditional"
+    ],
+    "simulia-sarvajanin-durgotsav-samity-vivekananda-road": [
+      "traditional",
+      "community-favorite"
+    ],
+    "nabarag-kidderpore": [
+      "traditional",
+      "community-favorite"
+    ],
+    "tagore-park-sporting-club": [
+      "award-winner",
+      "theme-based"
+    ],
+    "ajoynagar-sarbojanin-durgotsab-society": [
+      "community-favorite",
+      "traditional"
+    ],
+    "baghajatin-b-cblock-durgotsav-committee": [
+      "traditional",
+      "community-favorite"
+    ],
+    "loona-7-star": [
+      "award-winner",
+      "historical"
+    ],
+    "dum-dum-park-bharat-chakra": [
+      "traditional",
+      "community-favorite"
+    ],
+    "satattar-palli-sarbojanin-durgotsab-committee": [
+      "award-winner",
+      "historical"
+    ],
+    "purba-barisha-sitalatala-kishore-sangha": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "darjeepara-sarbojonin-durgotsab-samity": [
+      "award-winner",
+      "theme-based"
+    ],
+    "barisha-youth-club": [
+      "traditional",
+      "community-favorite"
+    ],
+    "alipore-sarbojanin-durgotsab-committee": [
+      "award-winner",
+      "historical"
+    ],
+    "tarun-dall-puja-committee": [
+      "traditional",
+      "community-favorite"
+    ],
+    "netajigarh-nagarik-brinda": [
+      "award-winner",
+      "theme-based"
+    ],
+    "seventy-six-pally-sarbojanin-durgotsab": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "beleghata-sandhani": [
+      "community-favorite",
+      "traditional"
+    ],
+    "avijit-club": [
+      "award-winner",
+      "historical"
+    ],
+    "khidderpore-shibtala-amar-sangha": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "college-square-sarbojanin-durgotsab-committee": [
+      "award-winner",
+      "historical"
+    ],
+    "gouriberia-sarbojanin-durgotsab-o-pradorshani": [
+      "award-winner",
+      "historical"
+    ],
+    "dakshinpara-durgotsab-committee": [
+      "traditional",
+      "community-favorite"
+    ],
+    "kolkata-poura-karmachari-sarbojanin-durgotsab-samity": [
+      "award-winner",
+      "historical"
+    ],
+    "hari-ghosh-street-swamiji-sangha": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "howrah-seva-sangha": [
+      "traditional",
+      "community-favorite"
+    ],
+    "sobhabazar-sarbojanin-durgotsab": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "22-palli-sarodotsab": [
+      "award-winner",
+      "historical"
+    ],
+    "judgebagan-sarbojanin-durgotsav": [
+      "traditional",
+      "community-favorite"
+    ],
+    "santoshpur-sagnik": [
+      "community-favorite",
+      "traditional"
+    ],
+    "chorebagan-sarbojanin-durgotsab-samity": [
+      "traditional",
+      "community-favorite"
+    ],
+    "nabapally-adhibasi-brinda": [
+      "community-favorite",
+      "traditional"
+    ],
+    "jamini-kaviraj-row-kalyan-sangha": [
+      "traditional",
+      "community-favorite"
+    ],
+    "sahidnagar-sarbojanin-durgotsab": [
+      "traditional",
+      "community-favorite"
+    ],
+    "hossenpur-kishore-sangha": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "shibrampur-aswathala-sarbojanin-durgotsav-committee": [
+      "traditional",
+      "community-favorite"
+    ],
+    "agradoot-durotsab-samity": [
+      "award-winner",
+      "theme-based"
+    ],
+    "sonarpur-recreation-club": [
+      "award-winner",
+      "theme-based"
+    ],
+    "bengal-united-club": [
+      "community-favorite",
+      "traditional"
+    ],
+    "hari-ghosh-street-sarbojanin-durgotsab-samity": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "chetla-agroni-club": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "halsibagan-sarbojanin-durgotsab": [
+      "community-favorite",
+      "traditional"
+    ],
+    "babubagan-sarbojanin-durgotsava": [
+      "traditional",
+      "community-favorite"
+    ],
+    "bakulbagan-sarbojanin-durgotsab": [
+      "traditional",
+      "community-favorite"
+    ],
+    "jubamaitry": [
+      "award-winner",
+      "theme-based"
+    ],
+    "behala-11-pally-sarodatsab-samity": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "ichapur-sasthibagan-bani-mondir-sarbojanin-durgotsab": [
+      "community-favorite",
+      "traditional"
+    ],
+    "mahatirtham-durgotsabkalikapur": [
+      "community-favorite",
+      "traditional"
+    ],
+    "monmohan-bose-street-sarbojanin": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "95-pally-sarbojanin-durgotsab-committee": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "trinayanee": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "hindusthan-park-durgotsab-committeepurbachal": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "natunpally-pradip-sangha": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "railpukur-united-club-baguihati": [
+      "award-winner",
+      "historical"
+    ],
+    "campbagan-sadharan-durgotsab-committee": [
+      "award-winner",
+      "historical"
+    ],
+    "ultadanga-jagaranisangha": [
+      "award-winner",
+      "theme-based"
+    ],
+    "patipukur-adi-sarbojanin-durga-puja-committee": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "udayan-kidderpore": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "dum-dum-park-tarun-sangha": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "sarbojanin-durgotsav-committee-vanishkali-pallybasi-brinda": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "khardah-arunachal-sarbojanin-sree-sree-sarbojanin-durgotsab": [
+      "award-winner",
+      "theme-based"
+    ],
+    "sanghasree": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "shibmandir": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "haridas-saha-bazar-abasik-kalyan-samity": [
+      "award-winner",
+      "theme-based"
+    ],
+    "tala-friends-association": [
+      "traditional",
+      "community-favorite"
+    ],
+    "saptarathi-sangha": [
+      "award-winner",
+      "historical"
+    ],
+    "tarun-matri-sevak-samity": [
+      "traditional",
+      "community-favorite"
+    ],
+    "tamer-lane-sarbojanin-durgotsab": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "dum-dum-park-yubak-brinda": [
+      "traditional",
+      "community-favorite"
+    ],
+    "prafulla-kanan-balak-brinda-east": [
+      "traditional",
+      "community-favorite"
+    ],
+    "gariahat-hindusthan-club": [
+      "community-favorite",
+      "traditional"
+    ],
+    "duttabagan-durgotsov-committee": [
+      "community-favorite",
+      "traditional"
+    ],
+    "kasba-uttarpara-arabinda-sporting-club": [
+      "award-winner",
+      "theme-based"
+    ],
+    "panchanantala-sarbojanin-durgotsab-committee": [
+      "award-winner",
+      "theme-based"
+    ],
+    "71-palli-baishakhi-sarbojanin-durgotsab-samity": [
+      "community-favorite",
+      "traditional"
+    ],
+    "entally-kanthal-bagan-sarbojanin-saradiya-utsav-comm": [
+      "award-winner",
+      "theme-based"
+    ],
+    "dakshinayan-residents-welfare-soceity": [
+      "award-winner",
+      "theme-based"
+    ],
+    "a-e-part-1-block-committee": [
+      "traditional",
+      "community-favorite"
+    ],
+    "jatra-suru-sangha": [
+      "award-winner",
+      "historical"
+    ],
+    "kankurgachi-jubak-brinda": [
+      "award-winner",
+      "historical"
+    ],
+    "dharsa-vratri-sangha-sarbojanin-durgotsav-committee": [
+      "community-favorite",
+      "traditional"
+    ],
+    "pagla-fouz": [
+      "award-winner",
+      "historical"
+    ],
+    "sikdar-bagan-sadharan-durgotsab": [
+      "community-favorite",
+      "traditional"
+    ],
+    "golden-arrow-club": [
+      "award-winner",
+      "theme-based"
+    ],
+    "ramrajatala-pallymangal-samity": [
+      "award-winner",
+      "theme-based"
+    ],
+    "tollygunge-road-27-pally-bijoyee-sangha": [
+      "award-winner",
+      "theme-based"
+    ],
+    "kanjial-para-puja-samity": [
+      "award-winner",
+      "theme-based"
+    ],
+    "taltala-doctor-lanestha-sarbojanin-durgotsab": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "adarsha-pally-sarbojanin-durgotsab-committee": [
+      "traditional",
+      "community-favorite"
+    ],
+    "amra-kajan-sporting-club": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "kamdahari-jagrata-sangha": [
+      "traditional",
+      "community-favorite"
+    ],
+    "dakshin-palli-sarbojanin-durgotsab-committee": [
+      "award-winner",
+      "historical"
+    ],
+    "abasar-sarbojanin-durgotsab-committee": [
+      "award-winner",
+      "historical"
+    ],
+    "halderpara-friends-association": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "baje-shibpur-sadharan-durgotsab-new-hz": [
+      "community-favorite",
+      "traditional"
+    ],
+    "central-park-youth-association": [
+      "award-winner",
+      "theme-based"
+    ],
+    "lalabagan-sarbojanin-durgotsab-samity": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "lakeview-park-durgotsab-samity": [
+      "award-winner",
+      "theme-based"
+    ],
+    "mahamayatalaeast-milani": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "park-circus-beniapukur-united-puja-committee": [
+      "award-winner",
+      "theme-based"
+    ],
+    "bosepukur-sitala-mandir": [
+      "award-winner",
+      "theme-based"
+    ],
+    "southern-satadal": [
+      "community-favorite",
+      "traditional"
+    ],
+    "shibpur-rabindra-samity": [
+      "community-favorite",
+      "traditional"
+    ],
+    "samaj-sebi-sangha": [
+      "award-winner",
+      "historical"
+    ],
+    "bagha-jatin-tarun-sangha": [
+      "community-favorite",
+      "traditional"
+    ],
+    "belgachiayuba-sammilani": [
+      "award-winner",
+      "theme-based"
+    ],
+    "nabapalli-sangha-sarbojanin-durgotsab": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "bidhan-sarani-atlas-club": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "lake-market-jubak-brinda": [
+      "traditional",
+      "community-favorite"
+    ],
+    "sammilani": [
+      "award-winner",
+      "theme-based"
+    ],
+    "dum-dum-tarun-dal": [
+      "traditional",
+      "community-favorite"
+    ],
+    "laha-colony-bibek-sangha": [
+      "traditional",
+      "community-favorite"
+    ],
+    "lake-avenue-sebak-sangha": [
+      "traditional",
+      "community-favorite"
+    ],
+    "tala-barowari-durgotsab": [
+      "award-winner",
+      "historical"
+    ],
+    "bandhudal-sporting-club": [
+      "award-winner",
+      "historical"
+    ],
+    "salkia-sanskriti-sangha": [
+      "award-winner",
+      "historical"
+    ],
+    "hb-block-residents-association": [
+      "community-favorite",
+      "traditional"
+    ],
+    "kanungo-park-recreation-club-liabrary": [
+      "award-winner",
+      "historical"
+    ],
+    "haridevpur-apanjan-club": [
+      "community-favorite",
+      "traditional"
+    ],
+    "east-end-park-sarbojanin-durgotsab-committee": [
+      "traditional",
+      "community-favorite"
+    ],
+    "bidhannagar-saltlake-bb-block-residents-association": [
+      "traditional",
+      "community-favorite"
+    ],
+    "shyambazar-palli-sangha": [
+      "award-winner",
+      "theme-based"
+    ],
+    "sadananda-smrity-sangha": [
+      "award-winner",
+      "historical"
+    ],
+    "santi-pally-puja-samity": [
+      "award-winner",
+      "historical"
+    ],
+    "baishnabghatapatuli-upanagari-sporting-club": [
+      "traditional",
+      "community-favorite"
+    ],
+    "naskarpur-sarbojanin-durgotsabbehala-samsad": [
+      "award-winner",
+      "theme-based"
+    ],
+    "behala-buroshibtala-janakalyan-sangha": [
+      "traditional",
+      "community-favorite"
+    ],
+    "kalighat-kishore-sangha": [
+      "award-winner",
+      "theme-based"
+    ],
+    "shyambazar-nabin-sangha": [
+      "award-winner",
+      "theme-based"
+    ],
+    "ramlalbazar-youth-association": [
+      "traditional",
+      "community-favorite"
+    ],
+    "lalabagan-yubakbrinda-nabankur-sangha": [
+      "award-winner",
+      "theme-based"
+    ],
+    "behala-club-sarbojanin-durgotsav-comm": [
+      "award-winner",
+      "historical"
+    ],
+    "hindusthan-pally-durgapuja-committee": [
+      "award-winner",
+      "historical"
+    ],
+    "purbachal-shakti-sangha": [
+      "traditional",
+      "community-favorite"
+    ],
+    "ahiritola-jubakbrinda-sarbojanin-sarodotsab": [
+      "community-favorite",
+      "traditional"
+    ],
+    "vivekananda-sporting-club-haridevpur": [
+      "award-winner",
+      "theme-based"
+    ],
+    "vivekananda-park-athletic-club": [
+      "community-favorite",
+      "traditional"
+    ],
+    "ahirtola-sarbojanin-durgotsab-samity": [
+      "award-winner",
+      "historical"
+    ],
+    "dhakuria-pragati-sangha": [
+      "traditional",
+      "community-favorite"
+    ],
+    "jhamapukur-sadharan-durgotsab-samity": [
+      "community-favorite",
+      "traditional"
+    ],
+    "nandaram-street-sarbojanin-durgotsab-samity": [
+      "award-winner",
+      "historical"
+    ],
+    "behala-trishakti-sangha": [
+      "award-winner",
+      "theme-based"
+    ],
+    "sontoshpur-tricon-park": [
+      "award-winner",
+      "theme-based"
+    ],
+    "uttar-bantra-sarbojanin-durgotsab-committee": [
+      "community-favorite",
+      "traditional"
+    ],
+    "alipore-tarundal-durgotsab-committee": [
+      "award-winner",
+      "theme-based"
+    ],
+    "entally-sarbojanin-sri-sri-durga-puja": [
+      "award-winner",
+      "theme-based"
+    ],
+    "kabirajbagan-sarbajanin-durgotsav-committee": [
+      "traditional",
+      "community-favorite"
+    ],
+    "paikpara-sarbojanin-durgatsav-samity": [
+      "award-winner",
+      "historical"
+    ],
+    "paddapukur-balak-sangha": [
+      "traditional",
+      "community-favorite"
+    ],
+    "parasar-nabodaya-sangha": [
+      "community-favorite",
+      "traditional"
+    ],
+    "sinthee-agragami-sangha": [
+      "community-favorite",
+      "traditional"
+    ],
+    "pally-unnayan-samity-paschim-putiary": [
+      "award-winner",
+      "historical"
+    ],
+    "swadhinata-udjapan-samity-kakurgachi-c-i-t-rd": [
+      "traditional",
+      "community-favorite"
+    ],
+    "monotosh-smrity-sangha": [
+      "community-favorite",
+      "traditional"
+    ],
+    "roy-bahadur-road-netaji-sporting-club": [
+      "community-favorite",
+      "traditional"
+    ],
+    "bhukailash-road-sarbojanin-durgotsab-samity": [
+      "traditional",
+      "community-favorite"
+    ],
+    "pathakpara-balak-sangha": [
+      "traditional",
+      "community-favorite"
+    ],
+    "narasingha-avenue-association": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "ultadanga-bidhan-sangha": [
+      "award-winner",
+      "theme-based"
+    ],
+    "dhakuria-sarbojanin-durgotsab": [
+      "award-winner",
+      "theme-based"
+    ],
+    "sarkarbagan-adhibasibrinda-durgotsab": [
+      "award-winner",
+      "theme-based"
+    ],
+    "thakurpukur-club-pally-mangal-colony": [
+      "award-winner",
+      "historical"
+    ],
+    "ariadaha-pragati-sangha": [
+      "traditional",
+      "community-favorite"
+    ],
+    "garia-sarbojanin-durgotsab-committee": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "charer-palli-sarbojanin-durgotsab-committee": [
+      "award-winner",
+      "theme-based"
+    ],
+    "howrah-anusilan-samity": [
+      "traditional",
+      "community-favorite"
+    ],
+    "babathakurtala-puja-committee": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "nawpara-dadabhai-sangha": [
+      "award-winner",
+      "theme-based"
+    ],
+    "manasbag-sarbojanin-durgotsab": [
+      "award-winner",
+      "theme-based"
+    ],
+    "entally-matribhumi-durga-puja-samity": [
+      "traditional",
+      "community-favorite"
+    ],
+    "lake-yuba-sangha": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "bosepukur-parijat-club": [
+      "traditional",
+      "community-favorite"
+    ],
+    "goabagan-sarodatsav-sammilani": [
+      "traditional",
+      "community-favorite"
+    ],
+    "goabagan-sarbojanin-durgotsab": [
+      "award-winner",
+      "theme-based"
+    ],
+    "dakshin-purbachal-sarbojanin-durgotsav-comm-udayan-sangha": [
+      "award-winner",
+      "historical"
+    ],
+    "sarir-sangathan-samity": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "ak-block-association-salt-lake": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "metropolitan-sarbajanin-durgautshab": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "behala-natun-dal": [
+      "award-winner",
+      "theme-based"
+    ],
+    "kamardanga-sitalatala-puja-committee": [
+      "traditional",
+      "community-favorite"
+    ],
+    "barisha-players-corner": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "22-no-pally-basi-bindo-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "29-pally-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "37-palli-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "48-north-basudebpur-natun-pally-belghoria": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "66-pally-durgapuja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "68-palli-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "68-pally-durga-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "7-tanks-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "aa-1d-sarbojanin-durga-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "ac-block-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "ae-part-2-durga-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "aj-block-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "annapurna-club-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "ba-block-durga-puja-ground": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "bagbazar-pally-puja-o-prodorshoni": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "bagbazar-sarbojanin-durga-puja-mandap": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "baghajatin-b-c-durga-puja-art": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "baghbazar-haldar-bari-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "baghmari-club-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "bagmari-bazar-sarbojonin-durga-utsav-committee": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "bagnan-naba-jagaran-durga-puja-club": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "baishnabghata-yatra-shuru-sangha": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "bamanmura-main-road-durgapuja-committee": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "bandhu-milan-sangha-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "bangaliyana-mela-durga-puja-ground": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "bansdroni-pally-unnayan-samity-puja-mondop": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "bansdroni-park-association": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "baranagar-friends-association-durga-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "baranagar-netaji-colony-sarbojanin-durga-puja-highland": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "barowarikhola-kali-mandir-durga-mandir": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "baruipur-sarbojonin-puja-o-utsav-sangha-durga-mandir": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "basu-bati-bagbazar": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "bc-block-durga-puja-ground": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "bd-block-durga-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "behala-players-corner-durga-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "beliaghata-33-pally": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "bh-block-durga-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "bharder-thakur-bari": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "bhawanipore-mitra-bari": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "bhowanipur-75-palli": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "bhowanipur-sarbojanin-durgotsav": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "bhuripukur-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "bondhudol-durga-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "cd-block-durga-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "cf-block-residents-association-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "chatterjee-para-sunday-club-gobardanga": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "chinar-park-adhibasibrinda": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "cossipore-tarundal-durga-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "dakshin-entally-sarbajanin-durga-puja-committee": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "dakshin-kolkata-sarbojonin-durgotsob": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "darjipara-mitra-house": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "dashadrone-youth-karna-shyam-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "db-block-durga-puja-ground": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "deshapriyanagar-sadharan-durgotsab-sinthi-more": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "dhaniapara-puja-mandap": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "dharar-math-bhatri-sangha-durgapuja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "duillya-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "durga-bhavan-baranagar-lowland-durga-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "durga-maath-open-play-ground-tangra-100-yrs": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "durga-puja-committee-triangular-park": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "durga-puja-pandal-andul-alampur-howrah": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "durga-puja-pandal-andul-howrah": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "durga-puja-pandal-barrackpore": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "durga-puja-pandal-howrah-1-hat-ln": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "durga-puja-pandal-manohar-pukur-rd": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "durga-puja-pandal-taratala": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "durga-pujo-fe-block": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "durga-sangha-sitala-temple": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "entally-sen-villa-durga-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "fatehpur-bazar-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "fuleswar-south-side-durgapuja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "fultala-playground-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "gauri-bari-sarbojanin-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "ghose-bari-pathuriaghata-46-pathuriaghata-st": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "golf-green-phase-ii-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "gopalnagar-malirbagan-durgapuja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "gouriberia-sarbojanin-durgotsab-o-pradarshani": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "greenpark-sarbojonin-durgotsob": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "harakutir-ray-banerjee-barir-durga-pujo": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "haridevpur-41-pally-club": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "haritaki-bagan-sarbojonin-durgotsab": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "hatkhola-gosaipara-sarbojonin-durgotsab": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "hazra-park-durga-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "hedua-park-durga-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "hridaypur-friends-circle": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "jagaran-sangha-narendrapur": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "jagari-sangha": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "jagorani-sangha-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "janbazar-rajbari": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "jorasanko-7-er-palli-sarbojanin-durgapuja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "jubok-sangho-puja-mandap": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "kadamtala-durga-mandap": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "kaiser-street-sarbojanin": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "kali-puja-pandal-green-park-dum-dum": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "kalighat-mahashakti-durga-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "kalighat-sree-sangha": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "kamal-park-sarbojanin-durga-puja-committee": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "kankurgachi-chalantika-durgotsav-ground": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "kasba-shakti-sangha": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "kestopur-durga-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "khidirpur-25-palli-durga-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "kishore-sangha-club-durga-puja-tangra": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "kolkata-durga-puja-parikrama-boat-tour": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "kumartuli-park-sarbojanin-durgotsab": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "kumortuli-sarbojonin-durgotsab": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "kundubagan-abasik-samiti-durga-mandir": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "labony-estate-durga-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "lake-youth-corner-durga-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "lal-building-durga-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "maa-durga-pandal-balaka-abasan": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "madhya-bidhan-pally-sarbojonin-puja-mandap": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "madhya-kolkata-sarbojanin-durga-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "maitreyi-durga-puja-mandap": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "mallick-colony-sarbojonin-durga-utsav": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "mandirtala-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "milan-samity-durga-puja-serampore": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "milan-sangha-gobardanga": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "milanpally-durga-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "mitali-sangha-bijoygarh-10-no-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "mitali-sangha-durga-puja-pandal-kankurgachi": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "mohammed-ali-park-muhammad-ali-park": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "moitri-sangha-durga-puja-pandel": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "naba-baghbazar-sarbajanin-durga-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "nabajagarani-sangha-durga-puja-mandap": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "nandan-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "nandram-sen-street-sarbojanin-durgotsab-samity": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "nasta-goli-kankurgachi-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "natunpara-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "nehru-nagar-sarbojonin-durga-puja-samity": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "new-market-54-pally-sarbajanin-durgotsav-parichalan-samity": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "new-market-sarbojonin-sri-sri-durga-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "new-town-durga-puja-committee-bg-block": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "nimtala-sarbojanin-durga-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "pallysree-durga-puja-ground": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "palta-yuba-sports-cultural-club-durga-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "parkshree-sarbojanin-durgotsav": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "parnasree-club-durga-puja-ground": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "pathakpara-barowari-puja-samiti": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "pathuriaghata-pancher-pally-sarbojonin-durgotsab-committee": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "pathuriaghata-rajbari-khelat-ghoses-residence": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "pragati-sangha-habra": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "pratapgarh-sporting-club-bongaon": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "purvachal-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "raipur-club-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "raja-subodh-mallick-square-sarbojanin": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "ramchandrapur-tarun-sangha": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "ramkrishna-park-durga-puja-mandap": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "ramkrishnapally-durga-puja-math": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "rangkol-mandal-para-yubak-brinda-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "rani-rashmoni-kachari-bari": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "rani-rashmoni-thakur-bari": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "regent-place-juba-sangha-club": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "rms-maidan-durga-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "rupak-sangha-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "sabarna-roy-chowdhury-sanjer-attchala-bari": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "sahid-colony-sarbojanin-durga-pujo": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "salkia-durgotsav-baroary": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "samparka-mahila-durga-puja-committee": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "santoshpur-avenue-south-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "santoshpur-rishi-aurobindo-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "saradia-durga-puja-pandal-jadavpur": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "sarat-bose-road-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "sealdah-bazar-jagaddhatri-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "shakti-sangha-clubs-durga-puja-ground": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "shibaji-sangha-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "shibtala-durga-mandap-madhyamgram": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "shimla-sporting-club-durga-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "shobhabazar-burtolla-sarbojanin-durgotsav-samity": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "shreenagar-durgamondop": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "sinthee-roy-para-sarbojanin-club-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "sreebhumi-durga-puja-pandal-7th-lane": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "sri-sangha-durga-puja-area": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "subhashpally-sarbojonin-durga-puja-pandal": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "swapnar-bagan-yubak-brinda-durga-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "tal-betal-durga-puja": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "tala-palli-sadharan-durgotsab-samity": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "tarun-brindo-sarbojonin-durga-puja-mondop": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "tollygunge-nagarik-sangsad-durga-puja-area": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "uttar-kolkata-sarbojanin-durga-puja-birendra-mancha": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "yuba-brinda-durga-puja-mandop": [
+      "community-favorite",
+      "award-winner"
+    ],
+    "9erpalli-sarbojanin-durgotsab": [
+      "traditional",
+      "community-favorite"
+    ],
+    "vidyasagar-central-sarbojanin-durgatsav-committee": [
+      "award-winner",
+      "historical"
+    ],
+    "hindusthan-volunteers": [
+      "award-winner",
+      "historical"
+    ],
+    "kalitala-sporting-club": [
+      "community-favorite",
+      "traditional"
+    ],
+    "beleghata-lake-side-south-club": [
+      "award-winner",
+      "historical"
+    ],
+    "aikyatan": [
+      "award-winner",
+      "theme-based"
+    ],
+    "rammohan-smriti-sangha": [
+      "traditional",
+      "community-favorite"
+    ],
+    "tala-pally-sadharan-durgotsab-samity": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "unnayani-sangha": [
+      "community-favorite",
+      "traditional"
+    ],
+    "jitendra-smriti-sangha": [
+      "award-winner",
+      "historical"
+    ],
+    "masterda-smriti-sangha": [
+      "award-winner",
+      "historical"
+    ],
+    "sunil-nagar-sarbojanin": [
+      "award-winner",
+      "historical"
+    ],
+    "mall-pally-sarbojanin-puja-committee": [
+      "award-winner",
+      "theme-based"
+    ],
+    "kidderpore-juba-gosthi": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "behala-young-mens-association": [
+      "community-favorite",
+      "traditional"
+    ],
+    "cit-light-welfare-association": [
+      "award-winner",
+      "historical"
+    ],
+    "swatantra-jubak-sangha": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "paddapukur-youth-association": [
+      "community-favorite",
+      "traditional"
+    ],
+    "the-bengal-boys-training-association": [
+      "award-winner",
+      "historical"
+    ],
+    "bandhura": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "jadavpur-athletic-club": [
+      "award-winner",
+      "historical"
+    ],
+    "state-bank-park-sarbojanin-durgotsab": [
+      "traditional",
+      "community-favorite"
+    ],
+    "ee-block-saradotsav-committee": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "ichapur-shivaji-sangha": [
+      "award-winner",
+      "historical"
+    ],
+    "selimpur-pally-sarbojanin-durgotsab": [
+      "traditional",
+      "community-favorite"
+    ],
+    "kankurgachi-milan-mela-samity": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "taltala-sarbojanin-durga-puja": [
+      "award-winner",
+      "theme-based"
+    ],
+    "jorasanko-sadharan-durgotsav-samity": [
+      "traditional",
+      "community-favorite"
+    ],
+    "green-avenue-friends-recreation-club": [
+      "award-winner",
+      "theme-based"
+    ],
+    "gray-street-sarbojanin-durgotsab-committee": [
+      "award-winner",
+      "historical"
+    ],
+    "41-pally-durga-puja-haridevpur": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "acharya-prafulla-pally-adi-sarbajonin-durgotsav-est-1950": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "adi-naktala-sarbojanin-durgotsav-committee": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "agradoot-club-durga-puja-makhla": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "ajoyadhanagar-club-durga-puja-mandap": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "anjangarh-durgapuja-mor": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "bally-juba-sangha-kali-mandir": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "ballygunge-21-pally": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "ballygunge-pratisthan-durgabari": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "baruipur-padmapukur-sarbojanin-durga-puja-mondop": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "belgharia-bani-mandir-durga-puja": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "bhartiya-yuva-parishad-puja-pandal-metiabruz": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "bhattacharya-para-sarbajanin-durga-puja": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "bhowanipur-swadhin-sangha-durga-puja": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "chakraborty-barir-durga-pujo": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "chorbagan-chatterjee-bari": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "dewanpara-sarbojanin-durgapuja-samity": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "dharsa-chowdhury-para-durgamondop": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "domjur-ghoshbari-puja-mandap": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "durga-bari-baruipara-domjur": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "durga-puja-mandap-panihati": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "durgotsab-samity-dakkhin-roytala": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "gajon-tola-durga-puja-mondop-nangi": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "garden-reach-durga-puja-pandal": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "halder-para-kalitala-durga-puja-budge-budge": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "jagriti-sangh-durga-puja-pandal-titagarh": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "jorasanko-shib-krishna-daw-bari": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "kalyan-sangha-durga-puja-lake-gardens": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "kankurgachi-mitali-sangha-durga-puja-pandal": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "kashipur-durga-puja-pandal-dasnagar": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "kashipur-saner-ghat-durga-puja": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "khelat-bhavan-pathuriaghata-rajbari": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "kidderpore-25-palli-durga-puja": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "madhya-garfa-sarbojanin-durgotsab-puja-committee": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "maha-anander-polly-sarbojonin-durga-utsob-committee": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "majumder-para-durga-puja-pandal-andul": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "makhla-durga-puja-pandal-uttarpara": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "metropolitan-durga-bari-tangra": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "milan-sangha-durga-puja-pandal-ramrajatala": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "newland-durga-puja-mandap-batanagar": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "newtown-action-area-iii-durga-puja-pandal": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "nimta-sanghati-puja-mandap": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "pathuriaghata-rajbari-khelat-ghose-residence": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "pragati-sangha-baruipur": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "salkia-chatra-bayam-samity-shishu-udyan": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "salkia-sangha-shree-maidan": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "sankrail-sporting-union-durga-mandap": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "santoshpur-trikon-park-durgotsab": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "shaktigarh-durga-mandop-birati": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "shreebhumi-sporting-club-durga-puja": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "sister-nivedita-multipurpose-society-durga-puja-mandap": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "sonar-durga-bari-mukherjee-bari-behala": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "tarapukur-paschimpally-puja-mandop-committee": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "titagarh-tarun-sangh-durga-puja-committee": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "tollygunge-adi-durga-mancha": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "young-blood-sarbojanin-durgotsab-committee": [
+      "community-favorite",
+      "theme-based"
+    ],
+    "shakuntala-park-netaji-sangha": [
+      "award-winner",
+      "historical"
+    ],
+    "baguiati-subhas-sangha": [
+      "award-winner",
+      "theme-based"
+    ],
+    "santoshpur-adi-sarbojanin-durgotsab": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "sontoshpur-avenue-south-club": [
+      "award-winner",
+      "historical"
+    ],
+    "sevaosanskriti-sangha": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "sura-sarbojanin-durgotsab-committee": [
+      "award-winner",
+      "historical"
+    ],
+    "baguiati-udayan-sangha": [
+      "traditional",
+      "community-favorite"
+    ],
+    "adhibasibrinda-kanaidhar-lane": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "aurobindo-setu-sarbojanin-durgapuja": [
+      "community-favorite",
+      "traditional"
+    ],
+    "chaltabagan-sarbojanin-durgotsab-committee": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "pataldanga-sri-sri-saradiya-mahapuja": [
+      "award-winner",
+      "theme-based"
+    ],
+    "rampur-aker-pally-club": [
+      "award-winner",
+      "theme-based"
+    ],
+    "brihattara-bagmari-sarbajanin-durgotsab-committee": [
+      "community-favorite",
+      "traditional"
+    ],
+    "bagmari-nabarun-sangha": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "khiddrepur-sarbojanin": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "aswininagar-bandhu-mahal-club": [
+      "award-winner",
+      "theme-based"
+    ],
+    "andul-rajbari": [
+      "traditional",
+      "historical"
+    ],
+    "baishnab-das-mallick-bari-malapara": [
+      "traditional",
+      "historical"
+    ],
+    "beniatola-sarbojanin": [
+      "award-winner",
+      "community-favorite"
+    ],
+    "bhukailash-rajbari": [
+      "traditional",
+      "historical"
+    ],
+    "chhatu-babu-latu-babu-thakur-bari-ramdulal-nibas": [
+      "traditional",
+      "historical"
+    ],
+    "chorbagan-mitra-bari": [
+      "traditional",
+      "historical"
+    ],
+    "darjipara-mitra-bari": [
+      "traditional",
+      "historical"
+    ],
+    "deshapriya-park-sarbojanin-durgotsab": [
+      "award-winner",
+      "community-favorite"
+    ],
+    "ekdalia-evergreen-club": [
+      "award-winner",
+      "community-favorite"
+    ],
+    "ghose-bari-46-pathuriaghata-st": [
+      "traditional",
+      "historical"
+    ],
+    "hathkhola-dutta-bari": [
+      "traditional",
+      "historical"
+    ],
+    "jagat-mukherjee-park": [
+      "award-winner",
+      "community-favorite"
+    ],
+    "jodhpur-park-sarbojanin-distinct-from-95-pally": [
+      "award-winner",
+      "community-favorite"
+    ],
+    "kalabagan-sarbojanin": [
+      "award-winner",
+      "community-favorite"
+    ],
+    "laha-bari": [
+      "traditional",
+      "historical"
+    ],
+    "maddox-square-durga-pujo": [
+      "award-winner",
+      "community-favorite"
+    ],
+    "mallick-bari-bhowanipore": [
+      "traditional",
+      "historical"
+    ],
+    "mallick-bari-pathuriaghatasingha-bahini": [
+      "traditional",
+      "historical"
+    ],
+    "mohammad-ali-park": [
+      "award-winner",
+      "community-favorite"
+    ],
+    "mudiali-club": [
+      "award-winner",
+      "community-favorite"
+    ],
+    "n-c-daw-bandukbari": [
+      "traditional",
+      "historical"
+    ],
+    "pathuriaghata-rajbari-khelat-ghoshs-residence": [
+      "traditional",
+      "historical"
+    ],
+    "rajdanga-naba-uday-sangha": [
+      "award-winner",
+      "community-favorite"
+    ],
+    "rani-rashmoni-bhawan": [
+      "traditional",
+      "historical"
+    ],
+    "rani-rashmoni-palace": [
+      "traditional",
+      "historical"
+    ],
+    "sabarna-roy-chowdhury-atchala-bari-boro-bari": [
+      "traditional",
+      "historical"
+    ],
+    "saborna-roychoudhury-borobari-durga-puja-area": [
+      "traditional",
+      "historical"
+    ],
+    "saha-bari-maniktala": [
+      "traditional",
+      "historical"
+    ],
+    "salt-lake-bj-block": [
+      "award-winner",
+      "community-favorite"
+    ],
+    "salt-lake-ck-block": [
+      "award-winner",
+      "community-favorite"
+    ],
+    "salt-lake-fd-block": [
+      "award-winner",
+      "community-favorite"
+    ],
+    "santosh-mitra-square-lebutala": [
+      "award-winner",
+      "community-favorite"
+    ],
+    "sb-park-sarbojanin": [
+      "award-winner",
+      "community-favorite"
+    ],
+    "sealdah-railway-athletic-club": [
+      "award-winner",
+      "community-favorite"
+    ],
+    "sonar-durga-bari-behala": [
+      "traditional",
+      "historical"
+    ],
+    "sovabazar-rajbari-boro-rajbari": [
+      "traditional",
+      "historical"
+    ],
+    "sreebhumi-sporting-club": [
+      "award-winner",
+      "community-favorite"
+    ],
+    "suruchi-sangha-new-alipore": [
+      "award-winner",
+      "community-favorite"
+    ],
+    "thanthania-dutta-bari": [
+      "traditional",
+      "historical"
+    ],
+    "singhi-park-sarbojanin-durgapuja-committee": [
+      "award-winner",
+      "theme-based"
+    ],
+    "50-no-ward-durgapuja-committee": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "santragachi-kalpataru": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "madhusudan-das-lane-bye-lane-sarbojaneen-durgotsab": [
+      "traditional",
+      "community-favorite"
+    ],
+    "kalighat-nepal-bhattacharjee-st-club": [
+      "community-favorite",
+      "traditional"
+    ],
+    "sree-durga-club": [
+      "award-winner",
+      "historical"
+    ],
+    "madhab-das-lane-sarbojanin-durgotsab": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "haridevpur-new-sporting-club": [
+      "award-winner",
+      "theme-based"
+    ],
+    "barisha-sarbojanin-durgotsab": [
+      "award-winner",
+      "historical"
+    ],
+    "ashok-nagar-sarbojanin-durgotsab-committee": [
+      "traditional",
+      "community-favorite"
+    ],
+    "badamtala-ashar-sangha": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "purbachal-sarbojanin-durgotsab-east": [
+      "award-winner",
+      "historical"
+    ],
+    "nagerbazar-sarbojanin": [
+      "traditional",
+      "community-favorite"
+    ],
+    "santoshpur-lake-pally": [
+      "award-winner",
+      "theme-based"
+    ],
+    "purba-kalikata-sarbojanin-durgotsab": [
+      "traditional",
+      "community-favorite"
+    ],
+    "bagmari-anchalik-yubak-brinda": [
+      "award-winner",
+      "historical"
+    ],
+    "saterpalli-sarbojanin-durgotsav-committee": [
+      "award-winner",
+      "historical"
+    ],
+    "forward-sporting-club": [
+      "award-winner",
+      "theme-based"
+    ],
+    "taltala-sarbojanin-saradiya-puja-committee": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "balia-baishakhi-sangha": [
+      "community-favorite",
+      "traditional"
+    ],
+    "uttar-kolkata-sanhati-sporting-club": [
+      "award-winner",
+      "theme-based"
+    ],
+    "75-pally-sarbojanin-durgotsav": [
+      "community-favorite",
+      "traditional"
+    ],
+    "kidderpore-bharati-sanmilani": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "brindaban-matrimandir": [
+      "award-winner",
+      "theme-based"
+    ],
+    "uttarayan-club": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "a-b-block-abasik-sangha": [
+      "community-favorite",
+      "traditional"
+    ],
+    "friends-union-puja-committee": [
+      "award-winner",
+      "historical"
+    ],
+    "rabindra-kanan-sarbojanin-durgotsab": [
+      "award-winner",
+      "theme-based"
+    ],
+    "chatterjeehat-shree-shree-durgapuja-sangam": [
+      "traditional",
+      "community-favorite"
+    ],
+    "ag-block-durga-puja-committee": [
+      "community-favorite",
+      "traditional"
+    ],
+    "dakshin-kolkata-tarun-samity": [
+      "community-favorite",
+      "traditional"
+    ],
+    "majumder-para-unnayan-samity": [
+      "community-favorite",
+      "traditional"
+    ],
+    "hari-nath-de-road-barowari-durgotsab": [
+      "traditional",
+      "community-favorite"
+    ],
+    "taltata-yuba-association-durga-puja-samity": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "north-tridhara": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "kidderpore-venus-club": [
+      "community-favorite",
+      "traditional"
+    ],
+    "howrah-saraswati-club": [
+      "traditional",
+      "community-favorite"
+    ],
+    "purba-putiary-pragati-sangha": [
+      "award-winner",
+      "theme-based"
+    ],
+    "tilak-nagar-sarbajanin-durgatsab-committee": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "surirbagan-sarbojanin-durgotsab-committee": [
+      "traditional",
+      "community-favorite"
+    ],
+    "brahmpur-harisava-sarbojanin-durgotsab-committee": [
+      "community-favorite",
+      "traditional"
+    ],
+    "katjunagar-sarbojanin-durgotsab-committee": [
+      "award-winner",
+      "theme-based"
+    ],
+    "south-purbachal-ideal-sporting-club": [
+      "community-favorite",
+      "traditional"
+    ],
+    "howrah-jatiya-sevadal": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "basupara-sarbojanin-durgotsavbarisha-sabuj-sathi": [
+      "traditional",
+      "community-favorite"
+    ],
+    "uttar-halderpara-club": [
+      "traditional",
+      "community-favorite"
+    ],
+    "belgachia-sadharan-durgotsab": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "bowbazar-47-palli-milansree-welfare-society": [
+      "community-favorite",
+      "traditional"
+    ],
+    "deshapriyanagar-sadharon-durgotsab": [
+      "traditional",
+      "community-favorite"
+    ],
+    "khudiram-yubak-sangha": [
+      "award-winner",
+      "historical"
+    ],
+    "bansdroni-sree-sangha": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "batore-sarbojanin-durgotsav-samity": [
+      "award-winner",
+      "historical"
+    ],
+    "baghajatin-vivekananda-milan-sangha": [
+      "community-favorite",
+      "traditional"
+    ],
+    "darpanarayan-tagore-stpally-samity": [
+      "community-favorite",
+      "traditional"
+    ],
+    "central-calcutta-youth-association": [
+      "award-winner",
+      "historical"
+    ],
+    "kalitala-r-k-das-road-durgotsav-comm": [
+      "award-winner",
+      "historical"
+    ],
+    "amardip-sangha": [
+      "award-winner",
+      "theme-based"
+    ],
+    "madurdaha-united-club": [
+      "traditional",
+      "community-favorite"
+    ],
+    "beleghata-gandhimath-friends-circle": [
+      "community-favorite",
+      "traditional"
+    ],
+    "east-kolkata-township-welfare-association": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "ib-block-welfare-association": [
+      "award-winner",
+      "historical"
+    ],
+    "salkia-alapani": [
+      "award-winner",
+      "theme-based"
+    ],
+    "naktala-udayan-sangha": [
+      "award-winner",
+      "theme-based"
+    ],
+    "nandibagan-sarbojanin-durgotsab-committee": [
+      "community-favorite",
+      "traditional"
+    ],
+    "behala-friends": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "patuli-sarbojanin-durgotsab": [
+      "award-winner",
+      "historical"
+    ],
+    "beadon-street-sarbojanin-durgotsav": [
+      "award-winner",
+      "historical"
+    ],
+    "prantik-pally-sarbojanin-durgapuja": [
+      "community-favorite",
+      "traditional"
+    ],
+    "beltala-shakti-sangha": [
+      "award-winner",
+      "theme-based"
+    ],
+    "ambagan-durga-puja-committee": [
+      "traditional",
+      "community-favorite"
+    ],
+    "netaji-jatiya-sebadal": [
+      "community-favorite",
+      "traditional"
+    ],
+    "palpara-sarbojanin-durgoutsob-comm": [
+      "award-winner",
+      "theme-based"
+    ],
+    "kalighat-milan-sangha": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "pathuriaghata-pancher-palli-sarbojanin-durgatsab": [
+      "traditional",
+      "community-favorite"
+    ],
+    "kailash-bose-street-sarbojanin-durgotsava": [
+      "famous-for-lighting",
+      "theme-based"
+    ],
+    "bhowanipore-muktadal": [
+      "community-favorite",
+      "traditional"
+    ],
+    "kodalia-netaji-sangha": [
+      "traditional",
+      "community-favorite"
+    ],
+    "ad-block-sarbojonin": [
+      "community-favorite"
+    ],
+    "badan-chand-roy-rajbari": [
+      "community-favorite"
+    ],
+    "baruipur-bhattacharya-para": [
+      "community-favorite"
+    ],
+    "bhowanipore-kansaripara-sarbojanin-durgotsab-samity": [
+      "community-favorite"
+    ],
+    "bhowanipore-rupchand": [
+      "community-favorite"
+    ],
+    "panchasayar": [
+      "community-favorite"
+    ],
+    "purba-kolkata-sarbojonin": [
+      "community-favorite"
+    ],
+    "sannyashi-bisasta-kali-bari": [
+      "community-favorite"
+    ],
+    "santoshpur-sagnik-durgotsav": [
+      "community-favorite"
+    ],
+    "sonali-park-sports-and-cultural-society": [
+      "community-favorite"
+    ],
+    "united-club": [
+      "community-favorite"
+    ]
+  }
+}
