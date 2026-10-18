@@ -49,6 +49,8 @@ jobs:
       - name: Run verification suite
         env:
           BASE: http://127.0.0.1:4173
+          # Guards against points.json drifting away from what the map draws.
+          EXPECTED_MARKERS: ${{ env.EXPECTED_MARKERS }}
         run: node scripts/final-verify.mjs
 
       - name: Configure Cloudflare credentials

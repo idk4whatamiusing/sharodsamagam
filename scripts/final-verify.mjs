@@ -163,6 +163,10 @@ console.log("\n== CLIENT-SIDE NAVIGATION ==");
   }));
   ok(m1.div && m1.pane && m1.tiles > 0 && m1.markers > 100, `map rendered after client nav (tiles=${m1.tiles}, markers=${m1.markers})`);
 
+  // Every geocoded pandal must actually be on the map.
+  const expected = Number(process.env.EXPECTED_MARKERS || 0);
+  if (expected) ok(m1.markers === expected, `all geocoded markers drawn (${m1.markers} of ${expected})`);
+
   // /map -> home again
   await nav.evaluate(() => {
     const a = [...document.querySelectorAll("a")].find((x) => x.getAttribute("href") === "/");

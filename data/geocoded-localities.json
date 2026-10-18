@@ -1,0 +1,482 @@
+{
+ "SHYAMBAZAR KOLKATA": {
+  "lat": 22.601335,
+  "lng": 88.3724974,
+  "name": "Shyambazar"
+ },
+ "PHOOLBAGAN KOLKATA": {
+  "lat": 22.5721593,
+  "lng": 88.3894213,
+  "name": "Phoolbagan"
+ },
+ "KALIGHAT KOLKATA": {
+  "lat": 22.5153313,
+  "lng": 88.3477052,
+  "name": "Kalighat"
+ },
+ "RABINDRA SAROBAR KOLKATA": {
+  "lat": 22.5072216,
+  "lng": 88.3454936,
+  "name": "Rabindra Sarobar"
+ },
+ "TOLLYGUNGE KOLKATA": {
+  "lat": 22.498636,
+  "lng": 88.3453908,
+  "name": "Tollygunge"
+ },
+ "HOWRAH MAIDAN HOWRAH": {
+  "lat": 22.5838585,
+  "lng": 88.3339983,
+  "name": "Howrah Maidan"
+ },
+ "CENTRAL KOLKATA": {
+  "lat": 22.5724857,
+  "lng": 88.3587427,
+  "name": "Central"
+ },
+ "BAGHAJATIN KOLKATA": {
+  "lat": 22.4827391,
+  "lng": 88.3866708,
+  "name": "Baghajatin"
+ },
+ "BASAKBAGAN SARBOJANIN DURGOTSAB KOLKATA": {
+  "lat": 22.5173511,
+  "lng": 88.3667515,
+  "name": "Gariahat Sarbojanin Durgotsab"
+ },
+ "BEADON STREET KOLKATA": {
+  "lat": 22.5904611,
+  "lng": 88.3607426,
+  "name": "Beadon Square"
+ },
+ "CHAMRAPATTI BEHALA KOLKATA": {
+  "lat": 22.501572,
+  "lng": 88.3209435,
+  "name": "Behala"
+ },
+ "BEHALA KOLKATA": {
+  "lat": 22.501572,
+  "lng": 88.3209435,
+  "name": "Behala"
+ },
+ "PHOOLBAGAN BELEGHATA KOLKATA": {
+  "lat": 22.5721593,
+  "lng": 88.3894213,
+  "name": "Phoolbagan"
+ },
+ "BELIAGHATA KOLKATA": {
+  "lat": 22.5633659,
+  "lng": 88.374175,
+  "name": "Sealdah Beliaghata Flyover"
+ },
+ "BENGAL UNITED CLUB KOLKATA": {
+  "lat": 22.5912141,
+  "lng": 88.3910653,
+  "name": "United Club"
+ },
+ "BHARATMATA PUJA SANGHA KOLKATA": {
+  "lat": 22.4743607,
+  "lng": 88.3665164,
+  "name": "Naktala Udayan Sangha Durga Puja"
+ },
+ "BHOWANIPORE KOLKATA": {
+  "lat": 22.5325844,
+  "lng": 88.3454429,
+  "name": "Bhowanipore"
+ },
+ "BHUKAILASH KOLKATA": {
+  "lat": 22.5357903,
+  "lng": 88.3178436,
+  "name": "Bhukailash Patit Pabon Mandir"
+ },
+ "BIDHANNAGAR KOLKATA": {
+  "lat": 22.5917545,
+  "lng": 88.3908911,
+  "name": "Bidhannagar Road"
+ },
+ "BOSEPUKUR KASBA KOLKATA": {
+  "lat": 22.5191703,
+  "lng": 88.3847542,
+  "name": "Bosepukur Sitala Mandir"
+ },
+ "BOSEPUKUR KOLKATA": {
+  "lat": 22.5191703,
+  "lng": 88.3847542,
+  "name": "Bosepukur Sitala Mandir"
+ },
+ "BOWBAZAR KOLKATA": {
+  "lat": 22.5704924,
+  "lng": 88.3615602,
+  "name": "Bowbazar"
+ },
+ "BRAHMPUR KOLKATA": {
+  "lat": 22.4602389,
+  "lng": 88.3644484,
+  "name": "Brahmapur"
+ },
+ "43 B BAGMARI KOLKATA": {
+  "lat": 22.584435,
+  "lng": 88.3908956,
+  "name": "Bagmari Road"
+ },
+ "CHANDRA NATH CHATTERJEE ST BHOWANIPORE KOLKATA": {
+  "lat": 22.5348948,
+  "lng": 88.3450208,
+  "name": "Chandra Nath Chatterjee Road"
+ },
+ "SARADA PALLY KOLKATA": {
+  "lat": 22.4906039,
+  "lng": 88.3706226,
+  "name": "Ananda Pally"
+ },
+ "BAGHAJATIN COLONY KOLKATA": {
+  "lat": 22.4827391,
+  "lng": 88.3866708,
+  "name": "Baghajatin"
+ },
+ "NILMONI MITRA ST BENIATOLA KOLKATA": {
+  "lat": 22.5912423,
+  "lng": 88.3647861,
+  "name": "Nilmoni Mitra Street"
+ },
+ "SECTOR 2 BIDHANNAGAR KOLKATA": {
+  "lat": 22.5896424,
+  "lng": 88.4089267,
+  "name": "Vasan Eye Care Hospital, Kolkata"
+ },
+ "GOPE LN ENTALLY KOLKATA": {
+  "lat": 22.5560942,
+  "lng": 88.3687362,
+  "name": "Gope Ln"
+ },
+ "ENTALLY KOLKATA": {
+  "lat": 22.5551428,
+  "lng": 88.3679998,
+  "name": "Entali"
+ },
+ "PALPARA KOLKATA": {
+  "lat": 22.7562225,
+  "lng": 88.380152,
+  "name": "Panpara Play Ground"
+ },
+ "RAJA KALI KRISHNA LN SOVABAZAR KOLKATA": {
+  "lat": 22.5957962,
+  "lng": 88.367258,
+  "name": "Raja Kali Krishna Ln"
+ },
+ "GOLPARK GARIAHAT KOLKATA": {
+  "lat": 22.5134321,
+  "lng": 88.4017445,
+  "name": "Golpark"
+ },
+ "PURBA KOLKATA": {
+  "lat": 22.4768118,
+  "lng": 88.3485022,
+  "name": "Purba Putiary"
+ },
+ "HOWRAH JATIYA SEVADAL KOLKATA": {
+  "lat": 22.4833412,
+  "lng": 88.3546378,
+  "name": "Netaji Jatiya Sebadal"
+ },
+ "JUDGEBAGAN SARBOJANIN DURGOTSAV KOLKATA": {
+  "lat": 22.6046989,
+  "lng": 88.3661347,
+  "name": "Bagbazar Sarbojanin Durgotsav"
+ },
+ "BIDHANPALLY KAMDAHARI KOLKATA": {
+  "lat": 22.4931985,
+  "lng": 88.3665885,
+  "name": "Bidhanpally"
+ },
+ "KAMDAHARI KOLKATA": {
+  "lat": 22.4622423,
+  "lng": 88.3778562,
+  "name": "Kamdhari Road"
+ },
+ "KASBA KOLKATA": {
+  "lat": 22.5044355,
+  "lng": 88.3721663,
+  "name": "Vodafone Idea"
+ },
+ "KHIDDERPORE ABHIYAN KOLKATA": {
+  "lat": 22.5386985,
+  "lng": 88.3175648,
+  "name": "Khidderpore"
+ },
+ "MANSATALA ROW KIDDERPORE KOLKATA": {
+  "lat": 22.5376078,
+  "lng": 88.3255124,
+  "name": "Manastala Row"
+ },
+ "KHUDIRAM YUBAK SANGHA KOLKATA": {
+  "lat": 22.4618434,
+  "lng": 88.2585626,
+  "name": "Khanberia Yubak Sangha Klayground"
+ },
+ "KIDDERPORE KOLKATA": {
+  "lat": 22.53538,
+  "lng": 88.3206094,
+  "name": "Kidderpore"
+ },
+ "LOONA 7 STAR KOLKATA": {
+  "lat": 22.5940585,
+  "lng": 88.3709783,
+  "name": "Star Theatre"
+ },
+ "MAJUMDER PARA UNNAYAN SAMITY KOLKATA": {
+  "lat": 22.4781334,
+  "lng": 88.3422101,
+  "name": "Pally Unnayan Samiti Club"
+ },
+ "METROPOLITAN CO OP HOUSING SOCIETY TANGRA KOLKATA": {
+  "lat": 22.4851212,
+  "lng": 88.2913934,
+  "name": "Iman Co-Operative Housing Society"
+ },
+ "NANDARAM SEN ST SOVABAZAR KOLKATA": {
+  "lat": 22.5982325,
+  "lng": 88.3615817,
+  "name": "Nandaram Sen St"
+ },
+ "SUKANTA PALLY KOLKATA": {
+  "lat": 22.7950847,
+  "lng": 88.3810612,
+  "name": "Sukanta Pally"
+ },
+ "AL BLOCK NEWTOWN ACTION AREA I KOLKATA": {
+  "lat": 22.5786809,
+  "lng": 88.4748626,
+  "name": "NewTown Development Authority Administrative Buidling"
+ },
+ "NEWTOWN KOLKATA": {
+  "lat": 26.254624,
+  "lng": 88.1820651,
+  "name": "Baazar Kolkata"
+ },
+ "ACTION AREA 1B KOLKATA": {
+  "lat": 22.5728636,
+  "lng": 88.4613745,
+  "name": "Dr. Subrata Chatterjee - Astrologer in Kolkata"
+ },
+ "DESH BANDHU NAGAR BAGUIATI KOLKATA": {
+  "lat": 22.616396,
+  "lng": 88.4278599,
+  "name": "Combo Kolkata"
+ },
+ "RAMAKRISHNA ATHELETIC CLUB KOLKATA": {
+  "lat": 22.5619972,
+  "lng": 88.3423131,
+  "name": "Mohun Bagan Atheletic Club"
+ },
+ "RAMKRISHAPUR SARBOJANIN DURGOTSAB KOLKATA": {
+  "lat": 22.5173511,
+  "lng": 88.3667515,
+  "name": "Gariahat Sarbojanin Durgotsab"
+ },
+ "SHIBRAMPUR MAUZA KOLKATA": {
+  "lat": 24.8264083,
+  "lng": 81.7983163,
+  "name": "Shivrajpur"
+ },
+ "SAHIDNAGAR SARBOJANIN DURGOTSAB KOLKATA": {
+  "lat": 22.5173511,
+  "lng": 88.3667515,
+  "name": "Gariahat Sarbojanin Durgotsab"
+ },
+ "SANTOSHPUR SAGNIK KOLKATA": {
+  "lat": 22.4960484,
+  "lng": 88.3822296,
+  "name": "Santoshpur"
+ },
+ "SANTOSH KOLKATA": {
+  "lat": 22.5658629,
+  "lng": 88.3655387,
+  "name": "Santosh Mitra Square"
+ },
+ "SANTRAGACHI KOLKATA": {
+  "lat": 22.5939709,
+  "lng": 88.2800968,
+  "name": "CGHS Dispensary, Santragachi"
+ },
+ "SAPTARATHI SANGHA KOLKATA": {
+  "lat": 22.5185653,
+  "lng": 88.352614,
+  "name": "Dakshin Kolkata Sangha"
+ },
+ "SARIR SANGATHAN SAMITY KOLKATA": {
+  "lat": 22.5620602,
+  "lng": 88.3803967,
+  "name": "Sharir Sangathan Samiti"
+ },
+ "SEVA O SANSKRITI SANGHA KOLKATA": {
+  "lat": 22.5219862,
+  "lng": 88.3698775,
+  "name": "Bharat Sevashram Sangha Hospital"
+ },
+ "JORAMANDIR BAGUIATI KOLKATA": {
+  "lat": 22.6131768,
+  "lng": 88.4299479,
+  "name": "Joramandir"
+ },
+ "SHYAMA PALLI SHYAMA SANGHA KOLKATA": {
+  "lat": 22.5986937,
+  "lng": 88.3755006,
+  "name": "Shyambazar Nabin Sangha"
+ },
+ "GHASIARA KOLKATA": {
+  "lat": 22.441181,
+  "lng": 88.4449693,
+  "name": "Ghasiara Vidyapith"
+ },
+ "SOBHABAZAR SARBOJANIN DURGOTSAB KOLKATA": {
+  "lat": 22.5173511,
+  "lng": 88.3667515,
+  "name": "Gariahat Sarbojanin Durgotsab"
+ },
+ "DURGA CHARAN DOCTOR RD TALTALA KOLKATA": {
+  "lat": 22.5581614,
+  "lng": 88.3643602,
+  "name": "Taltala Childrens Park"
+ },
+ "TALTALA KOLKATA": {
+  "lat": 22.5581614,
+  "lng": 88.3643602,
+  "name": "Taltala Childrens Park"
+ },
+ "SILPARA PURBA BARISHA KOLKATA": {
+  "lat": 22.4774268,
+  "lng": 88.3203914,
+  "name": "Purba Barisha High School"
+ },
+ "THE NEWALIPORE ASSOCIATION KOLKATA": {
+  "lat": 22.4983634,
+  "lng": 88.368571,
+  "name": "Indian Association for the Cultivation of Science (Centenary Building))"
+ },
+ "TRINAYANEE KOLKATA": {
+  "lat": 22.578853,
+  "lng": 88.3915351,
+  "name": "Trinayani"
+ },
+ "YOUTH RECREATION CENTRE KOLKATA": {
+  "lat": 3.24984,
+  "lng": 31.3619983,
+  "name": "Youth Recreation Centre"
+ },
+ "CHANDRANATH CHATTERJEE STREET KOLKATA": {
+  "lat": 22.5728636,
+  "lng": 88.4613745,
+  "name": "Dr. Subrata Chatterjee - Astrologer in Kolkata"
+ },
+ "GRAY STREET KOLKATA": {
+  "lat": 22.5601523,
+  "lng": 88.3529557,
+  "name": "New Market"
+ },
+ "KHIDDERPORE KOLKATA": {
+  "lat": 22.5386985,
+  "lng": 88.3175648,
+  "name": "Khidderpore"
+ },
+ "LAKEVIEW PARK KOLKATA": {
+  "lat": 47.6220519,
+  "lng": -122.2846686,
+  "name": "Lakeview Park"
+ },
+ "MADHUSUDAN DAS LANE KOLKATA": {
+  "lat": 22.5594173,
+  "lng": 88.3461762,
+  "name": "Michael Madhusudan Das Statue"
+ },
+ "MAJUMDER PARA KOLKATA": {
+  "lat": 22.5041947,
+  "lng": 88.3708222,
+  "name": "Dr. Mina Majumder Seva Mandir Pvt. Ltd"
+ },
+ "MALL PALLY KOLKATA": {
+  "lat": 22.4906039,
+  "lng": 88.3706226,
+  "name": "Ananda Pally"
+ },
+ "MANICKTALA KOLKATA": {
+  "lat": 22.5832398,
+  "lng": 88.3916706,
+  "name": "Manicktala Fire Station"
+ },
+ "MECHUA BAZAR KOLKATA": {
+  "lat": 22.5940341,
+  "lng": 88.362514,
+  "name": "Shobha Bazar"
+ },
+ "MONMOHAN BOSE STREET KOLKATA": {
+  "lat": 22.6012867,
+  "lng": 88.3689231,
+  "name": "Ram Kanta Bose Street"
+ },
+ "NABAPALLY KOLKATA": {
+  "lat": 22.5147581,
+  "lng": 88.3904034,
+  "name": "Nabapally"
+ },
+ "PUTIARY KOLKATA": {
+  "lat": 22.4768118,
+  "lng": 88.3485022,
+  "name": "Purba Putiary"
+ },
+ "RAMGARH KOLKATA": {
+  "lat": 22.4756796,
+  "lng": 88.3749311,
+  "name": "Ramgarh Lake"
+ },
+ "SATATTAR PALLI KOLKATA": {
+  "lat": 22.5150354,
+  "lng": 88.3498551,
+  "name": "Adi Lake Palli Club"
+ },
+ "SOBHABAZAR KOLKATA": {
+  "lat": 22.5958115,
+  "lng": 88.3609599,
+  "name": "Sobhbazar Beniatala"
+ },
+ "TALTATA KOLKATA": {
+  "lat": 22.47421,
+  "lng": 88.3551263,
+  "name": "Maitree Sangsad Ground"
+ },
+ "TAMER LANE KOLKATA": {
+  "lat": 22.5766886,
+  "lng": 88.3651464,
+  "name": "Tamer Ln"
+ },
+ "TEKIAPARA KOLKATA": {
+  "lat": 22.5350738,
+  "lng": 88.340642,
+  "name": "Telipara Road"
+ },
+ "PARK CIRCUS KOLKATA": {
+  "lat": 22.5407799,
+  "lng": 88.3738814,
+  "name": "Park Circus"
+ },
+ "ULTADANGA KOLKATA": {
+  "lat": 22.6012775,
+  "lng": 88.3841474,
+  "name": "Kolkata"
+ },
+ "UTTAR BANTRA KOLKATA": {
+  "lat": 28.660239,
+  "lng": 77.323984,
+  "name": "Kolkata Kathi Rolls"
+ },
+ "TANGRA KOLKATA": {
+  "lat": 22.5565107,
+  "lng": 88.3795946,
+  "name": "Tangra North"
+ },
+ "NETAJI KOLKATA": {
+  "lat": 22.4809928,
+  "lng": 88.3460002,
+  "name": "Netaji"
+ }
+}
