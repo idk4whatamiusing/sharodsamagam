@@ -11,11 +11,15 @@
 const DAY_TAB_OPEN =
   '<button type="button" class="group relative w-full flex-1';
 
-/** Maps the tab's printed date ("Oct 17-18") to its data key. */
+/** Maps the tab's printed date ("Oct 18") to its data key. */
 function keyForTabDate(tabDate: string): string | null {
   const compact = tabDate.toLowerCase().replace(/[\s\u2013\u2014]/g, "");
   if (compact.startsWith("oct16")) return "shashthi";
-  if (compact.startsWith("oct17")) return "saptami";
+  // The mirror ships one tab covering "Oct 17-18". The original counts
+  // Saptami as two days carrying different rites, so that single tab is
+  // split in two below.
+  if (compact.startsWith("oct17")) return "saptami1";
+  if (compact.startsWith("oct18")) return "saptami2";
   if (compact.startsWith("oct19")) return "ashtami";
   if (compact.startsWith("oct20")) return "nabami";
   if (compact.startsWith("oct21")) return "dashami";
@@ -23,7 +27,7 @@ function keyForTabDate(tabDate: string): string | null {
 }
 
 /**
- * Tags the five vertical day tabs with `data-fday` and the adjacent detail
+ * Tags the six vertical day tabs with `data-fday` and the adjacent detail
  * panel with `data-fday-panel`. Returns the HTML with those attributes added.
  */
 export function injectFestivalDayHooks(html: string): string {
@@ -47,16 +51,39 @@ export function injectFestivalDayHooks(html: string): string {
     result += out.slice(cursor, match.index);
     const tag = match[0];
 
+    // Take the whole button, not just its open tag: splitting Saptami in
+    // two requires a full second button, not a second <button ...>.
+    const closeIdx = out.indexOf("</button>", match.index + tag.length);
+    if (closeIdx < 0) {
+      result += tag;
+      cursor = match.index + tag.length;
+      continue;
+    }
+    const full = out.slice(match.index, closeIdx + "</button>".length);
     const after = out.slice(match.index + tag.length, match.index + tag.length + 500);
     const dateMatch = after.match(/>([^<]*Oct[^<]*)</i);
-    const key = dateMatch ? keyForTabDate(dateMatch[1]) : null;
+    const printedDate = dateMatch ? dateMatch[1] : "";
+    const key = printedDate ? keyForTabDate(printedDate) : null;
 
-    result += key ? tag.replace('class="', `data-fday="${key}" class="`) : tag;
-    cursor = match.index + tag.length;
+    if (printedDate.includes("17") && printedDate.includes("18")) {
+      // "Oct 17-18" is one tab in the mirror but two days on the original.
+      // Emit Oct 17 then Oct 18; FestivalDays fills the rest on hydration.
+      result +=
+        retag(full, "saptami1").replace(/>[^<]*Oct[^<]*</, ">Oct 17<") +
+        retag(full, "saptami2").replace(/>[^<]*Oct[^<]*</, ">Oct 18<");
+    } else {
+      result += key ? retag(full, key) : full;
+    }
+    cursor = closeIdx + "</button>".length;
   }
   result += out.slice(cursor);
 
   return result;
+}
+
+/** Adds `data-fday="<key>"` to a complete tab button. */
+function retag(button: string, key: string): string {
+  return button.replace('class="', `data-fday="${key}" class="`);
 }
 
 // The scraped hero carries a hardcoded "8 Days to Mahalaya" pill. Mahalaya

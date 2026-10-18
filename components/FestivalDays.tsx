@@ -101,6 +101,14 @@ export default function FestivalDays() {
 
       tabs.forEach((tab) => {
         const isActive = tab.dataset.fday === key;
+        // Each tab carries its own day's label. Reading `day` (the selected
+        // one) here rewrote every tab to the same text the moment select()
+        // ran, which left six identical tabs reading "Oct 16 Shashthi".
+        const own = tab.dataset.fday
+          ? DAYS_BY_KEY[tab.dataset.fday as FestivalDay["key"]]
+          : undefined;
+        if (!own) return;
+
         tab.className = isActive ? ACTIVE_TAB : IDLE_TAB;
         const existingArrow = tab.querySelector(":scope > div");
         if (isActive && !existingArrow) tab.insertAdjacentHTML("afterbegin", ARROW);
@@ -110,13 +118,15 @@ export default function FestivalDays() {
         const nameEl = tab.querySelectorAll("span")[1];
         const bnEl = tab.querySelectorAll("span")[2];
         if (dateEl) {
-          dateEl.textContent = day.tabDate;
+          dateEl.textContent = own.tabDate;
           dateEl.className =
             "text-[7px] min-[360px]:text-[7.5px] font-mono font-black uppercase tracking-wider " +
             (isActive ? "text-[#FFB800]" : "text-[#D97706]");
         }
         if (nameEl) {
-          nameEl.textContent = day.name.replace(/^Maha /, "").replace("Vijaya Dashami", "Dashami");
+          nameEl.textContent = own.name
+            .replace(/^Maha /, "")
+            .replace("Vijaya Dashami", "Dashami");
           nameEl.className =
             "font-serif font-black text-[11px] min-[360px]:text-xs leading-tight mt-0.5 " +
             (isActive
@@ -124,7 +134,7 @@ export default function FestivalDays() {
               : "text-[#2C1210]");
         }
         if (bnEl) {
-          bnEl.textContent = day.bnFull.split(" · ")[1] ?? day.bnFull;
+          bnEl.textContent = own.bnFull.split(" · ")[1] ?? own.bnFull;
           bnEl.className =
             "text-[7px] font-semibold tracking-tight mt-0.5 truncate max-w-[66px] " +
             (isActive ? "text-amber-200" : "text-[#2C1210]/60");

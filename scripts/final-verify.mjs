@@ -68,8 +68,10 @@ if (isLive) {
   ok(/Maha Shashthi/.test(cd1), "countdown names its target");
 }
 
-console.log("\n== DAY SWITCH (all 5) ==");
-for (const [key, title] of [["shashthi","Maha Shashthi"],["saptami","Maha Saptami"],["ashtami","Maha Ashtami"],["nabami","Maha Nabami"],["dashami","Vijaya Dashami"]]) {
+console.log("\n== DAY SWITCH (all 6) ==");
+// Maha Saptami occupies two days on the original and is split into two tabs
+// here, so both saptami1 and saptami2 legitimately carry the same title.
+for (const [key, title] of [["shashthi","Maha Shashthi"],["saptami1","Maha Saptami"],["saptami2","Maha Saptami"],["ashtami","Maha Ashtami"],["nabami","Maha Nabami"],["dashami","Vijaya Dashami"]]) {
   const r = await m.evaluate(async (k) => {
     document.querySelector(`[data-fday="${k}"]`)?.click();
     await new Promise(r => setTimeout(r, 250));
@@ -179,7 +181,7 @@ console.log("\n== CLIENT-SIDE NAVIGATION ==");
     return { digits: /\d/.test(s?.innerText || ""), tabs: tabs.length };
   });
   ok(h.digits, "countdown re-armed after navigating back");
-  ok(h.tabs === 5, `day tabs present after navigating back (${h.tabs})`);
+  ok(h.tabs === 6, `day tabs present after navigating back (${h.tabs})`);
   await nav.evaluate(() => document.querySelector('[data-fday="dashami"]')?.click());
   await nav.waitForTimeout(500);
   ok(
@@ -207,6 +209,76 @@ console.log("\n== CLIENT-SIDE NAVIGATION ==");
   ok(pm.div && pm.pane && pm.marker > 0, `pandal mini-map rendered after client nav (marker=${pm.marker})`);
   ok(nerr.length === 0, "client-nav console clean" + (nerr.length ? ": " + [...new Set(nerr)].join(" | ") : ""));
   await nav.close();
+}
+
+// ---------- panzika ----------
+console.log("\n== PANZIKA ==");
+{
+  const p = await b.newPage({ viewport: { width: 1440, height: 1000 } });
+  const perrs = [];
+  p.on("pageerror", e => perrs.push(e.message.slice(0, 100)));
+  p.on("console", c => c.type() === "error" && perrs.push(c.text().slice(0, 100)));
+  await ready(p, B + "/panzika/");
+
+  const shape = await p.evaluate(() => ({
+    days: document.querySelectorAll("[data-pday]").length,
+    gridDays: document.querySelectorAll("[data-gridday]").length,
+    // Only the seven festival dates should be clickable in the month grid.
+    clickable: document.querySelectorAll("[data-gridday]:not([disabled])").length,
+    views: [...document.querySelectorAll('[role="tab"]')]
+      .filter((t) => /Calendar|Almanac/.test(t.textContent)).length,
+    print: !!document.querySelector("button"),
+  }));
+  ok(shape.days === 7, `seven day tabs (${shape.days})`);
+  ok(shape.gridDays === 31, `October grid renders every date (${shape.gridDays})`);
+  ok(shape.clickable === 7, `only festival dates are selectable (${shape.clickable})`);
+  ok(shape.views === 2, `calendar and almanac views present (${shape.views})`);
+
+  // Every day must render a populated panel, and the ritual table must not
+  // come back empty - the harvested data is the only source for these.
+  let allDays = true;
+  for (const k of ["mahalaya","shashthi","saptami1","saptami2","ashtami","nabami","dashami"]) {
+    await p.click(`[data-pday="${k}"]`);
+    await p.waitForTimeout(200);
+    const r = await p.evaluate((kk) => {
+      const sec = document.querySelector('[aria-live="polite"]');
+      const rows = sec ? [...sec.querySelectorAll("h3 + div > div")] : [];
+      return {
+        heading: sec?.querySelector("h2")?.innerText.replace(/\s+/g, " ").trim() || "",
+        narrative: (sec?.querySelector("p.font-serif")?.innerText || "").trim().length,
+        rows: rows.length,
+        blanks: rows.filter((x) => !x.innerText.trim()).length,
+        selected: document.querySelector(`[data-pday="${kk}"]`)?.getAttribute("aria-selected"),
+      };
+    }, k);
+    if (!r.heading || !r.narrative || !r.rows || r.blanks || r.selected !== "true") {
+      allDays = false;
+      console.log(`       ${k}: "${r.heading}" narrative=${r.narrative} rows=${r.rows} blanks=${r.blanks} sel=${r.selected}`);
+    }
+  }
+  ok(allDays, "every day renders a heading, narrative and non-empty ritual rows");
+
+  // Clicking a calendar cell must drive the same panel as the tab strip.
+  await p.click('[data-gridday="21"]');
+  await p.waitForTimeout(250);
+  const viaGrid = await p.evaluate(() => ({
+    heading: document.querySelector('[aria-live="polite"] h2')?.innerText.replace(/\s+/g, " ").trim(),
+    pressed: document.querySelector('[data-gridday="21"]')?.getAttribute("aria-pressed"),
+  }));
+  ok(viaGrid.heading.includes("দশমী"), `calendar cell selects its day (${viaGrid.heading})`);
+  ok(viaGrid.pressed === "true", "selected cell marked aria-pressed");
+
+  // The almanac is a second view with its own content.
+  await p.click('button:has-text("Traditional Almanac Table")');
+  await p.waitForTimeout(300);
+  const alm = await p.evaluate(() => ({
+    entries: document.querySelectorAll("article").length,
+    bengali: /কার্তিক|আশ্বিন/.test(document.body.innerText),
+  }));
+  ok(alm.entries === 7, `almanac lists all seven entries (${alm.entries})`);
+  ok(alm.bengali, "almanac carries the Bengali month names");
+  ok(perrs.length === 0, "panzika console clean" + (perrs.length ? ": " + [...new Set(perrs)].join(" | ") : ""));
+  await p.close();
 }
 
 // ---------- other pages ----------

@@ -1,20 +1,31 @@
 /**
- * Single source of truth for the five days of Devi Paksha 2026.
+ * Single source of truth for Devi Paksha 2026, as shown on the home page.
  *
- * PROVENANCE: every field here originates from the dataset that already
- * existed in app/panzika/page.tsx. That page was written first and is
- * treated as authoritative. An earlier version of this file contained
+ * Six entries, because the original treats Maha Saptami as two distinct
+ * days: the 17th carries Navapatrika Snan and Pran Pratistha, and the 18th
+ * carries Bihita Adhik Puja running to the close of the Saptami tithi at
+ * 5:53 AM. The mirrored home page shipped a single "Oct 17-18" tab; the tab
+ * strip is split at build time by lib/homeInject.ts to match.
+ *
+ * PROVENANCE: the English wording here originates from the dataset that
+ * already existed in app/panzika/page.tsx. That page was written first and
+ * is treated as authoritative. An earlier version of this file contained
  * separately-invented ritual names and timings for the four non-Shashthi
  * days, which contradicted the panzika page - the same site answering the
  * same question two different ways. Do not reintroduce parallel copies:
  * edit here and both pages change together.
+ *
+ * The Bengali wording for these days is NOT written here. It is the
+ * original's own text, harvested into data/panzika.json and re-exported by
+ * lib/panzikaData.ts. This file only carries the English summary the home
+ * page shows.
  */
 
 export type Rite = readonly [label: string, time: string];
 
 export type FestivalDay = {
   /** Stable slug used for the tab data attributes and lookup keys. */
-  key: "shashthi" | "saptami" | "ashtami" | "nabami" | "dashami";
+  key: "shashthi" | "saptami1" | "saptami2" | "ashtami" | "nabami" | "dashami";
   /** English title, e.g. "Maha Shashthi". */
   name: string;
   /** Short date for the panzika header row, e.g. "16 Oct". */
@@ -57,22 +68,40 @@ export const FESTIVAL_DAYS: readonly FestivalDay[] = [
     ],
   },
   {
-    key: "saptami",
+    key: "saptami1",
     name: "Maha Saptami",
-    date: "17–18 Oct",
-    longDate: "17th – 18th October, Saturday – Sunday",
-    tabDate: "Oct 17–18",
+    date: "17 Oct",
+    longDate: "17th October, Saturday",
+    tabDate: "Oct 17",
     tithi: "Shukla Saptami",
     bn: "সপ্তমী",
-    bnFull: "সপ্তমী · নবপত্রিকা স্নান ও প্রাণপ্রতিষ্ঠা",
+    bnFull: "সপ্তমী · নবপত্রিকা প্রবেশ ও স্থাপন",
     desc:
-      "Navapatrika Snan — bathing of the Nabapatrika (Kola Bou) and Pran Pratistha.",
+      "Navapatrika Snan — the Kola Bou is bathed at the ghats, carried in and installed, then Pran Pratistha.",
     bhog: "Khichuri, Labra, Begun Bhaja",
-    highlight: "Navapatrika & Pran Pratistha",
+    highlight: "Navapatrika Snan & Pran Pratistha",
     rites: [
       ["Navapatrika Snan", "Morning · 06:00 AM"],
+      ["Kola Bou Snan", "Early Morning"],
       ["Pran Pratistha", "Morning · 08:30 AM"],
-      ["Sandhi Aarati", "Evening · 06:00 PM"],
+    ],
+  },
+  {
+    key: "saptami2",
+    name: "Maha Saptami",
+    date: "18 Oct",
+    longDate: "18th October, Sunday",
+    tabDate: "Oct 18",
+    tithi: "Shukla Saptami",
+    bn: "সপ্তমী",
+    bnFull: "সপ্তমী · শুক্লা সপ্তমীবিহিত অধিক পূজা",
+    desc:
+      "Bihita Adhik Puja runs until the Saptami tithi closes at 5:53 AM, after which Maha Ashtami begins.",
+    bhog: "Khichuri, Labra, Begun Bhaja",
+    highlight: "Bihita Adhik Puja until 5:53 AM",
+    rites: [
+      ["Bihita Adhik Puja", "Until · 05:53 AM"],
+      ["Ashtami begins", "From · 05:54 AM"],
     ],
   },
   {

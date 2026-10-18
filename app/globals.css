@@ -10,3 +10,55 @@
   100% { transform: translateY(-50%); }
 }
 
+/* Panzika day strip: seven festival days, so it needs seven columns on
+   desktop rather than wrapping 4+3.
+   This lives here instead of a `lg:grid-cols-7` utility because the
+   original site's compiled theme is loaded after our Tailwind output and
+   re-declares the same utility names, and Tailwind sorts arbitrary-property
+   variants below the base utility inside its cascade layer - so utility
+   classes on this element lose. An attribute selector outranks them on
+   specificity, which media queries alone would not achieve. */
+[data-day-strip] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 40rem) {
+  [data-day-strip] {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 64rem) {
+  [data-day-strip] {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+}
+
+/* Print styles for the Panzika.
+   "Print Panzika" is expected to produce a usable almanac sheet, so the nav,
+   footer and page furniture are dropped. Day panels stay whole rather than
+   splitting a ritual list across a page break. */
+@media print {
+  header,
+  footer,
+  nav,
+  #mobile-nav-actions,
+  .print\:hidden {
+    display: none !important;
+  }
+
+  body {
+    background: #fff !important;
+  }
+
+  main {
+    padding-top: 0 !important;
+  }
+
+  section,
+  article {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
+
