@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 // Must match CACHE_VERSION in public/sw.js. Any cache not carrying this
 // prefix belongs to an older build and is purged on load.
-const CACHE_PREFIX = "sharodsamagam-v5";
+const CACHE_PREFIX = "sharodsamagam-v6";
 
 export default function ServiceWorkerRegistrar() {
   useEffect(() => {

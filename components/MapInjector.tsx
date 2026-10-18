@@ -6,24 +6,19 @@ import "leaflet/dist/leaflet.css";
 
 const KOLKATA: [number, number] = [22.57, 88.36];
 
-// Esri World Street Map: no API key, unrestricted zoom, and no bulk-download
-// policy to trip over. Note Esri's REST tile template takes {y} before {x},
-// unlike the XYZ convention.
+// OpenStreetMap's standard raster tiles.
 //
-// (OpenStreetMap's own tile server is deliberately not used here: it
-// returns HTTP 200 with an "Access blocked" placeholder tile to anything it
-// considers abusive, and bulk-downloading for offline caches is explicitly
-// outside their tile usage policy.)
-const TILE_URL =
-  "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}";
+// Usage follows OSMF's Tile Usage Policy: only the tiles the current viewport
+// needs are requested (no prefetch, no offline download), the browser sends
+// its own Referer, and attribution is shown on the map. The service worker
+// caches tiles a visitor has already viewed, which the policy explicitly
+// encourages, and nothing more.
+const TILE_URL = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 const TILE_OPTS = {
   maxZoom: 19,
   attribution:
-    "Tiles &copy; Esri &mdash; Esri, HERE, Garmin, USGS, NPS and FAO",
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 };
-
-// Esri will happily serve tiles the browser has already seen, so the service
-// worker keeps a cache-first copy for repeat views.
 
 // A map that silently fails to draw is indistinguishable from a map that
 // never initialised, which makes every support question a guessing game.
@@ -68,8 +63,8 @@ function failureNotice(host: HTMLElement, detail: string, retry?: () => void) {
 }
 
 const BLOCKED_HINT =
-  "A network filter or privacy shield may be blocking the map tile server. " +
-  "Allow server.arcgisonline.com, then retry.";
+  "Your network or a privacy shield may be blocking OpenStreetMap's tile " +
+  "server. Allow tile.openstreetmap.org, then retry.";
 
 export default function MapInjector() {
   // The root layout persists across client-side navigation while the page

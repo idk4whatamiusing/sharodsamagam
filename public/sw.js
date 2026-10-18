@@ -3,16 +3,19 @@
 // Strategy per resource class:
 //   - navigations      -> network-first, fall back to the cached shell offline
 //   - /_next/static/*  -> cache-first (content-hashed, immutable)
-//   - /tiles/*         -> cache-first (addressed by z/x/y, stable)
+//   - basemap tiles    -> cache-first, so re-visits cost nothing
 //   - audio            -> cache-first
 //   - everything else  -> network-first, fall back to cache
+//
+// Offline map downloads are deliberately not supported: prefetching tiles
+// outside the current viewport is prohibited by OSMF's tile usage policy.
 //
 // Anything not matching CACHE_VERSION is deleted on activate, and the
 // registrar component purges foreign caches on page load. A cache-first
 // policy for *every* request (an earlier revision) pinned visitors to
 // stale HTML and a stale /points.json indefinitely after a deploy.
 
-const CACHE_VERSION = 'sharodsamagam-v5';
+const CACHE_VERSION = 'sharodsamagam-v6';
 const SHELL_CACHE = `${CACHE_VERSION}-shell`;
 const ASSET_CACHE = `${CACHE_VERSION}-assets`;
 const TILE_CACHE = `${CACHE_VERSION}-tiles`;
@@ -20,8 +23,16 @@ const TILE_CACHE = `${CACHE_VERSION}-tiles`;
 const SHELL = ['/', '/map/', '/paras/', '/panzika/', '/chronicles/'];
 const PRECACHE_URLS = ['/points.json', '/manifest.webmanifest'];
 
-const TILE_HOSTS = ['server.arcgisonline.com'];
-const MAX_PRECACHED_TILES = 3000;
+// Basemap tiles. OSMF's policy encourages keeping a local cache so repeat
+// views do not re-download; it forbids prefetching, and that capability was
+// removed from this worker. Nothing is ever fetched unless a map actually
+// asks for that tile.
+const TILE_HOSTS = [
+  'tile.openstreetmap.org',
+  'a.tile.openstreetmap.org',
+  'b.tile.openstreetmap.org',
+  'c.tile.openstreetmap.org',
+];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -49,29 +60,6 @@ self.addEventListener('activate', (event) => {
           .map((k) => caches.delete(k))
       );
       await self.clients.claim();
-    })()
-  );
-});
-
-// Fills the tile cache in the background so the map works with no network,
-// but never blocks page load on it.
-self.addEventListener('message', (event) => {
-  if (event.data?.type !== 'precache-tiles') return;
-  const urls = Array.isArray(event.data.urls) ? event.data.urls.slice(0, MAX_PRECACHED_TILES) : [];
-  event.waitUntil(
-    (async () => {
-      const cache = await caches.open(TILE_CACHE);
-      let done = 0;
-      const step = async (i) => {
-        const batch = urls.slice(i, i + 12);
-        await Promise.all(
-          batch.map((u) => cache.add(new Request(u, { cache: 'reload' })).catch(() => {}))
-        );
-        done += batch.length;
-        event.source?.postMessage({ type: 'precache-progress', done, total: urls.length });
-        if (done < urls.length) await step(i + 12);
-      };
-      if (urls.length) await step(0);
     })()
   );
 });
