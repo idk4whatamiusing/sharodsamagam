@@ -1070,6 +1070,40 @@ console.log("\n== UPLOAD ==");
   await p.close();
 }
 
+console.log("\n== IMAGES ==");
+{
+  // The gallery is a harvest of the community archive's R2 objects. One of
+  // them failed to download and rendered as a broken tile on both the home
+  // strip and /gallery, so every image those pages ask for is now requested.
+  const p = await b.newPage({ viewport: { width: 1440, height: 1000 } });
+  const srcs = new Set();
+  for (const path of ["/", "/gallery/"]) {
+    await p.goto(B + path, { waitUntil: "domcontentloaded", timeout: 60000 });
+    for (const s of await p.evaluate(() =>
+      [...document.querySelectorAll('img[src^="/gallery/"]')].map((i) => i.getAttribute("src"))
+    )) {
+      srcs.add(s);
+    }
+  }
+  const list = [...srcs];
+  const missing = [];
+  for (let i = 0; i < list.length; i += 16) {
+    const chunk = list.slice(i, i + 16);
+    const res = await Promise.all(chunk.map((s) => p.request.head(B + s)));
+    res.forEach((r, k) => {
+      if (r.status() !== 200) missing.push(`${chunk[k]} (${r.status()})`);
+    });
+  }
+  ok(
+    // The gallery page is a marquee of 46 photos and the home strip adds ten
+    // more; the union was 55 when this was written.
+    list.length >= 50 && missing.length === 0,
+    `every gallery image answers (${list.length} images)` +
+      (missing.length ? ": " + missing.slice(0, 3).join(", ") : "")
+  );
+  await p.close();
+}
+
 // ---------- page metadata ----------
 console.log("\n== METADATA ==");
 {
