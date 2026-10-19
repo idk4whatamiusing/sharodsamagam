@@ -334,6 +334,133 @@ console.log("\n== MOBILE FOOTER ACCORDION ==");
   await p.close();
 }
 
+console.log("\n== MOBILE MORE + TEEN CHALA ==");
+{
+  // The phone bottom bar's More was dead. The only trigger the layout wired
+  // was the first button matching "more" in document order, which is the
+  // desktop header's button - hidden below lg - so the visible phone button
+  // opened nothing. Both triggers open the same panel now, which scrolls,
+  // and closes on an outside tap or Escape.
+  const p = await b.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  const errs = [];
+  p.on("pageerror", (e) => errs.push(e.message.slice(0, 100)));
+  p.on("console", (c) => c.type() === "error" && errs.push(c.text().slice(0, 100)));
+  await ready(p, B + "/");
+
+  const more = await p.evaluate(async () => {
+    const vis = [...document.querySelectorAll("button")].filter(
+      (b) => /^more$/i.test((b.textContent || "").trim()) && b.getClientRects().length
+    );
+    const out = { visible: vis.length };
+    vis[0]?.click();
+    await new Promise((r) => setTimeout(r, 300));
+    const panel = document.getElementById("our-more-panel");
+    const rect = panel?.getBoundingClientRect();
+    out.display = panel ? getComputedStyle(panel).display : null;
+    out.inViewport = rect
+      ? rect.x >= -1 && rect.y >= -1 && rect.right <= innerWidth + 1 && rect.bottom <= innerHeight + 1
+      : false;
+    out.links = panel ? panel.querySelectorAll("a[href^='/']").length : 0;
+    out.overflowY = panel ? getComputedStyle(panel).overflowY : null;
+    document.body.click();
+    await new Promise((r) => setTimeout(r, 250));
+    out.afterOutside = panel?.style.display;
+    out.triggerClean = vis[0] ? vis[0].style.background === "" : null;
+    vis[0]?.click();
+    await new Promise((r) => setTimeout(r, 250));
+    out.reopened = panel?.style.display;
+    document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+    await new Promise((r) => setTimeout(r, 200));
+    out.afterEscape = panel?.style.display;
+    return out;
+  });
+  ok(more.visible >= 1, `the phone bottom bar has a visible More (${more.visible})`);
+  ok(
+    more.display === "block" && more.inViewport && more.links >= 6,
+    `More opens a panel on screen (${more.links} links, inViewport=${more.inViewport})`
+  );
+  ok(more.overflowY === "auto", `the panel scrolls when it overflows (overflow-y: ${more.overflowY})`);
+  ok(
+    more.afterOutside === "none" && more.triggerClean === true && more.reopened === "block" && more.afterEscape === "none",
+    "an outside tap and Escape both close it, and it reopens"
+  );
+
+  // The desktop header's MORE is the same panel.
+  await p.setViewportSize({ width: 1440, height: 900 });
+  await p.waitForTimeout(400);
+  const desktopMore = await p.evaluate(async () => {
+    const btn = [...document.querySelectorAll("button")].find(
+      (b) => /^more$/i.test((b.textContent || "").trim()) && b.getClientRects().length
+    );
+    btn?.click();
+    await new Promise((r) => setTimeout(r, 300));
+    const panel = document.getElementById("our-more-panel");
+    const open = panel ? getComputedStyle(panel).display : null;
+    document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+    return { clicked: !!btn, open };
+  });
+  ok(desktopMore.clicked && desktopMore.open === "block", "the desktop header's MORE still opens it");
+
+  // The mobile Teen Chala carousel: three cards behind a sticky stage, and
+  // nothing moved them after the scrape. The mapping is the original's own
+  // (sampled at several scroll fractions): the row slides
+  // translateX(-200vw x progress), and the lit card is round(progress x 2).
+  await p.setViewportSize({ width: 390, height: 844 });
+  await p.evaluate(() => window.scrollTo(0, 0));
+  await p.waitForTimeout(400);
+  const teen = await p.evaluate(async () => {
+    const sec = document.querySelector('section[aria-label*="Teen Chala"]');
+    if (!sec) return { error: "section missing" };
+    const row = sec.querySelector('div[style*="width:300%"]');
+    if (!row) return { error: "row missing" };
+    const cards = [...row.children];
+    const veils = cards.map((c) =>
+      [...c.querySelectorAll("div")].find(
+        (d) => /opacity/.test(d.getAttribute("style") || "") && /transition/.test(d.getAttribute("style") || "")
+      )
+    );
+    const top = sec.getBoundingClientRect().top + scrollY;
+    const h = sec.offsetHeight;
+    const steps = [];
+    for (const f of [0.1, 0.25, 0.5, 0.75]) {
+      scrollTo(0, top + f * h);
+      await new Promise((r) => setTimeout(r, 350));
+      const progress = Math.min(1, Math.max(0, (f * h) / (h - innerHeight)));
+      steps.push({
+        f,
+        want: -200 * progress,
+        got: parseFloat((row.style.transform.match(/-?[\d.]+/) || ["0"])[0]),
+        ops: veils.map((v) => v?.style.opacity),
+      });
+    }
+    return { cards: cards.length, steps };
+  });
+  ok(teen.cards === 3, `three cards in the carousel (${teen.cards || teen.error})`);
+  const offTrack = (teen.steps || []).filter((s) => !(Math.abs(s.got - s.want) <= 2));
+  ok(
+    teen.steps?.length === 4 && offTrack.length === 0,
+    "the row slides with the section" +
+      (offTrack.length
+        ? ": " + offTrack.map((s) => `f=${s.f} got ${s.got}, want ${s.want.toFixed(1)}`).join(" | ")
+        : "")
+  );
+  const at = (f) => teen.steps?.find((s) => s.f === f);
+  ok(
+    JSON.stringify(at(0.25)?.ops) === JSON.stringify(["0.3", "1", "0.3"]),
+    `a quarter in, the middle card is lit (${at(0.25)?.ops})`
+  );
+  ok(
+    JSON.stringify(at(0.5)?.ops) === JSON.stringify(["0.3", "0.3", "1"]),
+    `halfway, the third card takes over (${at(0.5)?.ops})`
+  );
+  ok(
+    JSON.stringify(at(0.75)?.ops) === JSON.stringify(["0.3", "0.3", "1"]) && at(0.75)?.got === -200,
+    `past three quarters it stays clamped on the third (${at(0.75)?.got}vw)`
+  );
+  ok(errs.length === 0, "mobile more + teen chala console clean" + (errs.length ? ": " + [...new Set(errs)].join(" | ") : ""));
+  await p.close();
+}
+
 // ---------- client-side navigation ----------
 // The layout persists across router.push navigation while page children swap
 // underneath it. Any page-scoped component whose effect has a [] dependency
@@ -441,6 +568,53 @@ console.log("\n== PARAS DIRECTORY ==");
   ok(initial.cards === 24, `starts with the server-rendered page (${initial.cards})`);
   ok(/Showing 24 of 776/.test(initial.count), `count states the real size (${initial.count})`);
 
+  // Search has to reach the whole directory on its own. The original's own
+  // search for "bagbazar" returns nine pandals, most of them spelled
+  // "Baghbazar", and none of them can be on screen while only the first page
+  // is rendered. Running it before the scroll-load proves the search reads
+  // the dataset rather than the cards that happen to exist.
+  const BAGBAZAR = [
+    "bagbazar-pally-puja-o-prodorshoni",
+    "bagbazar-sarbojanin-durga-puja-mandap",
+    "basu-bati-bagbazar",
+    "baghbazar-haldar-bari-puja",
+    "naba-baghbazar-sarbajanin-durga-puja",
+    "raja-raj-ballav-street-sadanga-durgoutsav-samiti",
+    "kumortuli-sarbojonin-durgotsab",
+    "tal-betal-durga-puja",
+    "saterpalli-sarbojanin-durgotsav-committee",
+  ];
+  const bag = await p.evaluate(async ({ sel, want }) => {
+    const i = document.querySelector('input[placeholder*="Search pandal"]');
+    i.value = "bagbazar";
+    i.dispatchEvent(new Event("input", { bubbles: true }));
+    await new Promise((r) => setTimeout(r, 700));
+    const shown = [...document.querySelectorAll(sel)].filter((a) => a.getClientRects().length);
+    const slugs = shown.map((a) => a.getAttribute("href").split("/").pop());
+    return {
+      slugs,
+      dupes: slugs.filter((s, k) => slugs.indexOf(s) !== k),
+      cards: document.querySelectorAll(sel).length,
+      missing: want.filter((s) => !slugs.includes(s)),
+      count: document.querySelector("[data-paras-count]")?.textContent || "",
+    };
+  }, { sel: CARD, want: BAGBAZAR });
+  ok(
+    bag.missing.length === 0,
+    `search finds the original's nine "bagbazar" pandals across the spellings (${bag.slugs.length} hits, missing ${bag.missing.join(", ") || "none"})`
+  );
+  ok(bag.dupes.length === 0, `search results carry no duplicate cards (${bag.dupes.join(", ") || "none"})`);
+  ok(
+    bag.cards < 776 && /Showing \d+ of 776/.test(bag.count),
+    `search renders its matches without loading the directory first (${bag.cards} cards, "${bag.count}")`
+  );
+  await p.evaluate(() => {
+    const i = document.querySelector('input[placeholder*="Search pandal"]');
+    i.value = "";
+    i.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  await p.waitForTimeout(400);
+
   // Scroll the sentinel until it reports exhaustion.
   for (let i = 0; i < 60; i++) {
     await p.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
@@ -504,6 +678,217 @@ console.log("\n== PARAS DIRECTORY ==");
   await clickChip("saved");
   ok((await visible()) === 0, "Saved with nothing saved shows none, without hiding the grid");
   await clickChip("all");
+
+  // List view used to strip every card's `block h-full` classes while the
+  // component's own queries keyed off them, so the mode reported "Showing 0
+  // of 776" and the chips and search went silent on the next click. It is a
+  // display state on frozen cards now.
+  const listMode = await p.evaluate(async (sel) => {
+    const btn = (label) =>
+      [...document.querySelectorAll("button")].find((b) => b.getAttribute("aria-label") === label);
+    const chip = (l) =>
+      [...document.querySelectorAll("main button")].find(
+        (x) => x.innerText.trim().toLowerCase().replace(/\d+\s*$/, "").trim() === l
+      );
+    btn("List View").click();
+    await new Promise((r) => setTimeout(r, 450));
+    const cards = [...document.querySelectorAll(sel)].filter((a) => a.getClientRects().length);
+    const out = {
+      count: document.querySelector("[data-paras-count]")?.textContent || "",
+      rowH: cards[0]?.getBoundingClientRect().height ?? 0,
+      classKept: (cards[0]?.className || "").includes("block"),
+    };
+    chip("north").click();
+    await new Promise((r) => setTimeout(r, 550));
+    out.northVisible = [...document.querySelectorAll(sel)].filter((a) => a.getClientRects().length).length;
+    chip("all").click();
+    await new Promise((r) => setTimeout(r, 350));
+    btn("Grid View").click();
+    await new Promise((r) => setTimeout(r, 450));
+    out.gridH = document.querySelectorAll(sel)[0]?.getBoundingClientRect().height ?? 0;
+    out.gridVisible = [...document.querySelectorAll(sel)].filter((a) => a.getClientRects().length).length;
+    return out;
+  }, CARD);
+  ok(/Showing all 776/.test(listMode.count), `list view keeps the directory count (${listMode.count})`);
+  ok(listMode.rowH > 0 && listMode.rowH < 120, `list view renders slim rows (${Math.round(listMode.rowH)}px)`);
+  ok(listMode.classKept, "cards keep the classes every query keys off through a mode switch");
+  ok(
+    listMode.northVisible === expectedZones.north,
+    `the chips filter in list view (${listMode.northVisible}/${expectedZones.north})`
+  );
+  ok(
+    listMode.gridVisible === loaded.expected && listMode.gridH > 200,
+    `grid view restores the full cards (${listMode.gridVisible}, ${Math.round(listMode.gridH)}px)`
+  );
+
+  // The sort dropdown shipped as the original's closed button ("Popular")
+  // with no listbox behind it: the listbox only exists while open, so the
+  // scrape missed it and pressing it did nothing.
+  const sortAll = await p.evaluate(async (sel) => {
+    const btn = document.querySelector('main button[aria-haspopup="listbox"]');
+    const label = () => (btn.querySelector("div span") || btn).textContent.trim();
+    const openOption = async (re) => {
+      btn.click();
+      await new Promise((r) => setTimeout(r, 300));
+      const box = document.querySelector('[role="listbox"]');
+      [...box.querySelectorAll('[role="option"]')].find((x) => re.test(x.textContent)).click();
+      await new Promise((r) => setTimeout(r, 700));
+    };
+    const firstVisible = () =>
+      [...document.querySelectorAll(sel)]
+        .find((a) => a.getClientRects().length)
+        ?.getAttribute("href")
+        .split("/")
+        .pop();
+    const out = { before: firstVisible() };
+    const data = await (await fetch("/paras.json")).json();
+
+    btn.click();
+    await new Promise((r) => setTimeout(r, 300));
+    const box = document.querySelector('[role="listbox"]');
+    out.open = !!box && getComputedStyle(box).display !== "none";
+    out.options = box ? [...box.querySelectorAll('[role="option"]')].map((x) => x.textContent.trim()) : [];
+    out.selected = box
+      ? [...box.querySelectorAll('[role="option"][aria-selected="true"]')].map((x) => x.textContent.trim())
+      : [];
+    out.expanded = btn.getAttribute("aria-expanded");
+
+    document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+    await new Promise((r) => setTimeout(r, 200));
+    out.afterEscape = box ? getComputedStyle(box).display : null;
+    btn.click();
+    await new Promise((r) => setTimeout(r, 250));
+    document.querySelector("main h1")?.click();
+    await new Promise((r) => setTimeout(r, 200));
+    out.afterOutside = box ? getComputedStyle(box).display : null;
+
+    await openOption(/Alphabetical/);
+    out.alphaLabel = label();
+    out.alphaFirst = firstVisible();
+    out.alphaExpected = [...data].sort((a, b) =>
+      new Intl.Collator("en", { numeric: true, sensitivity: "base" }).compare(a.name, b.name)
+    )[0].slug;
+
+    await openOption(/Top Rated/);
+    out.ratedLabel = label();
+    out.ratedCount = document.querySelector("[data-paras-count]")?.textContent || "";
+    const rated = new Set(data.filter((x) => (x.rating ?? 0) >= 4.9).map((x) => x.slug));
+    const shown = [...document.querySelectorAll(sel)].filter((a) => a.getClientRects().length);
+    out.ratedVisible = shown.length;
+    out.ratedExpected = rated.size;
+    out.ratedExtras = shown
+      .map((a) => a.getAttribute("href").split("/").pop())
+      .filter((s) => !rated.has(s));
+    const topSlug = out.ratedExtras.length ? null : shown[0]?.getAttribute("href").split("/").pop();
+    out.ratedTop = data.find((x) => x.slug === topSlug)?.rating;
+
+    await openOption(/Popular/);
+    out.popularLabel = label();
+    out.popularFirst = firstVisible();
+    out.popularCount = document.querySelector("[data-paras-count]")?.textContent || "";
+    out.tempLeft = document.querySelectorAll("[data-paras-temp]").length;
+    // What this once was: a later dropdown click matched ClientNav's
+    // accordion handler and took the view toggle down with it.
+    out.viewButtons = [...document.querySelectorAll("button")]
+      .filter((b) => /Grid View|List View/.test(b.getAttribute("aria-label") || ""))
+      .filter((b) => b.getClientRects().length).length;
+    return out;
+  }, CARD);
+  ok(sortAll.open, "sort dropdown opens");
+  ok(
+    JSON.stringify(sortAll.options) === JSON.stringify(["Popular", "Top Rated (★ 4.9+)", "Alphabetical (A-Z)"]),
+    `sort offers the original's three options (${sortAll.options.join(" / ")})`
+  );
+  ok(
+    sortAll.selected.length === 1 && sortAll.expanded === "true",
+    `the open listbox marks exactly one option (${sortAll.selected.join("")}, aria-expanded=${sortAll.expanded})`
+  );
+  ok(sortAll.afterEscape === "none" && sortAll.afterOutside === "none", "Escape and a click away both close it");
+  ok(
+    sortAll.alphaLabel === "Alphabetical (A-Z)" && sortAll.alphaFirst === sortAll.alphaExpected,
+    `Alphabetical sorts by name with numbers read as numbers (first: ${sortAll.alphaFirst})`
+  );
+  ok(
+    sortAll.alphaFirst === "7-tanks-durga-puja-pandal",
+    "Alphabetical starts where the original's own listing starts (7 Tanks)"
+  );
+  ok(
+    sortAll.ratedLabel === "Top Rated (★ 4.9+)" &&
+      sortAll.ratedVisible === sortAll.ratedExpected &&
+      sortAll.ratedExtras.length === 0 &&
+      sortAll.ratedTop === 5,
+    `Top Rated keeps the ★ 4.9+ set, best first (${sortAll.ratedVisible}/${sortAll.ratedExpected}, top ★${sortAll.ratedTop})`
+  );
+  ok(/Showing 102 of 776/.test(sortAll.ratedCount), `Top Rated counts its own set (${sortAll.ratedCount})`);
+  ok(
+    sortAll.popularLabel === "Popular" &&
+      sortAll.popularFirst === sortAll.before &&
+      /Showing all 776/.test(sortAll.popularCount) &&
+      sortAll.tempLeft === 0,
+    `Popular restores the directory order (${sortAll.popularFirst}, "${sortAll.popularCount}")`
+  );
+  ok(
+    sortAll.viewButtons === 2,
+    `opening the dropdown four times leaves the Grid/List toggle alone (${sortAll.viewButtons} visible)`
+  );
+
+  // A pressed chip used to look exactly like an unpressed one: no sign of
+  // what was filtering the view. Zone chips now light up in their own dot
+  // colour, All in ink, and Featured/Saved take the original's own pressed
+  // classes (data/paras-ui.json).
+  const chipPaint = await p.evaluate(async () => {
+    const chip = (l) =>
+      [...document.querySelectorAll("main button")].find(
+        (x) => x.innerText.trim().toLowerCase().replace(/\d+\s*$/, "").trim() === l
+      );
+    const snap = (l) => {
+      const c = chip(l);
+      return { cls: c.className, style: c.getAttribute("style") || "" };
+    };
+    const out = {};
+    chip("north").click();
+    await new Promise((r) => setTimeout(r, 350));
+    out.north = snap("north");
+    out.allWhileNorth = snap("all");
+    chip("featured").click();
+    await new Promise((r) => setTimeout(r, 350));
+    out.featured = snap("featured");
+    out.northAfter = snap("north");
+    chip("saved").click();
+    await new Promise((r) => setTimeout(r, 350));
+    out.saved = snap("saved");
+    out.featuredAfter = snap("featured");
+    chip("all").click();
+    await new Promise((r) => setTimeout(r, 350));
+    out.allBack = snap("all");
+    out.northBack = snap("north");
+    return out;
+  });
+  const CHIP_OFF = "background-color:#FFFFFF;color:#2C1210;border-color:#EAD5A0";
+  ok(
+    /background-color:\s*#4F46E5/i.test(chipPaint.north.style) && /color:\s*#FFFFFF/i.test(chipPaint.north.style),
+    `a pressed zone chip takes its own dot colour (${chipPaint.north.style})`
+  );
+  ok(
+    chipPaint.allWhileNorth.style === CHIP_OFF,
+    `All unpaints when a zone takes over (${chipPaint.allWhileNorth.style})`
+  );
+  ok(
+    chipPaint.featured.cls.includes("from-[#D90429] to-[#B80322]") && chipPaint.featured.cls.includes("text-white"),
+    "Featured takes the original's pressed gradient"
+  );
+  ok(
+    chipPaint.saved.cls.includes("bg-[#D90429]") && chipPaint.saved.cls.includes("text-white"),
+    "Saved takes the original's pressed red"
+  );
+  ok(
+    chipPaint.northAfter.style === CHIP_OFF && chipPaint.featuredAfter.cls.includes("bg-white"),
+    "switching chips unpaints the one before"
+  );
+  ok(
+    /background-color:\s*#2C1210/i.test(chipPaint.allBack.style) && chipPaint.northBack.style === CHIP_OFF,
+    `All paints in ink when pressed (${chipPaint.allBack.style})`
+  );
 
   // Search must reach beyond the server-rendered 24.
   const midName = await p.evaluate(async () => (await (await fetch("/paras.json")).json())[400].name);
@@ -839,6 +1224,96 @@ console.log("\n== GUIDE SUB-PAGES ==");
     `all ${targets.length} internal links on the guide pages resolve` +
       (broken.length ? ": " + broken.slice(0, 4).join(", ") : "")
   );
+  await p.close();
+}
+
+// ---------- guide topic tabs ----------
+console.log("\n== GUIDE TABS ==");
+{
+  // The guide index shows one topic at a time behind five pills, and the
+  // scrape kept only the panel the original happened to server-render, so
+  // four of the five did nothing. The others are harvested into
+  // data/guide-tabs.json and grafted in hidden; the pills swap between the
+  // marked panels, which keeps the transit map's DOM alive.
+  const p = await b.newPage({ viewport: { width: 1440, height: 1000 } });
+  const errs = [];
+  p.on("pageerror", (e) => errs.push(e.message.slice(0, 100)));
+  p.on("console", (c) => c.type() === "error" && errs.push(c.text().slice(0, 100)));
+  await ready(p, B + "/guide/");
+  await p.waitForTimeout(1500); // the map in the first panel
+
+  const MARKERS = {
+    "Where to Stay": "The Oberoi Grand",
+    "Kolkata Food Trail": "Ganguram Sweets",
+    "Emergency & Helplines": "Kolkata Police Control Room",
+    "Photography & Customs": "Pandal Photography Tips",
+  };
+  const tabs = await p.evaluate(async (want) => {
+    const buttons = [...document.querySelectorAll("[data-guide-tabs] [data-guide-tab]")];
+    const panels = [...document.querySelectorAll("[data-guide-panel]")];
+    const visible = () =>
+      panels.filter((x) => getComputedStyle(x).display !== "none").map((x) => x.dataset.guidePanel);
+    const active = () =>
+      buttons.filter((x) => /bg-\[#D90429\]/.test(x.className)).map((x) => x.dataset.guideTab);
+    const out = {
+      labels: buttons.map((x) => x.dataset.guideTab),
+      panels: panels.length,
+      first: visible(),
+      firstActive: active(),
+      steps: [],
+      mapKids: document.querySelector("[data-metro-map]")?.children.length || 0,
+    };
+    for (const [label, needle] of Object.entries(want)) {
+      buttons.find((x) => x.dataset.guideTab === label)?.click();
+      await new Promise((r) => setTimeout(r, 250));
+      const vis = visible();
+      const panel = panels.find((x) => x.dataset.guidePanel === vis[0]);
+      out.steps.push({
+        label,
+        vis,
+        active: active(),
+        hasMarker: (panel?.innerText || "").includes(needle),
+        chars: (panel?.innerText || "").length,
+      });
+    }
+    buttons.find((x) => x.dataset.guideTab === out.labels[0])?.click();
+    await new Promise((r) => setTimeout(r, 250));
+    out.backVisible = visible();
+    out.mapKidsAfter = document.querySelector("[data-metro-map]")?.children.length || 0;
+    return out;
+  }, MARKERS);
+  ok(
+    tabs.labels.length === 5 && tabs.panels === 5,
+    `five topic pills and five panels (${tabs.labels.length}/${tabs.panels})`
+  );
+  ok(
+    tabs.first.length === 1 &&
+      tabs.first[0] === tabs.labels[0] &&
+      tabs.firstActive.length === 1 &&
+      tabs.firstActive[0] === tabs.labels[0],
+    `the first topic is the one showing and lit (${tabs.first.join("")})`
+  );
+  const stepsBad = tabs.steps.filter(
+    (s) =>
+      s.vis.length !== 1 ||
+      s.vis[0] !== s.label ||
+      s.active.length !== 1 ||
+      s.active[0] !== s.label ||
+      !s.hasMarker ||
+      s.chars < 200
+  );
+  ok(
+    stepsBad.length === 0,
+    "every pill swaps in its own harvested panel and lights itself" +
+      (stepsBad.length
+        ? ": " + stepsBad.map((s) => `${s.label} (${s.vis.join("|")}, marker=${s.hasMarker}, ${s.chars} chars)`).join(" | ")
+        : "")
+  );
+  ok(
+    tabs.backVisible.length === 1 && tabs.backVisible[0] === tabs.labels[0] && tabs.mapKids > 0 && tabs.mapKidsAfter === tabs.mapKids,
+    `returning to the first topic keeps the transit map (${tabs.mapKids} nodes)`
+  );
+  ok(errs.length === 0, "guide tabs console clean" + (errs.length ? ": " + [...new Set(errs)].join(" | ") : ""));
   await p.close();
 }
 

@@ -5,6 +5,7 @@ import { mirrorHtml, listRoutes } from "../../lib/mirror";
 import { metadataForRoute } from "../../lib/meta";
 import { injectMetroMap } from "../../lib/metroInject";
 import { injectAboutJourney } from "../../lib/aboutInject";
+import { injectGuideTabs } from "../../lib/guideInject";
 import { injectEdenLive } from "../../lib/edenInject";
 import { injectParasListing } from "../../lib/parasInject";
 import { injectPoiDirectory } from "../../lib/poiInject";
@@ -33,6 +34,11 @@ export default async function MirrorPage({ params }: { params: Promise<{ slug: s
   // returned untouched by the injector.
   if (rel === "guide" || rel.startsWith("guide/")) {
     html = injectMetroMap(html);
+    if (rel === "guide") {
+      // The topic pills are dead buttons in the scrape; tag them and graft in
+      // the four panels components/GuideTabs.tsx swaps between.
+      html = injectGuideTabs(html);
+    }
   }
   if (rel === "eden-gardens-live") {
     // The broadcast replay's Theater Mode and Share controls are client-side

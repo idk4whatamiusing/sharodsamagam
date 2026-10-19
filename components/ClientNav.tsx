@@ -45,19 +45,21 @@ export default function ClientNav() {
     // follows it (lib/chromeInject grafts the harvested panels in), so the
     // toggle looks at the button's own next sibling - looking at the
     // wrapper's next sibling instead would hide the *following* section.
+    // Only buttons whose next sibling IS one of those panels are wired: this
+    // selector used to catch every aria-expanded button on the page, and on
+    // /paras the sort dropdown (also aria-expanded) got a listener that, on
+    // its second click, hid the Grid/List toggle along with it.
     // The wired mark keeps the effect, which re-runs on every navigation,
     // from stacking a second listener that would undo the first.
-    document.querySelectorAll<HTMLButtonElement>('button[aria-expanded="false"]').forEach((b) => {
-      if (b.closest("nav") || b.id === "kolkata-map" || b.id === "pandal-map") return;
+    document.querySelectorAll<HTMLButtonElement>("button[aria-expanded]").forEach((b) => {
+      const next = b.nextElementSibling as HTMLElement | null;
+      if (!next?.hasAttribute("data-sheet-panel")) return;
       if (b.dataset.sheetWired === "1") return;
       b.dataset.sheetWired = "1";
       b.addEventListener("click", () => {
-        const next =
-          (b.nextElementSibling as HTMLElement | null) ??
-          ((b.parentElement?.nextElementSibling as HTMLElement | null) ?? null);
         const expanded = b.getAttribute("aria-expanded") === "true";
         b.setAttribute("aria-expanded", expanded ? "false" : "true");
-        if (next) next.style.display = expanded ? "none" : "";
+        next.style.display = expanded ? "none" : "";
       });
     });
 
@@ -71,15 +73,49 @@ export default function ClientNav() {
       })
     );
 
-    // MORE dropdown
-    const moreBtn = Array.from(document.querySelectorAll("button")).find(
-      (b) => /more/i.test(b.textContent || "") && b.closest("nav") !== null || b.getAttribute("aria-label")?.includes("more")
-    );
+    // MORE dropdown. Both the desktop header's MORE and the phone bottom
+    // bar's More open it. The old lookup stopped at the first match in
+    // document order, which is the desktop button (hidden below lg), so on a
+    // phone the visible button did nothing at all. Every matching button is
+    // wired, and marked so the effect's re-runs on navigation do not stack a
+    // second listener that would undo the first.
     let panel: HTMLElement | null = document.getElementById("our-more-panel");
+
+    const moreBtns = Array.from(document.querySelectorAll<HTMLButtonElement>("button")).filter(
+      (b) => /^more$/i.test((b.textContent || "").trim())
+    );
+
+    const paintMore = (open: HTMLButtonElement | null) => {
+      moreBtns.forEach((b) => {
+        const on = b === open;
+        b.style.background = on ? "linear-gradient(to bottom, #D90429, #C0041F, #900215)" : "";
+        (b.querySelector("span") as HTMLElement | null)?.style.setProperty("color", on ? "#fff" : "");
+        if (b.hasAttribute("aria-expanded")) b.setAttribute("aria-expanded", String(on));
+      });
+    };
+    const closeMore = () => {
+      if (!panel) return;
+      panel.style.display = "none";
+      paintMore(null);
+    };
+    const toggleMore = (btn: HTMLButtonElement) => {
+      if (!panel) return;
+      if (panel.style.display === "block") {
+        closeMore();
+        return;
+      }
+      panel.style.display = "block";
+      paintMore(btn);
+    };
+
     if (!panel) {
       panel = document.createElement("div");
       panel.id = "our-more-panel";
-      panel.style.cssText = "position:fixed;top:88px;right:2%;z-index:60;display:none;";
+      // max-height + overflow: at 390px the saved-search card and the six
+      // destination tiles run past the bottom of the viewport, and the panel
+      // must scroll rather than clip.
+      panel.style.cssText =
+        "position:fixed;top:88px;right:2%;z-index:60;display:none;max-height:calc(100vh - 110px);overflow-y:auto;overscroll-behavior:contain;";
       panel.innerHTML = `
       <div class="w-[720px] max-w-[92vw] rounded-3xl bg-[#1C0D0B] p-[3px] border border-[#E5C880]/60 shadow-[0_20px_60px_-15px_rgba(44,18,16,0.6)]">
         <div class="w-full rounded-[22px] border border-[#D97706] bg-[#2C1210] p-[2px]">
@@ -133,27 +169,41 @@ export default function ClientNav() {
         </div>
       </div>`;
       document.body.appendChild(panel);
-      panel.querySelector("#our-more-close")?.addEventListener("click", () => (panel!.style.display = "none"));
+      panel.querySelector("#our-more-close")?.addEventListener("click", () => closeMore());
       panel.querySelectorAll<HTMLAnchorElement>("a[href]").forEach((a) => {
         if (!a.getAttribute("href")?.startsWith("/")) return;
         a.addEventListener("click", (e) => {
           const h = a.getAttribute("href");
-          if (h && h.startsWith("/")) { e.preventDefault(); panel!.style.display = "none"; router.push(h); }
+          if (h && h.startsWith("/")) { e.preventDefault(); closeMore(); router.push(h); }
         });
       });
     }
-    const togglePanel = () => {
-      if (!panel) return;
-      const open = panel.style.display === "block";
-      panel.style.display = open ? "none" : "block";
-      if (moreBtn) moreBtn.style.background = open ? "" : "linear-gradient(to bottom, #D90429, #C0041F, #900215)";
-      if (moreBtn) (moreBtn.querySelector("span") as HTMLElement | null)?.style.setProperty("color", open ? "" : "#fff");
+    moreBtns.forEach((b) => {
+      if (b.dataset.moreWired === "1") return;
+      b.dataset.moreWired = "1";
+      b.addEventListener("click", () => toggleMore(b));
+    });
+
+    // Tapping anywhere outside it - or Escape - closes it. At 390px the
+    // panel covers most of the viewport, so the More button must not be the
+    // only way out.
+    const onDocClick = (e: MouseEvent) => {
+      if (!panel || panel.style.display !== "block") return;
+      const t = e.target as HTMLElement | null;
+      if (t && panel.contains(t)) return;
+      if (t?.closest("button")?.dataset.moreWired === "1") return;
+      closeMore();
     };
-    moreBtn?.addEventListener("click", togglePanel);
+    const onKeydown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeMore();
+    };
+    document.addEventListener("click", onDocClick);
+    document.addEventListener("keydown", onKeydown);
 
     return () => {
       document.removeEventListener("click", handler);
-      moreBtn?.removeEventListener("click", togglePanel);
+      document.removeEventListener("click", onDocClick);
+      document.removeEventListener("keydown", onKeydown);
     };
   }, [router, pathname]);
   return null;

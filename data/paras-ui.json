@@ -1,0 +1,36 @@
+{
+  "_provenance": {
+    "source": "https://www.durgapujakolkata.in/paras",
+    "harvested": "2026-10-19T13:03:19.127Z",
+    "note": "The /paras sort listbox (opened in a browser to read its options and classes) and the Featured/Saved chips' own pressed and unpressed class strings. Re-run scripts/harvest-paras-ui.mjs to refresh."
+  },
+  "sort": {
+    "options": [
+      "Popular",
+      "Top Rated (★ 4.9+)",
+      "Alphabetical (A-Z)"
+    ],
+    "listboxClass": "absolute top-full left-0 sm:right-0 sm:left-auto mt-1 min-w-[190px] w-full sm:w-48 bg-[#FFFDF7] border border-[#EAD5A0] rounded-xl shadow-xl z-50 overflow-hidden py-1 divide-y divide-[#EAD5A0]/20 animate-in fade-in-0 zoom-in-95 duration-150",
+    "optionClass": "w-full text-left px-3 py-2 text-xs font-serif flex items-center justify-between gap-2 transition-colors cursor-pointer text-[#2C1210] hover:bg-[#FFF4D6] hover:text-[#D90429]",
+    "optionActiveClass": "w-full text-left px-3 py-2 text-xs font-serif flex items-center justify-between gap-2 transition-colors cursor-pointer bg-amber-100/70 text-[#D90429] font-bold",
+    "checkSvgPath": "M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z"
+  },
+  "chips": {
+    "featuredActive": {
+      "cls": "px-2.5 py-0.5 rounded-lg text-[10.5px] font-serif font-bold border transition-all cursor-pointer shrink-0 whitespace-nowrap flex items-center gap-1.5 bg-gradient-to-r from-[#D90429] to-[#B80322] text-white border-[#D90429] shadow-2xs",
+      "svg": "text-amber-300"
+    },
+    "featuredInactive": {
+      "cls": "px-2.5 py-0.5 rounded-lg text-[10.5px] font-serif font-bold border transition-all cursor-pointer shrink-0 whitespace-nowrap flex items-center gap-1.5 bg-white text-[#2C1210] border-[#EAD5A0] hover:border-[#D90429] hover:bg-rose-50/40",
+      "svg": "text-[#D97706]"
+    },
+    "savedActive": {
+      "cls": "px-2.5 py-0.5 rounded-lg text-[10.5px] font-serif font-bold border transition-all cursor-pointer shrink-0 whitespace-nowrap flex items-center gap-1.5 bg-[#D90429] text-white border-[#D90429] shadow-2xs",
+      "svg": "text-amber-300"
+    },
+    "savedInactive": {
+      "cls": "px-2.5 py-0.5 rounded-lg text-[10.5px] font-serif font-bold border transition-all cursor-pointer shrink-0 whitespace-nowrap flex items-center gap-1.5 bg-white text-[#2C1210] border-[#EAD5A0] hover:border-[#D90429] hover:bg-rose-50/40",
+      "svg": "text-[#D90429]"
+    }
+  }
+}

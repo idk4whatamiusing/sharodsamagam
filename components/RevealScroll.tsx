@@ -21,7 +21,14 @@ export default function RevealScroll() {
     const scan = () =>
       document
         .querySelectorAll<HTMLElement>("[style*='opacity:0']")
-        .forEach((el) => io.observe(el));
+        .forEach((el) => {
+          // The mobile Teen Chala carousel's dimmed cards sit at opacity 0.3
+          // between scroll steps, and components/TeenChalaScroll.tsx drives
+          // them. `[style*='opacity:0']` matches 0.3 too, and a stray reveal
+          // would settle them opaque for good, so they are opted out.
+          if (el.hasAttribute("data-teen-veil")) return;
+          io.observe(el);
+        });
     scan();
     const mo = new MutationObserver(scan);
     mo.observe(document.body, { childList: true, subtree: true });

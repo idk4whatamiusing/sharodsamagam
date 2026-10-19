@@ -9,6 +9,10 @@ import HeroSlides from "../components/HeroSlides";
 import ClientNav from "../components/ClientNav";
 import { injectMobilePanels } from "../lib/chromeInject";
 import GalleryMotion from "../components/GalleryMotion";
+// Mounted ahead of RevealScroll: its effect marks the Teen Chala carousel's
+// dimmed cards so RevealScroll's scan (which walks `[style*='opacity:0']`)
+// leaves them alone.
+import TeenChalaScroll from "../components/TeenChalaScroll";
 import RevealScroll from "../components/RevealScroll";
 import AudioPlayer from "../components/AudioPlayer";
 import ParasInteractions from "../components/ParasInteractions";
@@ -16,6 +20,7 @@ import MapInjector from "../components/MapInjector";
 import MetroInjector from "../components/MetroInjector";
 import EdenLive from "../components/EdenLive";
 import AboutJourney from "../components/AboutJourney";
+import GuideTabs from "../components/GuideTabs";
 import PoiSearch from "../components/PoiSearch";
 import "./globals.css";
 
@@ -75,12 +80,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <AudioPlayer tracks={TRACKS} />
         <ClientNav />
         <GalleryMotion />
+        <TeenChalaScroll />
         <RevealScroll />
         <ParasInteractions />
         <MapInjector />
         <MetroInjector />
         <EdenLive />
         <AboutJourney />
+        <GuideTabs />
         <PoiSearch />
         <Countdown />
         <FestivalDays />
