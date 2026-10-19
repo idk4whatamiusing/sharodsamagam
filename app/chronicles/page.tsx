@@ -1,6 +1,10 @@
 import fs from "fs";
 import path from "path";
+import type { Metadata } from "next";
 import Link from "next/link";
+import { metadataForRoute } from "../../lib/meta";
+
+export const metadata: Metadata = metadataForRoute("chronicles");
 
 export default function ChroniclesPage() {
   const posts = JSON.parse(

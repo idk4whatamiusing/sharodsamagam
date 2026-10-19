@@ -87,15 +87,14 @@ export default function ClientNav() {
             <div class="mb-3 p-3 rounded-2xl bg-[#FFFDF7] border-2 border-[#E5C880] shadow-2xs relative z-10">
               <div class="flex items-center justify-between gap-3 w-full">
                 <div class="flex items-center gap-2.5 min-w-0">
-                  <div class="w-8 h-8 rounded-full bg-amber-100 border border-amber-300 text-[#D97706] flex items-center justify-center shrink-0">👤</div>
+                  <div class="w-8 h-8 rounded-full bg-amber-100 border border-amber-300 text-[#D97706] flex items-center justify-center shrink-0">🔖</div>
                   <div class="min-w-0">
-                    <h4 class="font-serif font-bold text-xs">Visitor Profile</h4>
-                    <p class="text-[10px] text-[#2C1210]/70 font-serif truncate">Sign in with Google to save pandals</p>
+                    <h4 class="font-serif font-bold text-xs">Saved Pandals</h4>
+                    <p class="text-[10px] text-[#2C1210]/70 font-serif truncate">Kept in this browser, on the directory's Saved tab</p>
                   </div>
                 </div>
                 <div class="flex items-center gap-1.5 shrink-0">
-                  <a href="/profile" class="px-2.5 py-1.5 rounded-xl bg-[#FFF3D6] hover:bg-[#FFEAB8] border border-[#E5C880] font-serif font-bold text-xs no-underline">My Routes</a>
-                  <a href="/login" class="px-3 py-1.5 rounded-xl bg-[#D90429] hover:bg-[#B80322] text-white font-serif font-bold text-xs no-underline">Sign In</a>
+                  <a href="/paras" class="px-3 py-1.5 rounded-xl bg-[#D90429] hover:bg-[#B80322] text-white font-serif font-bold text-xs no-underline">Open Directory</a>
                 </div>
               </div>
             </div>

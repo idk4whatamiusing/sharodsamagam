@@ -33,8 +33,16 @@ const TRACKS = (() => {
 })();
 
 export const metadata: Metadata = {
+  // Resolves the relative URLs in each page's Open Graph tags. Without it Next
+  // warns and emits og:image as a bare path, which crawlers reject.
+  metadataBase: new URL("https://sharodsamagam.dpdns.org"),
   title: "Sharodsamagam 2026",
   description: "Sharodsamagam 2026 — the premier digital companion to Kolkata's grandest festival.",
+  openGraph: {
+    siteName: "Sharodsamagam",
+    locale: "en_IN",
+    type: "website",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

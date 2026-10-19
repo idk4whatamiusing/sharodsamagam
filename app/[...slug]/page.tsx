@@ -1,6 +1,8 @@
 import fs from "fs";
 import path from "path";
+import type { Metadata } from "next";
 import { mirrorHtml, listRoutes } from "../../lib/mirror";
+import { metadataForRoute } from "../../lib/meta";
 import { injectMetroMap } from "../../lib/metroInject";
 import { injectParasListing } from "../../lib/parasInject";
 
@@ -11,6 +13,11 @@ export function generateStaticParams() {
   return listRoutes()
     .filter((r) => r !== "index" && !r.startsWith("_"))
     .map((r) => ({ slug: r.split("/") }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string[] }> }) {
+  const { slug } = await params;
+  return metadataForRoute(slug.join("/"));
 }
 
 export default async function MirrorPage({ params }: { params: Promise<{ slug: string[] }> }) {

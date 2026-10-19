@@ -1,6 +1,8 @@
 import fs from "fs";
 import path from "path";
+import type { Metadata } from "next";
 import Link from "next/link";
+import { metadataForRoute } from "../../../lib/meta";
 
 export const dynamicParams = false;
 
@@ -9,6 +11,14 @@ export function generateStaticParams() {
     fs.readFileSync(path.join(process.cwd(), "data", "chronicles.json"), "utf8")
   );
   return posts.map((p: { slug: string }) => ({ slug: p.slug }));
+}
+
+// Each chronicle carries its own harvested title and share card, like every
+// other route: it reaches this file rather than the catch-all because the
+// article layout is its own component.
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  return metadataForRoute(`chronicles/${slug}`);
 }
 
 export default async function ChronicleArticle({ params }: { params: Promise<{ slug: string }> }) {

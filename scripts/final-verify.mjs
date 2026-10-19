@@ -606,6 +606,201 @@ console.log("\n== METRO MAP ==");
   await p.close();
 }
 
+// ---------- guide sub-pages ----------
+console.log("\n== GUIDE SUB-PAGES ==");
+{
+  // Each of the five sub-pages is static content: one <h1>, an intro, and a
+  // fixed set of cards. The counts are asserted so a page that renders empty
+  // or loses a card is caught - the mirror matched the original's rendered
+  // text exactly on the day these were taken.
+  const PAGES = [
+    { slug: "accommodation", h1: "Where to Stay in Kolkata for Durga Puja", cards: 10, tel: 10 },
+    { slug: "emergency", h1: "Emergency Contacts & Helplines", cards: 15, tel: 15 },
+    { slug: "etiquette", h1: "Puja Etiquette & Festival Norms", cards: 4, tel: 0 },
+    { slug: "food-trail", h1: "Kolkata Durga Puja Food Trail", cards: 12, tel: 0 },
+    { slug: "photography", h1: "Durga Puja Photography & Lighting Tips", cards: 4, tel: 0 },
+  ];
+
+  const p = await b.newPage({ viewport: { width: 1440, height: 1000 } });
+  const gerrs = [];
+  p.on("pageerror", (e) => gerrs.push(e.message.slice(0, 100)));
+  p.on("console", (c) => c.type() === "error" && gerrs.push(c.text().slice(0, 100)));
+
+  const allHrefs = new Set();
+  for (const page of PAGES) {
+    await ready(p, B + `/guide/${page.slug}/`);
+    const r = await p.evaluate(() => {
+      const m = document.querySelector("main");
+      return {
+        h1: m?.querySelector("h1")?.innerText.replace(/\s+/g, " ").trim() || "",
+        h3: m?.querySelectorAll("h3").length || 0,
+        // Callable rows: the emergency helplines and the hotel front desks.
+        tel: [...(m?.querySelectorAll('a[href^="tel:"]') || [])].map((a) =>
+          a.getAttribute("href")
+        ),
+        text: (m?.innerText || "").replace(/\s+/g, " ").trim().length,
+        back: m?.querySelector('a[href="/guide"]')?.innerText.trim() || "",
+        hrefs: [...document.querySelectorAll("a[href]")].map((a) =>
+          a.getAttribute("href")
+        ),
+      };
+    });
+    for (const h of r.hrefs) if (h?.startsWith("/")) allHrefs.add(h.split("?")[0]);
+
+    const label = `/guide/${page.slug}/`;
+    ok(r.h1 === page.h1, `${label} heading (${r.h1.slice(0, 44)})`);
+    ok(r.h3 === page.cards, `${label} renders all ${page.cards} cards (${r.h3})`);
+    ok(r.text > 400, `${label} has its body copy (${r.text} chars)`);
+    ok(r.back === "Back to Visitor Guide", `${label} links back to the guide index`);
+    if (page.tel) {
+      // Short codes like 100 and 1091 are as real as the landlines.
+      const dialable = r.tel.filter((h) => /^tel:\+?[\d-]{3,}$/.test(h)).length;
+      ok(
+        dialable === page.tel,
+        `${label} has ${page.tel} dialable numbers (${dialable})`
+      );
+    }
+  }
+  ok(gerrs.length === 0, "guide sub-pages console clean" + (gerrs.length ? ": " + [...new Set(gerrs)].join(" | ") : ""));
+
+  // The chrome is shared, so a link removed from the footer or the mobile menu
+  // must be gone from every page rather than from the one it was spotted on.
+  const deadWanted = ["/admin/login", "/login", "/profile"];
+  const stillThere = deadWanted.filter((h) => allHrefs.has(h));
+  ok(
+    stillThere.length === 0,
+    "removed account and admin links stay removed" + (stillThere.length ? ": " + stillThere.join(", ") : "")
+  );
+  const chrome = await p.evaluate(() => document.body.innerText);
+  ok(
+    !/Admin Portal|My Routes/.test(chrome),
+    "no sign-in or admin labels remain in the chrome"
+  );
+
+  // Every internal destination these pages offer has to answer. This is the
+  // check that would have caught the three dead links in the first place.
+  const targets = [...allHrefs].filter((h) => !h.startsWith("/cdn-cgi/"));
+  const broken = [];
+  for (const href of targets) {
+    const res = await p.request.get(B + href);
+    if (res.status() !== 200) broken.push(`${href} (${res.status()})`);
+  }
+  ok(
+    broken.length === 0,
+    `all ${targets.length} internal links on the guide pages resolve` +
+      (broken.length ? ": " + broken.slice(0, 4).join(", ") : "")
+  );
+  await p.close();
+}
+
+// ---------- page metadata ----------
+console.log("\n== METADATA ==");
+{
+  // The mirror carries no <head>, so every route used to inherit one title
+  // from the layout. These checks compare the built HTML against the harvested
+  // data/meta.json directly, which is the same source generateMetadata reads -
+  // so a wiring mistake shows up as a title that does not match its source.
+  const meta = JSON.parse(
+    await import("node:fs").then((fs) => fs.readFileSync("data/meta.json", "utf8"))
+  ).routes;
+
+  const SAMPLE = [
+    "index",
+    "gallery",
+    "paras",
+    "panzika",
+    "map",
+    "guide",
+    "guide/etiquette",
+    "guide/navigating-kolkata",
+    "events",
+    "paras/22-no-pally-basi-bindo-durga-puja-pandal",
+  ];
+
+  const read = async (rel) => {
+    const url = B + "/" + (rel === "index" ? "" : rel + "/");
+    const res = await fetch(url);
+    return res.text();
+  };
+  const field = (html, name) => {
+    const m = html.match(new RegExp(`<meta\\s+(?:property|name)="${name}"\\s+content="([^"]*)"`, "i"));
+    return m ? decode(m[1]) : "";
+  };
+  // Titles are HTML, so an ampersand arrives as &amp; and has to be put back
+  // before it can be compared with the harvested text.
+  const decode = (s) =>
+    s
+      .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)))
+      .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(Number(d)))
+      .replace(/&amp;/g, "&")
+      .replace(/&lt;/g, "<")
+      .replace(/&gt;/g, ">")
+      .replace(/&quot;/g, '"')
+      .replace(/&#39;|&apos;/g, "'");
+
+  const titles = new Map();
+  const problems = [];
+  let ogImages = 0;
+  for (const rel of SAMPLE) {
+    const html = await read(rel);
+    const title = (html.match(/<title[^>]*>([\s\S]*?)<\/title>/i) || [])[1] || "";
+    const want = meta[rel]?.title || meta.home?.title;
+    titles.set(rel, title);
+    if (decode(title) !== want) {
+      problems.push(`${rel}: got "${decode(title).slice(0, 40)}" want "${want?.slice(0, 40)}"`);
+    }
+    // Their host must never appear in our head, and the brand is ours.
+    const head = html.slice(0, html.indexOf("</head>"));
+    if (/durgapujakolkata|Sharodotsav/i.test(head)) problems.push(`${rel}: names the original`);
+    const site = field(head, "og:site_name");
+    if (site !== "Sharodsamagam") problems.push(`${rel}: og:site_name=${site || "missing"}`);
+    const img = field(head, "og:image");
+    if (!img.startsWith("https://sharodsamagam.dpdns.org/")) {
+      problems.push(`${rel}: og:image=${img || "missing"}`);
+    } else {
+      ogImages++;
+    }
+  }
+  ok(problems.length === 0, "titles match the harvested metadata" + (problems.length ? ": " + problems.slice(0, 3).join(" | ") : ` (${SAMPLE.length} routes)`));
+  // The guide section deliberately shares one title across its pages - that is
+  // what the original does - so the guide routes are exempted from the
+  // distinctness check and asserted to share a single title instead. Everything
+  // else stands on its own, which is the bug this section exists to prevent.
+  const guideRoutes = SAMPLE.filter((r) => r === "guide" || r.startsWith("guide/"));
+  const others = SAMPLE.filter((r) => !guideRoutes.includes(r));
+  const otherTitles = new Set(others.map((r) => titles.get(r)));
+  ok(
+    otherTitles.size === others.length,
+    `sampled routes carry their own titles (${otherTitles.size} distinct across ${others.length} routes)`
+  );
+  const guideTitles = new Set(guideRoutes.map((r) => titles.get(r)));
+  ok(
+    guideTitles.size === 1,
+    `the guide section shares one title, as the original does (${guideTitles.size} across ${guideRoutes.length} routes)`
+  );
+  ok(ogImages === SAMPLE.length, "every sampled route advertises a share image on our origin");
+
+  // Whatever the head advertises has to exist, or the preview breaks. The
+  // advertised URL is absolute on our own host, so it is requested through the
+  // local server the checks are pointed at.
+  const p = await b.newPage({ viewport: { width: 1440, height: 900 } });
+  const img = field(await read("gallery"), "og:image");
+  const imgRes = await p.request.get(B + new URL(img).pathname);
+  ok(imgRes.status() === 200, `the share image resolves (${new URL(img).pathname} ${imgRes.status()})`);
+
+  // Client-side navigation replaces the document title, so the tab keeps up.
+  await ready(p, B + "/");
+  const homeTitle = await p.title();
+  await p.click('a[href="/gallery"]');
+  await p.waitForTimeout(1500);
+  const galleryTitle = await p.title();
+  ok(
+    galleryTitle !== homeTitle && /Gallery/i.test(galleryTitle),
+    `client-side navigation updates the title ("${galleryTitle.slice(0, 40)}")`
+  );
+  await p.close();
+}
+
 // ---------- other pages ----------
 console.log("\n== REGRESSION ==");
 for (const [name, url] of [["/", "/"], ["/paras/", "/paras/"], ["/map/", "/map/"], ["/panzika/", "/panzika/"]]) {

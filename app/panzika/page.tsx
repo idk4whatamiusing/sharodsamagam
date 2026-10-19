@@ -1,4 +1,8 @@
+import type { Metadata } from "next";
+import { metadataForRoute } from "../../lib/meta";
 import PanzikaCalendar from "../../components/PanzikaCalendar";
+
+export const metadata: Metadata = metadataForRoute("panzika");
 
 export default function PanzikaPage() {
   return (
