@@ -690,6 +690,13 @@ console.log("\n== PARAS DIRECTORY ==");
       [...document.querySelectorAll("main button")].find(
         (x) => x.innerText.trim().toLowerCase().replace(/\d+\s*$/, "").trim() === l
       );
+    const paint = () => {
+      const bg = (l) => {
+        const el = [...document.querySelectorAll("button")].find((b) => b.getAttribute("aria-label") === l);
+        return el ? getComputedStyle(el).backgroundColor : null;
+      };
+      return { grid: bg("Grid View"), list: bg("List View") };
+    };
     btn("List View").click();
     await new Promise((r) => setTimeout(r, 450));
     const cards = [...document.querySelectorAll(sel)].filter((a) => a.getClientRects().length);
@@ -697,6 +704,7 @@ console.log("\n== PARAS DIRECTORY ==");
       count: document.querySelector("[data-paras-count]")?.textContent || "",
       rowH: cards[0]?.getBoundingClientRect().height ?? 0,
       classKept: (cards[0]?.className || "").includes("block"),
+      paintList: paint(),
     };
     chip("north").click();
     await new Promise((r) => setTimeout(r, 550));
@@ -707,6 +715,7 @@ console.log("\n== PARAS DIRECTORY ==");
     await new Promise((r) => setTimeout(r, 450));
     out.gridH = document.querySelectorAll(sel)[0]?.getBoundingClientRect().height ?? 0;
     out.gridVisible = [...document.querySelectorAll(sel)].filter((a) => a.getClientRects().length).length;
+    out.paintGrid = paint();
     return out;
   }, CARD);
   ok(/Showing all 776/.test(listMode.count), `list view keeps the directory count (${listMode.count})`);
@@ -719,6 +728,18 @@ console.log("\n== PARAS DIRECTORY ==");
   ok(
     listMode.gridVisible === loaded.expected && listMode.gridH > 200,
     `grid view restores the full cards (${listMode.gridVisible}, ${Math.round(listMode.gridH)}px)`
+  );
+  // The pressed look is a class swap between the toggle's two scraped
+  // states; painting inline styles underneath left Grid's own pressed class
+  // in place, so both buttons looked pressed in list view.
+  const PRESSED = "rgb(217, 4, 41)";
+  ok(
+    listMode.paintList.grid !== PRESSED && listMode.paintList.list === PRESSED,
+    `list view lights only the List button (grid ${listMode.paintList.grid}, list ${listMode.paintList.list})`
+  );
+  ok(
+    listMode.paintGrid.grid === PRESSED && listMode.paintGrid.list !== PRESSED,
+    `grid view lights only the Grid button (grid ${listMode.paintGrid.grid}, list ${listMode.paintGrid.list})`
   );
 
   // The sort dropdown shipped as the original's closed button ("Popular")

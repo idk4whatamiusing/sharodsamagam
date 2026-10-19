@@ -302,6 +302,26 @@ export default function ParasInteractions() {
       </div>`;
     };
 
+    // The mode toggle's two looks are both in the scraped markup already: the
+    // Grid button shipped pressed (it is the server-rendered default) and the
+    // List button unpressed. Snapshot the pair and swap class strings -
+    // painting inline styles underneath left the pressed look's own
+    // `bg-[#D90429]` class on the Grid button, so Grid stayed red in list
+    // view while List lit up beside it.
+    const viewButtons = Array.from(
+      main.querySelectorAll<HTMLButtonElement>(
+        'button[aria-label="Grid View"], button[aria-label="List View"]'
+      )
+    );
+    const gridBtn = viewButtons.find((b) => b.getAttribute("aria-label") === "Grid View") ?? null;
+    const listBtn = viewButtons.find((b) => b.getAttribute("aria-label") === "List View") ?? null;
+    const lit = (b: HTMLButtonElement | null) =>
+      !!b && /(^|\s)bg-\[#D90429\](\s|$)/.test(b.className);
+    const litBtn = lit(gridBtn) ? gridBtn : lit(listBtn) ? listBtn : gridBtn;
+    const dimBtn = litBtn === gridBtn ? listBtn : gridBtn;
+    const VIEW_ON = litBtn?.className ?? "";
+    const VIEW_OFF = dimBtn?.className ?? "";
+
     const applyMode = () => {
       container.className =
         mode === "list"
@@ -321,15 +341,16 @@ export default function ParasInteractions() {
           wireCard(a);
         }
       });
-      main.querySelectorAll<HTMLButtonElement>("button").forEach((b) => {
-        const t = b.innerText.trim();
-        if (t === "Grid" || t === "List") {
-          const on = t.toLowerCase() === mode;
-          b.style.background = on ? "#D90429" : "";
-          b.style.color = on ? "#fff" : "";
-          b.style.borderColor = on ? "#D90429" : "";
+      if (VIEW_ON && VIEW_OFF) {
+        for (const b of viewButtons) {
+          b.className = (b === gridBtn) === (mode === "grid") ? VIEW_ON : VIEW_OFF;
+          // Inline styles an earlier build left on the buttons would outrank
+          // the class swap.
+          b.style.background = "";
+          b.style.color = "";
+          b.style.borderColor = "";
         }
-      });
+      }
     };
 
     // ---- ordering -------------------------------------------------------
