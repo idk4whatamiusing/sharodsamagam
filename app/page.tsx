@@ -7,6 +7,7 @@ import {
   injectFestivalDayHooks,
   injectFestivalStatusSlot,
   injectHeroCard,
+  injectHeroDots,
 } from "../lib/homeInject";
 
 // The home page is served by app/page.tsx rather than the catch-all, so it
@@ -20,8 +21,12 @@ export default function Home() {
   // React handlers so the client components can revive them, replace the
   // hardcoded "8 Days to Mahalaya" pill with a slot that can stay accurate,
   // and rebuild the hero card, whose body shipped as a loading skeleton.
-  const html = injectHeroCard(
-    injectFestivalDayHooks(injectCountdownSlot(injectFestivalStatusSlot(raw)))
+  // Finally trim the hero's dot rows: they advertised seven slides, two of
+  // which were ever captured.
+  const html = injectHeroDots(
+    injectHeroCard(
+      injectFestivalDayHooks(injectCountdownSlot(injectFestivalStatusSlot(raw)))
+    )
   );
 
   return <div dangerouslySetInnerHTML={{ __html: html }} />;

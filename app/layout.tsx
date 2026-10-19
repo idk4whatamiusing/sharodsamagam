@@ -5,6 +5,7 @@ import ServiceWorkerRegistrar from "../components/ServiceWorkerRegistrar";
 import Countdown from "../components/Countdown";
 import FestivalDays from "../components/FestivalDays";
 import FestivalStatus from "../components/FestivalStatus";
+import HeroSlides from "../components/HeroSlides";
 import ClientNav from "../components/ClientNav";
 import GalleryMotion from "../components/GalleryMotion";
 import RevealScroll from "../components/RevealScroll";
@@ -75,6 +76,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Countdown />
         <FestivalDays />
         <FestivalStatus />
+        <HeroSlides />
         <ServiceWorkerRegistrar />
       </body>
     </html>

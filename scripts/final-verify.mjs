@@ -133,6 +133,66 @@ console.log("\n== HERO CARD ==");
   ok(!card.brand, "no 'Sharodotsav' left on the page");
   ok(card.stats[0] === "776" && card.stats[2] === "6", `stats match data (${card.stats.join("/")})`);
 
+  // The hero advertised a seven-slide carousel, but the scrape only ever
+  // captured two slides: five panels per variant hold no image at all. Both
+  // dot rows must be trimmed to the slides that exist, and drive them.
+  const heroDots = await p.evaluate(() => {
+    const rows = [...document.querySelectorAll("[data-hero-dots]")];
+    const panels = [...document.querySelectorAll("[data-hero-slide]")];
+    return {
+      rows: rows.length,
+      counts: rows.map((row) => row.querySelectorAll("button").length),
+      labels: rows.map((row) =>
+        [...row.querySelectorAll("button")].map((b) => b.getAttribute("aria-label") || "")
+      ),
+      lit: panels.filter((el) => el.classList.contains("opacity-100")).map((el) => el.dataset.heroSlide),
+    };
+  });
+  ok(heroDots.rows === 2, `both hero dot rows tagged (${heroDots.rows})`);
+  ok(
+    heroDots.counts.every((n) => n === 2),
+    `dot rows trimmed to the two captured slides (rows: ${heroDots.counts.join("/")} dots)`
+  );
+  ok(
+    /^Jump to 01 · /.test(heroDots.labels[0]?.[0] || "") &&
+      /^Jump to 02 · /.test(heroDots.labels[0]?.[1] || "") &&
+      heroDots.labels[1]?.[0] === "Go to slide 1" &&
+      heroDots.labels[1]?.[1] === "Go to slide 2",
+    `the kept dots name slides 01-02 (${heroDots.labels.flat().join(" | ")})`
+  );
+  ok(
+    heroDots.lit.length === 2 && heroDots.lit.every((i) => i === "0"),
+    `slide one is the lit backdrop on load (${heroDots.lit.join(",")})`
+  );
+
+  await p.evaluate(() => document.querySelector("[data-hero-dots] button:last-child")?.click());
+  const switched = await p.evaluate(() => {
+    const panels = [...document.querySelectorAll("[data-hero-slide]")];
+    const rows = [...document.querySelectorAll("[data-hero-dots]")];
+    const byState = (cls) =>
+      panels.filter((el) => el.classList.contains(cls)).map((el) => Number(el.dataset.heroSlide));
+    return {
+      pairs: panels.length,
+      lit: byState("opacity-100"),
+      dim: byState("opacity-0"),
+      current: rows.map((row) =>
+        [...row.querySelectorAll("button")].findIndex((b) => b.getAttribute("aria-current") === "true")
+      ),
+    };
+  });
+  ok(
+    switched.pairs === 4 &&
+      switched.lit.length === 2 &&
+      switched.lit.every((i) => i === 1) &&
+      switched.dim.length === 2 &&
+      switched.dim.every((i) => i === 0),
+    `second dot switches both variants to slide two (lit ${switched.lit.join(",")} / dim ${switched.dim.join(",")})`
+  );
+  ok(
+    switched.current.length === 2 && switched.current.every((i) => i === 1),
+    `both rows follow the switch (active index ${switched.current.join("/")})`
+  );
+
   // The phase pill must name the day the shared dataset says, not a
   // hand-maintained list that drifts when days are split.
   const pill = await p.evaluate(() => document.querySelector("[data-mahalaya-status]")?.textContent || "");

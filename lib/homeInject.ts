@@ -195,9 +195,11 @@ function dropDivBlock(html: string, openTag: string, from: number): string {
  *     ever contained the real slides. Replaced with the real zone breakdown,
  *     counted from data/pandals.json, which needs no invented content.
  *
- *  2. It advertised a seven-slide carousel with prev/next arrows, but only
- *     slide one was ever captured. Six dots and both arrows pointed at
- *     nothing. Removed rather than left as controls that do nothing.
+ *  2. It advertised a seven-slide carousel with prev/next arrows. Both arrows
+ *     and the card's own dot row pointed at slides the scrape never captured,
+ *     so they are removed rather than left as controls that do nothing. The
+ *     two dot rows further down the hero are trimmed to the captured slides
+ *     by injectHeroDots.
  *
  *  3. The caption carried the original's own brand, "Sharodotsav", and the
  *     stats were stale. Corrected against the real dataset.
@@ -260,4 +262,90 @@ export function injectHeroCard(html: string): string {
   }
 
   return out;
+}
+
+// --- hero slide dots ----------------------------------------------------
+
+/**
+ * Trims the hero's two surviving dot rows to the slides that exist, and tags
+ * them for components/HeroSlides.tsx.
+ *
+ * The original hero is a seven-slide carousel, one slide per section of the
+ * site. The scrape captured two of those slides - the panoramas in
+ * public/hero_slides - and the other five panels hold no image at all. Both
+ * dot rows still listed all seven, so five dots per row pointed at nothing.
+ * The rows keep their first `HERO_SLIDES` dots, which name slides 01 and 02
+ * and match the two panels that can be shown.
+ */
+const HERO_SLIDES = 2;
+
+// The two rows are told apart by their opening tag. The slide row's tag - a
+// bare "flex items-center gap-2 shrink-0" - is shared with the ticker chips,
+// so it is only accepted when the original's own first dot follows it.
+const HERO_JUMP_ROW_OPEN =
+  '<div class="flex items-center justify-center gap-1.5 pt-4">';
+const HERO_SLIDE_ROW_OPEN = '<div class="flex items-center gap-2 shrink-0">';
+const HERO_SLIDE_ROW_HINT = '<button aria-label="Go to slide 1"';
+const HERO_PANEL_OPEN = '<div class="absolute inset-0 transition-opacity';
+
+/** Index of a row's opening tag, skipping lookalikes that lack `hint`. */
+function rowAt(html: string, openTag: string, hint?: string): number {
+  let at = html.indexOf(openTag);
+  while (at !== -1 && hint && !html.startsWith(hint, at + openTag.length)) {
+    at = html.indexOf(openTag, at + 1);
+  }
+  return at;
+}
+
+/** Keeps a dot row's first `keep` buttons, drops the rest, tags the row. */
+function trimDotRow(
+  html: string,
+  openTag: string,
+  keep: number,
+  hint?: string
+): string {
+  const start = rowAt(html, openTag, hint);
+  if (start === -1) return html;
+
+  const inner = start + openTag.length;
+  // Dot rows hold nothing but buttons, so the row ends at its first </div>.
+  const end = html.indexOf("</div>", inner);
+  if (end === -1) return html;
+
+  const row = html.slice(inner, end);
+  const buttons = [...row.matchAll(/<button[\s\S]*?<\/button>/g)];
+  if (buttons.length <= keep) return html;
+
+  const kept = buttons
+    .slice(0, keep)
+    .map((b) => b[0])
+    .join("");
+  const tagged = `${openTag.slice(0, 5)}data-hero-dots ${openTag.slice(5)}`;
+  return html.slice(0, start) + tagged + kept + html.slice(end);
+}
+
+/** Tags each real slide panel with its index, in both hero variants. */
+function tagHeroPanels(html: string): string {
+  const images = [...html.matchAll(/src="\/hero_slides\/slide(\d)\.jpg"/g)];
+  let out = html;
+
+  // Right to left, so the indexes taken from the original string stay valid
+  // for the occurrences that have not been rewritten yet.
+  for (const image of images.reverse()) {
+    const at = out.lastIndexOf(HERO_PANEL_OPEN, image.index!);
+    if (at === -1) continue;
+    const tag = `${HERO_PANEL_OPEN.slice(0, 5)}data-hero-slide="${
+      Number(image[1]) - 1
+    }" ${HERO_PANEL_OPEN.slice(5)}`;
+    out = out.slice(0, at) + tag + out.slice(at + HERO_PANEL_OPEN.length);
+  }
+
+  return out;
+}
+
+/** Trims both hero dot rows and tags the rows and their slide panels. */
+export function injectHeroDots(html: string): string {
+  let out = trimDotRow(html, HERO_JUMP_ROW_OPEN, HERO_SLIDES);
+  out = trimDotRow(out, HERO_SLIDE_ROW_OPEN, HERO_SLIDES, HERO_SLIDE_ROW_HINT);
+  return tagHeroPanels(out);
 }
