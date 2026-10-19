@@ -461,6 +461,151 @@ console.log("\n== PANZIKA ==");
   await p.close();
 }
 
+// ---------- metro map ----------
+console.log("\n== METRO MAP ==");
+{
+  const p = await b.newPage({ viewport: { width: 1440, height: 1000 } });
+  const xerrs = [];
+  p.on("pageerror", (e) => xerrs.push(e.message.slice(0, 100)));
+  p.on("console", (c) => c.type() === "error" && xerrs.push(c.text().slice(0, 100)));
+  await ready(p, B + "/guide/");
+
+  // The skeleton is what the mirror holds; the map replaces it at build time.
+  const skeleton = await p.evaluate(() =>
+    /Loading Kolkata Transit/.test(document.body.innerText)
+  );
+  ok(!skeleton, "loading skeleton is gone");
+
+  // Tiles come from OSM, so wait for real pixels rather than for the element.
+  let tiles = { loaded: 0, total: 0 };
+  try {
+    await p.waitForFunction(
+      () => {
+        const t = [...document.querySelectorAll("[data-metro-map] .leaflet-tile")];
+        return t.length > 0 && t.every((x) => x.complete);
+      },
+      null,
+      { timeout: 25000 }
+    );
+  } catch {
+    /* measured below either way */
+  }
+  await p.waitForTimeout(1200);
+
+  const map = await p.evaluate(() => {
+    const host = document.querySelector("[data-metro-map]");
+    if (!host) return { missing: true };
+    const box = host.getBoundingClientRect();
+    const t = [...host.querySelectorAll(".leaflet-tile")];
+    const attr = host.querySelector(".leaflet-control-attribution");
+    const ab = attr?.getBoundingClientRect();
+    const pins = [...host.querySelectorAll(".leaflet-marker-icon span")].map(
+      (s) => s.style.background
+    );
+    const colours = {};
+    for (const c of pins) colours[c] = (colours[c] || 0) + 1;
+    const legend = host.querySelector("[data-metro-legend]");
+    const lb = legend?.getBoundingClientRect();
+    return {
+      height: Math.round(box.height),
+      tilesLoaded: t.filter((x) => x.complete && x.naturalWidth > 0).length,
+      tilesTotal: t.length,
+      strokes: [...host.querySelectorAll(".leaflet-overlay-pane path")].map((x) =>
+        x.getAttribute("stroke")
+      ),
+      metroPins: pins.length - (colours["rgb(28, 25, 23)"] || 0),
+      railPins: colours["rgb(28, 25, 23)"] || 0,
+      pinColours: Object.keys(colours).length,
+      legendText: (legend?.innerText || "").replace(/\s+/g, " ").trim(),
+      legendInside: !!lb && lb.left >= box.left - 1 && lb.right <= box.right + 1,
+      attributionVisible:
+        !!attr && getComputedStyle(attr).display !== "none" && (ab?.width || 0) > 0,
+      attributionInside: !!ab && ab.right <= box.right + 1 && ab.bottom <= box.bottom + 1,
+    };
+  });
+
+  if (map.missing) {
+    ok(false, "map slot exists on /guide/");
+  } else {
+    // Guards the cascade regression: the original's theme sets
+    // .leaflet-container{height:100%}, which collapsed the slot to 4px.
+    ok(map.height >= 400, `map has its reserved height (${map.height}px)`);
+    ok(
+      map.tilesLoaded > 0 && map.tilesLoaded === map.tilesTotal,
+      `OpenStreetMap tiles load (${map.tilesLoaded}/${map.tilesTotal})`
+    );
+    const want = ["#2563EB", "#16A34A", "#9333EA", "#CA8A04", "#EA580C"];
+    ok(
+      map.strokes.length === 5 && want.every((c) => map.strokes.includes(c)),
+      `five metro lines drawn (${map.strokes.join(" ")})`
+    );
+    ok(map.metroPins === 58, `58 metro stations pinned (${map.metroPins})`);
+    ok(map.railPins === 9, `9 suburban railway terminals pinned (${map.railPins})`);
+    ok(map.pinColours >= 6, `pins are coloured by line (${map.pinColours} colours)`);
+    // The corridor cards' own counts: 26/12/7/4/9, and they only add up to 58
+    // once the interchange duplicates the original draws are collapsed.
+    ok(
+      /Blue Line 26[\s\S]*Green Line 12[\s\S]*Purple Line 7[\s\S]*Yellow Line 4[\s\S]*Orange Line 9/.test(
+        map.legendText
+      ),
+      "legend carries the corridor cards' per-line counts"
+    );
+    ok(
+      /58 metro stations/.test(map.legendText) && /9 railway terminals/.test(map.legendText),
+      "legend separates metro stations from railway terminals"
+    );
+    ok(map.legendInside, "legend sits inside the map frame");
+    // OSM's tile policy requires the credit to be visible; the original's
+    // theme hides it with !important.
+    ok(map.attributionVisible, "OpenStreetMap attribution is visible");
+    ok(map.attributionInside, "attribution sits inside the map frame");
+
+    // A station popup is the map's actual content, not decoration.
+    await p.evaluate(() => {
+      const first = document.querySelector(
+        "[data-metro-map] .leaflet-marker-icon span"
+      );
+      first?.parentElement?.dispatchEvent(
+        new MouseEvent("click", { bubbles: true, cancelable: true, view: window })
+      );
+    });
+    await p.waitForTimeout(700);
+    const popup = await p.evaluate(
+      () =>
+        document.querySelector("[data-metro-map] .leaflet-popup-content")?.innerText.replace(/\s+/g, " ").trim() ||
+        ""
+    );
+    ok(
+      /[ঀ-৿]/.test(popup) && /Line/.test(popup),
+      `station popup names the place and its line (${popup.slice(0, 48)})`
+    );
+  }
+  ok(xerrs.length === 0, "guide console clean" + (xerrs.length ? ": " + [...new Set(xerrs)].join(" | ") : ""));
+
+  // The same map is advertised on the second guide page.
+  await ready(p, B + "/guide/navigating-kolkata/");
+  let second = { strokes: 0, pins: 0, skeleton: true };
+  try {
+    await p.waitForFunction(
+      () => document.querySelectorAll("[data-metro-map] .leaflet-marker-icon").length > 60,
+      null,
+      { timeout: 25000 }
+    );
+  } catch {
+    /* measured below either way */
+  }
+  second = await p.evaluate(() => ({
+    strokes: document.querySelectorAll("[data-metro-map] .leaflet-overlay-pane path").length,
+    pins: document.querySelectorAll("[data-metro-map] .leaflet-marker-icon").length,
+    skeleton: /Loading Kolkata Transit/.test(document.body.innerText),
+  }));
+  ok(
+    second.strokes === 5 && second.pins === 67 && !second.skeleton,
+    `navigating-kolkata draws the same network (${second.strokes} lines, ${second.pins} pins)`
+  );
+  await p.close();
+}
+
 // ---------- other pages ----------
 console.log("\n== REGRESSION ==");
 for (const [name, url] of [["/", "/"], ["/paras/", "/paras/"], ["/map/", "/map/"], ["/panzika/", "/panzika/"]]) {

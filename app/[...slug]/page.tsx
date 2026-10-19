@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { mirrorHtml, listRoutes } from "../../lib/mirror";
+import { injectMetroMap } from "../../lib/metroInject";
 import { injectParasListing } from "../../lib/parasInject";
 
 // Every mirror route is known at build time, so nothing is rendered on demand.
@@ -17,6 +18,12 @@ export default async function MirrorPage({ params }: { params: Promise<{ slug: s
   const rel = slug.join("/");
   let html = mirrorHtml(rel);
   if (!html) return <div>Not found: {rel}</div>;
+  // The guide's transit map is a never-resolving loading skeleton in the
+  // mirror. Swap it for a slot on any guide page; pages without one are
+  // returned untouched by the injector.
+  if (rel === "guide" || rel.startsWith("guide/")) {
+    html = injectMetroMap(html);
+  }
   if (rel === "map") {
     html = html.replace(
       /<div class="w-full h-full bg-\[#FFFBF0\][\s\S]*?Loading Kolkata Map\.\.\.<\/p><\/div>/,

@@ -1,0 +1,1126 @@
+{
+  "_provenance": {
+    "source": "https://www.durgapujakolkata.in/guide/navigating-kolkata",
+    "harvested": "2026-10-19T02:50:30.454Z",
+    "zoom": 12,
+    "note": "Coordinates inverted from the original's Leaflet pixel space at zoom 12. Line names from mirror/guide corridor cards. Re-run scripts/harvest-metro.mjs to refresh."
+  },
+  "lines": [
+    {
+      "color": "#2563EB",
+      "weight": 5,
+      "name": "Blue Line",
+      "bn": "ব্লু লাইন",
+      "route": "Dakshineswar ↔ Kavi Subhas",
+      "geometry": [
+        [
+          22.653938,
+          88.363724
+        ],
+        [
+          22.653621,
+          88.37883
+        ],
+        [
+          22.63968,
+          88.393936
+        ],
+        [
+          22.620983,
+          88.392906
+        ],
+        [
+          22.605771,
+          88.386383
+        ],
+        [
+          22.601333,
+          88.37265
+        ],
+        [
+          22.595945,
+          88.36544
+        ],
+        [
+          22.572487,
+          88.358917
+        ],
+        [
+          22.564561,
+          88.351707
+        ],
+        [
+          22.55505,
+          88.350334
+        ],
+        [
+          22.541416,
+          88.347244
+        ],
+        [
+          22.533488,
+          88.346214
+        ],
+        [
+          22.524291,
+          88.346558
+        ],
+        [
+          22.494795,
+          88.344841
+        ],
+        [
+          22.480837,
+          88.345871
+        ],
+        [
+          22.464023,
+          88.380547
+        ],
+        [
+          22.465927,
+          88.391533
+        ],
+        [
+          22.471955,
+          88.398056
+        ]
+      ]
+    },
+    {
+      "color": "#16A34A",
+      "weight": 5,
+      "name": "Green Line",
+      "bn": "গ্রিন লাইন",
+      "route": "Howrah Maidan ↔ Esplanade",
+      "geometry": [
+        [
+          22.581998,
+          88.332825
+        ],
+        [
+          22.583266,
+          88.340378
+        ],
+        [
+          22.571219,
+          88.349991
+        ],
+        [
+          22.564561,
+          88.351707
+        ],
+        [
+          22.567098,
+          88.37162
+        ],
+        [
+          22.57217,
+          88.39016
+        ],
+        [
+          22.573121,
+          88.403206
+        ],
+        [
+          22.580096,
+          88.401146
+        ],
+        [
+          22.587069,
+          88.408012
+        ],
+        [
+          22.590556,
+          88.415565
+        ],
+        [
+          22.586435,
+          88.421402
+        ],
+        [
+          22.581364,
+          88.429985
+        ]
+      ]
+    },
+    {
+      "color": "#9333EA",
+      "weight": 5,
+      "name": "Purple Line",
+      "bn": "পার্পল লাইন",
+      "route": "Majerhat ↔ Joka",
+      "geometry": [
+        [
+          22.461802,
+          88.306046
+        ],
+        [
+          22.46434,
+          88.307419
+        ],
+        [
+          22.487499,
+          88.313255
+        ],
+        [
+          22.508117,
+          88.320465
+        ],
+        [
+          22.519217,
+          88.323555
+        ]
+      ]
+    },
+    {
+      "color": "#CA8A04",
+      "weight": 5,
+      "name": "Yellow Line",
+      "bn": "ইয়েলো লাইন",
+      "route": "Noapara ↔ Airport",
+      "geometry": [
+        [
+          22.63968,
+          88.393936
+        ],
+        [
+          22.638095,
+          88.412132
+        ],
+        [
+          22.639363,
+          88.429642
+        ],
+        [
+          22.646334,
+          88.435822
+        ]
+      ]
+    },
+    {
+      "color": "#EA580C",
+      "weight": 5,
+      "name": "Orange Line",
+      "bn": "অরেঞ্জ লাইন",
+      "route": "Beleghata ↔ Kavi Subhas",
+      "geometry": [
+        [
+          22.471955,
+          88.398056
+        ],
+        [
+          22.484644,
+          88.392563
+        ],
+        [
+          22.496064,
+          88.398743
+        ],
+        [
+          22.505262,
+          88.401146
+        ],
+        [
+          22.514777,
+          88.401489
+        ],
+        [
+          22.52556,
+          88.395996
+        ],
+        [
+          22.532854,
+          88.395653
+        ],
+        [
+          22.543952,
+          88.399429
+        ],
+        [
+          22.550611,
+          88.404236
+        ]
+      ]
+    }
+  ],
+  "stations": [
+    {
+      "name": "Dakshineswar",
+      "bn": "দক্ষিণেশ্বর",
+      "kind": "metro",
+      "lines": [
+        "Blue Line"
+      ],
+      "latlng": [
+        22.653938,
+        88.363724
+      ],
+      "detail": "Dakshineswar(দক্ষিণেশ্বর)"
+    },
+    {
+      "name": "Baranagar",
+      "bn": "বরাহনগর",
+      "kind": "metro",
+      "lines": [
+        "Blue Line"
+      ],
+      "latlng": [
+        22.653621,
+        88.37883
+      ],
+      "detail": "Baranagar(বরাহনগর)"
+    },
+    {
+      "name": "Noapara",
+      "bn": "নোয়াপাড়া",
+      "kind": "metro",
+      "lines": [
+        "Blue Line",
+        "Yellow Line"
+      ],
+      "latlng": [
+        22.63968,
+        88.393936
+      ],
+      "detail": "Noapara(নোয়াপাড়া)"
+    },
+    {
+      "name": "Dum Dum",
+      "bn": "দমদম",
+      "kind": "metro",
+      "lines": [
+        "Blue Line"
+      ],
+      "latlng": [
+        22.620983,
+        88.392906
+      ],
+      "detail": "Dum Dum(দমদম)"
+    },
+    {
+      "name": "Belgachhia",
+      "bn": "বেলগাছিয়া",
+      "kind": "metro",
+      "lines": [
+        "Blue Line"
+      ],
+      "latlng": [
+        22.605771,
+        88.386383
+      ],
+      "detail": "Belgachhia(বেলগাছিয়া)"
+    },
+    {
+      "name": "Shyambazar",
+      "bn": "শ্যামবাজার",
+      "kind": "metro",
+      "lines": [
+        "Blue Line"
+      ],
+      "latlng": [
+        22.601333,
+        88.37265
+      ],
+      "detail": "Shyambazar(শ্যামবাজার)"
+    },
+    {
+      "name": "Shobhabazar Sutanuti",
+      "bn": "শোভাবাজার সুতানুটি",
+      "kind": "metro",
+      "lines": [
+        "Blue Line"
+      ],
+      "latlng": [
+        22.595945,
+        88.36544
+      ],
+      "detail": "Shobhabazar Sutanuti(শোভাবাজার সুতানুটি)"
+    },
+    {
+      "name": "Girish Park",
+      "bn": "গিরীশ পার্ক",
+      "kind": "metro",
+      "lines": [
+        "Blue Line"
+      ],
+      "latlng": [
+        22.587069,
+        88.363037
+      ],
+      "detail": "Girish Park(গিরীশ পার্ক)"
+    },
+    {
+      "name": "Mahatma Gandhi Road",
+      "bn": "মহাত্মা গান্ধী রোড",
+      "kind": "metro",
+      "lines": [
+        "Blue Line"
+      ],
+      "latlng": [
+        22.58073,
+        88.36132
+      ],
+      "detail": "Mahatma Gandhi Road(মহাত্মা গান্ধী রোড)"
+    },
+    {
+      "name": "Central",
+      "bn": "সেন্ট্রাল",
+      "kind": "metro",
+      "lines": [
+        "Blue Line"
+      ],
+      "latlng": [
+        22.572487,
+        88.358917
+      ],
+      "detail": "Central(সেন্ট্রাল)"
+    },
+    {
+      "name": "Chandni Chowk",
+      "bn": "চাঁদনি চক",
+      "kind": "metro",
+      "lines": [
+        "Blue Line"
+      ],
+      "latlng": [
+        22.566781,
+        88.354111
+      ],
+      "detail": "Chandni Chowk(চাঁদনি চক)"
+    },
+    {
+      "name": "Esplanade",
+      "bn": "এসপ্ল্যানেড",
+      "kind": "metro",
+      "lines": [
+        "Blue Line",
+        "Green Line"
+      ],
+      "latlng": [
+        22.564561,
+        88.351707
+      ],
+      "detail": "Esplanade(এসপ্ল্যানেড)"
+    },
+    {
+      "name": "Park Street",
+      "bn": "পার্ক স্ট্রীট",
+      "kind": "metro",
+      "lines": [
+        "Blue Line"
+      ],
+      "latlng": [
+        22.55505,
+        88.350334
+      ],
+      "detail": "Park Street(পার্ক স্ট্রীট)"
+    },
+    {
+      "name": "Maidan",
+      "bn": "ময়দান",
+      "kind": "metro",
+      "lines": [
+        "Blue Line"
+      ],
+      "latlng": [
+        22.549343,
+        88.348961
+      ],
+      "detail": "Maidan(ময়দান)"
+    },
+    {
+      "name": "Rabindra Sadan",
+      "bn": "রবীন্দ্র সদন",
+      "kind": "metro",
+      "lines": [
+        "Blue Line"
+      ],
+      "latlng": [
+        22.541416,
+        88.347244
+      ],
+      "detail": "Rabindra Sadan(রবীন্দ্র সদন)"
+    },
+    {
+      "name": "Netaji Bhavan",
+      "bn": "নেতাজি ভবন",
+      "kind": "metro",
+      "lines": [
+        "Blue Line"
+      ],
+      "latlng": [
+        22.533488,
+        88.346214
+      ],
+      "detail": "Netaji Bhavan(নেতাজি ভবন)"
+    },
+    {
+      "name": "Jatin Das Park",
+      "bn": "যতীন দাস পার্ক",
+      "kind": "metro",
+      "lines": [
+        "Blue Line"
+      ],
+      "latlng": [
+        22.524291,
+        88.346558
+      ],
+      "detail": "Jatin Das Park(যতীন দাস পার্ক)"
+    },
+    {
+      "name": "Kalighat",
+      "bn": "কালীঘাট",
+      "kind": "metro",
+      "lines": [
+        "Blue Line"
+      ],
+      "latlng": [
+        22.51668,
+        88.345871
+      ],
+      "detail": "Kalighat(কালীঘাট)"
+    },
+    {
+      "name": "Rabindra Sarobar",
+      "bn": "রবীন্দ্র সরোবর",
+      "kind": "metro",
+      "lines": [
+        "Blue Line"
+      ],
+      "latlng": [
+        22.507165,
+        88.345528
+      ],
+      "detail": "Rabindra Sarobar(রবীন্দ্র সরোবর)"
+    },
+    {
+      "name": "Mahanayak Uttam Kumar",
+      "bn": "মহানায়ক উত্তম কুমার",
+      "kind": "metro",
+      "lines": [
+        "Blue Line"
+      ],
+      "latlng": [
+        22.494795,
+        88.344841
+      ],
+      "detail": "Mahanayak Uttam Kumar(মহানায়ক উত্তম কুমার)"
+    },
+    {
+      "name": "Netaji",
+      "bn": "নেতাজি",
+      "kind": "metro",
+      "lines": [
+        "Blue Line"
+      ],
+      "latlng": [
+        22.480837,
+        88.345871
+      ],
+      "detail": "Netaji(নেতাজি)"
+    },
+    {
+      "name": "Masterda Surya Sen",
+      "bn": "মাস্টারদা সূর্য সেন",
+      "kind": "metro",
+      "lines": [
+        "Blue Line"
+      ],
+      "latlng": [
+        22.473541,
+        88.360977
+      ],
+      "detail": "Masterda Surya Sen(মাস্টারদা সূর্য সেন)"
+    },
+    {
+      "name": "Gitanjali",
+      "bn": "গীতাঞ্জলি",
+      "kind": "metro",
+      "lines": [
+        "Blue Line"
+      ],
+      "latlng": [
+        22.469416,
+        88.369904
+      ],
+      "detail": "Gitanjali(গীতাঞ্জলি)"
+    },
+    {
+      "name": "Kavi Nazrul",
+      "bn": "কবি নজরুল",
+      "kind": "metro",
+      "lines": [
+        "Blue Line"
+      ],
+      "latlng": [
+        22.464023,
+        88.380547
+      ],
+      "detail": "Kavi Nazrul(কবি নজরুল)"
+    },
+    {
+      "name": "Shahid Khudiram",
+      "bn": "শহীদ ক্ষুদিরাম",
+      "kind": "metro",
+      "lines": [
+        "Blue Line"
+      ],
+      "latlng": [
+        22.465927,
+        88.391533
+      ],
+      "detail": "Shahid Khudiram(শহীদ ক্ষুদিরাম)"
+    },
+    {
+      "name": "Kavi Subhash",
+      "bn": "কবি সুভাষ",
+      "kind": "metro",
+      "lines": [
+        "Blue Line",
+        "Orange Line"
+      ],
+      "latlng": [
+        22.471955,
+        88.398056
+      ],
+      "detail": "Kavi Subhash(কবি সুভাষ)"
+    },
+    {
+      "name": "Howrah Maidan",
+      "bn": "হাওড়া ময়দান",
+      "kind": "metro",
+      "lines": [
+        "Green Line"
+      ],
+      "latlng": [
+        22.581998,
+        88.332825
+      ],
+      "detail": "Howrah Maidan(হাওড়া ময়দান)"
+    },
+    {
+      "name": "Howrah",
+      "bn": "হাওড়া",
+      "kind": "metro",
+      "lines": [
+        "Green Line"
+      ],
+      "latlng": [
+        22.583266,
+        88.340378
+      ],
+      "detail": "Howrah(হাওড়া)"
+    },
+    {
+      "name": "Mahakaran",
+      "bn": "মহাকরণ",
+      "kind": "metro",
+      "lines": [
+        "Green Line"
+      ],
+      "latlng": [
+        22.571219,
+        88.349991
+      ],
+      "detail": "Mahakaran(মহাকরণ)"
+    },
+    {
+      "name": "Esplanade",
+      "bn": "এসপ্ল্যানেড",
+      "kind": "metro",
+      "lines": [
+        "Blue Line",
+        "Green Line"
+      ],
+      "latlng": [
+        22.564561,
+        88.351707
+      ],
+      "detail": "Esplanade(এসপ্ল্যানেড)"
+    },
+    {
+      "name": "Sealdah",
+      "bn": "শিয়ালদহ",
+      "kind": "metro",
+      "lines": [
+        "Green Line"
+      ],
+      "latlng": [
+        22.567098,
+        88.37162
+      ],
+      "detail": "Sealdah(শিয়ালদহ)"
+    },
+    {
+      "name": "Phoolbagan",
+      "bn": "ফুলবাগান",
+      "kind": "metro",
+      "lines": [
+        "Green Line"
+      ],
+      "latlng": [
+        22.57217,
+        88.39016
+      ],
+      "detail": "Phoolbagan(ফুলবাগান)"
+    },
+    {
+      "name": "Salt Lake Stadium",
+      "bn": "সল্টলেক স্টেডিয়াম",
+      "kind": "metro",
+      "lines": [
+        "Green Line"
+      ],
+      "latlng": [
+        22.573121,
+        88.403206
+      ],
+      "detail": "Salt Lake Stadium(সল্টলেক স্টেডিয়াম)"
+    },
+    {
+      "name": "Bengal Chemical",
+      "bn": "বেঙ্গল কেমিক্যাল",
+      "kind": "metro",
+      "lines": [
+        "Green Line"
+      ],
+      "latlng": [
+        22.580096,
+        88.401146
+      ],
+      "detail": "Bengal Chemical(বেঙ্গল কেমিক্যাল)"
+    },
+    {
+      "name": "City Center",
+      "bn": "সিটি সেন্টার",
+      "kind": "metro",
+      "lines": [
+        "Green Line"
+      ],
+      "latlng": [
+        22.587069,
+        88.408012
+      ],
+      "detail": "City Center(সিটি সেন্টার)"
+    },
+    {
+      "name": "Central Park",
+      "bn": "সেন্ট্রাল পার্ক",
+      "kind": "metro",
+      "lines": [
+        "Green Line"
+      ],
+      "latlng": [
+        22.590556,
+        88.415565
+      ],
+      "detail": "Central Park(সেন্ট্রাল পার্ক)"
+    },
+    {
+      "name": "Karunamoyee",
+      "bn": "করুণাময়ী",
+      "kind": "metro",
+      "lines": [
+        "Green Line"
+      ],
+      "latlng": [
+        22.586435,
+        88.421402
+      ],
+      "detail": "Karunamoyee(করুণাময়ী)"
+    },
+    {
+      "name": "Salt Lake Sector-V(সল্টলেক সেক্টর V)",
+      "bn": "",
+      "kind": "metro",
+      "lines": [
+        "Green Line"
+      ],
+      "latlng": [
+        22.581364,
+        88.429985
+      ],
+      "detail": "Salt Lake Sector-V(সল্টলেক সেক্টর V)"
+    },
+    {
+      "name": "Joka",
+      "bn": "জোকা",
+      "kind": "metro",
+      "lines": [
+        "Purple Line"
+      ],
+      "latlng": [
+        22.452283,
+        88.301582
+      ],
+      "detail": "Joka(জোকা)"
+    },
+    {
+      "name": "Thakurpukur",
+      "bn": "ঠাকুরপুকুর",
+      "kind": "metro",
+      "lines": [
+        "Purple Line"
+      ],
+      "latlng": [
+        22.46434,
+        88.307419
+      ],
+      "detail": "Thakurpukur(ঠাকুরপুকুর)"
+    },
+    {
+      "name": "Sakherbazar",
+      "bn": "সখেরবাজার",
+      "kind": "metro",
+      "lines": [
+        "Purple Line"
+      ],
+      "latlng": [
+        22.474493,
+        88.309822
+      ],
+      "detail": "Sakherbazar(সখেরবাজার)"
+    },
+    {
+      "name": "Behala Chowrasta",
+      "bn": "বেহালা চৌরাস্তা",
+      "kind": "metro",
+      "lines": [
+        "Purple Line"
+      ],
+      "latlng": [
+        22.487499,
+        88.313255
+      ],
+      "detail": "Behala Chowrasta(বেহালা চৌরাস্তা)"
+    },
+    {
+      "name": "Behala Bazar",
+      "bn": "বেহালা বাজার",
+      "kind": "metro",
+      "lines": [
+        "Purple Line"
+      ],
+      "latlng": [
+        22.498918,
+        88.317375
+      ],
+      "detail": "Behala Bazar(বেহালা বাজার)"
+    },
+    {
+      "name": "Taratala",
+      "bn": "তারাতলা",
+      "kind": "metro",
+      "lines": [
+        "Purple Line"
+      ],
+      "latlng": [
+        22.508117,
+        88.320465
+      ],
+      "detail": "Taratala(তারাতলা)"
+    },
+    {
+      "name": "Majerhat",
+      "bn": "মাঝেরহাট",
+      "kind": "metro",
+      "lines": [
+        "Purple Line"
+      ],
+      "latlng": [
+        22.519217,
+        88.323555
+      ],
+      "detail": "Majerhat(মাঝেরহাট)"
+    },
+    {
+      "name": "Kavi Subhash",
+      "bn": "কবি সুভাষ",
+      "kind": "metro",
+      "lines": [
+        "Blue Line",
+        "Orange Line"
+      ],
+      "latlng": [
+        22.471955,
+        88.398056
+      ],
+      "detail": "Kavi Subhash(কবি সুভাষ)"
+    },
+    {
+      "name": "Satyajit Ray",
+      "bn": "সত্যজিৎ রায়",
+      "kind": "metro",
+      "lines": [
+        "Orange Line"
+      ],
+      "latlng": [
+        22.484644,
+        88.392563
+      ],
+      "detail": "Satyajit Ray(সত্যজিৎ রায়)"
+    },
+    {
+      "name": "Jyotirindra Nandi",
+      "bn": "জ্যোতিরিন্দ্র নন্দী",
+      "kind": "metro",
+      "lines": [
+        "Orange Line"
+      ],
+      "latlng": [
+        22.496064,
+        88.398743
+      ],
+      "detail": "Jyotirindra Nandi(জ্যোতিরিন্দ্র নন্দী)"
+    },
+    {
+      "name": "Kavi Sukanta",
+      "bn": "কবি সুকান্ত",
+      "kind": "metro",
+      "lines": [
+        "Orange Line"
+      ],
+      "latlng": [
+        22.505262,
+        88.401146
+      ],
+      "detail": "Kavi Sukanta(কবি সুকান্ত)"
+    },
+    {
+      "name": "Hemanta Mukhopadhyay",
+      "bn": "হেমন্ত মুখোপাধ্যায়",
+      "kind": "metro",
+      "lines": [
+        "Orange Line"
+      ],
+      "latlng": [
+        22.514777,
+        88.401489
+      ],
+      "detail": "Hemanta Mukhopadhyay(হেমন্ত মুখোপাধ্যায়)"
+    },
+    {
+      "name": "VIP Bazar",
+      "bn": "ভিআইপি বাজার",
+      "kind": "metro",
+      "lines": [
+        "Orange Line"
+      ],
+      "latlng": [
+        22.52556,
+        88.395996
+      ],
+      "detail": "VIP Bazar(ভিআইপি বাজার)"
+    },
+    {
+      "name": "Ritwik Ghatak",
+      "bn": "ঋত্বিক ঘটক",
+      "kind": "metro",
+      "lines": [
+        "Orange Line"
+      ],
+      "latlng": [
+        22.532854,
+        88.395653
+      ],
+      "detail": "Ritwik Ghatak(ঋত্বিক ঘটক)"
+    },
+    {
+      "name": "Barun Sengupta",
+      "bn": "বরুণ সেনগুপ্ত",
+      "kind": "metro",
+      "lines": [
+        "Orange Line"
+      ],
+      "latlng": [
+        22.543952,
+        88.399429
+      ],
+      "detail": "Barun Sengupta(বরুণ সেনগুপ্ত)"
+    },
+    {
+      "name": "Beleghata",
+      "bn": "বেলেঘাটা",
+      "kind": "metro",
+      "lines": [
+        "Orange Line"
+      ],
+      "latlng": [
+        22.550611,
+        88.404236
+      ],
+      "detail": "Beleghata(বেলেঘাটা)"
+    },
+    {
+      "name": "Noapara",
+      "bn": "নোয়াপাড়া",
+      "kind": "metro",
+      "lines": [
+        "Blue Line",
+        "Yellow Line"
+      ],
+      "latlng": [
+        22.63968,
+        88.393936
+      ],
+      "detail": "Noapara(নোয়াপাড়া)"
+    },
+    {
+      "name": "Dum Dum Cantonment",
+      "bn": "দমদম ক্যান্টনমেন্ট",
+      "kind": "metro",
+      "lines": [
+        "Yellow Line"
+      ],
+      "latlng": [
+        22.638095,
+        88.412132
+      ],
+      "detail": "Dum Dum Cantonment(দমদম ক্যান্টনমেন্ট)"
+    },
+    {
+      "name": "Jessore Road",
+      "bn": "যশোহর রোড",
+      "kind": "metro",
+      "lines": [
+        "Yellow Line"
+      ],
+      "latlng": [
+        22.639363,
+        88.429642
+      ],
+      "detail": "Jessore Road(যশোহর রোড)"
+    },
+    {
+      "name": "Jai Hind",
+      "bn": "জয় হিন্দ",
+      "kind": "metro",
+      "lines": [
+        "Yellow Line"
+      ],
+      "latlng": [
+        22.646334,
+        88.435822
+      ],
+      "detail": "Jai Hind(জয় হিন্দ)"
+    },
+    {
+      "name": "Howrah Junction",
+      "bn": "",
+      "kind": "rail",
+      "lines": [
+        "Green Line"
+      ],
+      "latlng": [
+        22.5839,
+        88.343468
+      ],
+      "detail": "Howrah Junction HWH Howrah, West Bengal 711106 🚆 India's busiest terminal by number of platforms (~23); Eastern & South Eastern Railway; interchange with Green Line Metro"
+    },
+    {
+      "name": "Sealdah (Main / North)",
+      "bn": "",
+      "kind": "rail",
+      "lines": [
+        "Green Line"
+      ],
+      "latlng": [
+        22.567732,
+        88.370934
+      ],
+      "detail": "Sealdah (Main / North) SDAH Sealdah, Raja Bazar, Kolkata 700014 🚆 Major Eastern Railway terminus for Main/North suburban (Pl. 1-14) + long-distance trains; concourse walk to Sealdah Metro"
+    },
+    {
+      "name": "Sealdah (South)",
+      "bn": "",
+      "kind": "rail",
+      "lines": [
+        "Green Line"
+      ],
+      "latlng": [
+        22.566464,
+        88.37162
+      ],
+      "detail": "Sealdah (South) SDAH-S Sealdah South Section, Beliaghata, Kolkata 700014 🚆 Sealdah South suburban terminus (Platforms 15-21) for Sonarpur, Baruipur, Diamond Harbour, Canning, Namkhana, Budge Budge; direct subway interchange with Sealdah Metro (Green Line)"
+    },
+    {
+      "name": "Kolkata (Chitpur)",
+      "bn": "",
+      "kind": "rail",
+      "lines": [
+        "Blue Line"
+      ],
+      "latlng": [
+        22.601967,
+        88.38295
+      ],
+      "detail": "Kolkata (Chitpur) KOAA Belgachia, Kolkata 700037 🚆 Handles long-distance trains (incl. Maitree Express to Dhaka) to ease Howrah's load; formerly Chitpur Station"
+    },
+    {
+      "name": "Shalimar",
+      "bn": "",
+      "kind": "rail",
+      "lines": [
+        "Blue Line"
+      ],
+      "latlng": [
+        22.554733,
+        88.316689
+      ],
+      "detail": "Shalimar SHM Shalimar Station Rd, Kazipada, Howrah 711103 🚆 South Eastern Railway hub near 2nd Hooghly Bridge (Vidyasagar Setu); relieves Howrah congestion"
+    },
+    {
+      "name": "Dum Dum Junction",
+      "bn": "",
+      "kind": "rail",
+      "lines": [
+        "Blue Line"
+      ],
+      "latlng": [
+        22.6213,
+        88.39325
+      ],
+      "detail": "Dum Dum Junction DDJ Dum Dum, West Bengal 700030 🚆 Junction of Main Line, Bangaon Line & Circular Railway; interchange with Blue Line Metro (Dum Dum station)"
+    },
+    {
+      "name": "Ballygunge Junction",
+      "bn": "",
+      "kind": "rail",
+      "lines": [
+        "Orange Line"
+      ],
+      "latlng": [
+        22.519534,
+        88.371964
+      ],
+      "detail": "Ballygunge Junction BLN Ballygunge Station Rd, Kasba, Kolkata 700019 🚆 Junction serving South 24 Parganas suburban lines; Sealdah Division, Eastern Railway"
+    },
+    {
+      "name": "Santragachi Junction",
+      "bn": "",
+      "kind": "rail",
+      "lines": [
+        "Green Line"
+      ],
+      "latlng": [
+        22.583583,
+        88.28373
+      ],
+      "detail": "Santragachi Junction SRC Santragachi Station Rd, Howrah 711109 🚆 Key South Eastern Railway junction for long-distance trains; newly renovated terminal"
+    },
+    {
+      "name": "Liluah",
+      "bn": "",
+      "kind": "rail",
+      "lines": [
+        "Blue Line"
+      ],
+      "latlng": [
+        22.620666,
+        88.339348
+      ],
+      "detail": "Liluah LLH Patuapara, Liluah, Howrah 711204 🚆 First station of Howrah Division on the Howrah–Bardhaman Main & Chord lines; near Liluah rail workshop"
+    }
+  ]
+}

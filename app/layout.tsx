@@ -11,6 +11,7 @@ import RevealScroll from "../components/RevealScroll";
 import AudioPlayer from "../components/AudioPlayer";
 import ParasInteractions from "../components/ParasInteractions";
 import MapInjector from "../components/MapInjector";
+import MetroInjector from "../components/MetroInjector";
 import "./globals.css";
 
 const MIRROR = path.join(process.cwd(), "mirror");
@@ -62,6 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <RevealScroll />
         <ParasInteractions />
         <MapInjector />
+        <MetroInjector />
         <Countdown />
         <FestivalDays />
         <FestivalStatus />

@@ -34,6 +34,44 @@
   }
 }
 
+/* Transit map.
+   The guide's map slot asks for `h-[520px]`, but Leaflet adds its own
+   `.leaflet-container` class to whatever node it is initialised on, and the
+   original's compiled theme declares `.leaflet-container{height:100%}`. Both
+   selectors weigh the same, so the theme - which loads after our output -
+   wins and the map collapses to its 4px of border. An element-qualified
+   attribute selector outranks a bare class.
+
+   The height is the one the original's real map uses - 480px, 540px from the
+   `sm` breakpoint up - rather than the 520px of the loading skeleton it
+   replaces, since that skeleton's box is what the map is swapped into. */
+div[data-metro-map] {
+  height: 480px;
+  min-height: 480px;
+}
+
+@media (min-width: 40rem) {
+  div[data-metro-map] {
+    height: 540px;
+    min-height: 540px;
+  }
+}
+
+/* The original's theme hides the OpenStreetMap attribution with !important,
+   along with every other Leaflet control. The tiles are served by OSM and
+   their usage policy requires the credit to be visible, so it is restored
+   here: same reasoning as the height above, but the theme's `!important`
+   rules mean this needs `!important` too, and more specificity to win. */
+div[data-metro-map] .leaflet-control-attribution {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: auto !important;
+  height: auto !important;
+  pointer-events: auto !important;
+  font-size: 10px;
+}
+
 /* Print styles for the Panzika.
    "Print Panzika" is expected to produce a usable almanac sheet, so the nav,
    footer and page furniture are dropped. Day panels stay whole rather than
