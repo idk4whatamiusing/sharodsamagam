@@ -4,7 +4,10 @@ import type { Metadata } from "next";
 import { mirrorHtml, listRoutes } from "../../lib/mirror";
 import { metadataForRoute } from "../../lib/meta";
 import { injectMetroMap } from "../../lib/metroInject";
+import { injectAboutJourney } from "../../lib/aboutInject";
+import { injectEdenLive } from "../../lib/edenInject";
 import { injectParasListing } from "../../lib/parasInject";
+import { injectPoiDirectory } from "../../lib/poiInject";
 
 // Every mirror route is known at build time, so nothing is rendered on demand.
 export const dynamicParams = false;
@@ -30,6 +33,21 @@ export default async function MirrorPage({ params }: { params: Promise<{ slug: s
   // returned untouched by the injector.
   if (rel === "guide" || rel.startsWith("guide/")) {
     html = injectMetroMap(html);
+  }
+  if (rel === "eden-gardens-live") {
+    // The broadcast replay's Theater Mode and Share controls are client-side
+    // on the original; tag them for components/EdenLive.tsx.
+    html = injectEdenLive(html);
+  }
+  if (rel === "about-us") {
+    // The Ritual Journey day tabs are dead buttons in the scrape; tag them so
+    // components/AboutJourney.tsx can swap the panels from data/about-days.json.
+    html = injectAboutJourney(html);
+  }
+  if (rel === "points-of-interest") {
+    // The directory's search box and chips have no server-side behaviour, and
+    // the scrape only kept 119 of the 273 places; rebuild from data/pois.json.
+    html = injectPoiDirectory(html);
   }
   if (rel === "map") {
     html = html.replace(

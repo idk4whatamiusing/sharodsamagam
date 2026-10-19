@@ -1,0 +1,2614 @@
+{
+  "_provenance": {
+    "source": "https://www.durgapujakolkata.in/points-of-interest",
+    "api": "/api/pois",
+    "harvested": "2026-10-19T07:14:14.169Z",
+    "note": "The directory's full live list (the page renders 119 server-side and swaps in these on mount), its category chips, per-category card templates tokenised from the live DOM, and the empty state. Re-run scripts/harvest-pois.mjs to refresh."
+  },
+  "categories": [
+    {
+      "id": "metro-station",
+      "label": "Metro Station"
+    },
+    {
+      "id": "railway-station",
+      "label": "Railway Station"
+    },
+    {
+      "id": "ferry-ghat",
+      "label": "Ferry Ghat"
+    },
+    {
+      "id": "police-station",
+      "label": "Police Station"
+    },
+    {
+      "id": "hospital",
+      "label": "Hospital"
+    },
+    {
+      "id": "fire-brigade",
+      "label": "Fire Brigade"
+    },
+    {
+      "id": "popular-landmark",
+      "label": "Popular Landmark"
+    },
+    {
+      "id": "restaurant",
+      "label": "Restaurant"
+    },
+    {
+      "id": "accommodation",
+      "label": "Hotel / Accommodation"
+    },
+    {
+      "id": "parking",
+      "label": "Parking"
+    },
+    {
+      "id": "public-toilet",
+      "label": "Public Toilet"
+    },
+    {
+      "id": "atm",
+      "label": "ATM / Bank"
+    },
+    {
+      "id": "pharmacy",
+      "label": "Pharmacy"
+    },
+    {
+      "id": "petrol-pump",
+      "label": "Petrol Pump"
+    },
+    {
+      "id": "help-desk",
+      "label": "Puja Help Desk"
+    }
+  ],
+  "chipClasses": {
+    "active": "px-2.5 py-1 rounded-full text-[10.5px] font-mono font-bold shrink-0 transition-all cursor-pointer flex items-center gap-1.5 bg-[#D90429] text-white shadow-2xs border border-[#FFB800]",
+    "inactive": "px-2.5 py-1 rounded-full text-[10.5px] font-mono font-bold shrink-0 transition-all cursor-pointer flex items-center gap-1.5 bg-[#FFF3D6] text-[#2C1210] border border-[#E5C880] hover:bg-[#FFEAB8]"
+  },
+  "templates": {
+    "ferry-ghat": {
+      "withPhone": null,
+      "noPhone": "<div class=\"bg-[#FFFBF0] border border-[#E5C880] rounded-xl sm:rounded-2xl p-3.5 sm:p-4.5 space-y-2.5 shadow-2xs hover:border-[#D90429] hover:shadow-xs transition-all group\"><div class=\"flex items-center justify-between gap-2 border-b border-[#E5C880]/50 pb-2\"><div class=\"flex items-center gap-2\"><div class=\"w-8 h-8 rounded-lg bg-[#FFF3D6] border border-[#E5C880] flex items-center justify-center shrink-0 p-1 shadow-2xs group-hover:scale-105 transition-transform\"><img src=\"/poi-icons/ferry-ghat.png\" alt=\"ferry-ghat\" class=\"w-4 h-4 object-contain\"></div><span class=\"text-[8.5px] uppercase font-mono font-bold px-2 py-0.5 rounded-full bg-[#D97706]/15 text-[#D97706] border border-[#D97706]/30\">ferry ghat</span></div><a class=\"px-2.5 py-0.5 rounded-full bg-[#D90429] hover:bg-[#b00320] text-white text-[10.5px] font-mono font-bold flex items-center gap-1 shadow-2xs border border-[#FFB800] transition-all shrink-0 cursor-pointer\" href=\"/map?lat={{lat}}&amp;lng={{lng}}\"><span>View Map</span><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"11\" height=\"11\" fill=\"currentColor\" viewBox=\"0 0 256 256\"><path d=\"M238.7,102.46,62.81,37.21l-.25-.09A20,20,0,0,0,37.12,62.56l.09.25L102.46,238.7A20,20,0,0,0,121.3,252h.35a20,20,0,0,0,18.77-14.12l.09-.29,21.23-75.85,75.85-21.23.29-.09a20,20,0,0,0,.82-38Zm-89.93,38a12,12,0,0,0-8.32,8.32l-19.68,70.29L62.8,62.8l156.26,58Z\"></path></svg></a></div><h3 class=\"font-serif font-black text-base sm:text-lg text-[#2C1210] group-hover:text-[#D90429] transition-colors leading-snug\">{{name}}</h3><p class=\"text-xs text-[#2C1210]/80 font-serif flex items-start gap-1.5 leading-snug\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D90429] shrink-0 mt-0.5\"><path d=\"M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z\"></path></svg><span>{{address}}</span></p><p class=\"text-[10.5px] text-[#2C1210]/70 font-mono flex items-center gap-1.5 pt-1.5 border-t border-[#E5C880]/50\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D90429] shrink-0\"><path d=\"M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm68-84a12,12,0,0,1-12,12H128a12,12,0,0,1-12-12V72a12,12,0,0,1,24,0v44h44A12,12,0,0,1,196,128Z\"></path></svg><span>{{hours}}</span></p></div>"
+    },
+    "police-station": {
+      "withPhone": "<div class=\"bg-[#FFFBF0] border border-[#E5C880] rounded-xl sm:rounded-2xl p-3.5 sm:p-4.5 space-y-2.5 shadow-2xs hover:border-[#D90429] hover:shadow-xs transition-all group\"><div class=\"flex items-center justify-between gap-2 border-b border-[#E5C880]/50 pb-2\"><div class=\"flex items-center gap-2\"><div class=\"w-8 h-8 rounded-lg bg-[#FFF3D6] border border-[#E5C880] flex items-center justify-center shrink-0 p-1 shadow-2xs group-hover:scale-105 transition-transform\"><img src=\"/poi-icons/police-station.png\" alt=\"police-station\" class=\"w-4 h-4 object-contain\"></div><span class=\"text-[8.5px] uppercase font-mono font-bold px-2 py-0.5 rounded-full bg-[#D97706]/15 text-[#D97706] border border-[#D97706]/30\">police station</span></div><a class=\"px-2.5 py-0.5 rounded-full bg-[#D90429] hover:bg-[#b00320] text-white text-[10.5px] font-mono font-bold flex items-center gap-1 shadow-2xs border border-[#FFB800] transition-all shrink-0 cursor-pointer\" href=\"/map?lat={{lat}}&amp;lng={{lng}}\"><span>View Map</span><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"11\" height=\"11\" fill=\"currentColor\" viewBox=\"0 0 256 256\"><path d=\"M238.7,102.46,62.81,37.21l-.25-.09A20,20,0,0,0,37.12,62.56l.09.25L102.46,238.7A20,20,0,0,0,121.3,252h.35a20,20,0,0,0,18.77-14.12l.09-.29,21.23-75.85,75.85-21.23.29-.09a20,20,0,0,0,.82-38Zm-89.93,38a12,12,0,0,0-8.32,8.32l-19.68,70.29L62.8,62.8l156.26,58Z\"></path></svg></a></div><h3 class=\"font-serif font-black text-base sm:text-lg text-[#2C1210] group-hover:text-[#D90429] transition-colors leading-snug\">{{name}}</h3><p class=\"text-xs text-[#2C1210]/80 font-serif flex items-start gap-1.5 leading-snug\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D90429] shrink-0 mt-0.5\"><path d=\"M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z\"></path></svg><span>{{address}}</span></p><p class=\"text-xs font-mono text-[#D97706] flex items-center gap-1.5 font-bold\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"13\" height=\"13\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D97706] shrink-0\"><path d=\"M231.88,175.08A56.26,56.26,0,0,1,176,224C96.6,224,32,159.4,32,80A56.26,56.26,0,0,1,80.92,24.12a16,16,0,0,1,16.62,9.52l21.12,47.15,0,.12A16,16,0,0,1,117.39,96c-.18.27-.37.52-.57.77L96,121.45c7.49,15.22,23.41,31,38.83,38.51l24.34-20.71a8.12,8.12,0,0,1,.75-.56,16,16,0,0,1,15.17-1.4l.13.06,47.11,21.11A16,16,0,0,1,231.88,175.08Z\"></path></svg><a href=\"tel:{{phone}}\" class=\"hover:underline\">{{phone}}</a></p><p class=\"text-[10.5px] text-[#2C1210]/70 font-mono flex items-center gap-1.5 pt-1.5 border-t border-[#E5C880]/50\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D90429] shrink-0\"><path d=\"M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm68-84a12,12,0,0,1-12,12H128a12,12,0,0,1-12-12V72a12,12,0,0,1,24,0v44h44A12,12,0,0,1,196,128Z\"></path></svg><span>{{hours}}</span></p></div>",
+      "noPhone": null
+    },
+    "hospital": {
+      "withPhone": "<div class=\"bg-[#FFFBF0] border border-[#E5C880] rounded-xl sm:rounded-2xl p-3.5 sm:p-4.5 space-y-2.5 shadow-2xs hover:border-[#D90429] hover:shadow-xs transition-all group\"><div class=\"flex items-center justify-between gap-2 border-b border-[#E5C880]/50 pb-2\"><div class=\"flex items-center gap-2\"><div class=\"w-8 h-8 rounded-lg bg-[#FFF3D6] border border-[#E5C880] flex items-center justify-center shrink-0 p-1 shadow-2xs group-hover:scale-105 transition-transform\"><img src=\"/poi-icons/hospital.png\" alt=\"hospital\" class=\"w-4 h-4 object-contain\"></div><span class=\"text-[8.5px] uppercase font-mono font-bold px-2 py-0.5 rounded-full bg-[#D97706]/15 text-[#D97706] border border-[#D97706]/30\">hospital</span></div><a class=\"px-2.5 py-0.5 rounded-full bg-[#D90429] hover:bg-[#b00320] text-white text-[10.5px] font-mono font-bold flex items-center gap-1 shadow-2xs border border-[#FFB800] transition-all shrink-0 cursor-pointer\" href=\"/map?lat={{lat}}&amp;lng={{lng}}\"><span>View Map</span><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"11\" height=\"11\" fill=\"currentColor\" viewBox=\"0 0 256 256\"><path d=\"M238.7,102.46,62.81,37.21l-.25-.09A20,20,0,0,0,37.12,62.56l.09.25L102.46,238.7A20,20,0,0,0,121.3,252h.35a20,20,0,0,0,18.77-14.12l.09-.29,21.23-75.85,75.85-21.23.29-.09a20,20,0,0,0,.82-38Zm-89.93,38a12,12,0,0,0-8.32,8.32l-19.68,70.29L62.8,62.8l156.26,58Z\"></path></svg></a></div><h3 class=\"font-serif font-black text-base sm:text-lg text-[#2C1210] group-hover:text-[#D90429] transition-colors leading-snug\">{{name}}</h3><p class=\"text-xs text-[#2C1210]/80 font-serif flex items-start gap-1.5 leading-snug\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D90429] shrink-0 mt-0.5\"><path d=\"M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z\"></path></svg><span>{{address}}</span></p><p class=\"text-xs font-mono text-[#D97706] flex items-center gap-1.5 font-bold\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"13\" height=\"13\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D97706] shrink-0\"><path d=\"M231.88,175.08A56.26,56.26,0,0,1,176,224C96.6,224,32,159.4,32,80A56.26,56.26,0,0,1,80.92,24.12a16,16,0,0,1,16.62,9.52l21.12,47.15,0,.12A16,16,0,0,1,117.39,96c-.18.27-.37.52-.57.77L96,121.45c7.49,15.22,23.41,31,38.83,38.51l24.34-20.71a8.12,8.12,0,0,1,.75-.56,16,16,0,0,1,15.17-1.4l.13.06,47.11,21.11A16,16,0,0,1,231.88,175.08Z\"></path></svg><a href=\"tel:{{phone}}\" class=\"hover:underline\">{{phone}}</a></p><p class=\"text-[10.5px] text-[#2C1210]/70 font-mono flex items-center gap-1.5 pt-1.5 border-t border-[#E5C880]/50\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D90429] shrink-0\"><path d=\"M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm68-84a12,12,0,0,1-12,12H128a12,12,0,0,1-12-12V72a12,12,0,0,1,24,0v44h44A12,12,0,0,1,196,128Z\"></path></svg><span>{{hours}}</span></p></div>",
+      "noPhone": null
+    },
+    "popular-landmark": {
+      "withPhone": "<div class=\"bg-[#FFFBF0] border border-[#E5C880] rounded-xl sm:rounded-2xl p-3.5 sm:p-4.5 space-y-2.5 shadow-2xs hover:border-[#D90429] hover:shadow-xs transition-all group\"><div class=\"flex items-center justify-between gap-2 border-b border-[#E5C880]/50 pb-2\"><div class=\"flex items-center gap-2\"><div class=\"w-8 h-8 rounded-lg bg-[#FFF3D6] border border-[#E5C880] flex items-center justify-center shrink-0 p-1 shadow-2xs group-hover:scale-105 transition-transform\"><img src=\"/poi-icons/popular-landmarks.png\" alt=\"popular-landmark\" class=\"w-4 h-4 object-contain\"></div><span class=\"text-[8.5px] uppercase font-mono font-bold px-2 py-0.5 rounded-full bg-[#D97706]/15 text-[#D97706] border border-[#D97706]/30\">popular landmark</span></div><a class=\"px-2.5 py-0.5 rounded-full bg-[#D90429] hover:bg-[#b00320] text-white text-[10.5px] font-mono font-bold flex items-center gap-1 shadow-2xs border border-[#FFB800] transition-all shrink-0 cursor-pointer\" href=\"/map?lat={{lat}}&amp;lng={{lng}}\"><span>View Map</span><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"11\" height=\"11\" fill=\"currentColor\" viewBox=\"0 0 256 256\"><path d=\"M238.7,102.46,62.81,37.21l-.25-.09A20,20,0,0,0,37.12,62.56l.09.25L102.46,238.7A20,20,0,0,0,121.3,252h.35a20,20,0,0,0,18.77-14.12l.09-.29,21.23-75.85,75.85-21.23.29-.09a20,20,0,0,0,.82-38Zm-89.93,38a12,12,0,0,0-8.32,8.32l-19.68,70.29L62.8,62.8l156.26,58Z\"></path></svg></a></div><h3 class=\"font-serif font-black text-base sm:text-lg text-[#2C1210] group-hover:text-[#D90429] transition-colors leading-snug\">{{name}}</h3><p class=\"text-xs text-[#2C1210]/80 font-serif flex items-start gap-1.5 leading-snug\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D90429] shrink-0 mt-0.5\"><path d=\"M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z\"></path></svg><span>{{address}}</span></p><p class=\"text-xs font-mono text-[#D97706] flex items-center gap-1.5 font-bold\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"13\" height=\"13\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D97706] shrink-0\"><path d=\"M231.88,175.08A56.26,56.26,0,0,1,176,224C96.6,224,32,159.4,32,80A56.26,56.26,0,0,1,80.92,24.12a16,16,0,0,1,16.62,9.52l21.12,47.15,0,.12A16,16,0,0,1,117.39,96c-.18.27-.37.52-.57.77L96,121.45c7.49,15.22,23.41,31,38.83,38.51l24.34-20.71a8.12,8.12,0,0,1,.75-.56,16,16,0,0,1,15.17-1.4l.13.06,47.11,21.11A16,16,0,0,1,231.88,175.08Z\"></path></svg><a href=\"tel:{{phone}}\" class=\"hover:underline\">{{phone}}</a></p><p class=\"text-[10.5px] text-[#2C1210]/70 font-mono flex items-center gap-1.5 pt-1.5 border-t border-[#E5C880]/50\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D90429] shrink-0\"><path d=\"M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm68-84a12,12,0,0,1-12,12H128a12,12,0,0,1-12-12V72a12,12,0,0,1,24,0v44h44A12,12,0,0,1,196,128Z\"></path></svg><span>{{hours}}</span></p></div>",
+      "noPhone": "<div class=\"bg-[#FFFBF0] border border-[#E5C880] rounded-xl sm:rounded-2xl p-3.5 sm:p-4.5 space-y-2.5 shadow-2xs hover:border-[#D90429] hover:shadow-xs transition-all group\"><div class=\"flex items-center justify-between gap-2 border-b border-[#E5C880]/50 pb-2\"><div class=\"flex items-center gap-2\"><div class=\"w-8 h-8 rounded-lg bg-[#FFF3D6] border border-[#E5C880] flex items-center justify-center shrink-0 p-1 shadow-2xs group-hover:scale-105 transition-transform\"><img src=\"/poi-icons/popular-landmarks.png\" alt=\"popular-landmark\" class=\"w-4 h-4 object-contain\"></div><span class=\"text-[8.5px] uppercase font-mono font-bold px-2 py-0.5 rounded-full bg-[#D97706]/15 text-[#D97706] border border-[#D97706]/30\">popular landmark</span></div><a class=\"px-2.5 py-0.5 rounded-full bg-[#D90429] hover:bg-[#b00320] text-white text-[10.5px] font-mono font-bold flex items-center gap-1 shadow-2xs border border-[#FFB800] transition-all shrink-0 cursor-pointer\" href=\"/map?lat={{lat}}&amp;lng={{lng}}\"><span>View Map</span><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"11\" height=\"11\" fill=\"currentColor\" viewBox=\"0 0 256 256\"><path d=\"M238.7,102.46,62.81,37.21l-.25-.09A20,20,0,0,0,37.12,62.56l.09.25L102.46,238.7A20,20,0,0,0,121.3,252h.35a20,20,0,0,0,18.77-14.12l.09-.29,21.23-75.85,75.85-21.23.29-.09a20,20,0,0,0,.82-38Zm-89.93,38a12,12,0,0,0-8.32,8.32l-19.68,70.29L62.8,62.8l156.26,58Z\"></path></svg></a></div><h3 class=\"font-serif font-black text-base sm:text-lg text-[#2C1210] group-hover:text-[#D90429] transition-colors leading-snug\">{{name}}</h3><p class=\"text-xs text-[#2C1210]/80 font-serif flex items-start gap-1.5 leading-snug\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D90429] shrink-0 mt-0.5\"><path d=\"M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z\"></path></svg><span>{{address}}</span></p><p class=\"text-[10.5px] text-[#2C1210]/70 font-mono flex items-center gap-1.5 pt-1.5 border-t border-[#E5C880]/50\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D90429] shrink-0\"><path d=\"M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm68-84a12,12,0,0,1-12,12H128a12,12,0,0,1-12-12V72a12,12,0,0,1,24,0v44h44A12,12,0,0,1,196,128Z\"></path></svg><span>{{hours}}</span></p></div>"
+    },
+    "restaurant": {
+      "withPhone": "<div class=\"bg-[#FFFBF0] border border-[#E5C880] rounded-xl sm:rounded-2xl p-3.5 sm:p-4.5 space-y-2.5 shadow-2xs hover:border-[#D90429] hover:shadow-xs transition-all group\"><div class=\"flex items-center justify-between gap-2 border-b border-[#E5C880]/50 pb-2\"><div class=\"flex items-center gap-2\"><div class=\"w-8 h-8 rounded-lg bg-[#FFF3D6] border border-[#E5C880] flex items-center justify-center shrink-0 p-1 shadow-2xs group-hover:scale-105 transition-transform\"><img src=\"/poi-icons/restaurants.png\" alt=\"restaurant\" class=\"w-4 h-4 object-contain\"></div><span class=\"text-[8.5px] uppercase font-mono font-bold px-2 py-0.5 rounded-full bg-[#D97706]/15 text-[#D97706] border border-[#D97706]/30\">restaurant</span></div><a class=\"px-2.5 py-0.5 rounded-full bg-[#D90429] hover:bg-[#b00320] text-white text-[10.5px] font-mono font-bold flex items-center gap-1 shadow-2xs border border-[#FFB800] transition-all shrink-0 cursor-pointer\" href=\"/map?lat={{lat}}&amp;lng={{lng}}\"><span>View Map</span><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"11\" height=\"11\" fill=\"currentColor\" viewBox=\"0 0 256 256\"><path d=\"M238.7,102.46,62.81,37.21l-.25-.09A20,20,0,0,0,37.12,62.56l.09.25L102.46,238.7A20,20,0,0,0,121.3,252h.35a20,20,0,0,0,18.77-14.12l.09-.29,21.23-75.85,75.85-21.23.29-.09a20,20,0,0,0,.82-38Zm-89.93,38a12,12,0,0,0-8.32,8.32l-19.68,70.29L62.8,62.8l156.26,58Z\"></path></svg></a></div><h3 class=\"font-serif font-black text-base sm:text-lg text-[#2C1210] group-hover:text-[#D90429] transition-colors leading-snug\">{{name}}</h3><p class=\"text-xs text-[#2C1210]/80 font-serif flex items-start gap-1.5 leading-snug\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D90429] shrink-0 mt-0.5\"><path d=\"M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z\"></path></svg><span>{{address}}</span></p><p class=\"text-xs font-mono text-[#D97706] flex items-center gap-1.5 font-bold\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"13\" height=\"13\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D97706] shrink-0\"><path d=\"M231.88,175.08A56.26,56.26,0,0,1,176,224C96.6,224,32,159.4,32,80A56.26,56.26,0,0,1,80.92,24.12a16,16,0,0,1,16.62,9.52l21.12,47.15,0,.12A16,16,0,0,1,117.39,96c-.18.27-.37.52-.57.77L96,121.45c7.49,15.22,23.41,31,38.83,38.51l24.34-20.71a8.12,8.12,0,0,1,.75-.56,16,16,0,0,1,15.17-1.4l.13.06,47.11,21.11A16,16,0,0,1,231.88,175.08Z\"></path></svg><a href=\"tel:{{phone}}\" class=\"hover:underline\">{{phone}}</a></p><p class=\"text-[10.5px] text-[#2C1210]/70 font-mono flex items-center gap-1.5 pt-1.5 border-t border-[#E5C880]/50\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D90429] shrink-0\"><path d=\"M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm68-84a12,12,0,0,1-12,12H128a12,12,0,0,1-12-12V72a12,12,0,0,1,24,0v44h44A12,12,0,0,1,196,128Z\"></path></svg><span>{{hours}}</span></p></div>",
+      "noPhone": "<div class=\"bg-[#FFFBF0] border border-[#E5C880] rounded-xl sm:rounded-2xl p-3.5 sm:p-4.5 space-y-2.5 shadow-2xs hover:border-[#D90429] hover:shadow-xs transition-all group\"><div class=\"flex items-center justify-between gap-2 border-b border-[#E5C880]/50 pb-2\"><div class=\"flex items-center gap-2\"><div class=\"w-8 h-8 rounded-lg bg-[#FFF3D6] border border-[#E5C880] flex items-center justify-center shrink-0 p-1 shadow-2xs group-hover:scale-105 transition-transform\"><img src=\"/poi-icons/restaurants.png\" alt=\"restaurant\" class=\"w-4 h-4 object-contain\"></div><span class=\"text-[8.5px] uppercase font-mono font-bold px-2 py-0.5 rounded-full bg-[#D97706]/15 text-[#D97706] border border-[#D97706]/30\">restaurant</span></div><a class=\"px-2.5 py-0.5 rounded-full bg-[#D90429] hover:bg-[#b00320] text-white text-[10.5px] font-mono font-bold flex items-center gap-1 shadow-2xs border border-[#FFB800] transition-all shrink-0 cursor-pointer\" href=\"/map?lat={{lat}}&amp;lng={{lng}}\"><span>View Map</span><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"11\" height=\"11\" fill=\"currentColor\" viewBox=\"0 0 256 256\"><path d=\"M238.7,102.46,62.81,37.21l-.25-.09A20,20,0,0,0,37.12,62.56l.09.25L102.46,238.7A20,20,0,0,0,121.3,252h.35a20,20,0,0,0,18.77-14.12l.09-.29,21.23-75.85,75.85-21.23.29-.09a20,20,0,0,0,.82-38Zm-89.93,38a12,12,0,0,0-8.32,8.32l-19.68,70.29L62.8,62.8l156.26,58Z\"></path></svg></a></div><h3 class=\"font-serif font-black text-base sm:text-lg text-[#2C1210] group-hover:text-[#D90429] transition-colors leading-snug\">{{name}}</h3><p class=\"text-xs text-[#2C1210]/80 font-serif flex items-start gap-1.5 leading-snug\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D90429] shrink-0 mt-0.5\"><path d=\"M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z\"></path></svg><span>{{address}}</span></p><p class=\"text-[10.5px] text-[#2C1210]/70 font-mono flex items-center gap-1.5 pt-1.5 border-t border-[#E5C880]/50\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D90429] shrink-0\"><path d=\"M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm68-84a12,12,0,0,1-12,12H128a12,12,0,0,1-12-12V72a12,12,0,0,1,24,0v44h44A12,12,0,0,1,196,128Z\"></path></svg><span>{{hours}}</span></p></div>"
+    },
+    "accommodation": {
+      "withPhone": "<div class=\"bg-[#FFFBF0] border border-[#E5C880] rounded-xl sm:rounded-2xl p-3.5 sm:p-4.5 space-y-2.5 shadow-2xs hover:border-[#D90429] hover:shadow-xs transition-all group\"><div class=\"flex items-center justify-between gap-2 border-b border-[#E5C880]/50 pb-2\"><div class=\"flex items-center gap-2\"><div class=\"w-8 h-8 rounded-lg bg-[#FFF3D6] border border-[#E5C880] flex items-center justify-center shrink-0 p-1 shadow-2xs group-hover:scale-105 transition-transform\"><img src=\"/poi-icons/accommodation.png\" alt=\"accommodation\" class=\"w-4 h-4 object-contain\"></div><span class=\"text-[8.5px] uppercase font-mono font-bold px-2 py-0.5 rounded-full bg-[#D97706]/15 text-[#D97706] border border-[#D97706]/30\">accommodation</span></div><a class=\"px-2.5 py-0.5 rounded-full bg-[#D90429] hover:bg-[#b00320] text-white text-[10.5px] font-mono font-bold flex items-center gap-1 shadow-2xs border border-[#FFB800] transition-all shrink-0 cursor-pointer\" href=\"/map?lat={{lat}}&amp;lng={{lng}}\"><span>View Map</span><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"11\" height=\"11\" fill=\"currentColor\" viewBox=\"0 0 256 256\"><path d=\"M238.7,102.46,62.81,37.21l-.25-.09A20,20,0,0,0,37.12,62.56l.09.25L102.46,238.7A20,20,0,0,0,121.3,252h.35a20,20,0,0,0,18.77-14.12l.09-.29,21.23-75.85,75.85-21.23.29-.09a20,20,0,0,0,.82-38Zm-89.93,38a12,12,0,0,0-8.32,8.32l-19.68,70.29L62.8,62.8l156.26,58Z\"></path></svg></a></div><h3 class=\"font-serif font-black text-base sm:text-lg text-[#2C1210] group-hover:text-[#D90429] transition-colors leading-snug\">{{name}}</h3><p class=\"text-xs text-[#2C1210]/80 font-serif flex items-start gap-1.5 leading-snug\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D90429] shrink-0 mt-0.5\"><path d=\"M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z\"></path></svg><span>{{address}}</span></p><p class=\"text-xs font-mono text-[#D97706] flex items-center gap-1.5 font-bold\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"13\" height=\"13\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D97706] shrink-0\"><path d=\"M231.88,175.08A56.26,56.26,0,0,1,176,224C96.6,224,32,159.4,32,80A56.26,56.26,0,0,1,80.92,24.12a16,16,0,0,1,16.62,9.52l21.12,47.15,0,.12A16,16,0,0,1,117.39,96c-.18.27-.37.52-.57.77L96,121.45c7.49,15.22,23.41,31,38.83,38.51l24.34-20.71a8.12,8.12,0,0,1,.75-.56,16,16,0,0,1,15.17-1.4l.13.06,47.11,21.11A16,16,0,0,1,231.88,175.08Z\"></path></svg><a href=\"tel:{{phone}}\" class=\"hover:underline\">{{phone}}</a></p><p class=\"text-[10.5px] text-[#2C1210]/70 font-mono flex items-center gap-1.5 pt-1.5 border-t border-[#E5C880]/50\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D90429] shrink-0\"><path d=\"M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm68-84a12,12,0,0,1-12,12H128a12,12,0,0,1-12-12V72a12,12,0,0,1,24,0v44h44A12,12,0,0,1,196,128Z\"></path></svg><span>{{hours}}</span></p></div>",
+      "noPhone": null
+    },
+    "help-desk": {
+      "withPhone": "<div class=\"bg-[#FFFBF0] border border-[#E5C880] rounded-xl sm:rounded-2xl p-3.5 sm:p-4.5 space-y-2.5 shadow-2xs hover:border-[#D90429] hover:shadow-xs transition-all group\"><div class=\"flex items-center justify-between gap-2 border-b border-[#E5C880]/50 pb-2\"><div class=\"flex items-center gap-2\"><div class=\"w-8 h-8 rounded-lg bg-[#FFF3D6] border border-[#E5C880] flex items-center justify-center shrink-0 p-1 shadow-2xs group-hover:scale-105 transition-transform\"><img src=\"/poi-icons/help-desk.png\" alt=\"help-desk\" class=\"w-4 h-4 object-contain\"></div><span class=\"text-[8.5px] uppercase font-mono font-bold px-2 py-0.5 rounded-full bg-[#D97706]/15 text-[#D97706] border border-[#D97706]/30\">help desk</span></div><a class=\"px-2.5 py-0.5 rounded-full bg-[#D90429] hover:bg-[#b00320] text-white text-[10.5px] font-mono font-bold flex items-center gap-1 shadow-2xs border border-[#FFB800] transition-all shrink-0 cursor-pointer\" href=\"/map?lat={{lat}}&amp;lng={{lng}}\"><span>View Map</span><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"11\" height=\"11\" fill=\"currentColor\" viewBox=\"0 0 256 256\"><path d=\"M238.7,102.46,62.81,37.21l-.25-.09A20,20,0,0,0,37.12,62.56l.09.25L102.46,238.7A20,20,0,0,0,121.3,252h.35a20,20,0,0,0,18.77-14.12l.09-.29,21.23-75.85,75.85-21.23.29-.09a20,20,0,0,0,.82-38Zm-89.93,38a12,12,0,0,0-8.32,8.32l-19.68,70.29L62.8,62.8l156.26,58Z\"></path></svg></a></div><h3 class=\"font-serif font-black text-base sm:text-lg text-[#2C1210] group-hover:text-[#D90429] transition-colors leading-snug\">{{name}}</h3><p class=\"text-xs text-[#2C1210]/80 font-serif flex items-start gap-1.5 leading-snug\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D90429] shrink-0 mt-0.5\"><path d=\"M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z\"></path></svg><span>{{address}}</span></p><p class=\"text-xs font-mono text-[#D97706] flex items-center gap-1.5 font-bold\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"13\" height=\"13\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D97706] shrink-0\"><path d=\"M231.88,175.08A56.26,56.26,0,0,1,176,224C96.6,224,32,159.4,32,80A56.26,56.26,0,0,1,80.92,24.12a16,16,0,0,1,16.62,9.52l21.12,47.15,0,.12A16,16,0,0,1,117.39,96c-.18.27-.37.52-.57.77L96,121.45c7.49,15.22,23.41,31,38.83,38.51l24.34-20.71a8.12,8.12,0,0,1,.75-.56,16,16,0,0,1,15.17-1.4l.13.06,47.11,21.11A16,16,0,0,1,231.88,175.08Z\"></path></svg><a href=\"tel:{{phone}}\" class=\"hover:underline\">{{phone}}</a></p><p class=\"text-[10.5px] text-[#2C1210]/70 font-mono flex items-center gap-1.5 pt-1.5 border-t border-[#E5C880]/50\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D90429] shrink-0\"><path d=\"M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm68-84a12,12,0,0,1-12,12H128a12,12,0,0,1-12-12V72a12,12,0,0,1,24,0v44h44A12,12,0,0,1,196,128Z\"></path></svg><span>{{hours}}</span></p></div>",
+      "noPhone": null
+    },
+    "parking": {
+      "withPhone": null,
+      "noPhone": "<div class=\"bg-[#FFFBF0] border border-[#E5C880] rounded-xl sm:rounded-2xl p-3.5 sm:p-4.5 space-y-2.5 shadow-2xs hover:border-[#D90429] hover:shadow-xs transition-all group\"><div class=\"flex items-center justify-between gap-2 border-b border-[#E5C880]/50 pb-2\"><div class=\"flex items-center gap-2\"><div class=\"w-8 h-8 rounded-lg bg-[#FFF3D6] border border-[#E5C880] flex items-center justify-center shrink-0 p-1 shadow-2xs group-hover:scale-105 transition-transform\"><img src=\"/poi-icons/special-parkings.png\" alt=\"parking\" class=\"w-4 h-4 object-contain\"></div><span class=\"text-[8.5px] uppercase font-mono font-bold px-2 py-0.5 rounded-full bg-[#D97706]/15 text-[#D97706] border border-[#D97706]/30\">parking</span></div><a class=\"px-2.5 py-0.5 rounded-full bg-[#D90429] hover:bg-[#b00320] text-white text-[10.5px] font-mono font-bold flex items-center gap-1 shadow-2xs border border-[#FFB800] transition-all shrink-0 cursor-pointer\" href=\"/map?lat={{lat}}&amp;lng={{lng}}\"><span>View Map</span><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"11\" height=\"11\" fill=\"currentColor\" viewBox=\"0 0 256 256\"><path d=\"M238.7,102.46,62.81,37.21l-.25-.09A20,20,0,0,0,37.12,62.56l.09.25L102.46,238.7A20,20,0,0,0,121.3,252h.35a20,20,0,0,0,18.77-14.12l.09-.29,21.23-75.85,75.85-21.23.29-.09a20,20,0,0,0,.82-38Zm-89.93,38a12,12,0,0,0-8.32,8.32l-19.68,70.29L62.8,62.8l156.26,58Z\"></path></svg></a></div><h3 class=\"font-serif font-black text-base sm:text-lg text-[#2C1210] group-hover:text-[#D90429] transition-colors leading-snug\">{{name}}</h3><p class=\"text-xs text-[#2C1210]/80 font-serif flex items-start gap-1.5 leading-snug\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D90429] shrink-0 mt-0.5\"><path d=\"M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z\"></path></svg><span>{{address}}</span></p><p class=\"text-[10.5px] text-[#2C1210]/70 font-mono flex items-center gap-1.5 pt-1.5 border-t border-[#E5C880]/50\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D90429] shrink-0\"><path d=\"M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm68-84a12,12,0,0,1-12,12H128a12,12,0,0,1-12-12V72a12,12,0,0,1,24,0v44h44A12,12,0,0,1,196,128Z\"></path></svg><span>{{hours}}</span></p></div>"
+    },
+    "pharmacy": {
+      "withPhone": "<div class=\"bg-[#FFFBF0] border border-[#E5C880] rounded-xl sm:rounded-2xl p-3.5 sm:p-4.5 space-y-2.5 shadow-2xs hover:border-[#D90429] hover:shadow-xs transition-all group\"><div class=\"flex items-center justify-between gap-2 border-b border-[#E5C880]/50 pb-2\"><div class=\"flex items-center gap-2\"><div class=\"w-8 h-8 rounded-lg bg-[#FFF3D6] border border-[#E5C880] flex items-center justify-center shrink-0 p-1 shadow-2xs group-hover:scale-105 transition-transform\"><img src=\"/poi-icons/medicine-stores.png\" alt=\"pharmacy\" class=\"w-4 h-4 object-contain\"></div><span class=\"text-[8.5px] uppercase font-mono font-bold px-2 py-0.5 rounded-full bg-[#D97706]/15 text-[#D97706] border border-[#D97706]/30\">pharmacy</span></div><a class=\"px-2.5 py-0.5 rounded-full bg-[#D90429] hover:bg-[#b00320] text-white text-[10.5px] font-mono font-bold flex items-center gap-1 shadow-2xs border border-[#FFB800] transition-all shrink-0 cursor-pointer\" href=\"/map?lat={{lat}}&amp;lng={{lng}}\"><span>View Map</span><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"11\" height=\"11\" fill=\"currentColor\" viewBox=\"0 0 256 256\"><path d=\"M238.7,102.46,62.81,37.21l-.25-.09A20,20,0,0,0,37.12,62.56l.09.25L102.46,238.7A20,20,0,0,0,121.3,252h.35a20,20,0,0,0,18.77-14.12l.09-.29,21.23-75.85,75.85-21.23.29-.09a20,20,0,0,0,.82-38Zm-89.93,38a12,12,0,0,0-8.32,8.32l-19.68,70.29L62.8,62.8l156.26,58Z\"></path></svg></a></div><h3 class=\"font-serif font-black text-base sm:text-lg text-[#2C1210] group-hover:text-[#D90429] transition-colors leading-snug\">{{name}}</h3><p class=\"text-xs text-[#2C1210]/80 font-serif flex items-start gap-1.5 leading-snug\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D90429] shrink-0 mt-0.5\"><path d=\"M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z\"></path></svg><span>{{address}}</span></p><p class=\"text-xs font-mono text-[#D97706] flex items-center gap-1.5 font-bold\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"13\" height=\"13\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D97706] shrink-0\"><path d=\"M231.88,175.08A56.26,56.26,0,0,1,176,224C96.6,224,32,159.4,32,80A56.26,56.26,0,0,1,80.92,24.12a16,16,0,0,1,16.62,9.52l21.12,47.15,0,.12A16,16,0,0,1,117.39,96c-.18.27-.37.52-.57.77L96,121.45c7.49,15.22,23.41,31,38.83,38.51l24.34-20.71a8.12,8.12,0,0,1,.75-.56,16,16,0,0,1,15.17-1.4l.13.06,47.11,21.11A16,16,0,0,1,231.88,175.08Z\"></path></svg><a href=\"tel:{{phone}}\" class=\"hover:underline\">{{phone}}</a></p><p class=\"text-[10.5px] text-[#2C1210]/70 font-mono flex items-center gap-1.5 pt-1.5 border-t border-[#E5C880]/50\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D90429] shrink-0\"><path d=\"M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm68-84a12,12,0,0,1-12,12H128a12,12,0,0,1-12-12V72a12,12,0,0,1,24,0v44h44A12,12,0,0,1,196,128Z\"></path></svg><span>{{hours}}</span></p></div>",
+      "noPhone": null
+    },
+    "atm": {
+      "withPhone": null,
+      "noPhone": "<div class=\"bg-[#FFFBF0] border border-[#E5C880] rounded-xl sm:rounded-2xl p-3.5 sm:p-4.5 space-y-2.5 shadow-2xs hover:border-[#D90429] hover:shadow-xs transition-all group\"><div class=\"flex items-center justify-between gap-2 border-b border-[#E5C880]/50 pb-2\"><div class=\"flex items-center gap-2\"><div class=\"w-8 h-8 rounded-lg bg-[#FFF3D6] border border-[#E5C880] flex items-center justify-center shrink-0 p-1 shadow-2xs group-hover:scale-105 transition-transform\"><img src=\"/poi-icons/banks-atms.png\" alt=\"atm\" class=\"w-4 h-4 object-contain\"></div><span class=\"text-[8.5px] uppercase font-mono font-bold px-2 py-0.5 rounded-full bg-[#D97706]/15 text-[#D97706] border border-[#D97706]/30\">atm</span></div><a class=\"px-2.5 py-0.5 rounded-full bg-[#D90429] hover:bg-[#b00320] text-white text-[10.5px] font-mono font-bold flex items-center gap-1 shadow-2xs border border-[#FFB800] transition-all shrink-0 cursor-pointer\" href=\"/map?lat={{lat}}&amp;lng={{lng}}\"><span>View Map</span><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"11\" height=\"11\" fill=\"currentColor\" viewBox=\"0 0 256 256\"><path d=\"M238.7,102.46,62.81,37.21l-.25-.09A20,20,0,0,0,37.12,62.56l.09.25L102.46,238.7A20,20,0,0,0,121.3,252h.35a20,20,0,0,0,18.77-14.12l.09-.29,21.23-75.85,75.85-21.23.29-.09a20,20,0,0,0,.82-38Zm-89.93,38a12,12,0,0,0-8.32,8.32l-19.68,70.29L62.8,62.8l156.26,58Z\"></path></svg></a></div><h3 class=\"font-serif font-black text-base sm:text-lg text-[#2C1210] group-hover:text-[#D90429] transition-colors leading-snug\">{{name}}</h3><p class=\"text-xs text-[#2C1210]/80 font-serif flex items-start gap-1.5 leading-snug\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D90429] shrink-0 mt-0.5\"><path d=\"M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z\"></path></svg><span>{{address}}</span></p><p class=\"text-[10.5px] text-[#2C1210]/70 font-mono flex items-center gap-1.5 pt-1.5 border-t border-[#E5C880]/50\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D90429] shrink-0\"><path d=\"M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm68-84a12,12,0,0,1-12,12H128a12,12,0,0,1-12-12V72a12,12,0,0,1,24,0v44h44A12,12,0,0,1,196,128Z\"></path></svg><span>{{hours}}</span></p></div>"
+    },
+    "fire-brigade": {
+      "withPhone": "<div class=\"bg-[#FFFBF0] border border-[#E5C880] rounded-xl sm:rounded-2xl p-3.5 sm:p-4.5 space-y-2.5 shadow-2xs hover:border-[#D90429] hover:shadow-xs transition-all group\"><div class=\"flex items-center justify-between gap-2 border-b border-[#E5C880]/50 pb-2\"><div class=\"flex items-center gap-2\"><div class=\"w-8 h-8 rounded-lg bg-[#FFF3D6] border border-[#E5C880] flex items-center justify-center shrink-0 p-1 shadow-2xs group-hover:scale-105 transition-transform\"><img src=\"/poi-icons/fire-brigade.png\" alt=\"fire-brigade\" class=\"w-4 h-4 object-contain\"></div><span class=\"text-[8.5px] uppercase font-mono font-bold px-2 py-0.5 rounded-full bg-[#D97706]/15 text-[#D97706] border border-[#D97706]/30\">fire brigade</span></div><a class=\"px-2.5 py-0.5 rounded-full bg-[#D90429] hover:bg-[#b00320] text-white text-[10.5px] font-mono font-bold flex items-center gap-1 shadow-2xs border border-[#FFB800] transition-all shrink-0 cursor-pointer\" href=\"/map?lat={{lat}}&amp;lng={{lng}}\"><span>View Map</span><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"11\" height=\"11\" fill=\"currentColor\" viewBox=\"0 0 256 256\"><path d=\"M238.7,102.46,62.81,37.21l-.25-.09A20,20,0,0,0,37.12,62.56l.09.25L102.46,238.7A20,20,0,0,0,121.3,252h.35a20,20,0,0,0,18.77-14.12l.09-.29,21.23-75.85,75.85-21.23.29-.09a20,20,0,0,0,.82-38Zm-89.93,38a12,12,0,0,0-8.32,8.32l-19.68,70.29L62.8,62.8l156.26,58Z\"></path></svg></a></div><h3 class=\"font-serif font-black text-base sm:text-lg text-[#2C1210] group-hover:text-[#D90429] transition-colors leading-snug\">{{name}}</h3><p class=\"text-xs text-[#2C1210]/80 font-serif flex items-start gap-1.5 leading-snug\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D90429] shrink-0 mt-0.5\"><path d=\"M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z\"></path></svg><span>{{address}}</span></p><p class=\"text-xs font-mono text-[#D97706] flex items-center gap-1.5 font-bold\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"13\" height=\"13\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D97706] shrink-0\"><path d=\"M231.88,175.08A56.26,56.26,0,0,1,176,224C96.6,224,32,159.4,32,80A56.26,56.26,0,0,1,80.92,24.12a16,16,0,0,1,16.62,9.52l21.12,47.15,0,.12A16,16,0,0,1,117.39,96c-.18.27-.37.52-.57.77L96,121.45c7.49,15.22,23.41,31,38.83,38.51l24.34-20.71a8.12,8.12,0,0,1,.75-.56,16,16,0,0,1,15.17-1.4l.13.06,47.11,21.11A16,16,0,0,1,231.88,175.08Z\"></path></svg><a href=\"tel:{{phone}}\" class=\"hover:underline\">{{phone}}</a></p><p class=\"text-[10.5px] text-[#2C1210]/70 font-mono flex items-center gap-1.5 pt-1.5 border-t border-[#E5C880]/50\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D90429] shrink-0\"><path d=\"M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm68-84a12,12,0,0,1-12,12H128a12,12,0,0,1-12-12V72a12,12,0,0,1,24,0v44h44A12,12,0,0,1,196,128Z\"></path></svg><span>{{hours}}</span></p></div>",
+      "noPhone": null
+    },
+    "metro-station": {
+      "withPhone": null,
+      "noPhone": "<div class=\"bg-[#FFFBF0] border border-[#E5C880] rounded-xl sm:rounded-2xl p-3.5 sm:p-4.5 space-y-2.5 shadow-2xs hover:border-[#D90429] hover:shadow-xs transition-all group\"><div class=\"flex items-center justify-between gap-2 border-b border-[#E5C880]/50 pb-2\"><div class=\"flex items-center gap-2\"><div class=\"w-8 h-8 rounded-lg bg-[#FFF3D6] border border-[#E5C880] flex items-center justify-center shrink-0 p-1 shadow-2xs group-hover:scale-105 transition-transform\"><img alt=\"metro-station\" class=\"w-4 h-4 object-contain\" src=\"/poi-icons/public-transport.png\"></div><span class=\"text-[8.5px] uppercase font-mono font-bold px-2 py-0.5 rounded-full bg-[#D97706]/15 text-[#D97706] border border-[#D97706]/30\">metro station</span></div><a class=\"px-2.5 py-0.5 rounded-full bg-[#D90429] hover:bg-[#b00320] text-white text-[10.5px] font-mono font-bold flex items-center gap-1 shadow-2xs border border-[#FFB800] transition-all shrink-0 cursor-pointer\" href=\"/map?lat={{lat}}&amp;lng={{lng}}\"><span>View Map</span><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"11\" height=\"11\" fill=\"currentColor\" viewBox=\"0 0 256 256\"><path d=\"M238.7,102.46,62.81,37.21l-.25-.09A20,20,0,0,0,37.12,62.56l.09.25L102.46,238.7A20,20,0,0,0,121.3,252h.35a20,20,0,0,0,18.77-14.12l.09-.29,21.23-75.85,75.85-21.23.29-.09a20,20,0,0,0,.82-38Zm-89.93,38a12,12,0,0,0-8.32,8.32l-19.68,70.29L62.8,62.8l156.26,58Z\"></path></svg></a></div><h3 class=\"font-serif font-black text-base sm:text-lg text-[#2C1210] group-hover:text-[#D90429] transition-colors leading-snug\">{{name}}</h3><p class=\"text-xs text-[#2C1210]/80 font-serif flex items-start gap-1.5 leading-snug\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D90429] shrink-0 mt-0.5\"><path d=\"M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z\"></path></svg><span>{{address}}</span></p><p class=\"text-[10.5px] text-[#2C1210]/70 font-mono flex items-center gap-1.5 pt-1.5 border-t border-[#E5C880]/50\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D90429] shrink-0\"><path d=\"M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm68-84a12,12,0,0,1-12,12H128a12,12,0,0,1-12-12V72a12,12,0,0,1,24,0v44h44A12,12,0,0,1,196,128Z\"></path></svg><span>{{hours}}</span></p></div>"
+    },
+    "railway-station": {
+      "withPhone": null,
+      "noPhone": "<div class=\"bg-[#FFFBF0] border border-[#E5C880] rounded-xl sm:rounded-2xl p-3.5 sm:p-4.5 space-y-2.5 shadow-2xs hover:border-[#D90429] hover:shadow-xs transition-all group\"><div class=\"flex items-center justify-between gap-2 border-b border-[#E5C880]/50 pb-2\"><div class=\"flex items-center gap-2\"><div class=\"w-8 h-8 rounded-lg bg-[#FFF3D6] border border-[#E5C880] flex items-center justify-center shrink-0 p-1 shadow-2xs group-hover:scale-105 transition-transform\"><img alt=\"railway-station\" class=\"w-4 h-4 object-contain\" src=\"/poi-icons/railway-station.png\"></div><span class=\"text-[8.5px] uppercase font-mono font-bold px-2 py-0.5 rounded-full bg-[#D97706]/15 text-[#D97706] border border-[#D97706]/30\">railway station</span></div><a class=\"px-2.5 py-0.5 rounded-full bg-[#D90429] hover:bg-[#b00320] text-white text-[10.5px] font-mono font-bold flex items-center gap-1 shadow-2xs border border-[#FFB800] transition-all shrink-0 cursor-pointer\" href=\"/map?lat={{lat}}&amp;lng={{lng}}\"><span>View Map</span><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"11\" height=\"11\" fill=\"currentColor\" viewBox=\"0 0 256 256\"><path d=\"M238.7,102.46,62.81,37.21l-.25-.09A20,20,0,0,0,37.12,62.56l.09.25L102.46,238.7A20,20,0,0,0,121.3,252h.35a20,20,0,0,0,18.77-14.12l.09-.29,21.23-75.85,75.85-21.23.29-.09a20,20,0,0,0,.82-38Zm-89.93,38a12,12,0,0,0-8.32,8.32l-19.68,70.29L62.8,62.8l156.26,58Z\"></path></svg></a></div><h3 class=\"font-serif font-black text-base sm:text-lg text-[#2C1210] group-hover:text-[#D90429] transition-colors leading-snug\">{{name}}</h3><p class=\"text-xs text-[#2C1210]/80 font-serif flex items-start gap-1.5 leading-snug\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D90429] shrink-0 mt-0.5\"><path d=\"M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z\"></path></svg><span>{{address}}</span></p><p class=\"text-[10.5px] text-[#2C1210]/70 font-mono flex items-center gap-1.5 pt-1.5 border-t border-[#E5C880]/50\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D90429] shrink-0\"><path d=\"M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm68-84a12,12,0,0,1-12,12H128a12,12,0,0,1-12-12V72a12,12,0,0,1,24,0v44h44A12,12,0,0,1,196,128Z\"></path></svg><span>{{hours}}</span></p></div>"
+    }
+  },
+  "emptyState": "<div class=\"bg-[#FFFBF0] border border-[#E5C880] rounded-2xl p-10 text-center text-[#2C1210] space-y-2 shadow-sm\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" fill=\"currentColor\" viewBox=\"0 0 256 256\" class=\"text-[#D97706] mx-auto\"><path d=\"M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z\"></path></svg><h4 class=\"font-serif font-bold text-lg text-[#2C1210]\">No Facilities Found</h4><p class=\"text-xs text-[#2C1210]/70 font-mono\">Try adjusting your search query or category filter.</p><button class=\"px-3.5 py-1.5 rounded-full bg-[#D90429] text-white text-xs font-mono font-bold uppercase tracking-wider cursor-pointer border border-[#FFB800]\">Reset Filters</button></div>",
+  "pois": [
+    {
+      "id": "poi-fg-babughat",
+      "name": "Babughat",
+      "category": "ferry-ghat",
+      "lat": 22.5685482,
+      "lng": 88.3419627,
+      "address": "Strand Rd, B.B.D. Bagh, Kolkata 700001",
+      "openHours": "5:30 AM - 9:30 PM"
+    },
+    {
+      "id": "poi-fg-outram-ghat",
+      "name": "Outram Ghat",
+      "category": "ferry-ghat",
+      "lat": 22.564409,
+      "lng": 88.3380608,
+      "address": "Strand Rd, Kolkata 700021",
+      "openHours": "5:30 AM - 9:30 PM"
+    },
+    {
+      "id": "poi-fg-armenian-ferry-ghat",
+      "name": "Armenian Ferry Ghat",
+      "category": "ferry-ghat",
+      "lat": 22.5803481,
+      "lng": 88.3473408,
+      "address": "223, Strand Bank Rd, Fairley Place, B.B.D. Bagh, Kolkata 700001",
+      "openHours": "5:30 AM - 9:30 PM"
+    },
+    {
+      "id": "poi-fg-fairlie-place",
+      "name": "Fairlie Place / WBTC Ferry Ghat",
+      "category": "ferry-ghat",
+      "lat": 22.5761007,
+      "lng": 88.3457157,
+      "address": "Fairley Place, B.B.D. Bagh, Kolkata 700001",
+      "openHours": "5:30 AM - 9:30 PM"
+    },
+    {
+      "id": "poi-fg-chandpal-ghat",
+      "name": "Chandpal Ghat",
+      "category": "ferry-ghat",
+      "lat": 22.5687169,
+      "lng": 88.3412938,
+      "address": "1, Strand Rd, Fairley Place, B.B.D. Bagh, Kolkata 700001",
+      "openHours": "5:30 AM - 9:30 PM"
+    },
+    {
+      "id": "poi-fg-millennium-park",
+      "name": "Millennium Park Jetty",
+      "category": "ferry-ghat",
+      "lat": 22.5728209,
+      "lng": 88.3445493,
+      "address": "12, Strand Rd, Bara Bazar, B.B.D. Bagh, Kolkata 700001",
+      "openHours": "5:30 AM - 9:30 PM"
+    },
+    {
+      "id": "poi-fg-ahiritola",
+      "name": "Ahiritola Ghat",
+      "category": "ferry-ghat",
+      "lat": 22.5960089,
+      "lng": 88.3530937,
+      "address": "Strand Bank Rd, Ahiritola, Jorabagan, Kolkata 700005",
+      "openHours": "5:30 AM - 9:30 PM"
+    },
+    {
+      "id": "poi-fg-nimtala",
+      "name": "Nimtala Ghat",
+      "category": "ferry-ghat",
+      "lat": 22.5949478,
+      "lng": 88.3522489,
+      "address": "64, Strand Rd, Ahiritola, Beniatola, Kolkata 700006",
+      "openHours": "5:30 AM - 9:30 PM"
+    },
+    {
+      "id": "poi-fg-kumartuli",
+      "name": "Kumartuli Ghat",
+      "category": "ferry-ghat",
+      "lat": 22.6018923,
+      "lng": 88.3612439,
+      "address": "Durga Charan Banerjee St, Sovabazar, Kolkata 700003",
+      "openHours": "5:30 AM - 9:30 PM"
+    },
+    {
+      "id": "poi-fg-bagbazar",
+      "name": "Bagbazar Ghat",
+      "category": "ferry-ghat",
+      "lat": 22.6049909,
+      "lng": 88.3647601,
+      "address": "Bagbazar St, Bag Bazar Colony, Baghbazar, Kolkata 700003",
+      "openHours": "5:30 AM - 9:30 PM"
+    },
+    {
+      "id": "poi-fg-shovabazar",
+      "name": "Shovabazar Launch Ghat",
+      "category": "ferry-ghat",
+      "lat": 22.5991643,
+      "lng": 88.3566693,
+      "address": "Strand Bank Rd, Sovabazar, Shobhabazar, Kolkata 700005",
+      "openHours": "5:30 AM - 9:30 PM"
+    },
+    {
+      "id": "poi-fg-dakshineswar-jetty",
+      "name": "Dakshineswar Ferry Jetty",
+      "category": "ferry-ghat",
+      "lat": 22.6536606,
+      "lng": 88.3575402,
+      "address": "Ma Bhabotarini Jetty Ghat, Dakshineswar, Kolkata 700076",
+      "openHours": "5:30 AM - 9:30 PM"
+    },
+    {
+      "id": "poi-fg-ariadaha",
+      "name": "Ariadaha Ferry Ghat",
+      "category": "ferry-ghat",
+      "lat": 22.6667292,
+      "lng": 88.3578585,
+      "address": "Ariadaha, Kolkata 700057",
+      "openHours": "5:30 AM - 9:30 PM"
+    },
+    {
+      "id": "poi-fg-howrah-station-jetty",
+      "name": "Howrah Station Jetty",
+      "category": "ferry-ghat",
+      "lat": 22.582955,
+      "lng": 88.34428,
+      "address": "Howrah Railway Station, Howrah 711101",
+      "openHours": "5:30 AM - 9:30 PM"
+    },
+    {
+      "id": "poi-fg-howrah-jetty-ii",
+      "name": "Howrah Ferry Jetty II & III",
+      "category": "ferry-ghat",
+      "lat": 22.5821238,
+      "lng": 88.3439082,
+      "address": "Howrah, West Bengal 711101",
+      "openHours": "5:30 AM - 9:30 PM"
+    },
+    {
+      "id": "poi-fg-ramkrishnapur",
+      "name": "Ramkrishnapur Ghat",
+      "category": "ferry-ghat",
+      "lat": 22.5717254,
+      "lng": 88.3357651,
+      "address": "Choura Bustee, Shibpur, Howrah 711101",
+      "openHours": "5:30 AM - 9:30 PM"
+    },
+    {
+      "id": "poi-fg-bandhaghat",
+      "name": "Bandhaghat Ferry Ghat",
+      "category": "ferry-ghat",
+      "lat": 22.6006105,
+      "lng": 88.3505226,
+      "address": "Bandhaghat, Mali Panchghara, Howrah 711106",
+      "openHours": "5:30 AM - 9:30 PM"
+    },
+    {
+      "id": "poi-fg-belur-math",
+      "name": "Belur Math Ferry Ghat",
+      "category": "ferry-ghat",
+      "lat": 22.6302069,
+      "lng": 88.3586108,
+      "address": "Ferry Ghat Rd, Belur, Howrah 711202",
+      "openHours": "5:30 AM - 9:30 PM"
+    },
+    {
+      "id": "poi-fg-jagannath-ghat",
+      "name": "Jagannath Ghat",
+      "category": "ferry-ghat",
+      "lat": 22.6193521,
+      "lng": 88.3600542,
+      "address": "BK Paul Temple Rd, Ghusuri, Howrah 711107",
+      "openHours": "5:30 AM - 9:30 PM"
+    },
+    {
+      "id": "poi-p1",
+      "name": "Shyambazar Police Station",
+      "category": "police-station",
+      "lat": 22.5881,
+      "lng": 88.3678,
+      "address": "64, Kali Charan Ghosh Road, Shyambazar",
+      "phone": "033-2555-1234",
+      "openHours": "24 Hours"
+    },
+    {
+      "id": "poi-p2",
+      "name": "Hare Street Police Station",
+      "category": "police-station",
+      "lat": 22.5703,
+      "lng": 88.3513,
+      "address": "1, Hare Street, BBD Bagh",
+      "phone": "033-2248-5577",
+      "openHours": "24 Hours"
+    },
+    {
+      "id": "poi-p3",
+      "name": "Bhowanipore Police Station",
+      "category": "police-station",
+      "lat": 22.536,
+      "lng": 88.348,
+      "address": "87, Lansdowne Road, Bhowanipore",
+      "phone": "033-2455-9900",
+      "openHours": "24 Hours"
+    },
+    {
+      "id": "poi-p4",
+      "name": "Lake Police Station",
+      "category": "police-station",
+      "lat": 22.5315,
+      "lng": 88.3484,
+      "address": "37/1, Sarat Bose Road",
+      "phone": "033-2486-1000",
+      "openHours": "24 Hours"
+    },
+    {
+      "id": "poi-p5",
+      "name": "Kasba Police Station",
+      "category": "police-station",
+      "lat": 22.5104,
+      "lng": 88.3927,
+      "address": "357A, Prince Anwar Shah Road",
+      "phone": "033-2440-9000",
+      "openHours": "24 Hours"
+    },
+    {
+      "id": "poi-h1",
+      "name": "SSKM (PG) Hospital",
+      "category": "hospital",
+      "lat": 22.5395,
+      "lng": 88.3403,
+      "address": "244, AJC Bose Road, South Kolkata",
+      "phone": "033-2223-1467",
+      "openHours": "24 Hours Emergency"
+    },
+    {
+      "id": "poi-h2",
+      "name": "Medical College and Hospital",
+      "category": "hospital",
+      "lat": 22.5745,
+      "lng": 88.366,
+      "address": "88, College Street, Central Kolkata",
+      "phone": "033-2241-3231",
+      "openHours": "24 Hours Emergency"
+    },
+    {
+      "id": "poi-h3",
+      "name": "Calcutta Medical Research Institute",
+      "category": "hospital",
+      "lat": 22.5463,
+      "lng": 88.3452,
+      "address": "7/2, Diamond Harbour Road",
+      "phone": "033-4038-7300",
+      "openHours": "24 Hours Emergency"
+    },
+    {
+      "id": "poi-h4",
+      "name": "Belle Vue Clinic",
+      "category": "hospital",
+      "lat": 22.5571,
+      "lng": 88.3534,
+      "address": "9, Dr UN Brahmachari Street, Park Street",
+      "phone": "033-2287-2321",
+      "openHours": "24 Hours Emergency"
+    },
+    {
+      "id": "poi-l1",
+      "name": "Victoria Memorial",
+      "category": "popular-landmark",
+      "lat": 22.5448,
+      "lng": 88.3426,
+      "address": "Victoria Memorial Hall, Queens Way",
+      "phone": "033-2223-1890",
+      "openHours": "10:00 AM - 5:00 PM (Closed Monday)"
+    },
+    {
+      "id": "poi-l2",
+      "name": "Howrah Bridge (Rabindra Setu)",
+      "category": "popular-landmark",
+      "lat": 22.5852,
+      "lng": 88.3464,
+      "address": "Howrah Bridge, Strand Road",
+      "openHours": "24 Hours"
+    },
+    {
+      "id": "poi-l3",
+      "name": "Dakshineswar Kali Temple",
+      "category": "popular-landmark",
+      "lat": 22.6553,
+      "lng": 88.3577,
+      "address": "Dakshineswar, North Kolkata",
+      "openHours": "6:00 AM - 12:30 PM, 3:00 PM - 8:30 PM"
+    },
+    {
+      "id": "poi-l4",
+      "name": "Kalighat Temple",
+      "category": "popular-landmark",
+      "lat": 22.5226,
+      "lng": 88.344,
+      "address": "Kalighat, South Kolkata",
+      "openHours": "5:00 AM - 2:00 PM, 5:00 PM - 10:30 PM"
+    },
+    {
+      "id": "poi-l5",
+      "name": "Indian Museum",
+      "category": "popular-landmark",
+      "lat": 22.5573,
+      "lng": 88.3508,
+      "address": "27, Jawaharlal Nehru Road, Park Street",
+      "phone": "033-2286-1699",
+      "openHours": "10:00 AM - 5:00 PM (Closed Monday)"
+    },
+    {
+      "id": "poi-rest1",
+      "name": "Peter Cat",
+      "category": "restaurant",
+      "lat": 22.5556,
+      "lng": 88.3507,
+      "address": "18A, Park Street",
+      "phone": "033-2229-8841",
+      "openHours": "12:00 PM - 11:00 PM"
+    },
+    {
+      "id": "poi-rest2",
+      "name": "Arsalan Biryani",
+      "category": "restaurant",
+      "lat": 22.5424,
+      "lng": 88.3753,
+      "address": "1A, Ho Chi Minh Sarani, Park Circus",
+      "phone": "033-2281-7878",
+      "openHours": "12:00 PM - 11:30 PM"
+    },
+    {
+      "id": "poi-rest3",
+      "name": "Flurys Tea Room",
+      "category": "restaurant",
+      "lat": 22.5558,
+      "lng": 88.3508,
+      "address": "18, Park Street",
+      "phone": "033-2229-7664",
+      "openHours": "8:00 AM - 9:30 PM"
+    },
+    {
+      "id": "poi-rest4",
+      "name": "Balwant Singh Eating House",
+      "category": "restaurant",
+      "lat": 22.5616,
+      "lng": 88.3591,
+      "address": "1A, Creek Row, Dharmatala",
+      "openHours": "7:00 AM - 11:00 PM"
+    },
+    {
+      "id": "poi-rest5",
+      "name": "Kasturi Restaurant",
+      "category": "restaurant",
+      "lat": 22.5703,
+      "lng": 88.3688,
+      "address": "26, Rabindra Sarani, Shyambazar",
+      "phone": "033-2555-3456",
+      "openHours": "11:00 AM - 10:30 PM"
+    },
+    {
+      "id": "poi-a1",
+      "name": "The Oberoi Grand",
+      "category": "accommodation",
+      "lat": 22.5564,
+      "lng": 88.3493,
+      "address": "15, Jawaharlal Nehru Road",
+      "phone": "033-2249-2323",
+      "openHours": "24 Hours"
+    },
+    {
+      "id": "poi-a2",
+      "name": "ITC Royal Bengal",
+      "category": "accommodation",
+      "lat": 22.5453,
+      "lng": 88.3734,
+      "address": "1, JBS Haldane Avenue",
+      "phone": "033-4455-7777",
+      "openHours": "24 Hours"
+    },
+    {
+      "id": "poi-a3",
+      "name": "Hyatt Regency Kolkata",
+      "category": "accommodation",
+      "lat": 22.5381,
+      "lng": 88.3955,
+      "address": "JA-1, Sector III, Salt Lake",
+      "phone": "033-2335-1234",
+      "openHours": "24 Hours"
+    },
+    {
+      "id": "poi-a4",
+      "name": "Hotel Broadway",
+      "category": "accommodation",
+      "lat": 22.5726,
+      "lng": 88.3497,
+      "address": "27A, Ganesh Chandra Avenue",
+      "phone": "033-2236-3930",
+      "openHours": "24 Hours"
+    },
+    {
+      "id": "poi-a5",
+      "name": "Lytton Hotel",
+      "category": "accommodation",
+      "lat": 22.5568,
+      "lng": 88.3527,
+      "address": "14, Sudder Street, New Market",
+      "phone": "033-2249-1872",
+      "openHours": "24 Hours"
+    },
+    {
+      "id": "poi-hd1",
+      "name": "Puja Help Desk - Esplanade",
+      "category": "help-desk",
+      "lat": 22.5651,
+      "lng": 88.3527,
+      "address": "Esplanade Bus Stand, Central Kolkata",
+      "phone": "1800-345-0345",
+      "openHours": "10:00 AM - 12:00 AM (During Puja)"
+    },
+    {
+      "id": "poi-hd2",
+      "name": "Puja Help Desk - Shyambazar",
+      "category": "help-desk",
+      "lat": 22.5872,
+      "lng": 88.3688,
+      "address": "Shyambazar 5 Crossing, North Kolkata",
+      "phone": "1800-345-0346",
+      "openHours": "10:00 AM - 12:00 AM (During Puja)"
+    },
+    {
+      "id": "poi-hd3",
+      "name": "Puja Help Desk - Golpark",
+      "category": "help-desk",
+      "lat": 22.5284,
+      "lng": 88.3543,
+      "address": "Golpark Crossing, South Kolkata",
+      "phone": "1800-345-0347",
+      "openHours": "10:00 AM - 12:00 AM (During Puja)"
+    },
+    {
+      "id": "poi-pk1",
+      "name": "Esplanade Parking Lot",
+      "category": "parking",
+      "lat": 22.5654,
+      "lng": 88.3512,
+      "address": "Esplanade, Central Kolkata",
+      "openHours": "24 Hours During Puja"
+    },
+    {
+      "id": "poi-pk2",
+      "name": "Rabindra Sarobar Parking",
+      "category": "parking",
+      "lat": 22.529,
+      "lng": 88.3502,
+      "address": "Rabindra Sarobar, South Kolkata",
+      "openHours": "6:00 AM - 11:00 PM"
+    },
+    {
+      "id": "poi-ph1",
+      "name": "Apollo Pharmacy - Park Street",
+      "category": "pharmacy",
+      "lat": 22.5543,
+      "lng": 88.351,
+      "address": "7, Park Street",
+      "phone": "033-4040-2222",
+      "openHours": "8:00 AM - 11:00 PM"
+    },
+    {
+      "id": "poi-ph2",
+      "name": "Medica Pharmacy - Gariahat",
+      "category": "pharmacy",
+      "lat": 22.5218,
+      "lng": 88.3649,
+      "address": "18, Gariahat Road",
+      "phone": "033-4060-3333",
+      "openHours": "8:00 AM - 10:00 PM"
+    },
+    {
+      "id": "poi-atm1",
+      "name": "SBI ATM - Esplanade",
+      "category": "atm",
+      "lat": 22.5648,
+      "lng": 88.352,
+      "address": "Esplanade, Central Kolkata",
+      "openHours": "24 Hours"
+    },
+    {
+      "id": "poi-atm2",
+      "name": "HDFC ATM - Park Street",
+      "category": "atm",
+      "lat": 22.555,
+      "lng": 88.3505,
+      "address": "Park Street, Central Kolkata",
+      "openHours": "24 Hours"
+    },
+    {
+      "id": "poi-fb1",
+      "name": "Central Fire Station",
+      "category": "fire-brigade",
+      "lat": 22.5726,
+      "lng": 88.351,
+      "address": "21, Mirza Ghalib Street, Esplanade",
+      "phone": "101",
+      "openHours": "24 Hours"
+    },
+    {
+      "id": "metro-baranagar",
+      "name": "Baranagar Metro Station",
+      "category": "metro-station",
+      "lat": 22.653529,
+      "lng": 88.378873,
+      "address": "Blue Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-baranagar-line1",
+      "name": "Baranagar Metro Station",
+      "category": "metro-station",
+      "lat": 22.653529,
+      "lng": 88.378873,
+      "address": "Also known as Swami Vivekananda",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-barun-sengupta",
+      "name": "Barun Sengupta Metro Station",
+      "category": "metro-station",
+      "lat": 22.543986,
+      "lng": 88.339274,
+      "address": "Orange Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-barun-sengupta-line6",
+      "name": "Barun Sengupta Metro Station",
+      "category": "metro-station",
+      "lat": 22.543986,
+      "lng": 88.399274,
+      "address": "Also known as Metropolitan / Science City / Dhapa / Mathpukur",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-behala-bazar",
+      "name": "Behala Bazar Metro Station",
+      "category": "metro-station",
+      "lat": 22.498929,
+      "lng": 88.317354,
+      "address": "Purple Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-behala-bazar-line3",
+      "name": "Behala Bazar Metro Station",
+      "category": "metro-station",
+      "lat": 22.498929,
+      "lng": 88.317354,
+      "address": "Behala Bazar, Purple Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-behala-chowrasta",
+      "name": "Behala Chowrasta Metro Station",
+      "category": "metro-station",
+      "lat": 22.487529,
+      "lng": 88.313426,
+      "address": "Purple Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-behala-chowrasta-line3",
+      "name": "Behala Chowrasta Metro Station",
+      "category": "metro-station",
+      "lat": 22.487529,
+      "lng": 88.313426,
+      "address": "Behala Chowrasta, Purple Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-beleghata",
+      "name": "Beleghata Metro Station",
+      "category": "metro-station",
+      "lat": 22.550703,
+      "lng": 88.404094,
+      "address": "Orange Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-beleghata-line6",
+      "name": "Beleghata Metro Station",
+      "category": "metro-station",
+      "lat": 22.550703,
+      "lng": 88.404094,
+      "address": "Also known as Tangra Metropolitan Township; current NE terminus of Orange Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-belgachhia",
+      "name": "Belgachhia Metro Station",
+      "category": "metro-station",
+      "lat": 22.60583,
+      "lng": 88.38639,
+      "address": "Blue Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-belgachhia-line1",
+      "name": "Belgachhia Metro Station",
+      "category": "metro-station",
+      "lat": 22.60583,
+      "lng": 88.38639,
+      "address": "Belgachhia, Blue Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-bengal-chemical",
+      "name": "Bengal Chemical Metro Station",
+      "category": "metro-station",
+      "lat": 22.580076,
+      "lng": 88.401283,
+      "address": "Green Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-bengal-chemical-line2",
+      "name": "Bengal Chemical Metro Station",
+      "category": "metro-station",
+      "lat": 22.580076,
+      "lng": 88.401283,
+      "address": "Also known as Acharya Prafulla Chandra Ray",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-central",
+      "name": "Central Metro Station",
+      "category": "metro-station",
+      "lat": 22.57247,
+      "lng": 88.358788,
+      "address": "Blue Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-central-line1",
+      "name": "Central Metro Station",
+      "category": "metro-station",
+      "lat": 22.57247,
+      "lng": 88.358788,
+      "address": "Also known as Bepin Behari Ganguly Street",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-central-park",
+      "name": "Central Park Metro Station",
+      "category": "metro-station",
+      "lat": 22.590437,
+      "lng": 88.415605,
+      "address": "Green Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-central-park-line2",
+      "name": "Central Park Metro Station",
+      "category": "metro-station",
+      "lat": 22.590437,
+      "lng": 88.415605,
+      "address": "Central Park, Green Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-chandni-chowk",
+      "name": "Chandni Chowk Metro Station",
+      "category": "metro-station",
+      "lat": 22.566796,
+      "lng": 88.354137,
+      "address": "Blue Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-chandni-chowk-line1",
+      "name": "Chandni Chowk Metro Station",
+      "category": "metro-station",
+      "lat": 22.566796,
+      "lng": 88.354137,
+      "address": "Also known as Ganesh Chandra Avenue",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-city-center",
+      "name": "City Center Metro Station",
+      "category": "metro-station",
+      "lat": 22.587069,
+      "lng": 88.407875,
+      "address": "Green Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-city-center-line2",
+      "name": "City Center Metro Station",
+      "category": "metro-station",
+      "lat": 22.587069,
+      "lng": 88.407875,
+      "address": "City Center, Green Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-dakshineswar",
+      "name": "Dakshineswar Metro Station",
+      "category": "metro-station",
+      "lat": 22.653971,
+      "lng": 88.363724,
+      "address": "Blue Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-dakshineswar-line1",
+      "name": "Dakshineswar Metro Station",
+      "category": "metro-station",
+      "lat": 22.653971,
+      "lng": 88.363724,
+      "address": "Also known as Sri Ramakrishna; Northern terminus of Blue Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-dum-dum",
+      "name": "Dum Dum Metro Station",
+      "category": "metro-station",
+      "lat": 22.62111,
+      "lng": 88.39278,
+      "address": "Blue Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-dum-dum-cantonment",
+      "name": "Dum Dum Cantonment Metro Station",
+      "category": "metro-station",
+      "lat": 22.638,
+      "lng": 88.4123,
+      "address": "Yellow Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-dum-dum-cantonment-line4",
+      "name": "Dum Dum Cantonment Metro Station",
+      "category": "metro-station",
+      "lat": 22.638,
+      "lng": 88.4123,
+      "address": "Dum Dum Cantonment, Yellow Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-dum-dum-line1",
+      "name": "Dum Dum Metro Station",
+      "category": "metro-station",
+      "lat": 22.62111,
+      "lng": 88.39278,
+      "address": "Adjacent to Dum Dum Junction railway station",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-esplanade",
+      "name": "Esplanade Metro Station",
+      "category": "metro-station",
+      "lat": 22.56444,
+      "lng": 88.35167,
+      "address": "Blue Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-esplanade-line1",
+      "name": "Esplanade Metro Station",
+      "category": "metro-station",
+      "lat": 22.56444,
+      "lng": 88.35167,
+      "address": "Largest station on the network; also known as Dharmatala; Green Line interchange since 6-Mar-2024",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-esplanade-line2",
+      "name": "Esplanade Metro Station",
+      "category": "metro-station",
+      "lat": 22.56444,
+      "lng": 88.35167,
+      "address": "Same station as Blue Line Esplanade above",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-girish-park",
+      "name": "Girish Park Metro Station",
+      "category": "metro-station",
+      "lat": 22.587143,
+      "lng": 88.363083,
+      "address": "Blue Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-girish-park-line1",
+      "name": "Girish Park Metro Station",
+      "category": "metro-station",
+      "lat": 22.587143,
+      "lng": 88.363083,
+      "address": "Also known as Jorasanko, birthplace of Rabindranath Tagore",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-gitanjali",
+      "name": "Gitanjali Metro Station",
+      "category": "metro-station",
+      "lat": 22.469426,
+      "lng": 88.369985,
+      "address": "Blue Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-gitanjali-line1",
+      "name": "Gitanjali Metro Station",
+      "category": "metro-station",
+      "lat": 22.469426,
+      "lng": 88.369985,
+      "address": "Also known as Naktala",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-hemanta-mukhopadhyay",
+      "name": "Hemanta Mukhopadhyay Metro Station",
+      "category": "metro-station",
+      "lat": 22.514777,
+      "lng": 88.401469,
+      "address": "Orange Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-hemanta-mukhopadhyay-line6",
+      "name": "Hemanta Mukhopadhyay Metro Station",
+      "category": "metro-station",
+      "lat": 22.514777,
+      "lng": 88.401469,
+      "address": "Also known as Ruby More",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-howrah",
+      "name": "Howrah Metro Station",
+      "category": "metro-station",
+      "lat": 22.584454,
+      "lng": 88.340578,
+      "address": "Green Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-howrah-line2",
+      "name": "Howrah Metro Station",
+      "category": "metro-station",
+      "lat": 22.584454,
+      "lng": 88.340578,
+      "address": "Deepest metro station in India (34 m); interchange with Howrah Jn railway station",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-howrah-maidan",
+      "name": "Howrah Maidan Metro Station",
+      "category": "metro-station",
+      "lat": 22.581998,
+      "lng": 88.332994,
+      "address": "Green Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-howrah-maidan-line2",
+      "name": "Howrah Maidan Metro Station",
+      "category": "metro-station",
+      "lat": 22.581998,
+      "lng": 88.332994,
+      "address": "Western terminus of Green Line; serves Howrah Municipal Stadium",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-jai-hind",
+      "name": "Jai Hind Metro Station",
+      "category": "metro-station",
+      "lat": 22.64619,
+      "lng": 88.43591,
+      "address": "Yellow Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-jai-hind-line4",
+      "name": "Jai Hind Metro Station",
+      "category": "metro-station",
+      "lat": 22.64619,
+      "lng": 88.43591,
+      "address": "Airport station (NSCBI Airport); also known as Biman Bandar; largest metro station in India (Aug 2025)",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-jatin-das-park",
+      "name": "Jatin Das Park Metro Station",
+      "category": "metro-station",
+      "lat": 22.524262,
+      "lng": 88.346489,
+      "address": "Blue Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-jatin-das-park-line1",
+      "name": "Jatin Das Park Metro Station",
+      "category": "metro-station",
+      "lat": 22.524262,
+      "lng": 88.346489,
+      "address": "Also known as Hazra",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-jessore-road",
+      "name": "Jessore Road Metro Station",
+      "category": "metro-station",
+      "lat": 22.639514,
+      "lng": 88.429777,
+      "address": "Yellow Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-jessore-road-line4",
+      "name": "Jessore Road Metro Station",
+      "category": "metro-station",
+      "lat": 22.639514,
+      "lng": 88.429777,
+      "address": "Jessore Road, Yellow Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-joka",
+      "name": "Joka Metro Station",
+      "category": "metro-station",
+      "lat": 22.452244,
+      "lng": 88.301751,
+      "address": "Purple Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-joka-line3",
+      "name": "Joka Metro Station",
+      "category": "metro-station",
+      "lat": 22.452244,
+      "lng": 88.301751,
+      "address": "Also known as Diamond Park; southern terminus of Purple Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-jyotirindra-nandi",
+      "name": "Jyotirindra Nandi Metro Station",
+      "category": "metro-station",
+      "lat": 22.495915,
+      "lng": 88.398667,
+      "address": "Orange Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-jyotirindra-nandi-line6",
+      "name": "Jyotirindra Nandi Metro Station",
+      "category": "metro-station",
+      "lat": 22.495915,
+      "lng": 88.398667,
+      "address": "Also known as Singhbari",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-kalighat",
+      "name": "Kalighat Metro Station",
+      "category": "metro-station",
+      "lat": 22.516652,
+      "lng": 88.346003,
+      "address": "Blue Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-kalighat-line1",
+      "name": "Kalighat Metro Station",
+      "category": "metro-station",
+      "lat": 22.516652,
+      "lng": 88.346003,
+      "address": "Also known as Rashbehari Basu",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-karunamoyee",
+      "name": "Karunamoyee Metro Station",
+      "category": "metro-station",
+      "lat": 22.586435,
+      "lng": 88.421515,
+      "address": "Green Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-karunamoyee-line2",
+      "name": "Karunamoyee Metro Station",
+      "category": "metro-station",
+      "lat": 22.586435,
+      "lng": 88.421515,
+      "address": "First Kolkata station with Platform Screen Doors",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-kavi-nazrul",
+      "name": "Kavi Nazrul Metro Station",
+      "category": "metro-station",
+      "lat": 22.46417,
+      "lng": 88.38055,
+      "address": "Blue Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-kavi-nazrul-line1",
+      "name": "Kavi Nazrul Metro Station",
+      "category": "metro-station",
+      "lat": 22.46417,
+      "lng": 88.38055,
+      "address": "Also known as Garia Bazar",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-kavi-subhash",
+      "name": "Kavi Subhash Metro Station",
+      "category": "metro-station",
+      "lat": 22.47194,
+      "lng": 88.39806,
+      "address": "Blue Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-kavi-subhash-line1",
+      "name": "Kavi Subhash Metro Station",
+      "category": "metro-station",
+      "lat": 22.47194,
+      "lng": 88.39806,
+      "address": "Also known as New Garia; southern terminus of Blue Line; interchange with Orange Line since 6-Mar-2024",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-kavi-subhash-line6",
+      "name": "Kavi Subhash Metro Station",
+      "category": "metro-station",
+      "lat": 22.47194,
+      "lng": 88.39806,
+      "address": "Southern terminus of Orange Line; same station as Blue Line Kavi Subhash",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-kavi-sukanta",
+      "name": "Kavi Sukanta Metro Station",
+      "category": "metro-station",
+      "lat": 22.505262,
+      "lng": 88.400996,
+      "address": "Orange Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-kavi-sukanta-line6",
+      "name": "Kavi Sukanta Metro Station",
+      "category": "metro-station",
+      "lat": 22.505262,
+      "lng": 88.400996,
+      "address": "Also known as Avishikta More",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-mahakaran",
+      "name": "Mahakaran Metro Station",
+      "category": "metro-station",
+      "lat": 22.571189,
+      "lng": 88.350106,
+      "address": "Green Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-mahakaran-line2",
+      "name": "Mahakaran Metro Station",
+      "category": "metro-station",
+      "lat": 22.571189,
+      "lng": 88.350106,
+      "address": "Mahakaran, Green Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-mahanayak-uttam-kumar",
+      "name": "Mahanayak Uttam Kumar Metro Station",
+      "category": "metro-station",
+      "lat": 22.49472,
+      "lng": 88.345,
+      "address": "Blue Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-mahanayak-uttam-kumar-line1",
+      "name": "Mahanayak Uttam Kumar Metro Station",
+      "category": "metro-station",
+      "lat": 22.49472,
+      "lng": 88.345,
+      "address": "Also known as Tollygunge",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-mahatma-gandhi-road",
+      "name": "Mahatma Gandhi Road Metro Station",
+      "category": "metro-station",
+      "lat": 22.580858,
+      "lng": 88.361401,
+      "address": "Blue Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-mahatma-gandhi-road-line1",
+      "name": "Mahatma Gandhi Road Metro Station",
+      "category": "metro-station",
+      "lat": 22.580858,
+      "lng": 88.361401,
+      "address": "Also known as Mahajati Sadan / Chittaranjan Avenue",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-maidan",
+      "name": "Maidan Metro Station",
+      "category": "metro-station",
+      "lat": 22.54944,
+      "lng": 88.34889,
+      "address": "Blue Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-maidan-line1",
+      "name": "Maidan Metro Station",
+      "category": "metro-station",
+      "lat": 22.54944,
+      "lng": 88.34889,
+      "address": "Also known as Gostho Pal",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-majerhat",
+      "name": "Majerhat Metro Station",
+      "category": "metro-station",
+      "lat": 22.5191,
+      "lng": 88.3234,
+      "address": "Purple Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-majerhat-line3",
+      "name": "Majerhat Metro Station",
+      "category": "metro-station",
+      "lat": 22.5191,
+      "lng": 88.3234,
+      "address": "Current northern terminus of Purple Line (pending extension)",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-masterda-surya-sen",
+      "name": "Masterda Surya Sen Metro Station",
+      "category": "metro-station",
+      "lat": 22.473521,
+      "lng": 88.360871,
+      "address": "Blue Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-masterda-surya-sen-line1",
+      "name": "Masterda Surya Sen Metro Station",
+      "category": "metro-station",
+      "lat": 22.473521,
+      "lng": 88.360871,
+      "address": "Also known as Bansdroni",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-netaji",
+      "name": "Netaji Metro Station",
+      "category": "metro-station",
+      "lat": 22.480976,
+      "lng": 88.346,
+      "address": "Blue Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-netaji-bhavan",
+      "name": "Netaji Bhavan Metro Station",
+      "category": "metro-station",
+      "lat": 22.53333,
+      "lng": 88.34611,
+      "address": "Blue Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-netaji-bhavan-line1",
+      "name": "Netaji Bhavan Metro Station",
+      "category": "metro-station",
+      "lat": 22.53333,
+      "lng": 88.34611,
+      "address": "Also known as Bhawanipore",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-netaji-line1",
+      "name": "Netaji Metro Station",
+      "category": "metro-station",
+      "lat": 22.480976,
+      "lng": 88.346,
+      "address": "Also known as Kudghat",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-noapara",
+      "name": "Noapara Metro Station",
+      "category": "metro-station",
+      "lat": 22.63972,
+      "lng": 88.39389,
+      "address": "Blue Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-noapara-line1",
+      "name": "Noapara Metro Station",
+      "category": "metro-station",
+      "lat": 22.63972,
+      "lng": 88.39389,
+      "address": "Also known as Maa Sarada; interchange with Yellow Line (from 22-Aug-2025)",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-noapara-line4",
+      "name": "Noapara Metro Station",
+      "category": "metro-station",
+      "lat": 22.63972,
+      "lng": 88.39389,
+      "address": "Southern terminus of Yellow Line; same station as Blue Line Noapara",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-park-street",
+      "name": "Park Street Metro Station",
+      "category": "metro-station",
+      "lat": 22.555,
+      "lng": 88.35028,
+      "address": "Blue Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-park-street-line1",
+      "name": "Park Street Metro Station",
+      "category": "metro-station",
+      "lat": 22.555,
+      "lng": 88.35028,
+      "address": "Also known as Mother Teresa",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-phoolbagan",
+      "name": "Phoolbagan Metro Station",
+      "category": "metro-station",
+      "lat": 22.57214,
+      "lng": 88.390282,
+      "address": "Green Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-phoolbagan-line2",
+      "name": "Phoolbagan Metro Station",
+      "category": "metro-station",
+      "lat": 22.57214,
+      "lng": 88.390282,
+      "address": "Phoolbagan, Green Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-rabindra-sadan",
+      "name": "Rabindra Sadan Metro Station",
+      "category": "metro-station",
+      "lat": 22.54139,
+      "lng": 88.34722,
+      "address": "Blue Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-rabindra-sadan-line1",
+      "name": "Rabindra Sadan Metro Station",
+      "category": "metro-station",
+      "lat": 22.54139,
+      "lng": 88.34722,
+      "address": "Also known as Exide",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-rabindra-sarobar",
+      "name": "Rabindra Sarobar Metro Station",
+      "category": "metro-station",
+      "lat": 22.50722,
+      "lng": 88.34556,
+      "address": "Blue Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-rabindra-sarobar-line1",
+      "name": "Rabindra Sarobar Metro Station",
+      "category": "metro-station",
+      "lat": 22.50722,
+      "lng": 88.34556,
+      "address": "Also known as Charu Market / Dhakuria",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-ritwik-ghatak",
+      "name": "Ritwik Ghatak Metro Station",
+      "category": "metro-station",
+      "lat": 22.532861,
+      "lng": 88.395765,
+      "address": "Orange Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-ritwik-ghatak-line6",
+      "name": "Ritwik Ghatak Metro Station",
+      "category": "metro-station",
+      "lat": 22.532861,
+      "lng": 88.395765,
+      "address": "Also known as Bantala Road / Uttar Panchanagram",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-sakherbazar",
+      "name": "Sakherbazar Metro Station",
+      "category": "metro-station",
+      "lat": 22.474611,
+      "lng": 88.309991,
+      "address": "Purple Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-sakherbazar-line3",
+      "name": "Sakherbazar Metro Station",
+      "category": "metro-station",
+      "lat": 22.474611,
+      "lng": 88.309991,
+      "address": "Also known as Silpara",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-salt-lake-sector-v",
+      "name": "Salt Lake Sector-V Metro Station",
+      "category": "metro-station",
+      "lat": 22.581318,
+      "lng": 88.429822,
+      "address": "Green Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-salt-lake-sector-v-line2",
+      "name": "Salt Lake Sector-V Metro Station",
+      "category": "metro-station",
+      "lat": 22.581318,
+      "lng": 88.429822,
+      "address": "Largest station on Green Line; eastern terminus",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-salt-lake-stadium",
+      "name": "Salt Lake Stadium Metro Station",
+      "category": "metro-station",
+      "lat": 22.57306,
+      "lng": 88.40306,
+      "address": "Green Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-salt-lake-stadium-line2",
+      "name": "Salt Lake Stadium Metro Station",
+      "category": "metro-station",
+      "lat": 22.57306,
+      "lng": 88.40306,
+      "address": "Salt Lake Stadium, Green Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-satyajit-ray",
+      "name": "Satyajit Ray Metro Station",
+      "category": "metro-station",
+      "lat": 22.4846,
+      "lng": 88.3926,
+      "address": "Orange Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-satyajit-ray-line6",
+      "name": "Satyajit Ray Metro Station",
+      "category": "metro-station",
+      "lat": 22.4846,
+      "lng": 88.3926,
+      "address": "Also known as Chak Garia / Ajoy Nagar",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-sealdah",
+      "name": "Sealdah Metro Station",
+      "category": "metro-station",
+      "lat": 22.567207,
+      "lng": 88.371497,
+      "address": "Green Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-sealdah-line2",
+      "name": "Sealdah Metro Station",
+      "category": "metro-station",
+      "lat": 22.567207,
+      "lng": 88.371497,
+      "address": "Interchange with Sealdah railway station (local/suburban/national rail)",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-shahid-khudiram",
+      "name": "Shahid Khudiram Metro Station",
+      "category": "metro-station",
+      "lat": 22.465972,
+      "lng": 88.39167,
+      "address": "Blue Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-shahid-khudiram-line1",
+      "name": "Shahid Khudiram Metro Station",
+      "category": "metro-station",
+      "lat": 22.465972,
+      "lng": 88.39167,
+      "address": "Also known as Briji / Dhalai Bridge",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-shobhabazar-sutanuti",
+      "name": "Shobhabazar Sutanuti Metro Station",
+      "category": "metro-station",
+      "lat": 22.596029,
+      "lng": 88.365285,
+      "address": "Blue Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-shobhabazar-sutanuti-line1",
+      "name": "Shobhabazar Sutanuti Metro Station",
+      "category": "metro-station",
+      "lat": 22.596029,
+      "lng": 88.365285,
+      "address": "Also known as Hatkhola",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-shyambazar",
+      "name": "Shyambazar Metro Station",
+      "category": "metro-station",
+      "lat": 22.601313,
+      "lng": 88.372586,
+      "address": "Blue Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-shyambazar-line1",
+      "name": "Shyambazar Metro Station",
+      "category": "metro-station",
+      "lat": 22.601313,
+      "lng": 88.372586,
+      "address": "Shyambazar, Blue Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-taratala",
+      "name": "Taratala Metro Station",
+      "category": "metro-station",
+      "lat": 22.508165,
+      "lng": 88.320563,
+      "address": "Purple Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-taratala-line3",
+      "name": "Taratala Metro Station",
+      "category": "metro-station",
+      "lat": 22.508165,
+      "lng": 88.320563,
+      "address": "Also known as Pathakpara",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-thakurpukur",
+      "name": "Thakurpukur Metro Station",
+      "category": "metro-station",
+      "lat": 22.464261,
+      "lng": 88.307555,
+      "address": "Purple Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-thakurpukur-line3",
+      "name": "Thakurpukur Metro Station",
+      "category": "metro-station",
+      "lat": 22.464261,
+      "lng": 88.307555,
+      "address": "Thakurpukur, Purple Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-vip-bazar",
+      "name": "VIP Bazar Metro Station",
+      "category": "metro-station",
+      "lat": 22.5255,
+      "lng": 88.39586,
+      "address": "Orange Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "metro-vip-bazar-line6",
+      "name": "VIP Bazar Metro Station",
+      "category": "metro-station",
+      "lat": 22.5255,
+      "lng": 88.39586,
+      "address": "VIP Bazar, Orange Line",
+      "openHours": "6:45 AM - 10:45 PM (Extended during Puja)"
+    },
+    {
+      "id": "rail-agarpara",
+      "name": "Agarpara",
+      "category": "railway-station",
+      "lat": 22.683686,
+      "lng": 88.38525,
+      "address": "Sealdah-Naihati Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-akra",
+      "name": "Akra",
+      "category": "railway-station",
+      "lat": 22.514658,
+      "lng": 88.249255,
+      "address": "Ballygunge-Budge Budge Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-ambika-kalna",
+      "name": "Ambika Kalna",
+      "category": "railway-station",
+      "lat": 23.213423,
+      "lng": 88.353174,
+      "address": "Howrah-Katwa Line (via Bandel)",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-b.b.d.-bag",
+      "name": "B.B.D. Bag",
+      "category": "railway-station",
+      "lat": 22.576681,
+      "lng": 88.346601,
+      "address": "Circular Railway (Chakra Rail)",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-bagbazar",
+      "name": "Bagbazar",
+      "category": "railway-station",
+      "lat": 22.605185,
+      "lng": 88.365285,
+      "address": "Circular Railway (Chakra Rail)",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-baghajatin",
+      "name": "Baghajatin",
+      "category": "railway-station",
+      "lat": 22.48274,
+      "lng": 88.386652,
+      "address": "Sealdah-Sonarpur Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-bahirkhanda",
+      "name": "Bahirkhanda",
+      "category": "railway-station",
+      "lat": 22.852647,
+      "lng": 88.069119,
+      "address": "Howrah-Tarakeswar Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-baidyabati",
+      "name": "Baidyabati",
+      "category": "railway-station",
+      "lat": 22.795324,
+      "lng": 88.332011,
+      "address": "Howrah-Bandel Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-bally",
+      "name": "Bally",
+      "category": "railway-station",
+      "lat": 22.655931,
+      "lng": 88.34054,
+      "address": "Howrah-Bandel Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-bally-ghat",
+      "name": "Bally Ghat",
+      "category": "railway-station",
+      "lat": 22.652559,
+      "lng": 88.348316,
+      "address": "Sealdah-Dankuni (via Bally)",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-bally-halt",
+      "name": "Bally Halt",
+      "category": "railway-station",
+      "lat": 22.652245,
+      "lng": 88.339242,
+      "address": "Sealdah-Dankuni (via Bally)",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-ballygunge-junction",
+      "name": "Ballygunge Junction",
+      "category": "railway-station",
+      "lat": 22.519377,
+      "lng": 88.372135,
+      "address": "Railway Stations",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-bandel-junction",
+      "name": "Bandel Junction",
+      "category": "railway-station",
+      "lat": 22.9232,
+      "lng": 88.378459,
+      "address": "Howrah-Bandel Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-bans-beria",
+      "name": "Bans Beria",
+      "category": "railway-station",
+      "lat": 22.957407,
+      "lng": 88.395266,
+      "address": "Howrah-Katwa Line (via Bandel)",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-baranagar-road",
+      "name": "Baranagar Road",
+      "category": "railway-station",
+      "lat": 22.65364,
+      "lng": 88.378515,
+      "address": "Sealdah-Dankuni (via Bally)",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-barasat-junction",
+      "name": "Barasat Junction",
+      "category": "railway-station",
+      "lat": 22.723556,
+      "lng": 88.483228,
+      "address": "Sealdah-Barasat Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-bardhaman-junction",
+      "name": "Bardhaman Junction",
+      "category": "railway-station",
+      "lat": 23.250268,
+      "lng": 87.869609,
+      "address": "Howrah-Bardhaman Chord Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-barrackpore",
+      "name": "Barrackpore",
+      "category": "railway-station",
+      "lat": 22.760265,
+      "lng": 88.371112,
+      "address": "Sealdah-Naihati Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-baruipara",
+      "name": "Baruipara",
+      "category": "railway-station",
+      "lat": 22.767241,
+      "lng": 88.237019,
+      "address": "Howrah-Bardhaman Chord Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-begampur",
+      "name": "Begampur",
+      "category": "railway-station",
+      "lat": 22.738447,
+      "lng": 88.255029,
+      "address": "Howrah-Bardhaman Chord Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-belanagar",
+      "name": "Belanagar",
+      "category": "railway-station",
+      "lat": 22.66125,
+      "lng": 88.319074,
+      "address": "Howrah-Bardhaman Chord Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-belgharia",
+      "name": "Belgharia",
+      "category": "railway-station",
+      "lat": 22.661903,
+      "lng": 88.389285,
+      "address": "Sealdah-Naihati Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-belur",
+      "name": "Belur",
+      "category": "railway-station",
+      "lat": 22.636254,
+      "lng": 88.339772,
+      "address": "Howrah-Bandel Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-bhadreshwar",
+      "name": "Bhadreshwar",
+      "category": "railway-station",
+      "lat": 22.827879,
+      "lng": 88.341503,
+      "address": "Howrah-Bandel Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-bidhan-nagar-road",
+      "name": "Bidhan Nagar Road",
+      "category": "railway-station",
+      "lat": 22.591451,
+      "lng": 88.390814,
+      "address": "Sealdah-Naihati Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-bidhannagar-road",
+      "name": "Bidhannagar Road",
+      "category": "railway-station",
+      "lat": 22.591451,
+      "lng": 88.390814,
+      "address": "Circular Railway (Chakra Rail)",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-birati",
+      "name": "Birati",
+      "category": "railway-station",
+      "lat": 22.664186,
+      "lng": 88.427449,
+      "address": "Sealdah-Barasat Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-bisharpara-kodaliya",
+      "name": "Bisharpara Kodaliya",
+      "category": "railway-station",
+      "lat": 22.676558,
+      "lng": 88.43485,
+      "address": "Sealdah-Barasat Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-brace-bridge",
+      "name": "Brace Bridge",
+      "category": "railway-station",
+      "lat": 22.517909,
+      "lng": 88.301182,
+      "address": "Ballygunge-Budge Budge Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-chanchai",
+      "name": "Chanchai",
+      "category": "railway-station",
+      "lat": 23.158235,
+      "lng": 88.026036,
+      "address": "Howrah-Bardhaman Chord Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-chandannagar",
+      "name": "Chandannagar",
+      "category": "railway-station",
+      "lat": 22.867161,
+      "lng": 88.354087,
+      "address": "Howrah-Bandel Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-chandanpur",
+      "name": "Chandanpur",
+      "category": "railway-station",
+      "lat": 22.880406,
+      "lng": 88.176387,
+      "address": "Howrah-Bardhaman Chord Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-chinsurah-chuchura",
+      "name": "Chinsurah (Chuchura)",
+      "category": "railway-station",
+      "lat": 22.890158,
+      "lng": 88.369875,
+      "address": "Howrah-Bandel Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-dakshineswar",
+      "name": "Dakshineswar",
+      "category": "railway-station",
+      "lat": 22.653971,
+      "lng": 88.363724,
+      "address": "Sealdah-Dankuni (via Bally)",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-dankuni-junction",
+      "name": "Dankuni Junction",
+      "category": "railway-station",
+      "lat": 22.678093,
+      "lng": 88.290426,
+      "address": "Sealdah-Dankuni (via Bally)",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-dasnagar",
+      "name": "Dasnagar",
+      "category": "railway-station",
+      "lat": 22.598094,
+      "lng": 88.307762,
+      "address": "Howrah-Santragachi Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-dhakuria",
+      "name": "Dhakuria",
+      "category": "railway-station",
+      "lat": 22.509148,
+      "lng": 88.371188,
+      "address": "Sealdah-Sonarpur Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-diara",
+      "name": "Diara",
+      "category": "railway-station",
+      "lat": 22.798358,
+      "lng": 88.281483,
+      "address": "Howrah-Tarakeswar Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-dum-dum-cantonment",
+      "name": "Dum Dum Cantonment",
+      "category": "railway-station",
+      "lat": 22.63713,
+      "lng": 88.412095,
+      "address": "Sealdah-Barasat Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-dum-dum-junction",
+      "name": "Dum Dum Junction",
+      "category": "railway-station",
+      "lat": 22.621183,
+      "lng": 88.393141,
+      "address": "Railway Stations",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-durganagar",
+      "name": "Durganagar",
+      "category": "railway-station",
+      "lat": 22.650643,
+      "lng": 88.419254,
+      "address": "Sealdah-Barasat Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-eden-gardens",
+      "name": "Eden Gardens",
+      "category": "railway-station",
+      "lat": 22.565058,
+      "lng": 88.339326,
+      "address": "Circular Railway (Chakra Rail)",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-garia",
+      "name": "Garia",
+      "category": "railway-station",
+      "lat": 22.466237,
+      "lng": 88.40501,
+      "address": "Sealdah-Sonarpur Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-garifa",
+      "name": "Garifa",
+      "category": "railway-station",
+      "lat": 22.908419,
+      "lng": 88.41265,
+      "address": "Naihati-Bandel Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-gobra",
+      "name": "Gobra",
+      "category": "railway-station",
+      "lat": 22.69607,
+      "lng": 88.279389,
+      "address": "Howrah-Bardhaman Chord Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-haripal",
+      "name": "Haripal",
+      "category": "railway-station",
+      "lat": 22.831547,
+      "lng": 88.119163,
+      "address": "Howrah-Tarakeswar Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-hind-motor",
+      "name": "Hind Motor",
+      "category": "railway-station",
+      "lat": 22.685756,
+      "lng": 88.336076,
+      "address": "Howrah-Bandel Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-hooghly",
+      "name": "Hooghly",
+      "category": "railway-station",
+      "lat": 22.90603,
+      "lng": 88.376168,
+      "address": "Howrah-Bandel Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-hooghly-ghat",
+      "name": "Hooghly Ghat",
+      "category": "railway-station",
+      "lat": 22.904874,
+      "lng": 88.396466,
+      "address": "Naihati-Bandel Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-howrah-junction",
+      "name": "Howrah Junction",
+      "category": "railway-station",
+      "lat": 22.583946,
+      "lng": 88.343407,
+      "address": "Railway Stations",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-hridaypur",
+      "name": "Hridaypur",
+      "category": "railway-station",
+      "lat": 22.710707,
+      "lng": 88.469692,
+      "address": "Sealdah-Barasat Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-ichhapur",
+      "name": "Ichhapur",
+      "category": "railway-station",
+      "lat": 22.800456,
+      "lng": 88.37368,
+      "address": "Sealdah-Naihati Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-jadavpur",
+      "name": "Jadavpur",
+      "category": "railway-station",
+      "lat": 22.495416,
+      "lng": 88.374747,
+      "address": "Sealdah-Sonarpur Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-jagatdal-jagaddal",
+      "name": "Jagatdal (Jagaddal)",
+      "category": "railway-station",
+      "lat": 22.850758,
+      "lng": 88.394907,
+      "address": "Sealdah-Naihati Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-janai-road",
+      "name": "Janai Road",
+      "category": "railway-station",
+      "lat": 22.721908,
+      "lng": 88.265249,
+      "address": "Howrah-Bardhaman Chord Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-kaikala",
+      "name": "Kaikala",
+      "category": "railway-station",
+      "lat": 22.840565,
+      "lng": 88.091581,
+      "address": "Howrah-Tarakeswar Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-kamarkundu",
+      "name": "Kamarkundu",
+      "category": "railway-station",
+      "lat": 22.820725,
+      "lng": 88.20526,
+      "address": "Howrah-Bardhaman Chord Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-kankinara",
+      "name": "Kankinara",
+      "category": "railway-station",
+      "lat": 22.866507,
+      "lng": 88.405346,
+      "address": "Sealdah-Naihati Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-katwa-junction",
+      "name": "Katwa Junction",
+      "category": "railway-station",
+      "lat": 23.640148,
+      "lng": 88.122533,
+      "address": "Howrah-Katwa Line (via Bandel)",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-khardaha",
+      "name": "Khardaha",
+      "category": "railway-station",
+      "lat": 22.724913,
+      "lng": 88.377509,
+      "address": "Sealdah-Naihati Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-khidderpore",
+      "name": "Khidderpore",
+      "category": "railway-station",
+      "lat": 22.537555,
+      "lng": 88.315825,
+      "address": "Circular Railway (Chakra Rail)",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-kolkata-chitpur",
+      "name": "Kolkata (Chitpur)",
+      "category": "railway-station",
+      "lat": 22.601838,
+      "lng": 88.383066,
+      "address": "Railway Stations",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-komagata-maru-budge-budge",
+      "name": "Komagata Maru Budge Budge",
+      "category": "railway-station",
+      "lat": 22.49289,
+      "lng": 88.194859,
+      "address": "Ballygunge-Budge Budge Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-konnagar",
+      "name": "Konnagar",
+      "category": "railway-station",
+      "lat": 22.700993,
+      "lng": 88.342544,
+      "address": "Howrah-Bandel Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-lake-gardens",
+      "name": "Lake Gardens",
+      "category": "railway-station",
+      "lat": 22.508071,
+      "lng": 88.353284,
+      "address": "Circular Railway (Chakra Rail)",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-liluah",
+      "name": "Liluah",
+      "category": "railway-station",
+      "lat": 22.620782,
+      "lng": 88.339198,
+      "address": "Railway Stations",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-loknath",
+      "name": "Loknath",
+      "category": "railway-station",
+      "lat": 22.871608,
+      "lng": 88.034151,
+      "address": "Howrah-Tarakeswar Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-madhyamgram",
+      "name": "Madhyamgram",
+      "category": "railway-station",
+      "lat": 22.694695,
+      "lng": 88.452755,
+      "address": "Sealdah-Barasat Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-majerhat",
+      "name": "Majerhat",
+      "category": "railway-station",
+      "lat": 22.519054,
+      "lng": 88.322131,
+      "address": "Circular Railway (Chakra Rail)",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-mankundu",
+      "name": "Mankundu",
+      "category": "railway-station",
+      "lat": 22.846561,
+      "lng": 88.346881,
+      "address": "Howrah-Bandel Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-masagram-junction",
+      "name": "Masagram Junction",
+      "category": "railway-station",
+      "lat": 23.135301,
+      "lng": 88.042499,
+      "address": "Howrah-Bardhaman Chord Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-nabadwip-dham",
+      "name": "Nabadwip Dham",
+      "category": "railway-station",
+      "lat": 23.397728,
+      "lng": 88.356725,
+      "address": "Howrah-Katwa Line (via Bandel)",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-naihati-junction",
+      "name": "Naihati Junction",
+      "category": "railway-station",
+      "lat": 22.887602,
+      "lng": 88.418096,
+      "address": "Sealdah-Naihati Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-nalikul",
+      "name": "Nalikul",
+      "category": "railway-station",
+      "lat": 22.830301,
+      "lng": 88.166773,
+      "address": "Howrah-Tarakeswar Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-nangi",
+      "name": "Nangi",
+      "category": "railway-station",
+      "lat": 22.500516,
+      "lng": 88.224043,
+      "address": "Ballygunge-Budge Budge Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-narendrapur-halt",
+      "name": "Narendrapur Halt",
+      "category": "railway-station",
+      "lat": 22.454117,
+      "lng": 88.418352,
+      "address": "Sealdah-Sonarpur Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-new-alipore",
+      "name": "New Alipore",
+      "category": "railway-station",
+      "lat": 22.509929,
+      "lng": 88.336008,
+      "address": "Circular Railway (Chakra Rail)",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-new-barrackpore",
+      "name": "New Barrackpore",
+      "category": "railway-station",
+      "lat": 22.686967,
+      "lng": 88.445087,
+      "address": "Sealdah-Barasat Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-new-garia",
+      "name": "New Garia",
+      "category": "railway-station",
+      "lat": 22.472736,
+      "lng": 88.397671,
+      "address": "Sealdah-Sonarpur Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-padmapukur",
+      "name": "Padmapukur",
+      "category": "railway-station",
+      "lat": 22.567,
+      "lng": 88.303,
+      "address": "Shalimar-Santragachi Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-palta",
+      "name": "Palta",
+      "category": "railway-station",
+      "lat": 22.782499,
+      "lng": 88.370099,
+      "address": "Sealdah-Naihati Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-park-circus",
+      "name": "Park Circus",
+      "category": "railway-station",
+      "lat": 22.540947,
+      "lng": 88.373901,
+      "address": "Sealdah-Sonarpur Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-patipukur",
+      "name": "Patipukur",
+      "category": "railway-station",
+      "lat": 22.60734,
+      "lng": 88.393876,
+      "address": "Circular Railway (Chakra Rail)",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-prinsep-ghat",
+      "name": "Prinsep Ghat",
+      "category": "railway-station",
+      "lat": 22.556955,
+      "lng": 88.331604,
+      "address": "Circular Railway (Chakra Rail)",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-rajchandrapur",
+      "name": "Rajchandrapur",
+      "category": "railway-station",
+      "lat": 22.65294,
+      "lng": 88.320911,
+      "address": "Sealdah-Dankuni (via Bally)",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-ramrajatala",
+      "name": "Ramrajatala",
+      "category": "railway-station",
+      "lat": 22.589382,
+      "lng": 88.296752,
+      "address": "Howrah-Santragachi Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-remount-road",
+      "name": "Remount Road",
+      "category": "railway-station",
+      "lat": 22.52595,
+      "lng": 88.316734,
+      "address": "Circular Railway (Chakra Rail)",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-rishra",
+      "name": "Rishra",
+      "category": "railway-station",
+      "lat": 22.726182,
+      "lng": 88.343577,
+      "address": "Howrah-Bandel Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-saktigarh",
+      "name": "Saktigarh",
+      "category": "railway-station",
+      "lat": 23.207301,
+      "lng": 87.968942,
+      "address": "Howrah-Bardhaman Chord Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-santoshpur",
+      "name": "Santoshpur",
+      "category": "railway-station",
+      "lat": 22.524135,
+      "lng": 88.272198,
+      "address": "Ballygunge-Budge Budge Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-santragachi-junction",
+      "name": "Santragachi Junction",
+      "category": "railway-station",
+      "lat": 22.583654,
+      "lng": 88.283615,
+      "address": "Railway Stations",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-sealdah",
+      "name": "Sealdah",
+      "category": "railway-station",
+      "lat": 22.567792,
+      "lng": 88.37102,
+      "address": "Railway Stations",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-seoraphuli-junction",
+      "name": "Seoraphuli Junction",
+      "category": "railway-station",
+      "lat": 22.774208,
+      "lng": 88.328637,
+      "address": "Howrah-Bandel Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-serampore-shrirampur",
+      "name": "Serampore (Shrirampur)",
+      "category": "railway-station",
+      "lat": 22.754097,
+      "lng": 88.338922,
+      "address": "Howrah-Bandel Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-shalimar",
+      "name": "Shalimar",
+      "category": "railway-station",
+      "lat": 22.554637,
+      "lng": 88.316661,
+      "address": "Railway Stations",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-shyamnagar",
+      "name": "Shyamnagar",
+      "category": "railway-station",
+      "lat": 22.828519,
+      "lng": 88.380339,
+      "address": "Sealdah-Naihati Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-sir-gurudas-banerjee-halt",
+      "name": "Sir Gurudas Banerjee Halt",
+      "category": "railway-station",
+      "lat": 22.574214,
+      "lng": 88.385154,
+      "address": "Circular Railway (Chakra Rail)",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-sodepur",
+      "name": "Sodepur",
+      "category": "railway-station",
+      "lat": 22.699263,
+      "lng": 88.382379,
+      "address": "Sealdah-Naihati Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-sonarpur-junction",
+      "name": "Sonarpur Junction",
+      "category": "railway-station",
+      "lat": 22.44298,
+      "lng": 88.430544,
+      "address": "Sealdah-Sonarpur Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-sovabazar-ahiritola",
+      "name": "Sovabazar Ahiritola",
+      "category": "railway-station",
+      "lat": 22.59754,
+      "lng": 88.355027,
+      "address": "Circular Railway (Chakra Rail)",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-tala",
+      "name": "Tala",
+      "category": "railway-station",
+      "lat": 22.606382,
+      "lng": 88.378872,
+      "address": "Circular Railway (Chakra Rail)",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-tarakeswar",
+      "name": "Tarakeswar",
+      "category": "railway-station",
+      "lat": 22.882403,
+      "lng": 88.014213,
+      "address": "Howrah-Tarakeswar Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-tikiapara",
+      "name": "Tikiapara",
+      "category": "railway-station",
+      "lat": 22.5986,
+      "lng": 88.3243,
+      "address": "Howrah-Santragachi Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-titagarh",
+      "name": "Titagarh",
+      "category": "railway-station",
+      "lat": 22.741722,
+      "lng": 88.374582,
+      "address": "Sealdah-Naihati Line",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-tollygunge",
+      "name": "Tollygunge",
+      "category": "railway-station",
+      "lat": 22.507755,
+      "lng": 88.347494,
+      "address": "Circular Railway (Chakra Rail)",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-tribeni",
+      "name": "Tribeni",
+      "category": "railway-station",
+      "lat": 22.991405,
+      "lng": 88.398737,
+      "address": "Howrah-Katwa Line (via Bandel)",
+      "openHours": "24 Hours Railway Station"
+    },
+    {
+      "id": "rail-uttarpara",
+      "name": "Uttarpara",
+      "category": "railway-station",
+      "lat": 22.667598,
+      "lng": 88.341208,
+      "address": "Howrah-Bandel Line",
+      "openHours": "24 Hours Railway Station"
+    }
+  ]
+}

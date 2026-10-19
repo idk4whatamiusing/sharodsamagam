@@ -99,13 +99,17 @@ export function injectFestivalStatusSlot(html: string): string {
   if (!html.includes(MAHALAYA_TEXT)) return html;
   return html.replace(
     MAHALAYA_TEXT,
-    '<span data-mahalaya-status>Sharodotsav 2026</span>'
+    '<span data-mahalaya-status>Sharodsamagam 2026</span>'
   );
 }
 
 const COUNTDOWN_SKELETON_OPEN =
   '<div class="flex items-center justify-between sm:justify-around py-1">';
-const COUNTDOWN_SKELETON_CLOSE = '<p class="text-[8px] text-amber-200/50 font-mono pt-0.5">Sharodotsav 2026</p>';
+// The skeleton's last node is a small caption <p>. It is matched by its own
+// classes rather than by its text, so the brand on the page can change without
+// breaking where the slot ends.
+const COUNTDOWN_SKELETON_CAPTION =
+  '<p class="text-[8px] text-amber-200/50 font-mono pt-0.5">';
 
 /**
  * Replaces the never-resolving Countdown Card skeleton with an empty slot
@@ -123,13 +127,16 @@ export function injectCountdownSlot(html: string): string {
   const cardIdx = html.indexOf("Countdown Card");
   if (cardIdx === -1 || cardIdx > start) return html;
 
-  const end = html.indexOf(COUNTDOWN_SKELETON_CLOSE, start);
+  const end = html.indexOf(COUNTDOWN_SKELETON_CAPTION, start);
   if (end === -1) return html;
+  const close = html.indexOf("</p>", end);
+  if (close === -1) return html;
+  const cut = close + "</p>".length;
 
   return (
     html.slice(0, start) +
     '<div data-countdown-slot class="block"></div>' +
-    html.slice(end + COUNTDOWN_SKELETON_CLOSE.length)
+    html.slice(cut)
   );
 }
 
@@ -243,8 +250,8 @@ export function injectHeroCard(html: string): string {
       out.slice(skeletonEnd);
   }
 
-  // 3. Brand. The original's name appears in the caption and in several
-  //    other places on the page; ours is Sharodsamagam throughout.
+  // 3. Brand, as a safety net: the mirror carries our own name, but a future
+  //    re-harvest of the original would bring its name back in.
   out = out.split("Sharodotsav").join("Sharodsamagam");
 
   // 4. Stale stats. The card said "700+" and "5 Zones"; the dataset has

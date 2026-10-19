@@ -42,6 +42,8 @@ const SEEDS = [
   "/chronicles/",
   "/announcements/",
   "/points-of-interest/",
+  "/eden-gardens-live/",
+  "/upload/",
   "/copyright/",
 ];
 

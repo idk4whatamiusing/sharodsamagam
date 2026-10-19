@@ -13,6 +13,9 @@ import AudioPlayer from "../components/AudioPlayer";
 import ParasInteractions from "../components/ParasInteractions";
 import MapInjector from "../components/MapInjector";
 import MetroInjector from "../components/MetroInjector";
+import EdenLive from "../components/EdenLive";
+import AboutJourney from "../components/AboutJourney";
+import PoiSearch from "../components/PoiSearch";
 import "./globals.css";
 
 const MIRROR = path.join(process.cwd(), "mirror");
@@ -73,6 +76,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ParasInteractions />
         <MapInjector />
         <MetroInjector />
+        <EdenLive />
+        <AboutJourney />
+        <PoiSearch />
         <Countdown />
         <FestivalDays />
         <FestivalStatus />

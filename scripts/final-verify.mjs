@@ -753,6 +753,323 @@ console.log("\n== GUIDE SUB-PAGES ==");
   await p.close();
 }
 
+// ---------- the pages polished after the first pass ----------
+console.log("\n== EVENTS + EDEN GARDENS ==");
+{
+  const p = await b.newPage({ viewport: { width: 1440, height: 1000 } });
+  const errs = [];
+  p.on("pageerror", (e) => errs.push(e.message.slice(0, 100)));
+  p.on("console", (c) => c.type() === "error" && errs.push(c.text().slice(0, 100)));
+
+  await ready(p, B + "/events/");
+  const card = await p.evaluate(() => {
+    // The card is a div; its CTA is the anchor inside it.
+    const link = document.querySelector('main a[href="/eden-gardens-live"]');
+    return {
+      href: link?.getAttribute("href") || "",
+      text: (link?.parentElement?.innerText || "").replace(/\s+/g, " ").trim(),
+    };
+  });
+  ok(card.href === "/eden-gardens-live", `events: the broadcast card links to the replay (${card.href})`);
+  ok(
+    // The badge is uppercased by CSS, so innerText reports it in caps.
+    /full broadcast recording/i.test(card.text) &&
+      /10 October 2026/.test(card.text) &&
+      /Eden Gardens Mahalaya 2026 Mega Celebration/.test(card.text),
+    "events: the card keeps the original's badge, date and title"
+  );
+
+  // The card was added because the original's own CTA pointed at a page the
+  // scrape had not mirrored; the destination has to answer.
+  const res = await p.request.get(B + card.href);
+  ok(res.status() === 200, `events: the replay page answers (${res.status()})`);
+
+  await ready(p, B + "/eden-gardens-live/");
+  const theater = await p.evaluate(async () => {
+    const wrap = document.querySelector("[data-eden-wrap]");
+    const btn = document.querySelector("[data-eden-theater]");
+    const label = () => document.querySelector("[data-eden-label]")?.textContent || "";
+    const before = { cls: wrap?.className || "", label: label() };
+    btn?.click();
+    await new Promise((r) => setTimeout(r, 150));
+    const on = { cls: wrap?.className || "", label: label() };
+    btn?.click();
+    await new Promise((r) => setTimeout(r, 150));
+    const off = { cls: wrap?.className || "", label: label() };
+    return { before, on, off, iframe: !!document.querySelector('iframe[src*="youtube"]') };
+  });
+  ok(
+    /max-w-5xl/.test(theater.before.cls) && theater.before.label === "Theater Mode",
+    "eden: theater mode starts off"
+  );
+  ok(
+    /max-w-7xl/.test(theater.on.cls) && !/max-w-5xl/.test(theater.on.cls) && theater.on.label === "Standard View",
+    "eden: theater mode widens the column and relabels itself"
+  );
+  ok(
+    /max-w-5xl/.test(theater.off.cls) && theater.off.label === "Theater Mode",
+    "eden: pressing it again restores the standard view"
+  );
+  ok(theater.iframe, "eden: the broadcast player is embedded");
+
+  // Share: headless has no share sheet, so the original's own fallback - copy
+  // the URL and show "Link Copied" for 2.5 s - is the path to check. Some
+  // builds of this browser do expose navigator.share without a sheet behind
+  // it, which would leave the click waiting forever, so the fallback is
+  // forced by hiding the API first.
+  await p.evaluate(() => {
+    Object.defineProperty(Navigator.prototype, "share", {
+      value: undefined,
+      configurable: true,
+    });
+  });
+  await p.context().grantPermissions(["clipboard-read", "clipboard-write"], { origin: B });
+  await p.bringToFront();
+  await p.click("[data-eden-share]");
+  const copied = await p
+    .waitForFunction(
+      () => /Link Copied/.test(document.querySelector("[data-eden-share]")?.textContent || ""),
+      null,
+      { timeout: 5000 }
+    )
+    .then(() => true)
+    .catch(() => false);
+  ok(copied, "eden: share falls back to copying the link and says so");
+  const reverted = await p
+    .waitForFunction(
+      () => /^Share/.test((document.querySelector("[data-eden-share]")?.textContent || "").trim()),
+      null,
+      { timeout: 5000 }
+    )
+    .then(() => true)
+    .catch(() => false);
+  ok(reverted, "eden: the copied state clears itself");
+  ok(
+    errs.length === 0,
+    "events + eden console clean" + (errs.length ? ": " + [...new Set(errs)].join(" | ") : "")
+  );
+  await p.close();
+}
+
+console.log("\n== ABOUT-US JOURNEY ==");
+{
+  // The original keeps five of the six day panels in its client component and
+  // server-renders only the day it happens to open on. data/about-days.json
+  // holds all six, captured by clicking each tab in a real browser.
+  const DAYS = [
+    ["Mahalaya", "Mahalaya: The Celestial Reawakening"],
+    ["Maha Shasthi", "Maha Shasthi: Bodhon & Sacred Unveiling"],
+    ["Maha Saptami", "Maha Saptami: Nabapatrika Snan"],
+    ["Maha Ashtami", "Maha Ashtami: Kumari Puja & Sandhi Puja"],
+    ["Maha Navami", "Maha Navami: Maha Arati & Dhunuchi Naach"],
+    ["Bijoya Dashami", "Bijoya Dashami: Sindoor Khela & Immersion"],
+  ];
+  const p = await b.newPage({ viewport: { width: 1440, height: 1000 } });
+  const errs = [];
+  p.on("pageerror", (e) => errs.push(e.message.slice(0, 100)));
+  p.on("console", (c) => c.type() === "error" && errs.push(c.text().slice(0, 100)));
+
+  await ready(p, B + "/about-us/");
+  const initial = await p.evaluate(() => {
+    const panel = document.querySelector("[data-about-panel]");
+    const buttons = [...document.querySelectorAll("[data-about-day]")];
+    return {
+      tabs: buttons.map((b) => b.dataset.aboutDay),
+      active: buttons.find((b) => (b.className || "").includes("bg-[#D90429]"))?.dataset.aboutDay || "",
+      heading: panel?.querySelector("h3")?.textContent?.trim() || "",
+    };
+  });
+  ok(initial.tabs.length === 6, `about-us: six day tabs (${initial.tabs.join(" · ")})`);
+  ok(initial.active === "Maha Ashtami", `about-us: today's tab is the one in view (${initial.active})`);
+  ok(
+    initial.heading === "Maha Ashtami: Kumari Puja & Sandhi Puja",
+    "about-us: the server-rendered panel is the harvested one"
+  );
+
+  const problems = [];
+  for (const [day, heading] of DAYS) {
+    const r = await p.evaluate(async (d) => {
+      document.querySelector(`[data-about-day="${d}"]`)?.click();
+      await new Promise((r) => setTimeout(r, 200));
+      const panel = document.querySelector("[data-about-panel]");
+      return {
+        heading: panel?.querySelector("h3")?.textContent?.trim() || "",
+        text: (panel?.innerText || "").replace(/\s+/g, " ").trim().length,
+        active: [...document.querySelectorAll("[data-about-day]")]
+          .filter((b) => (b.className || "").includes("bg-[#D90429]"))
+          .map((b) => b.dataset.aboutDay),
+      };
+    }, day);
+    if (r.heading !== heading) problems.push(`${day}: heading "${r.heading}"`);
+    if (r.text < 300) problems.push(`${day}: only ${r.text} chars`);
+    if (r.active.length !== 1 || r.active[0] !== day) {
+      problems.push(`${day}: active=${r.active.join("+") || "none"}`);
+    }
+  }
+  ok(
+    problems.length === 0,
+    "about-us: every day swaps in its own panel" +
+      (problems.length ? ": " + problems.slice(0, 3).join(" | ") : "")
+  );
+  // The creator cards carried Cloudflare's email-decoy anchors, which resolve
+  // nowhere without Cloudflare's script and whose payloads are the operators'
+  // private addresses. They are removed rather than left dead.
+  const decoys = await p.evaluate(
+    () =>
+      document.querySelectorAll('main a[href^="/cdn-cgi/"], main a.__cf_email__').length
+  );
+  ok(decoys === 0, `about-us: no Cloudflare email decoys are shipped (${decoys})`);
+  ok(
+    errs.length === 0,
+    "about-us console clean" + (errs.length ? ": " + [...new Set(errs)].join(" | ") : "")
+  );
+  await p.close();
+}
+
+console.log("\n== POINTS OF INTEREST ==");
+{
+  // The original server-renders 119 places and then fetches /api/pois on mount
+  // and swaps in all 273. The build renders the full directory from
+  // data/pois.json, and this component checks the search, the chips and the
+  // empty state against that same live list.
+  const p = await b.newPage({ viewport: { width: 1440, height: 1000 } });
+  const errs = [];
+  p.on("pageerror", (e) => errs.push(e.message.slice(0, 100)));
+  p.on("console", (c) => c.type() === "error" && errs.push(c.text().slice(0, 100)));
+
+  await ready(p, B + "/points-of-interest/");
+  const base = await p.evaluate(() => {
+    const cards = [...document.querySelectorAll("[data-poi-card]")];
+    // Only the chip row carries chips; the cards carry the category too.
+    const chips = [...document.querySelectorAll("[data-poi-chips] [data-poi-cat]")];
+    return {
+      cards: cards.length,
+      chips: chips.length,
+      all: chips.find((b) => b.dataset.poiCat === "all")?.textContent?.trim() || "",
+      phones: cards.filter((c) => c.querySelector('a[href^="tel:"]')).length,
+      maps: cards.filter((c) => /^\/map\?lat=[-\d.]+&lng=[-\d.]+$/.test(
+        c.querySelector('a[href^="/map?"]')?.getAttribute("href") || ""
+      )).length,
+      emptyHidden: document.querySelector("[data-poi-empty]")?.hidden,
+    };
+  });
+  ok(base.cards === 273, `poi: all 273 places render (${base.cards})`);
+  ok(base.all === "All (273)", `poi: the All chip counts the live directory (${base.all})`);
+  ok(base.chips === 16, `poi: sixteen category chips (${base.chips})`);
+  ok(base.phones === 26, `poi: the places with phone numbers keep them (${base.phones})`);
+  ok(base.maps === base.cards, `poi: every card links to the map at its coordinates (${base.maps})`);
+  ok(base.emptyHidden === true, "poi: the empty state starts hidden");
+
+  const search = async (q) =>
+    p.evaluate(async (text) => {
+      const input = document.querySelector("[data-poi-search]");
+      const set = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value").set;
+      set.call(input, text);
+      input.dispatchEvent(new Event("input", { bubbles: true }));
+      await new Promise((r) => setTimeout(r, 200));
+      const visible = [...document.querySelectorAll("[data-poi-card]")].filter((c) => !c.hidden);
+      const empty = document.querySelector("[data-poi-empty]");
+      return {
+        n: visible.length,
+        match: visible.every((c) => (c.dataset.poiKey || "").includes(text.toLowerCase())),
+        empty: !empty?.hidden,
+        emptyText: empty?.innerText.replace(/\s+/g, " ").trim() || "",
+      };
+    }, q);
+
+  const kalighat = await search("kalighat");
+  ok(
+    kalighat.n > 0 && kalighat.match && !kalighat.empty,
+    `poi: search narrows to name/address matches (${kalighat.n} for "kalighat")`
+  );
+  const none = await search("zzzzqqq");
+  ok(
+    none.n === 0 && none.empty && /No Facilities Found/.test(none.emptyText),
+    "poi: a query that matches nothing shows the empty state"
+  );
+
+  await p.click("[data-poi-reset]");
+  const reset = await p.evaluate(() => ({
+    n: [...document.querySelectorAll("[data-poi-card]")].filter((c) => !c.hidden).length,
+    value: document.querySelector("[data-poi-search]")?.value,
+    emptyHidden: document.querySelector("[data-poi-empty]")?.hidden,
+    allActive: (document.querySelector('[data-poi-chips] [data-poi-cat="all"]')?.className || "").includes("bg-[#D90429]"),
+  }));
+  ok(
+    reset.n === 273 && reset.value === "" && reset.emptyHidden === true && reset.allActive,
+    "poi: Reset Filters restores the full directory"
+  );
+
+  await p.click('[data-poi-chips] [data-poi-cat="metro-station"]');
+  const metro = await p.evaluate(() => {
+    const cards = [...document.querySelectorAll("[data-poi-card]")];
+    const visible = cards.filter((c) => !c.hidden);
+    return {
+      n: visible.length,
+      only: visible.every((c) => c.dataset.poiCat === "metro-station"),
+      chip: (document.querySelector('[data-poi-chips] [data-poi-cat="metro-station"]')?.className || "").includes(
+        "bg-[#D90429]"
+      ),
+      all: (document.querySelector('[data-poi-chips] [data-poi-cat="all"]')?.className || "").includes("bg-[#D90429]"),
+    };
+  });
+  ok(
+    metro.n > 0 && metro.only && metro.chip && !metro.all,
+    `poi: a category chip filters and shows as pressed (${metro.n} metro stations)`
+  );
+
+  await p.click('[data-poi-chips] [data-poi-cat="all"]');
+  const backAll = await p.evaluate(
+    () => [...document.querySelectorAll("[data-poi-card]")].filter((c) => !c.hidden).length
+  );
+  ok(backAll === 273, `poi: All returns the whole directory (${backAll})`);
+  ok(
+    errs.length === 0,
+    "poi console clean" + (errs.length ? ": " + [...new Set(errs)].join(" | ") : "")
+  );
+  await p.close();
+}
+
+console.log("\n== UPLOAD ==");
+{
+  // The original answers /upload with a client-only "Community Archive" page
+  // whose Google sign-in cannot work in a static export. The mirror is that
+  // resolved state, with the sign-in calls replaced by a note and a way into
+  // the gallery - and, crucially, no control left that does nothing.
+  const p = await b.newPage({ viewport: { width: 1440, height: 1000 } });
+  const errs = [];
+  p.on("pageerror", (e) => errs.push(e.message.slice(0, 100)));
+  p.on("console", (c) => c.type() === "error" && errs.push(c.text().slice(0, 100)));
+
+  await ready(p, B + "/upload/");
+  const r = await p.evaluate(() => {
+    const m = document.querySelector("main");
+    const text = (m?.innerText || "").replace(/\s+/g, " ").trim();
+    return {
+      h1: m?.querySelector("h1")?.textContent?.trim() || "",
+      text,
+      buttons: m?.querySelectorAll("button").length ?? 0,
+      gallery: [...(m?.querySelectorAll('a[href="/gallery"]') || [])].length,
+      spinner: !!m?.querySelector(".animate-spin"),
+    };
+  });
+  ok(r.h1 === "Share Your Durga Puja Photos", `upload: the archive page renders (${r.h1.slice(0, 44)})`);
+  ok(!r.spinner, "upload: the never-resolving spinner is gone");
+  ok(r.buttons === 0, `upload: no control is left dead (${r.buttons} buttons)`);
+  ok(r.gallery >= 2, `upload: the header and the notice lead to the gallery (${r.gallery} links)`);
+  ok(
+    /read-only/.test(r.text) && !/Continue with Google|Sign In/.test(r.text),
+    "upload: the notice explains why uploads are off"
+  );
+  const gallery = await p.request.get(B + "/gallery/");
+  ok(gallery.status() === 200, `upload: the gallery it points at answers (${gallery.status()})`);
+  ok(
+    errs.length === 0,
+    "upload console clean" + (errs.length ? ": " + [...new Set(errs)].join(" | ") : "")
+  );
+  await p.close();
+}
+
 // ---------- page metadata ----------
 console.log("\n== METADATA ==");
 {
@@ -774,6 +1091,10 @@ console.log("\n== METADATA ==");
     "guide/etiquette",
     "guide/navigating-kolkata",
     "events",
+    "about-us",
+    "points-of-interest",
+    "eden-gardens-live",
+    "upload",
     "paras/22-no-pally-basi-bindo-durga-puja-pandal",
   ];
 
@@ -826,12 +1147,20 @@ console.log("\n== METADATA ==");
   // what the original does - so the guide routes are exempted from the
   // distinctness check and asserted to share a single title instead. Everything
   // else stands on its own, which is the bug this section exists to prevent.
+  //
+  // /upload is the other deliberate exception: the original serves its home
+  // title there too (the Community Archive is an overlay, not a document), so
+  // the two are checked against each other rather than for uniqueness.
   const guideRoutes = SAMPLE.filter((r) => r === "guide" || r.startsWith("guide/"));
-  const others = SAMPLE.filter((r) => !guideRoutes.includes(r));
+  const others = SAMPLE.filter((r) => !guideRoutes.includes(r) && r !== "upload");
   const otherTitles = new Set(others.map((r) => titles.get(r)));
   ok(
     otherTitles.size === others.length,
     `sampled routes carry their own titles (${otherTitles.size} distinct across ${others.length} routes)`
+  );
+  ok(
+    titles.get("upload") === titles.get("index"),
+    "the upload page keeps the home title, as the original does"
   );
   const guideTitles = new Set(guideRoutes.map((r) => titles.get(r)));
   ok(
