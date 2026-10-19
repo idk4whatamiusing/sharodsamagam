@@ -7,6 +7,7 @@ import FestivalDays from "../components/FestivalDays";
 import FestivalStatus from "../components/FestivalStatus";
 import HeroSlides from "../components/HeroSlides";
 import ClientNav from "../components/ClientNav";
+import { injectMobilePanels } from "../lib/chromeInject";
 import GalleryMotion from "../components/GalleryMotion";
 import RevealScroll from "../components/RevealScroll";
 import AudioPlayer from "../components/AudioPlayer";
@@ -26,7 +27,9 @@ const CHROME_HEAD = fs.readFileSync(path.join(MIRROR, "_chrome_head.html"), "utf
   '<div class="relative z-10 flex items-center gap-1 sm:gap-2 shrink-0"></div>',
   '<div id="mobile-nav-actions" class="relative z-10 flex items-center gap-1 sm:gap-2 shrink-0"></div>'
 );
-const CHROME_FOOT = fs.readFileSync(path.join(MIRROR, "_chrome_foot.html"), "utf8");
+const CHROME_FOOT = injectMobilePanels(
+  fs.readFileSync(path.join(MIRROR, "_chrome_foot.html"), "utf8")
+);
 const TRACKS = (() => {
   try {
     const j = JSON.parse(fs.readFileSync(path.join(process.cwd(), "data", "music.json"), "utf8"));

@@ -245,6 +245,95 @@ const sync = await (async () => {
 ok(sync, "dhak state synced mobile -> desktop");
 ok(merr.length === 0, "mobile console clean" + (merr.length ? ": " + merr.join(" | ") : ""));
 
+console.log("\n== MOBILE FOOTER ACCORDION ==");
+{
+  // The footer's four section headers shipped from the scrape with no panels
+  // behind them: pressing one flipped aria-expanded and revealed nothing, and
+  // because the toggle looked at the wrapper's next sibling, pressing it
+  // twice hid the *next* section. The panels are harvested from the original
+  // by scripts/harvest-mobile-sheet.mjs and grafted in at build time.
+  const p = await b.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  const errs = [];
+  p.on("pageerror", (e) => errs.push(e.message.slice(0, 100)));
+  p.on("console", (c) => c.type() === "error" && errs.push(c.text().slice(0, 100)));
+  await ready(p, B + "/");
+
+  const TITLES = [
+    "Pandal Circuits & Zones",
+    "Smart Travel & City Guide",
+    "Culture, Lore & Media",
+    "About & Assistance",
+  ];
+  const problems = [];
+  for (const title of TITLES) {
+    const r = await p.evaluate(async (t) => {
+      const button = [...document.querySelectorAll("button")].find((b) =>
+        (b.textContent || "").replace(/\s+/g, " ").includes(t)
+      );
+      if (!button) return { error: "header not found" };
+      const panel = button.nextElementSibling;
+      const nextSection = button.parentElement?.nextElementSibling;
+      const rest = { display: panel ? getComputedStyle(panel).display : null };
+      button.click();
+      await new Promise((r) => setTimeout(r, 250));
+      const open = {
+        expanded: button.getAttribute("aria-expanded"),
+        display: panel ? getComputedStyle(panel).display : null,
+        visible: panel
+          ? [...panel.querySelectorAll("a[href]")].filter((a) => a.getClientRects().length).length
+          : 0,
+        hrefs: panel ? [...panel.querySelectorAll("a[href]")].map((a) => a.getAttribute("href")) : [],
+        nextSectionDisplay: nextSection ? getComputedStyle(nextSection).display : null,
+      };
+      button.click();
+      await new Promise((r) => setTimeout(r, 250));
+      const closed = {
+        expanded: button.getAttribute("aria-expanded"),
+        display: panel ? getComputedStyle(panel).display : null,
+      };
+      return { rest, open, closed };
+    }, title);
+
+    if (r.error) {
+      problems.push(`${title}: ${r.error}`);
+      continue;
+    }
+    const bad = [];
+    if (r.rest.display !== "none") bad.push("panel not hidden at rest");
+    if (r.open.expanded !== "true") bad.push("aria-expanded not set");
+    if (r.open.display === "none" || r.open.visible < 3) bad.push(`reveals ${r.open.visible} items`);
+    if (r.open.nextSectionDisplay === "none") bad.push("hid the next section");
+    if (r.closed.expanded !== "false" || r.closed.display !== "none") bad.push("does not close");
+    if (r.open.hrefs.some((h) => /admin|login/i.test(h || ""))) bad.push("carries an admin link");
+    if (bad.length) problems.push(`${title}: ${bad.join(", ")}`);
+  }
+  ok(
+    problems.length === 0,
+    "all four footer panels expand, reveal their links and close again" +
+      (problems.length ? ": " + problems.join(" | ") : "")
+  );
+
+  const hrefs = await p.evaluate(() =>
+    [
+      ...new Set(
+        [...document.querySelectorAll("[data-sheet-panel] a[href]")].map((a) => a.getAttribute("href"))
+      ),
+    ]
+  );
+  const missing = [];
+  for (const h of hrefs) {
+    const res = await p.request.get(B + h);
+    if (res.status() !== 200) missing.push(`${h} (${res.status()})`);
+  }
+  ok(
+    hrefs.length >= 15 && missing.length === 0,
+    `every footer-panel link answers (${hrefs.length} links)` +
+      (missing.length ? ": " + missing.join(", ") : "")
+  );
+  ok(errs.length === 0, "accordion console clean" + (errs.length ? ": " + [...new Set(errs)].join(" | ") : ""));
+  await p.close();
+}
+
 // ---------- client-side navigation ----------
 // The layout persists across router.push navigation while page children swap
 // underneath it. Any page-scoped component whose effect has a [] dependency

@@ -41,11 +41,20 @@ export default function ClientNav() {
     };
     highlight();
 
-    // footer More-accordion toggles
+    // Mobile footer accordions. Each section header owns the panel that
+    // follows it (lib/chromeInject grafts the harvested panels in), so the
+    // toggle looks at the button's own next sibling - looking at the
+    // wrapper's next sibling instead would hide the *following* section.
+    // The wired mark keeps the effect, which re-runs on every navigation,
+    // from stacking a second listener that would undo the first.
     document.querySelectorAll<HTMLButtonElement>('button[aria-expanded="false"]').forEach((b) => {
       if (b.closest("nav") || b.id === "kolkata-map" || b.id === "pandal-map") return;
+      if (b.dataset.sheetWired === "1") return;
+      b.dataset.sheetWired = "1";
       b.addEventListener("click", () => {
-        const next = b.parentElement?.nextElementSibling as HTMLElement | null ?? b.nextElementSibling as HTMLElement | null;
+        const next =
+          (b.nextElementSibling as HTMLElement | null) ??
+          ((b.parentElement?.nextElementSibling as HTMLElement | null) ?? null);
         const expanded = b.getAttribute("aria-expanded") === "true";
         b.setAttribute("aria-expanded", expanded ? "false" : "true");
         if (next) next.style.display = expanded ? "none" : "";
