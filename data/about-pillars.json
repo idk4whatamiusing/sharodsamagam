@@ -4,7 +4,7 @@
     "harvested": "2026-10-20T11:15:23.853Z",
     "note": "Four Sacred Pillars panels harvested by clicking each tab."
   },
-  "activeClass": "p-2 sm:p-2.5 rounded-xl border text-left transition-all duration-200 flex items-center gap-2 cursor-pointer bg-[#1C0D0B] border-[#FFB800] text-white shadow-xs ring-1 ring-[#FFB800]/50 scale-[1.01]",
+  "activeClass": "p-2 sm:p-2.5 rounded-xl border text-left transition-all duration-200 flex items-center gap-2 cursor-pointer bg-[#1C0D0B] border-[#FFB800] text-[#FFB800] shadow-xs ring-1 ring-[#FFB800]/50 scale-[1.01]",
   "inactiveClass": "p-2 sm:p-2.5 rounded-xl border text-left transition-all duration-200 flex items-center gap-2 cursor-pointer bg-[#FFFBF0] border-[#E5C880]/70 text-[#2C1210] hover:bg-white hover:border-[#D97706]",
   "days": [
     {
