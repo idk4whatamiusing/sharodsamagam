@@ -2,6 +2,12 @@
 
 @source "./**/*.{tsx,ts}";
 @source "../components/**/*.{tsx,ts}";
+/* The mirrored pages and the harvested About panels are plain HTML/JSON, so
+   Tailwind has to read them too - otherwise utilities that only appear there
+   (md:col-span-8, bg-[#180A08], ...) are never generated and the layout
+   collapses. */
+@source "../mirror/**/*.html";
+@source "../data/**/*.json";
 
 /* Original compiled theme (fonts, variables, utilities) also loaded in layout via <link> */
 
