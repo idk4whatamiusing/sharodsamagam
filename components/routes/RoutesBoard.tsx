@@ -288,7 +288,7 @@ export default function RoutesBoard({
                   </p>
 
                   {c?.arrival && (
-                    <div className="mt-1.5 rounded-xl border border-emerald-200/80 bg-emerald-50 px-2 py-1.5 font-sans text-[9.5px] leading-snug text-emerald-800">
+                    <div className="mt-1.5 rounded-xl border border-[#E5C880] bg-[#FFF3D6]/60 px-2 py-1.5 font-sans text-[9.5px] leading-snug text-[#B45309]">
                       {c.arrival}
                     </div>
                   )}
@@ -502,7 +502,7 @@ function RouteDetails({
         <div className="space-y-3 p-4">
           <div className="grid gap-2 sm:grid-cols-2">
             <div className="rounded-xl border border-[#E5C880]/70 bg-white p-2.5">
-              <p className="font-mono text-[8px] font-black uppercase tracking-wider text-emerald-600">
+              <p className="font-mono text-[8px] font-black uppercase tracking-wider text-[#B45309]">
                 Starting point
               </p>
               <p className="mt-0.5 font-serif text-[11px] font-bold text-[#2C1210]">
@@ -549,7 +549,7 @@ function RouteDetails({
               </p>
             )}
             {copy?.arrival && (
-              <p className="mt-1.5 rounded-lg border border-emerald-200 bg-emerald-50 p-2 font-sans text-[9.5px] leading-snug text-emerald-800">
+              <p className="mt-1.5 rounded-lg border border-[#E5C880] bg-[#FFF3D6]/60 p-2 font-sans text-[9.5px] leading-snug text-[#B45309]">
                 {copy.arrival}
               </p>
             )}

@@ -144,12 +144,12 @@ export default function ClientNav() {
               </div>
             </div>
             <div class="grid grid-cols-2 gap-2.5 relative z-10">
-              ${[["/points-of-interest","Points of Interest & Metro","Interactive guide to Kolkata transit, heritage spots, & food trails","#0284C7","bg-sky-500/10","border-sky-500/30"],
-                 ["/chronicles","Puja Chronicles","Centuries of cultural heritage, Dhak lore, & Bonedi Bari archives","#D97706","bg-amber-500/10","border-amber-500/30"],
-                 ["/events","Cultural Events Calendar","Live music recitals, Dhak competitions, & cultural programs","#7C3AED","bg-purple-500/10","border-purple-500/30"],
-                 ["/procession","Immersion & Red Road Carnival","Dashami immersion ghats, Red Road mega carnival passes & routes","#059669","bg-emerald-500/10","border-emerald-500/30"],
-                 ["/announcements","Official Bulletins","Live traffic advisories, VIP alerts, & safety announcements","#E11D48","bg-rose-500/10","border-rose-500/30"],
-                 ["/about-us","About the Portal","The digital gateway celebrating Bengal's greatest cultural festival","#B45309","bg-amber-600/10","border-amber-600/30"]].map(([h,l,d,c,b1,b2])=>`
+              ${[["/points-of-interest","Points of Interest & Metro","Interactive guide to Kolkata transit, heritage spots, & food trails","#B45309","bg-amber-500/10","border-amber-500/30"],
+                 ["/chronicles","Puja Chronicles","Centuries of cultural heritage, Dhak lore, & Bonedi Bari archives","#D90429","bg-red-500/10","border-red-500/30"],
+                 ["/events","Cultural Events Calendar","Live music recitals, Dhak competitions, & cultural programs","#B45309","bg-amber-500/10","border-amber-500/30"],
+                 ["/procession","Immersion & Red Road Carnival","Dashami immersion ghats, Red Road mega carnival passes & routes","#D90429","bg-red-500/10","border-red-500/30"],
+                 ["/announcements","Official Bulletins","Live traffic advisories, VIP alerts, & safety announcements","#B45309","bg-amber-500/10","border-amber-500/30"],
+                 ["/about-us","About the Portal","The digital gateway celebrating Bengal's greatest cultural festival","#D90429","bg-red-500/10","border-red-500/30"]].map(([h,l,d,c,b1,b2])=>`
               <a href="${h}" class="group flex items-start gap-3 p-2.5 rounded-2xl border bg-white/90 border-[#DECFA6]/80 hover:border-[#D97706] hover:bg-[#FFFDF7] transition-all duration-200 shadow-2xs">
                 <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 border ${b1} ${b2}" style="color:${c}">✦</div>
                 <div class="flex-1 min-w-0">

@@ -535,7 +535,7 @@ export default function MapApp() {
       for (const segment of segments) {
         if (!segment.coords || segment.coords.length < 2) continue;
         const isTransit = segment.mode !== "walk";
-        const color = isTransit ? "#2563EB" : "#D90429";
+        const color = isTransit ? "#B45309" : "#D90429";
         const accent = isTransit ? "#FFFFFF" : "#FFB800";
         L.polyline(segment.coords, {
           color,
@@ -951,15 +951,15 @@ export default function MapApp() {
       radius: 7,
       color: "#FFFFFF",
       weight: 3,
-      fillColor: "#2563EB",
+      fillColor: "#B45309",
       fillOpacity: 1,
     }).addTo(layer);
     L.circleMarker([lat, lng], {
       radius: 20,
-      color: "#2563EB",
+      color: "#B45309",
       weight: 1,
       opacity: 0.35,
-      fillColor: "#2563EB",
+      fillColor: "#B45309",
       fillOpacity: 0.1,
     }).addTo(layer);
   }, []);
@@ -1294,7 +1294,7 @@ export default function MapApp() {
                 type="button"
                 aria-label="Recenter map on my location"
                 onClick={() => void recenter()}
-                className="flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-full bg-[#2563EB] text-white shadow-sm transition-transform active:scale-95"
+                className="flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-full bg-[#B45309] text-white shadow-sm transition-transform active:scale-95"
               >
                 <Icon name="locate" size={14} />
               </button>
@@ -1335,7 +1335,7 @@ export default function MapApp() {
                         onClick={() => focusPoi(poi)}
                         className="flex w-full cursor-pointer items-start gap-1.5 rounded-lg px-1.5 py-1 text-left hover:bg-[#FFF3D6]"
                       >
-                        <Icon name="transit" size={12} className="mt-0.5 shrink-0 text-[#2563EB]" />
+                        <Icon name="transit" size={12} className="mt-0.5 shrink-0 text-[#B45309]" />
                         <span className="min-w-0">
                           <span className="block truncate font-sans text-[10px] font-bold text-[#2C1210]">
                             {titleCase(poi.name)}
