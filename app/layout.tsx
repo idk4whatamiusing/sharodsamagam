@@ -20,6 +20,7 @@ import MapInjector from "../components/MapInjector";
 import MetroInjector from "../components/MetroInjector";
 import EdenLive from "../components/EdenLive";
 import AboutJourney from "../components/AboutJourney";
+import AboutPillars from "../components/AboutPillars";
 import GuideTabs from "../components/GuideTabs";
 import PoiSearch from "../components/PoiSearch";
 import "./globals.css";
@@ -87,6 +88,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <MetroInjector />
         <EdenLive />
         <AboutJourney />
+        <AboutPillars />
         <GuideTabs />
         <PoiSearch />
         <Countdown />

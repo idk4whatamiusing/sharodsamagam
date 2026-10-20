@@ -5,6 +5,7 @@ import { mirrorHtml, listRoutes } from "../../lib/mirror";
 import { metadataForRoute } from "../../lib/meta";
 import { injectMetroMap } from "../../lib/metroInject";
 import { injectAboutJourney } from "../../lib/aboutInject";
+import { injectAboutPillars } from "../../lib/pillarInject";
 import { injectGuideTabs } from "../../lib/guideInject";
 import { injectEdenLive } from "../../lib/edenInject";
 import { injectParasListing } from "../../lib/parasInject";
@@ -49,6 +50,7 @@ export default async function MirrorPage({ params }: { params: Promise<{ slug: s
     // The Ritual Journey day tabs are dead buttons in the scrape; tag them so
     // components/AboutJourney.tsx can swap the panels from data/about-days.json.
     html = injectAboutJourney(html);
+  html = injectAboutPillars(html);
   }
   if (rel === "points-of-interest") {
     // The directory's search box and chips have no server-side behaviour, and
