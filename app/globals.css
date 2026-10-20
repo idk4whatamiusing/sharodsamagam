@@ -278,3 +278,22 @@ div[data-map-app] .custom-poi-marker:hover img {
 div[class*="bg-[#180A08]"] {
   background-color: #180a08 !important;
 }
+
+/* The pressed "Four Sacred Pillars" tab carries its own amber label classes
+   in the mirrored markup, so the tab's state has to drive the label colour as
+   well - otherwise the previously pressed tab stays yellow. */
+[data-pillar-tabs] button[data-pillar-active="true"] .pillar-title {
+  color: #fde68a;
+}
+
+[data-pillar-tabs] button[data-pillar-active="true"] .pillar-label {
+  color: #fbbf24;
+}
+
+[data-pillar-tabs] button[data-pillar-active="false"] .pillar-title {
+  color: #2c1210;
+}
+
+[data-pillar-tabs] button[data-pillar-active="false"] .pillar-label {
+  color: #b45309;
+}
