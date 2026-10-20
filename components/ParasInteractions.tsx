@@ -676,6 +676,11 @@ export default function ParasInteractions() {
     loadBtn?.addEventListener("click", appendBatch);
 
     // ---- data -----------------------------------------------------------
+    // The server-rendered cards exist before the directory JSON arrives, so
+    // they are wired straight away - a visitor who clicks Save in that
+    // window must not find a dead button.
+    cardAnchors().forEach(wireCard);
+
     const boot = async () => {
       try {
         const res = await fetch("/paras.json");

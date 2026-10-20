@@ -46,7 +46,6 @@ const MIME = {
   ".webmanifest": "application/manifest+json",
 };
 
-const EMPTY = { pandals: [], trails: [], routes: [], liked: [] };
 const stores = new Map();
 
 const COOKIE_USER = /ss_mock_user=([^;]+)/;
@@ -131,7 +130,14 @@ const server = http.createServer(async (req, res) => {
       json(res, { error: "not_signed_in" }, 401);
       return;
     }
-    const saves = stores.get(key) || { ...EMPTY };
+    // A fresh copy per user: a shallow spread would share the empty arrays
+    // between accounts, so one user's save would leak into the next.
+    const saves = stores.get(key) || {
+      pandals: [],
+      trails: [],
+      routes: [],
+      liked: [],
+    };
     if (req.method === "GET") {
       json(res, saves);
       return;

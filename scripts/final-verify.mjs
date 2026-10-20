@@ -925,7 +925,10 @@ console.log("\n== PARAS DIRECTORY ==");
     i.dispatchEvent(new Event("input", { bubbles: true }));
   });
   await p.waitForTimeout(250);
-  await p.context().addCookies([{ name: "ss_mock_user", value: "verifier", url: B }]);
+  // A fresh user per run: the mock API keeps its store in memory, so a
+  // leftover save from an earlier run would turn the toggle into a removal.
+  const verifier = `verifier-${Date.now()}`;
+  await p.context().addCookies([{ name: "ss_mock_user", value: verifier, url: B }]);
   await p.reload({ waitUntil: "load" });
   // The account resolves from the API, and saving while it is still loading
   // sends the visitor to sign in instead.
@@ -937,7 +940,7 @@ console.log("\n== PARAS DIRECTORY ==");
   await p.evaluate(() => {
     document.querySelector('a.block.h-full[href^="/paras/"] [aria-label="Save Pandal"]').click();
   });
-  await p.waitForTimeout(400);
+  await p.waitForTimeout(600);
   await p.reload({ waitUntil: "load" });
   // The account's save list arrives from the API, so the badge settles a
   // moment after the reload.
@@ -1770,7 +1773,7 @@ console.log("\n== ACCOUNT & AI PLANNER ==");
   ok(/sign in to plan/i.test(gated.text), "the AI planner asks signed-out visitors to sign in");
   ok(!gated.chat, "the AI chat is not offered before sign-in");
 
-  await p.context().addCookies([{ name: "ss_mock_user", value: "planner", url: B }]);
+  await p.context().addCookies([{ name: "ss_mock_user", value: `planner-${Date.now()}`, url: B }]);
   await p.reload({ waitUntil: "load" });
   await p
     .waitForFunction(() => document.documentElement.dataset.authState === "signed-in", null, {
@@ -1790,15 +1793,23 @@ console.log("\n== ACCOUNT & AI PLANNER ==");
 
   await p.locator('input[placeholder*="e.g."]').fill("3 hours of lighting pandals in South Kolkata");
   await p.locator('button[aria-label="Send to the planner"]').click();
-  await p.waitForTimeout(1500);
-  const answered = await p.evaluate(() => {
-    const aside = document.querySelector("aside");
-    return {
-      text: aside?.innerText || "",
-      paths: document.querySelectorAll("[data-map-canvas] .leaflet-overlay-pane path").length,
-    };
-  });
-  ok(/stop/i.test(answered.text), "the planner answers with a stop list");
+  // The answer arrives from the API, so it is waited for rather than
+  // assumed to be there after a fixed pause.
+  const answered = await p
+    .waitForFunction(
+      () => {
+        const aside = document.querySelector("aside");
+        const text = aside?.innerText || "";
+        return /\bstops?\b/i.test(text) && !/Planning your route/.test(text)
+          ? { text, paths: document.querySelectorAll("[data-map-canvas] .leaflet-overlay-pane path").length }
+          : null;
+      },
+      null,
+      { timeout: 15000 }
+    )
+    .then((handle) => handle.jsonValue())
+    .catch(() => ({ text: "", paths: 0 }));
+  ok(/stop/i.test(answered.text), `the planner answers with a stop list (${answered.text.slice(0, 40)})`);
   ok(answered.paths > 0, `the planned route is drawn on the map (${answered.paths} paths)`);
 
   await p.goto(B + "/profile/", { waitUntil: "load" });
