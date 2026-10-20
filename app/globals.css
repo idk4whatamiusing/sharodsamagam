@@ -76,6 +76,177 @@ div[data-metro-map] .leaflet-control-attribution {
    "Print Panzika" is expected to produce a usable almanac sheet, so the nav,
    footer and page furniture are dropped. Day panels stay whole rather than
    splitting a ritual list across a page break. */
+/* ------------------------------------------------------------------ the map
+   `/map` is a full-screen Leaflet application rather than a mirrored page, so
+   the site's mobile header, footer, audio controls and page scroll are hidden
+   while it is mounted. The mobile bottom nav deliberately stays: the original
+   keeps it as the only way back into the site from the map. */
+body:has([data-map-app]) {
+  overflow: hidden;
+  height: 100%;
+}
+
+html:has([data-map-app]) {
+  overflow: hidden;
+  height: 100%;
+}
+
+body:has([data-map-app]) header[class*="lg:hidden"],
+body:has([data-map-app]) footer,
+body:has([data-map-app]) button[aria-label="Dhak"],
+body:has([data-map-app]) button[aria-label="Playlist"] {
+  display: none !important;
+}
+
+body:has([data-map-app]) .flex-grow {
+  min-height: 0 !important;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+div[data-map-app] .leaflet-container {
+  width: 100% !important;
+  height: 100% !important;
+  background: #e8e2d4;
+  font-family: inherit;
+  outline: none;
+}
+
+div[data-map-app] .leaflet-pane,
+div[data-map-app] .leaflet-top,
+div[data-map-app] .leaflet-bottom {
+  z-index: 1;
+}
+
+div[data-map-app] .leaflet-control-attribution {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: auto !important;
+  height: auto !important;
+  pointer-events: auto !important;
+  margin: 0 !important;
+  padding: 0 4px !important;
+  border-radius: 4px 4px 0 0;
+  background: rgba(255, 251, 240, 0.82) !important;
+  color: rgba(44, 18, 16, 0.62) !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace !important;
+  font-size: 7.5px !important;
+  line-height: 1.4 !important;
+}
+
+div[data-map-app] .leaflet-control-attribution a {
+  color: #b45309 !important;
+}
+
+@media (max-width: 1023px) {
+  div[data-map-app] .leaflet-bottom.leaflet-left {
+    bottom: 176px;
+  }
+}
+
+@keyframes pandalPinPop {
+  0% {
+    transform: scale(0.25) translateY(10px);
+    opacity: 0;
+  }
+  68% {
+    transform: scale(1.08) translateY(-1px);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes poiPinPop {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+div[data-map-app] .custom-pandal-marker,
+div[data-map-app] .custom-poi-marker {
+  background: transparent;
+  border: 0;
+}
+
+div[data-map-app] .pandal-pin-pop {
+  transform-origin: 50% 100%;
+  animation: pandalPinPop 0.38s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+div[data-map-app] .poi-pin-pop {
+  transform-origin: 50% 50%;
+  animation: poiPinPop 0.3s ease-out both;
+}
+
+div[data-map-app] .custom-pandal-marker img,
+div[data-map-app] .custom-poi-marker img {
+  filter: drop-shadow(0 2px 2px rgba(44, 18, 16, 0.28));
+  transition: transform 0.18s ease;
+  transform-origin: 50% 100%;
+}
+
+div[data-map-app] .custom-pandal-marker:hover img {
+  transform: scale(1.14) translateY(-2px);
+}
+
+div[data-map-app] .custom-poi-marker:hover img {
+  transform: scale(1.12);
+}
+
+/* The map draws its own scrollable chip rails and sheets; the browser's
+   scrollbar would sit inside the rounded map frame. */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* The original theme re-declares responsive grid utilities after Tailwind's
+   output, so the /routes card grid is pinned by an attribute selector. */
+[data-routes-grid] {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+/* As with the grid, the compiled original theme re-declares `.w-full` after
+   Tailwind, which was stretching the /routes search box across the whole row
+   and collapsing the filter chips to zero width. */
+[data-routes-search] {
+  width: 100%;
+}
+
+@media (min-width: 48rem) {
+  [data-routes-search] {
+    width: 16rem;
+    flex: none;
+  }
+
+  [data-routes-grid] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 80rem) {
+  [data-routes-grid] {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Print styles for the Panzika.
+   "Print Panzika" is expected to produce a usable almanac sheet, so the nav,
+   footer and page furniture are dropped. Day panels stay whole rather than
+   splitting a ritual list across a page break. */
 @media print {
   header,
   footer,
@@ -99,4 +270,5 @@ div[data-metro-map] .leaflet-control-attribution {
     page-break-inside: avoid;
   }
 }
+
 

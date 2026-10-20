@@ -15,7 +15,7 @@ export const dynamicParams = false;
 
 export function generateStaticParams() {
   return listRoutes()
-    .filter((r) => r !== "index" && !r.startsWith("_"))
+    .filter((r) => r !== "index" && !r.startsWith("_") && r !== "map" && r !== "routes")
     .map((r) => ({ slug: r.split("/") }));
 }
 
