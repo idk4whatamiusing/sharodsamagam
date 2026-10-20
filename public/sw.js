@@ -15,7 +15,7 @@
 // policy for *every* request (an earlier revision) pinned visitors to
 // stale HTML and a stale /points.json indefinitely after a deploy.
 
-const CACHE_VERSION = 'sharodsamagam-v6';
+const CACHE_VERSION = 'sharodsamagam-v7';
 const SHELL_CACHE = `${CACHE_VERSION}-shell`;
 const ASSET_CACHE = `${CACHE_VERSION}-assets`;
 const TILE_CACHE = `${CACHE_VERSION}-tiles`;
