@@ -272,3 +272,9 @@ div[data-map-app] .custom-poi-marker:hover img {
 }
 
 
+
+/* The original compiled theme re-declares background utilities after Tailwind,
+   which erased the dark about-us panels and made their amber text unreadable. */
+div[class*="bg-[#180A08]"] {
+  background-color: #180a08 !important;
+}
