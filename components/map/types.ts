@@ -127,7 +127,7 @@ export type PlannerResult = {
   activeModeSeconds: number;
 };
 
-export type MapTab = "filters" | "trails" | "planner";
+export type MapTab = "filters" | "trails" | "planner" | "ai";
 
 export type MapFilters = {
   query: string;

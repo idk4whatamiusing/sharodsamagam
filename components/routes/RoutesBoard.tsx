@@ -2,13 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 import type { CuratedRoute, RouteCopy } from "../map/types";
-import {
-  titleCase,
-  copyToClipboard,
-  pandalStops,
-  readJson,
-  writeJson,
-} from "../map/utils";
+import { titleCase, copyToClipboard, pandalStops } from "../map/utils";
+import { useSaves } from "../useSaves";
 import { Icon, Toast } from "../map/ui";
 
 type StopMeta = { categories: string[]; metro: string; zone: string };
@@ -53,13 +48,13 @@ export default function RoutesBoard({
 }) {
   const [filter, setFilter] = useState("all");
   const [query, setQuery] = useState("");
-  const [liked, setLiked] = useState<number[]>([]);
+  const { saves, toggle: toggleSaved } = useSaves();
+  const liked = saves.liked;
   const [previews, setPreviews] = useState<number[]>([]);
   const [detail, setDetail] = useState<CuratedRoute | null>(null);
   const [toast, setToast] = useState("");
 
   useEffect(() => {
-    setLiked(readJson<number[]>("ss-routes-liked", []));
     if (window.location.hash.startsWith("#route-")) {
       const element = document.querySelector(window.location.hash);
       if (element) setTimeout(() => element.scrollIntoView({ behavior: "smooth", block: "center" }), 350);
@@ -118,16 +113,10 @@ export default function RoutesBoard({
       .sort((a, b) => a.number - b.number);
   }, [copy, filter, query, routes]);
 
-  const toggleLike = (route: CuratedRoute) => {
-    setLiked((previous) => {
-      const has = previous.includes(route.number);
-      const next = has
-        ? previous.filter((number) => number !== route.number)
-        : [...previous, route.number];
-      writeJson("ss-routes-liked", next);
-      setToast(has ? "Removed from liked trails." : "Trail liked on this device.");
-      return next;
-    });
+  const toggleLike = async (route: CuratedRoute) => {
+    const result = await toggleSaved("liked", String(route.number), route.number);
+    if (!result.ok) return;
+    setToast(result.saved ? "Trail liked." : "Removed from liked trails.");
   };
 
   const togglePreview = (route: CuratedRoute) => {

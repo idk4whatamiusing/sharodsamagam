@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect } from "react";
+import { useRef } from "react";
 import { usePathname } from "next/navigation";
+import { useSaves } from "./useSaves";
 import ui from "../data/paras-ui.json";
 
 /** One entry of public/paras.json, produced by scripts/build-paras-json.mjs. */
@@ -22,7 +24,6 @@ type Pandal = {
 };
 
 const BATCH = 24;
-const SAVED_KEY = "sharodsamagam:saved-pandals";
 
 /**
  * Curated enough to be "featured". The original has no tag by that name, so
@@ -105,16 +106,21 @@ function paintCard(card: HTMLElement, p: Pandal) {
   return card;
 }
 
-const readSaved = (): Set<string> => {
-  try {
-    return new Set<string>(JSON.parse(localStorage.getItem(SAVED_KEY) || "[]"));
-  } catch {
-    return new Set();
-  }
-};
-
 export default function ParasInteractions() {
   const pathname = usePathname();
+  const { saves, toggle: toggleSaved } = useSaves();
+  // The listing effect wires the cards once and then keeps its own set,
+  // so the account's list is mirrored into it through a ref rather than
+  // by re-running the whole effect (which would re-fetch the directory).
+  const savedRef = useRef<string[]>([]);
+  const repaintRef = useRef<(() => void) | null>(null);
+  // The listing effect wires its cards once, on mount, when the account
+  // has not loaded yet. It therefore cannot close over the toggle
+  // directly - it would keep the signed-out version forever - so the
+  // latest one is read through a ref at click time.
+  const toggleRef = useRef(toggleSaved);
+  toggleRef.current = toggleSaved;
+  savedRef.current = saves.pandals;
 
   // Only the listing. /paras/<slug> detail pages also contain links to
   // sibling pandals, and treating those as filterable cards would be wrong.
@@ -160,7 +166,7 @@ export default function ParasInteractions() {
     const searchText = new Map<string, string>();
     const blindText = new Map<string, string>();
     const cardBySlug = new Map<string, HTMLAnchorElement>();
-    const saved = readSaved();
+    const saved = new Set(savedRef.current);
 
     let query = "";
     let zone = "all";
@@ -241,12 +247,15 @@ export default function ParasInteractions() {
         saveBtn.addEventListener("click", (e) => {
           e.preventDefault();
           e.stopPropagation();
-          if (saved.has(slug)) saved.delete(slug);
-          else saved.add(slug);
-          localStorage.setItem(SAVED_KEY, JSON.stringify([...saved]));
-          paint();
-          setChipState();
-          if (savedOnly) applyVisibility();
+          void (async () => {
+            const result = await toggleRef.current("pandal", slug);
+            if (!result.ok) return;
+            if (result.saved) saved.add(slug);
+            else saved.delete(slug);
+            paint();
+            setChipState();
+            if (savedOnly) applyVisibility();
+          })();
         });
       }
 
@@ -701,13 +710,35 @@ export default function ParasInteractions() {
       }
     };
 
+    // Keep the listing in step with the account: a save made on another
+    // device (or in the map) repaints the cards and the Saved badge.
+    repaintRef.current = () => {
+      saved.clear();
+      for (const slug of savedRef.current) saved.add(slug);
+      main.querySelectorAll<HTMLAnchorElement>(CARD).forEach((a) => {
+        const btn = a.querySelector<HTMLButtonElement>('[aria-label="Save Pandal"]');
+        if (!btn) return;
+        const on = saved.has(slugOf(a));
+        btn.style.background = on ? "#D90429" : "";
+        btn.style.borderColor = on ? "#D90429" : "";
+        btn.setAttribute("aria-pressed", String(on));
+      });
+      setChipState();
+      if (savedOnly) applyVisibility();
+    };
+
     boot();
 
     return () => {
+      repaintRef.current = null;
       document.removeEventListener("click", onSortOutside);
       document.removeEventListener("keydown", onSortEscape);
     };
   }, [pathname]);
+
+  useEffect(() => {
+    repaintRef.current?.();
+  }, [saves.pandals]);
 
   return null;
 }

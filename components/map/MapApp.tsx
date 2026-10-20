@@ -18,19 +18,17 @@ import type {
 } from "./types";
 import {
   MODE_META,
-  STORAGE,
   copyToClipboard,
   decodePolyline,
+  appleMapsUrl,
   googleMapsUrl,
   haversineM,
   pandalsAlongRoute,
   poiIconPath,
-  readJson,
   routeModeSeconds,
   stopFromPandal,
   straightLineStopMeters,
   titleCase,
-  writeJson,
   zoneLabel,
 } from "./utils";
 import { FilterPanel } from "./FilterPanel";
@@ -45,6 +43,9 @@ import {
   RouteSheet,
   SuggestModal,
 } from "./Overlays";
+import { useSaves } from "../useSaves";
+import { AiPlannerPanel } from "./AiPlannerPanel";
+import type { AiPlan } from "./AiPlannerPanel";
 import { Icon, Toast } from "./ui";
 
 const DEFAULT_FILTERS: MapFilters = {
@@ -115,7 +116,8 @@ export default function MapApp() {
   const [tab, setTab] = useState<MapTab>("filters");
   const [filters, setFilters] = useState<MapFilters>(DEFAULT_FILTERS);
   const deferredFilters = useDeferredValue(filters);
-  const [saved, setSaved] = useState<string[]>([]);
+  const { saves, toggle: toggleSaved } = useSaves();
+  const saved = saves.pandals;
   const [selected, setSelected] = useState<Pandal | null>(null);
   const [selectedPoi, setSelectedPoi] = useState<Poi | null>(null);
   const [style, setStyle] = useState<"standard" | "satellite">("standard");
@@ -127,14 +129,13 @@ export default function MapApp() {
   const [activeRoute, setActiveRoute] = useState<CuratedRoute | null>(null);
   const [activeGeo, setActiveGeo] = useState<RouteGeoMap[string] | null>(null);
   const [geoLoading, setGeoLoading] = useState(false);
-  const [savedTrails, setSavedTrails] = useState<string[]>([]);
 
   const [plannerStops, setPlannerStops] = useState<PlannerStop[]>([]);
   const [plannerMode, setPlannerMode] = useState<TravelMode>("walk");
   const [plannerResult, setPlannerResult] = useState<PlannerResult | null>(null);
   const [plannerLoading, setPlannerLoading] = useState(false);
-  const [savedPlanner, setSavedPlanner] = useState<string[]>([]);
 
+  const [aiPlan, setAiPlan] = useState<AiPlan | null>(null);
   const [mobilePanelOpen, setMobilePanelOpen] = useState(false);
   const [routeSheetOpen, setRouteSheetOpen] = useState(false);
   const [nearbyOpen, setNearbyOpen] = useState(false);
@@ -181,12 +182,6 @@ export default function MapApp() {
   useEffect(() => {
     void loadData();
   }, [loadData]);
-
-  useEffect(() => {
-    setSaved(readJson<string[]>(STORAGE.saved, []));
-    setSavedTrails(readJson<string[]>("ss-map-trails", []));
-    setSavedPlanner(readJson<string[]>("ss-map-saved-routes", []));
-  }, []);
 
   /* --------------------------------------------------------------- map init */
   useEffect(() => {
@@ -670,16 +665,12 @@ export default function MapApp() {
   }, [clearRoute, showToast]);
 
   const toggleTrailSave = useCallback(
-    (route: CuratedRoute) => {
-      setSavedTrails((previous) => {
-        const has = previous.includes(route.id);
-        const next = has ? previous.filter((id) => id !== route.id) : [...previous, route.id];
-        writeJson("ss-map-trails", next);
-        showToast(has ? "Trail removed from saved." : "Trail saved on this device.");
-        return next;
-      });
+    async (route: CuratedRoute) => {
+      const result = await toggleSaved("trail", route.id);
+      if (!result.ok) return;
+      showToast(result.saved ? "Trail saved to your profile." : "Trail removed from saved.");
     },
-    [showToast]
+    [showToast, toggleSaved]
   );
 
   const shareCurated = useCallback(
@@ -867,15 +858,99 @@ export default function MapApp() {
     return [result.mode, ...result.stops.map((stop) => `${stop.lat.toFixed(4)},${stop.lng.toFixed(4)}`)].join("|");
   }, []);
 
-  const savePlannerResult = useCallback(() => {
+  const savePlannerResult = useCallback(async () => {
     if (!plannerResult) return;
     const signature = plannerSignature(plannerResult);
-    const has = savedPlanner.includes(signature);
-    const next = has ? savedPlanner.filter((item) => item !== signature) : [...savedPlanner, signature];
-    setSavedPlanner(next);
-    writeJson("ss-map-saved-routes", next);
-    showToast(has ? "Route removed from saved." : "Route saved on this device.");
-  }, [plannerResult, plannerSignature, savedPlanner, showToast]);
+    const result = await toggleSaved("route", signature);
+    if (!result.ok) return;
+    showToast(result.saved ? "Route saved to your profile." : "Route removed from saved.");
+  }, [plannerResult, plannerSignature, toggleSaved, showToast]);
+
+  /**
+   * The AI plan becomes an ordinary route: the stops are handed to the same
+   * planner that a hand-built route uses, so the geometry, distance, turn
+   * steps and "pandals on the way" all come from the real routing engine.
+   */
+  const applyAiPlan = useCallback(
+    async (plan: AiPlan) => {
+      setAiPlan(plan);
+      const stops: PlannerStop[] = [];
+      for (const stop of plan.stops) {
+        if (stop.lat == null || stop.lng == null) continue;
+        const pandal = data?.pandals.find((p) => p.slug === stop.id);
+        const poi = data?.pois.find((p) => p.id === stop.id);
+        stops.push(
+          pandal
+            ? stopFromPandal(pandal)
+            : {
+                id: stop.id,
+                name: stop.name,
+                locality: stop.locality || poi?.address || "",
+                zone: stop.zone,
+                lat: stop.lat,
+                lng: stop.lng,
+                metro: poi?.address || "",
+                kind: "poi" as const,
+              }
+        );
+      }
+      if (stops.length < 2) {
+        showToast("The planner needs at least two stops to draw a route.");
+        return;
+      }
+      setPlannerStops(stops);
+      setPlannerMode(plan.mode as TravelMode);
+      setTab("planner");
+      // Draw the plan's own line first so the map answers immediately, then
+      // let the router replace it with the real road geometry.
+      const straight = straightLineStopMeters(stops) * 1.18;
+      const coords: [number, number][] = stops.map((stop) => [stop.lat, stop.lng]);
+      const segments: RouteSegment[] = stops.slice(1).map((stop, index) => ({
+        mode: plan.mode as TravelMode,
+        coords: [
+          [stops[index].lat, stops[index].lng],
+          [stop.lat, stop.lng],
+        ],
+      }));
+      drawSegments(segments, true);
+      fitRoute(coords);
+      await generatePlannerRoute(stops, plan.mode as TravelMode);
+    },
+    [data, drawSegments, fitRoute, generatePlannerRoute, showToast]
+  );
+
+  const openAiGoogleMaps = useCallback(() => {
+    if (!plannerStops.length) return;
+    const url = googleMapsUrl(plannerStops, plannerMode);
+    if (url) window.open(url, "_blank", "noopener");
+  }, [plannerMode, plannerStops]);
+
+  const openAiAppleMaps = useCallback(() => {
+    if (!plannerStops.length) return;
+    const url = appleMapsUrl(plannerStops, plannerMode);
+    if (url) window.open(url, "_blank", "noopener");
+  }, [plannerMode, plannerStops]);
+
+  const shareAiPlan = useCallback(async () => {
+    if (!plannerStops.length) {
+      showToast("Ask the planner for a route first.");
+      return;
+    }
+    const params = new URLSearchParams();
+    params.set("mode", plannerMode);
+    params.set("start", stopToken(plannerStops[0]));
+    params.set("end", stopToken(plannerStops[plannerStops.length - 1]));
+    const middle = plannerStops.slice(1, -1).map(stopToken);
+    if (middle.length) params.set("stops", middle.join("|"));
+    if (aiPlan?.meetingPoint) params.set("meet", aiPlan.meetingPoint.id);
+    const ok = await copyToClipboard(`${window.location.origin}/map?${params.toString()}`);
+    showToast(ok ? "Trip link copied." : "Copy failed - select the address bar to share.");
+  }, [aiPlan, plannerMode, plannerStops, showToast]);
+
+  const clearAiPlan = useCallback(() => {
+    setAiPlan(null);
+    clearPlanner();
+  }, [clearPlanner]);
 
   const sharePlannerResult = useCallback(async () => {
     if (!plannerResult || plannerResult.stops.length < 2) return;
@@ -912,16 +987,12 @@ export default function MapApp() {
   );
 
   const savePandal = useCallback(
-    (pandal: Pandal) => {
-      setSaved((previous) => {
-        const has = previous.includes(pandal.slug);
-        const next = has ? previous.filter((slug) => slug !== pandal.slug) : [...previous, pandal.slug];
-        writeJson(STORAGE.saved, next);
-        showToast(has ? "Pandal removed from saved." : "Pandal saved on this device.");
-        return next;
-      });
+    async (pandal: Pandal) => {
+      const result = await toggleSaved("pandal", pandal.slug);
+      if (!result.ok) return;
+      showToast(result.saved ? "Pandal saved to your profile." : "Pandal removed from saved.");
     },
-    [showToast]
+    [showToast, toggleSaved]
   );
 
   const focusPandal = useCallback((pandal: Pandal) => {
@@ -1091,9 +1162,9 @@ export default function MapApp() {
   }, [data, filteredPandals, filters.query]);
 
   const activeSearchRoute = activeRoute;
-  const savedTrail = activeSearchRoute ? savedTrails.includes(activeSearchRoute.id) : false;
+  const savedTrail = activeSearchRoute ? saves.trails.includes(activeSearchRoute.id) : false;
   const plannerSaved = plannerResult
-    ? savedPlanner.includes(plannerSignature(plannerResult))
+    ? saves.routes.includes(plannerSignature(plannerResult))
     : false;
 
   const chips = useMemo(() => {
@@ -1183,12 +1254,13 @@ export default function MapApp() {
       <div className="flex h-full w-full lg:gap-4">
         {/* ---------------------------------------------------------- sidebar */}
         <aside className="hidden h-full w-[360px] shrink-0 flex-col overflow-hidden rounded-3xl border border-[#E5C880] bg-[#FFFBF0] p-3 text-[#2C1210] shadow-sm lg:flex">
-          <div className="mb-2 grid shrink-0 grid-cols-3 gap-1 rounded-xl border border-[#E5C880] bg-[#FFF3D6] p-1">
+          <div className="mb-2 grid shrink-0 grid-cols-4 gap-1 rounded-xl border border-[#E5C880] bg-[#FFF3D6] p-1">
             {(
               [
                 ["filters", "Filter & POIs"],
                 ["trails", "Curated Trails"],
                 ["planner", "Route Planner"],
+                ["ai", "AI Planner"],
               ] as [MapTab, string][]
             ).map(([id, label]) => (
               <button
@@ -1238,6 +1310,19 @@ export default function MapApp() {
             {data && tab === "filters" && filterPanel}
             {data && tab === "trails" && trailsPanel}
             {data && tab === "planner" && plannerPanel}
+            {data && tab === "ai" && (
+              <AiPlannerPanel
+                plan={aiPlan}
+                onPlan={(plan) => void applyAiPlan(plan)}
+                onShare={() => void shareAiPlan()}
+                onOpenGoogle={openAiGoogleMaps}
+                onOpenApple={openAiAppleMaps}
+                onSave={() => void savePlannerResult()}
+                saved={plannerSaved}
+                onClear={clearAiPlan}
+              />
+            )}
+
           </div>
           <InstallBanner />
         </aside>

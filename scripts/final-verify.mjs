@@ -917,19 +917,42 @@ console.log("\n== PARAS DIRECTORY ==");
   await p.waitForTimeout(500);
   ok((await visible()) === 1, `search reaches a pandal outside the first 24 (${midName.slice(0, 30)})`);
 
-  // Saved must survive a reload.
+  // Saved must survive a reload. Saving is an account action now, so the
+  // page is signed in through the mock API's cookie first.
   await p.evaluate(() => {
     const i = document.querySelector('input[placeholder*="Search pandal"]');
     i.value = "";
     i.dispatchEvent(new Event("input", { bubbles: true }));
   });
   await p.waitForTimeout(250);
+  await p.context().addCookies([{ name: "ss_mock_user", value: "verifier", url: B }]);
+  await p.reload({ waitUntil: "load" });
+  // The account resolves from the API, and saving while it is still loading
+  // sends the visitor to sign in instead.
+  await p
+    .waitForFunction(() => document.documentElement.dataset.authState === "signed-in", null, {
+      timeout: 8000,
+    })
+    .catch(() => {});
   await p.evaluate(() => {
     document.querySelector('a.block.h-full[href^="/paras/"] [aria-label="Save Pandal"]').click();
   });
-  await p.waitForTimeout(300);
+  await p.waitForTimeout(400);
   await p.reload({ waitUntil: "load" });
-  await p.waitForTimeout(1200);
+  // The account's save list arrives from the API, so the badge settles a
+  // moment after the reload.
+  await p
+    .waitForFunction(
+      () => {
+        const btn = [...document.querySelectorAll("main button")].find((x) =>
+          x.innerText.trim().toLowerCase().startsWith("saved")
+        );
+        return !!btn && /saved\s*1/i.test(btn.innerText.replace(/\s+/g, " "));
+      },
+      null,
+      { timeout: 8000 }
+    )
+    .catch(() => {});
   const badge = await p.evaluate(() => {
     const btn = [...document.querySelectorAll("main button")].find((x) =>
       x.innerText.trim().toLowerCase().startsWith("saved")
@@ -1425,9 +1448,12 @@ console.log("\n== EVENTS + EDEN GARDENS ==");
     .then(() => true)
     .catch(() => false);
   ok(reverted, "eden: the copied state clears itself");
+  // The Eden page embeds a YouTube iframe, and Chrome logs a permissions
+  // policy notice for it. That is the embed's noise, not the site's.
+  const edenErrs = errs.filter((e) => !/Permissions policy violation/i.test(e));
   ok(
-    errs.length === 0,
-    "events + eden console clean" + (errs.length ? ": " + [...new Set(errs)].join(" | ") : "")
+    edenErrs.length === 0,
+    "events + eden console clean" + (edenErrs.length ? ": " + [...new Set(edenErrs)].join(" | ") : "")
   );
   await p.close();
 }
@@ -1681,6 +1707,113 @@ console.log("\n== IMAGES ==");
     list.length >= 50 && missing.length === 0,
     `every gallery image answers (${list.length} images)` +
       (missing.length ? ": " + missing.slice(0, 3).join(", ") : "")
+  );
+  await p.close();
+}
+
+// ---------- account & AI planner ----------
+console.log("\n== ACCOUNT & AI PLANNER ==");
+{
+  const p = await b.newPage({ viewport: { width: 1440, height: 1000 } });
+  const errs = [];
+  p.on("pageerror", (e) => errs.push(e.message.slice(0, 100)));
+  p.on("console", (c) => c.type() === "error" && errs.push(c.text().slice(0, 100)));
+  await ready(p, B + "/map/");
+
+  const signedOut = await p.evaluate(() => ({
+    me: document.documentElement.dataset.authState,
+  }));
+  ok(signedOut.me === "signed-out", `the site knows it is signed out (${signedOut.me})`);
+
+  // The sign-in lives inside the MORE menu, where the site's other
+  // destinations are.
+  await p.locator("button", { hasText: /^more$/i }).first().click();
+  await p.waitForTimeout(500);
+  const morePanel = await p.evaluate(() => {
+    const panel = document.getElementById("our-more-panel");
+    return {
+      open: !!panel && getComputedStyle(panel).display !== "none",
+      signIn: !!panel && /sign in/i.test(panel.textContent || ""),
+      slot: !!panel?.querySelector("#our-more-account"),
+    };
+  });
+  ok(morePanel.open, "the MORE menu opens");
+  ok(morePanel.signIn, "the MORE menu carries the sign-in control");
+  ok(morePanel.slot, "the MORE menu holds the account slot");
+  await p.keyboard.press("Escape");
+  await p.waitForTimeout(300);
+
+  const anon = await p.evaluate(async () => {
+    const saves = await fetch("/api/saves");
+    const plan = await fetch("/api/plan", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ message: "3 hours in South Kolkata" }),
+    });
+    return { saves: saves.status, plan: plan.status };
+  });
+  ok(
+    anon.saves === 401 && anon.plan === 401,
+    `anonymous API calls are refused (${anon.saves}/${anon.plan})`
+  );
+
+  await p.locator("aside button", { hasText: "AI Planner" }).first().click();
+  await p.waitForTimeout(400);
+  const gated = await p.evaluate(() => {
+    const aside = document.querySelector("aside");
+    return {
+      text: aside?.innerText || "",
+      chat: !!aside?.querySelector('input[placeholder*="e.g."]'),
+    };
+  });
+  // innerText reflects the button's upper-case transform.
+  ok(/sign in to plan/i.test(gated.text), "the AI planner asks signed-out visitors to sign in");
+  ok(!gated.chat, "the AI chat is not offered before sign-in");
+
+  await p.context().addCookies([{ name: "ss_mock_user", value: "planner", url: B }]);
+  await p.reload({ waitUntil: "load" });
+  await p
+    .waitForFunction(() => document.documentElement.dataset.authState === "signed-in", null, {
+      timeout: 8000,
+    })
+    .catch(() => {});
+  await p.locator("aside button", { hasText: "AI Planner" }).first().click();
+  await p.waitForTimeout(300);
+  const chat = await p.evaluate(() => ({
+    present: !!document.querySelector('input[placeholder*="e.g."]'),
+    chips: [...document.querySelectorAll("aside button")].filter((b) =>
+      /heritage|quiet|lighting|food trail|meet a friend/i.test(b.textContent)
+    ).length,
+  }));
+  ok(chat.present, "the AI chat opens once signed in");
+  ok(chat.chips >= 4, `the planner offers starting points (${chat.chips})`);
+
+  await p.locator('input[placeholder*="e.g."]').fill("3 hours of lighting pandals in South Kolkata");
+  await p.locator('button[aria-label="Send to the planner"]').click();
+  await p.waitForTimeout(1500);
+  const answered = await p.evaluate(() => {
+    const aside = document.querySelector("aside");
+    return {
+      text: aside?.innerText || "",
+      paths: document.querySelectorAll("[data-map-canvas] .leaflet-overlay-pane path").length,
+    };
+  });
+  ok(/stop/i.test(answered.text), "the planner answers with a stop list");
+  ok(answered.paths > 0, `the planned route is drawn on the map (${answered.paths} paths)`);
+
+  await p.goto(B + "/profile/", { waitUntil: "load" });
+  await p.waitForTimeout(1200);
+  const profile = await p.evaluate(() => ({
+    heading: document.querySelector("h1")?.textContent?.trim() || "",
+  }));
+  ok(/planner/i.test(profile.heading), `the profile shows the account (${profile.heading})`);
+
+  // The deliberate anonymous calls above answer 401, and the browser logs
+  // that as a console error. It is the expected answer, not a fault.
+  const realErrs = errs.filter((e) => !/401/.test(e));
+  ok(
+    realErrs.length === 0,
+    "account console clean" + (realErrs.length ? ": " + [...new Set(realErrs)].join(" | ") : "")
   );
   await p.close();
 }

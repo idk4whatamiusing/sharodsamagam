@@ -2,11 +2,35 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "sharodsamagam",
   "compatibility_date": "2026-01-15",
+  // The site itself is a static export; this Worker adds the endpoints a
+  // static site cannot have: Google OAuth, the saved-items API, uploads and
+  // the AI trip planner. Everything else is served straight from the assets.
+  "main": "./worker/index.js",
+  "ai": {
+    "binding": "AI"
+  },
+  "kv_namespaces": [
+    {
+      "binding": "CACHE",
+      "id": "9ee90f0a21994863a82b06a364b9a8cd"
+    }
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "sharodsamagam",
+      "database_id": "0d54455f-b7e9-4f88-991d-c8d696aa7022",
+      "migrations_dir": "worker/migrations"
+    }
+  ],
   "assets": {
     "directory": "./out",
+    "binding": "ASSETS",
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page",
-    "run_worker_first": false
+    // Only the dynamic paths run the Worker; every other request is served
+    // straight from the asset manifest, exactly as before.
+    "run_worker_first": ["/api/*", "/auth/*", "/media/*"]
   },
   "routes": [
     {

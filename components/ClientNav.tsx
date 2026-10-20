@@ -129,13 +129,14 @@ export default function ClientNav() {
               </div>
               <button id="our-more-close" aria-label="Close menu" class="w-7 h-7 rounded-full bg-[#FFF0F2] border border-[#D90429]/30 text-[#D90429] flex items-center justify-center">✕</button>
             </div>
+            <div id="our-more-account" class="mb-3 p-3 rounded-2xl bg-[#FFFDF7] border-2 border-[#E5C880] shadow-2xs relative z-10"></div>
             <div class="mb-3 p-3 rounded-2xl bg-[#FFFDF7] border-2 border-[#E5C880] shadow-2xs relative z-10">
               <div class="flex items-center justify-between gap-3 w-full">
                 <div class="flex items-center gap-2.5 min-w-0">
                   <div class="w-8 h-8 rounded-full bg-amber-100 border border-amber-300 text-[#D97706] flex items-center justify-center shrink-0">🔖</div>
                   <div class="min-w-0">
                     <h4 class="font-serif font-bold text-xs">Saved Pandals</h4>
-                    <p class="text-[10px] text-[#2C1210]/70 font-serif truncate">Kept in this browser, on the directory's Saved tab</p>
+                    <p class="text-[10px] text-[#2C1210]/70 font-serif truncate">Your saved pandals, on the directory's Saved tab</p>
                   </div>
                 </div>
                 <div class="flex items-center gap-1.5 shrink-0">

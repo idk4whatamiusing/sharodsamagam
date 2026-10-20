@@ -38,8 +38,10 @@ jobs:
 
       - name: Serve the built site
         run: |
-          cd out
-          nohup python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/serve.log 2>&1 &
+          # The static server also mocks the Worker's API (/api/me,
+          # /api/saves, /api/plan), so the account features can be checked
+          # without deploying the Worker first.
+          nohup node scripts/serve-static.mjs 4173 out > /tmp/serve.log 2>&1 &
           for i in $(seq 1 30); do
             if curl -sf http://127.0.0.1:4173/ > /dev/null; then break; fi
             sleep 1
@@ -82,6 +84,13 @@ jobs:
             echo "::error title=Invalid token::CLOUDFLARE_API_TOKEN was rejected by the Cloudflare API. Check that the secret is current and has Workers Scripts:Edit."
             echo "ready=false" >> "$GITHUB_OUTPUT"
           fi
+
+      - name: Apply D1 migrations
+        if: steps.creds.outputs.ready == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx wrangler d1 migrations apply sharodsamagam --remote
 
       - name: Deploy to Cloudflare Workers
         if: steps.creds.outputs.ready == 'true'

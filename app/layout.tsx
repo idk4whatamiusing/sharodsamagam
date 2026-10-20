@@ -7,6 +7,8 @@ import FestivalDays from "../components/FestivalDays";
 import FestivalStatus from "../components/FestivalStatus";
 import HeroSlides from "../components/HeroSlides";
 import ClientNav from "../components/ClientNav";
+import AccountButton from "../components/AccountButton";
+import AuthProvider from "../components/AuthProvider";
 import { injectMobilePanels } from "../lib/chromeInject";
 import GalleryMotion from "../components/GalleryMotion";
 // Mounted ahead of RevealScroll: its effect marks the Teen Chala carousel's
@@ -26,13 +28,16 @@ import PoiSearch from "../components/PoiSearch";
 import "./globals.css";
 
 const MIRROR = path.join(process.cwd(), "mirror");
-const CHROME_HEAD = fs.readFileSync(path.join(MIRROR, "_chrome_head.html"), "utf8").replace(
-  // The mobile navbar reserves an empty slot to the right of the wordmark
-  // (`justify-between` on the pill puts it at the right-hand end). Tag it so
-  // the audio player can portal its controls in there on small screens.
-  '<div class="relative z-10 flex items-center gap-1 sm:gap-2 shrink-0"></div>',
-  '<div id="mobile-nav-actions" class="relative z-10 flex items-center gap-1 sm:gap-2 shrink-0"></div>'
-);
+const CHROME_HEAD = fs
+  .readFileSync(path.join(MIRROR, "_chrome_head.html"), "utf8")
+  .replace(
+    // The mobile navbar reserves an empty slot to the right of the wordmark
+    // (`justify-between` on the pill puts it at the right-hand end). Tag it so
+    // the audio player can portal its controls in there on small screens.
+    '<div class="relative z-10 flex items-center gap-1 sm:gap-2 shrink-0"></div>',
+    '<div id="mobile-nav-actions" class="relative z-10 flex items-center gap-1 sm:gap-2 shrink-0"></div>'
+  )
+
 const CHROME_FOOT = injectMobilePanels(
   fs.readFileSync(path.join(MIRROR, "_chrome_foot.html"), "utf8")
 );
@@ -75,10 +80,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="stylesheet" href="/static/css/19rhlcx2srev9.css" />
       </head>
       <body className="bg-[#FFFDF5] text-[#2C1210] antialiased min-h-screen flex flex-col">
-        <div dangerouslySetInnerHTML={{ __html: CHROME_HEAD }} />
-        <div className="flex-grow" style={{ minHeight: "100vh" }}>{children}</div>
-        <div dangerouslySetInnerHTML={{ __html: CHROME_FOOT }} />
-        <AudioPlayer tracks={TRACKS} />
+        <AuthProvider>
+          <div dangerouslySetInnerHTML={{ __html: CHROME_HEAD }} />
+          <div className="flex-grow" style={{ minHeight: "100vh" }}>{children}</div>
+          <div dangerouslySetInnerHTML={{ __html: CHROME_FOOT }} />
+          <AccountButton />
+          <AudioPlayer tracks={TRACKS} />
         <ClientNav />
         <GalleryMotion />
         <TeenChalaScroll />
@@ -94,8 +101,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Countdown />
         <FestivalDays />
         <FestivalStatus />
-        <HeroSlides />
-        <ServiceWorkerRegistrar />
+          <HeroSlides />
+          <ServiceWorkerRegistrar />
+        </AuthProvider>
       </body>
     </html>
   );

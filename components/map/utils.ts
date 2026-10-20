@@ -224,6 +224,20 @@ export function curatedStops(route: CuratedRoute): PlannerStop[] {
   return out;
 }
 
+/** Apple Maps cannot carry waypoints, so it gets the first hop plus the
+ *  overall origin/destination pair. The per-stop list in the plan covers the
+ *  rest of the route. */
+export function appleMapsUrl(stops: PlannerStop[], mode: TravelMode): string {
+  if (stops.length < 2) return "";
+  const params = new URLSearchParams({
+    saddr: `${stops[0].lat},${stops[0].lng}`,
+    daddr: `${stops[stops.length - 1].lat},${stops[stops.length - 1].lng}`,
+  });
+  // dirflg: w = walking, d = driving, r = transit.
+  params.set("dirflg", mode === "walk" ? "w" : mode === "transit" ? "r" : "d");
+  return `https://maps.apple.com/?${params.toString()}`;
+}
+
 export function googleMapsUrl(stops: PlannerStop[], mode: TravelMode): string {
   if (stops.length < 2) return "";
   const origin = `${stops[0].lat},${stops[0].lng}`;

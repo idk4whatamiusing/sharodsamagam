@@ -3,8 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import type { MapTab, Pandal, Poi } from "./types";
-import { STORAGE, ZONES, poiIconPath, titleCase, writeJson } from "./utils";
+import { STORAGE, ZONES, poiIconPath, titleCase } from "./utils";
 import { Icon, Spinner, Toast } from "./ui";
+import { postSuggestion, uploadPhoto } from "../../lib/account";
 
 /* ------------------------------------------------------------------ cards */
 
@@ -691,29 +692,54 @@ export function SuggestModal({
   });
   const [error, setError] = useState("");
   const [done, setDone] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [photoFile, setPhotoFile] = useState<File | null>(null);
 
   if (!open) return null;
 
   const update = (patch: Partial<typeof form>) =>
     setForm((previous) => ({ ...previous, ...patch }));
 
-  const submit = () => {
+  const submit = async () => {
     if (!form.name.trim() || !form.zone || !form.contact.trim() || !form.phone.trim()) {
       setError("Pandal name, zone, your name and phone are required.");
       return;
     }
-    try {
-      const existing = JSON.parse(
-        window.localStorage.getItem(STORAGE.suggestions) || "[]"
-      ) as unknown[];
-      existing.push({ ...form, submittedAt: new Date().toISOString() });
-      writeJson(STORAGE.suggestions, existing);
-    } catch {
-      /* noop */
-    }
+    setBusy(true);
     setError("");
-    setDone(true);
-    onToast("Suggestion saved on this device for review.");
+    try {
+      let photoId: string | undefined;
+      if (photoFile) {
+        const uploaded = await uploadPhoto(photoFile, form.name, form.theme);
+        if (!uploaded) {
+          setError("The photo could not be uploaded. Try without it.");
+          setBusy(false);
+          return;
+        }
+        photoId = uploaded.id;
+      }
+      const ok = await postSuggestion({
+        name: form.name.trim(),
+        locality: [form.locality.trim(), form.zone].filter(Boolean).join(", "),
+        lat: form.lat,
+        lng: form.lng,
+        note: [form.theme.trim(), form.contact.trim(), form.phone.trim(), form.email.trim()]
+          .filter(Boolean)
+          .join(" - "),
+        photoId,
+      });
+      if (!ok) {
+        setError("The suggestion could not be sent. Please try again.");
+        setBusy(false);
+        return;
+      }
+      setDone(true);
+      onToast("Suggestion sent to the Sharodsamagam team.");
+    } catch {
+      setError("The suggestion could not be sent. Please try again.");
+    } finally {
+      setBusy(false);
+    }
   };
 
   const reset = () => {
@@ -762,8 +788,8 @@ export function SuggestModal({
             </span>
             <p className="font-serif text-base font-black text-[#2C1210]">Suggestion saved</p>
             <p className="mx-auto mt-1 max-w-xs font-sans text-[10px] leading-relaxed text-[#2C1210]/55">
-              This preview has no server, so the suggestion is stored on this device for the
-              Sharodsamagam team to review later.
+              The Sharodsamagam team will review it. If you added a photo it is queued for
+              approval too.
             </p>
             <div className="mt-3 flex justify-center gap-2">
               <button
@@ -843,6 +869,17 @@ export function SuggestModal({
                 {form.lat.toFixed(5)}, {form.lng.toFixed(5)}
               </p>
             </div>
+            <Field label="Add a photo (optional)">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(event) => setPhotoFile(event.target.files?.[0] || null)}
+                className="w-full cursor-pointer rounded-lg border border-[#E5C880] bg-white px-2 py-1.5 font-mono text-[9px] text-[#2C1210]/60"
+              />
+              {photoFile && (
+                <p className="mt-1 font-mono text-[8px] text-[#B45309]">{photoFile.name}</p>
+              )}
+            </Field>
             <div className="rounded-lg border border-[#E5C880]/70 bg-[#FFF3D6]/50 p-2">
               <p className="mb-1.5 font-mono text-[8px] font-black uppercase tracking-wider text-[#B45309]">
                 Your contact details
@@ -885,7 +922,8 @@ export function SuggestModal({
               </button>
               <button
                 type="button"
-                onClick={submit}
+                onClick={() => void submit()}
+                disabled={busy}
                 className="flex-1 cursor-pointer rounded-xl bg-[#D90429] py-2 font-serif text-[11px] font-bold text-white hover:bg-[#B50321]"
               >
                 Submit Suggestion
