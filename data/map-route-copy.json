@@ -1,0 +1,938 @@
+{
+  "1": {
+    "zone": "South",
+    "stops": 19,
+    "title": "Dhakuria → Gariahat → Kalighat → New Alipore",
+    "metro": "",
+    "description": "This joins the Dhakuria cluster to the bigger South Kolkata circuit. The Dhakuria–Selimpur–Jodhpur Park grouping is also supported by published walking itineraries.",
+    "start": "Dhakuria Railway Station",
+    "finish": "New Alipore; road connection to Kalighat Metro or return transport.",
+    "earlyExits": "Gariahat after stop 8; Kalighat after stop 10; Rabindra Sarobar after stop 14.",
+    "sectionCount": 5,
+    "sections": [
+      {
+        "title": "Dhakuria section",
+        "stops": [
+          "Babubagan Sarbojanin Durgotsava",
+          "Selimpur Pally Sarbojanin Durgotsab",
+          "Jodhpur Park Sarbojanin (Distinct from 95 Pally)",
+          "95 Pally Sarbojanin Durgotsab Committee"
+        ]
+      },
+      {
+        "title": "Transfer towards Gariahat/Ekdalia, then",
+        "stops": [
+          "Ekdalia Evergreen Club",
+          "Singhi Park Sarbojanin Durgapuja Committee",
+          "Gariahat Hindusthan Club",
+          "Hindusthan Park Sarbojanin Durgotsab Committee"
+        ]
+      },
+      {
+        "title": "Continue west and south",
+        "stops": [
+          "Tridhara Sammilani",
+          "Deshapriya Park Sarbojanin Durgotsab",
+          "Ballygunge Cultural Association",
+          "Samaj Sebi Sangha",
+          "Shibmandir",
+          "Mudiali Club"
+        ]
+      },
+      {
+        "title": "Transfer north towards the Kalighat/Rashbehari crossing, then",
+        "stops": [
+          "Badamtala Ashar Sangha",
+          "66 Pally Durgapuja Pandal",
+          "Kalighat Nepal Bhattacharjee St Club",
+          "Chetla Agroni Club"
+        ]
+      },
+      {
+        "title": "Optional final transfer",
+        "stops": [
+          "Suruchi Sangha (New Alipore)"
+        ]
+      }
+    ],
+    "likesDisplay": "125+"
+  },
+  "2": {
+    "zone": "South",
+    "stops": 16,
+    "title": "Ballygunge → South Kolkata favourites → Behala edge",
+    "metro": "",
+    "description": "South Kolkata favorites extending into western residential hub.",
+    "start": "Ballygunge Railway Station, Gariahat side",
+    "finish": "Buroshibtala/New Alipore; arrange road transport towards Taratala or Kalighat.",
+    "earlyExits": "Rabindra Sarobar after stop 10. Stops 15–16 are optional.",
+    "sectionCount": 3,
+    "sections": [
+      {
+        "title": "Gariahat & South Kolkata favourites",
+        "stops": [
+          "Ekdalia Evergreen Club",
+          "Singhi Park Sarbojanin Durgapuja Committee",
+          "Gariahat Hindusthan Club",
+          "Hindusthan Park Sarbojanin Durgotsab Committee",
+          "Tridhara Sammilani",
+          "Deshapriya Park Sarbojanin Durgotsab",
+          "Ballygunge Cultural Association",
+          "Samaj Sebi Sangha",
+          "Shibmandir",
+          "Mudiali Club"
+        ]
+      },
+      {
+        "title": "Transfer towards Kalighat, then",
+        "stops": [
+          "Badamtala Ashar Sangha",
+          "66 Pally Durgapuja Pandal",
+          "Kalighat Nepal Bhattacharjee St Club",
+          "Chetla Agroni Club"
+        ]
+      },
+      {
+        "title": "Western extension, with road transfers where needed",
+        "stops": [
+          "Suruchi Sangha (New Alipore)",
+          "Behala Buroshibtala Janakalyan Sangha"
+        ]
+      }
+    ],
+    "likesDisplay": "100+"
+  },
+  "3": {
+    "zone": "North",
+    "stops": 20,
+    "title": "Howrah arrival → Riverside North Kolkata → Hatibagan",
+    "metro": "",
+    "description": "Heritage access check: Stops 6, 8 and 18 depend on the respective houses' visiting arrangements.",
+    "start": "Ahiritola / Shobhabazar Sutanuti",
+    "finish": "Girish Park Metro → Esplanade → Howrah.",
+    "earlyExits": "Shobhabazar after stop 8; Shyambazar after the Hatibagan section.",
+    "sectionCount": 4,
+    "sections": [
+      {
+        "title": "Riverside North Kolkata",
+        "stops": [
+          "Ahirtola Sarbojanin Durgotsab Samity",
+          "Hatkhola Gosaipara Sarbojonin Durgotsab",
+          "Kumartuli Park Sarbojanin Durgotsab",
+          "Kumortuli Sarbojonin Durgotsab",
+          "Bagbazar Sarbojanin Durga Puja Mandap",
+          "Baghbazar Haldar Bari Puja"
+        ]
+      },
+      {
+        "title": "Continue towards Sovabazar",
+        "stops": [
+          "Jagat Mukherjee Park",
+          "Sovabazar Rajbari (Boro Rajbari)",
+          "Shyampukur Sanghatirtha Durga Puja Samity (Sanghatirtha)"
+        ]
+      },
+      {
+        "title": "Hatibagan section",
+        "stops": [
+          "Sikdar Bagan Sadharan Durgotsab",
+          "Nabin Pally Sarbojanin Durgotsav ( Hatibagan Nabinpally)",
+          "North Tridhara",
+          "Nalin Sarkar Street",
+          "Hatibagan Sarbojonin Durgotsab Committee"
+        ]
+      },
+      {
+        "title": "Southern extension",
+        "stops": [
+          "Kashi Bose Lane Durga Puja Samity",
+          "Hari Ghosh Street Sarbojanin Durgotsab Samity",
+          "Hedua Park Durga Puja",
+          "Chhatu Babu Latu Babu Thakur Bari (Ramdulal Nibas)",
+          "Simla Byayam Samity",
+          "Chorebagan Sarbojanin Durgotsab Samity"
+        ]
+      }
+    ],
+    "likesDisplay": "225+",
+    "arrival": "Arrival: Howrah Metro → Esplanade → Blue Line to Shobhabazar Sutanuti. Walk towards Ahiritola."
+  },
+  "4": {
+    "zone": "North",
+    "stops": 18,
+    "title": "Dum Dum → Tala → Cossipore → Old North Kolkata",
+    "metro": "",
+    "description": "This deliberately keeps Cossipore before the southward Bagbazar section, instead of sending people back north at the end.",
+    "start": "Belgachia / Tala Prattoy",
+    "finish": "Shobhabazar Sutanuti Metro.",
+    "earlyExits": "Shobhabazar after stop 11.",
+    "sectionCount": 4,
+    "sections": [
+      {
+        "title": "Tala section",
+        "stops": [
+          "Tala Prattoy",
+          "Tala Barowari Durgotsab",
+          "Tala Palli Sadharan Durgotsab Samity"
+        ]
+      },
+      {
+        "title": "Road/walking connection towards Cossipore",
+        "stops": [
+          "Cossipore Tarundal Durga Puja"
+        ]
+      },
+      {
+        "title": "Transfer towards Bagbazar, then",
+        "stops": [
+          "Bagbazar Sarbojanin Durga Puja Mandap",
+          "Baghbazar Haldar Bari Puja",
+          "Jagat Mukherjee Park",
+          "Kumortuli Sarbojonin Durgotsab",
+          "Kumartuli Park Sarbojanin Durgotsab",
+          "Ahirtola Sarbojanin Durgotsab Samity",
+          "Sovabazar Rajbari (Boro Rajbari)"
+        ]
+      },
+      {
+        "title": "Continue east",
+        "stops": [
+          "Shyampukur Sanghatirtha Durga Puja Samity (Sanghatirtha)",
+          "Sikdar Bagan Sadharan Durgotsab",
+          "Nabin Pally Sarbojanin Durgotsav ( Hatibagan Nabinpally)",
+          "North Tridhara",
+          "Nalin Sarkar Street",
+          "Hatibagan Sarbojonin Durgotsab Committee",
+          "Kashi Bose Lane Durga Puja Samity"
+        ]
+      }
+    ],
+    "likesDisplay": "175+",
+    "arrival": "Arrival: Dum Dum → Blue Line to Belgachia. Approach Tala Prattoy using the permitted entrance route."
+  },
+  "5": {
+    "zone": "Central",
+    "stops": 16,
+    "title": "Sealdah → Central Kolkata → Hatibagan → Sovabazar",
+    "metro": "",
+    "description": "Illuminated water reflections of Central moving north into old aristocrat Sovabazar.",
+    "start": "Sealdah Railway Station",
+    "finish": "Shobhabazar Sutanuti or Shyambazar Metro. Return to Sealdah through Esplanade.",
+    "earlyExits": "MG Road after the Central section; Girish Park after stop 6.",
+    "sectionCount": 3,
+    "sections": [
+      {
+        "title": "Central Kolkata big draws",
+        "stops": [
+          "Santosh Mitra Square (Lebutala)",
+          "College Square Sarbojanin Durgotsab Committee",
+          "Mohammad Ali Park",
+          "Thanthania Dutta Bari",
+          "Chorebagan Sarbojanin Durgotsab Samity",
+          "Simla Byayam Samity"
+        ]
+      },
+      {
+        "title": "Continue north",
+        "stops": [
+          "Chhatu Babu Latu Babu Thakur Bari (Ramdulal Nibas)",
+          "Kashi Bose Lane Durga Puja Samity",
+          "Hatibagan Sarbojonin Durgotsab Committee",
+          "Nalin Sarkar Street",
+          "North Tridhara",
+          "Nabin Pally Sarbojanin Durgotsav ( Hatibagan Nabinpally)",
+          "Sikdar Bagan Sadharan Durgotsab"
+        ]
+      },
+      {
+        "title": "Finish northern section",
+        "stops": [
+          "Shyampukur Sanghatirtha Durga Puja Samity (Sanghatirtha)",
+          "Sovabazar Rajbari (Boro Rajbari)",
+          "Jagat Mukherjee Park"
+        ]
+      }
+    ],
+    "likesDisplay": "175+"
+  },
+  "6": {
+    "zone": "Twin-Zone",
+    "stops": 16,
+    "title": "Esplanade → North and South highlights",
+    "metro": "",
+    "description": "Best use: Visitors who specifically want both North and South in one day. It involves more travelling than a single-zone route.",
+    "start": "Shyambazar Metro",
+    "finish": "Road connection to Kalighat Metro.",
+    "earlyExits": "",
+    "sectionCount": 4,
+    "sections": [
+      {
+        "title": "North Kolkata — eight stops",
+        "stops": [
+          "Bagbazar Sarbojanin Durga Puja Mandap",
+          "Kumortuli Sarbojonin Durgotsab",
+          "Kumartuli Park Sarbojanin Durgotsab",
+          "Ahirtola Sarbojanin Durgotsab Samity",
+          "Sovabazar Rajbari (Boro Rajbari)",
+          "Hatibagan Sarbojonin Durgotsab Committee",
+          "Kashi Bose Lane Durga Puja Samity",
+          "Chhatu Babu Latu Babu Thakur Bari (Ramdulal Nibas)"
+        ]
+      },
+      {
+        "title": "Transit Link: Walk to Girish Park; Blue Line to Kalighat",
+        "stops": [
+          "Girish Park to Kalighat Metro link"
+        ]
+      },
+      {
+        "title": "South Kolkata — eight stops",
+        "stops": [
+          "Deshapriya Park Sarbojanin Durgotsab",
+          "Tridhara Sammilani",
+          "Ballygunge Cultural Association",
+          "Samaj Sebi Sangha"
+        ]
+      },
+      {
+        "title": "Transfer towards the Rashbehari/Kalighat crossing",
+        "stops": [
+          "Badamtala Ashar Sangha",
+          "66 Pally Durgapuja Pandal",
+          "Kalighat Nepal Bhattacharjee St Club",
+          "Chetla Agroni Club"
+        ]
+      }
+    ],
+    "likesDisplay": "250+",
+    "arrival": "Arrival: Esplanade → Blue Line to Shyambazar."
+  },
+  "7": {
+    "zone": "North",
+    "stops": 15,
+    "title": "Bidhannagar Road → Ultadanga → Hatibagan → Maniktala",
+    "metro": "",
+    "description": "Eastern gateway into vibrant Hatibagan and Maniktala pockets.",
+    "start": "Bidhannagar Road Railway Station",
+    "finish": "Girish Park Metro.",
+    "earlyExits": "Shyambazar after stop 8. The final westward leg to Simla can be shortened by road transport where available.",
+    "sectionCount": 3,
+    "sections": [
+      {
+        "title": "Ultadanga section",
+        "stops": [
+          "Telengabagan Sarbojanin Durgotsab",
+          "Ultadanga Pallyshree",
+          "Karbagan Sarbojanin Durgotsab Committee",
+          "Gouriberia Sarbojanin Durgotsab O Pradarshani"
+        ]
+      },
+      {
+        "title": "Move west into Hatibagan",
+        "stops": [
+          "Nalin Sarkar Street",
+          "North Tridhara",
+          "Nabin Pally Sarbojanin Durgotsav ( Hatibagan Nabinpally)",
+          "Sikdar Bagan Sadharan Durgotsab",
+          "Hatibagan Sarbojonin Durgotsab Committee"
+        ]
+      },
+      {
+        "title": "Move south into Maniktala",
+        "stops": [
+          "Kashi Bose Lane Durga Puja Samity",
+          "Hedua Park Durga Puja",
+          "Hartaki Bagan Sarbojanin Durgotsab",
+          "Manicktala Chaltabagan Loha Patty",
+          "Brindaban Matrimandir",
+          "Simla Byayam Samity"
+        ]
+      }
+    ],
+    "likesDisplay": "125+"
+  },
+  "8": {
+    "zone": "South",
+    "stops": 6,
+    "title": "Ballygunge–Gariahat favourites",
+    "metro": "",
+    "description": "Use: A compact South Kolkata selection without the western extension.",
+    "start": "Ballygunge Railway Station",
+    "finish": "Road connection to Kalighat Metro or Ballygunge Railway Station.",
+    "earlyExits": "",
+    "sectionCount": 1,
+    "sections": [
+      {
+        "title": "Gariahat flagship circuit",
+        "stops": [
+          "Ekdalia Evergreen Club",
+          "Singhi Park Sarbojanin Durgapuja Committee",
+          "Gariahat Hindusthan Club",
+          "Hindusthan Park Sarbojanin Durgotsab Committee",
+          "Ballygunge Cultural Association",
+          "Samaj Sebi Sangha"
+        ]
+      }
+    ],
+    "likesDisplay": "150+"
+  },
+  "9": {
+    "zone": "South",
+    "stops": 5,
+    "title": "Kalighat–Chetla–New Alipore",
+    "metro": "",
+    "description": "Artistic avant-garde themes and stunning architectural concepts.",
+    "start": "Kalighat Metro",
+    "finish": "New Alipore; road connection back to Kalighat.",
+    "earlyExits": "Short version: Finish after Chetla Agroni.",
+    "sectionCount": 2,
+    "sections": [
+      {
+        "title": "Kalighat and Chetla",
+        "stops": [
+          "Badamtala Ashar Sangha",
+          "66 Pally Durgapuja Pandal",
+          "Kalighat Nepal Bhattacharjee St Club",
+          "Chetla Agroni Club"
+        ]
+      },
+      {
+        "title": "Road transfer to New Alipore",
+        "stops": [
+          "Suruchi Sangha (New Alipore)"
+        ]
+      }
+    ],
+    "likesDisplay": "100+"
+  },
+  "10": {
+    "zone": "South",
+    "stops": 2,
+    "title": "Mudiali–Shibmandir",
+    "metro": "",
+    "description": "Use: A genuinely compact route. There is no benefit in adding distant stops just to make the count five.",
+    "start": "Rabindra Sarobar Metro",
+    "finish": "Rabindra Sarobar Metro.",
+    "earlyExits": "",
+    "sectionCount": 1,
+    "sections": [
+      {
+        "title": "Southern heritage park loop",
+        "stops": [
+          "Mudiali Club",
+          "Shibmandir"
+        ]
+      }
+    ],
+    "likesDisplay": "200+"
+  },
+  "11": {
+    "zone": "South",
+    "stops": 4,
+    "title": "Dhakuria–Jodhpur Park",
+    "metro": "",
+    "description": "Use: The first section of Route 1 as a standalone outing.",
+    "start": "Dhakuria Railway Station",
+    "finish": "Return connection to Dhakuria, or road transport towards Gariahat/Kalighat.",
+    "earlyExits": "",
+    "sectionCount": 1,
+    "sections": [
+      {
+        "title": "Dhakuria and Jodhpur Park",
+        "stops": [
+          "Babubagan Sarbojanin Durgotsava",
+          "Selimpur Pally Sarbojanin Durgotsab",
+          "Jodhpur Park Sarbojanin (Distinct from 95 Pally)",
+          "95 Pally Sarbojanin Durgotsab Committee"
+        ]
+      }
+    ],
+    "likesDisplay": "125+"
+  },
+  "12": {
+    "zone": "South",
+    "stops": 5,
+    "title": "Santoshpur neighbourhood circuit",
+    "metro": "",
+    "description": "Use: A local circuit; do not describe every stop as being immediately outside the station.",
+    "start": "Jadavpur Railway Station area",
+    "finish": "Road connection to Jadavpur Railway Station.",
+    "earlyExits": "",
+    "sectionCount": 1,
+    "sections": [
+      {
+        "title": "Santoshpur residential circuit",
+        "stops": [
+          "Santoshpur Rishi Aurobindo Durga Puja Pandal",
+          "Santoshpur Trikon Park Durgotsab",
+          "Santoshpur Avenue South Durga Puja Pandal",
+          "Santoshpur Lake Pally",
+          "Santoshpur Adi Sarbojanin Durgotsab"
+        ]
+      }
+    ],
+    "likesDisplay": "150+",
+    "arrival": "Arrival: Jadavpur Railway Station → east-side road connection towards Santoshpur."
+  },
+  "13": {
+    "zone": "South",
+    "stops": 6,
+    "title": "Haridevpur",
+    "metro": "",
+    "description": "Note: Uses canonical entries for Haridevpur clubs. World-class conceptual art installations.",
+    "start": "Netaji Metro area",
+    "finish": "Road connection back to Netaji Metro.",
+    "earlyExits": "",
+    "sectionCount": 1,
+    "sections": [
+      {
+        "title": "Haridevpur art installations",
+        "stops": [
+          "41 Pally Durga Puja, Haridevpur",
+          "Ajeyo Sanhati",
+          "Haridevpur New Sporting Club",
+          "Haridevpur Apanjan Club",
+          "Haridevpur Adarsha Samity",
+          "Vivekananda Sporting Club Haridevpur"
+        ]
+      }
+    ],
+    "likesDisplay": "175+",
+    "arrival": "Arrival: Netaji Metro → road connection towards 41 Pally."
+  },
+  "14": {
+    "zone": "South",
+    "stops": 4,
+    "title": "Naktala–Bansdroni",
+    "metro": "",
+    "description": "Use: A south-suburban alternative, with a clear change of neighbourhood.",
+    "start": "Gitanjali Metro",
+    "finish": "Masterda Surya Sen Metro.",
+    "earlyExits": "",
+    "sectionCount": 2,
+    "sections": [
+      {
+        "title": "Naktala cluster",
+        "stops": [
+          "Naktala Udayan Sangha",
+          "Adi Naktala Sarbojanin Durgotsav Committee"
+        ]
+      },
+      {
+        "title": "Westward road/walking connection towards Bansdroni",
+        "stops": [
+          "Bansdroni Sree Sangha",
+          "Bansdroni Park Association"
+        ]
+      }
+    ],
+    "likesDisplay": "90+"
+  },
+  "15": {
+    "zone": "South",
+    "stops": 6,
+    "title": "Behala town circuit",
+    "metro": "",
+    "description": "Note: Sonar Durga Bari requires a heritage-house access check; the other stops form the community-puja circuit.",
+    "start": "Behala Bazar Metro or Behala Tram Depot area",
+    "finish": "Behala Bazar area.",
+    "earlyExits": "",
+    "sectionCount": 1,
+    "sections": [
+      {
+        "title": "Behala central loop",
+        "stops": [
+          "Behala Friends",
+          "Behala Natun Dal",
+          "Behala Mitra Sangha",
+          "Behala 11 Pally Sarodatsab Samity",
+          "Sonar Durga Bari (Behala)",
+          "Behala Club Sarbojanin Durgotsav Comm."
+        ]
+      }
+    ],
+    "likesDisplay": "125+"
+  },
+  "16": {
+    "zone": "South",
+    "stops": 5,
+    "title": "Barisha–Sakher Bazar",
+    "metro": "",
+    "description": "Use: Walk within the clusters; allow local transport for the longer connecting section.",
+    "start": "Behala Chowrasta Metro",
+    "finish": "Sakher Bazar/Barisha; road connection to Behala Chowrasta Metro.",
+    "earlyExits": "",
+    "sectionCount": 1,
+    "sections": [
+      {
+        "title": "Barisha community cluster",
+        "stops": [
+          "Barisha Yubak Brinda",
+          "Barisha Tarun Tirtha",
+          "Barisha Club",
+          "Barisha Sarbojanin Durgotsab",
+          "Barisha Youth Club"
+        ]
+      }
+    ],
+    "likesDisplay": "150+"
+  },
+  "17": {
+    "zone": "South",
+    "stops": 5,
+    "title": "Bhowanipore",
+    "metro": "",
+    "description": "Note: These use one entry per puja without duplicate spelling variants. Old-world adda and traditional elegance.",
+    "start": "Netaji Bhavan Metro",
+    "finish": "Jatin Das Park Metro.",
+    "earlyExits": "",
+    "sectionCount": 1,
+    "sections": [
+      {
+        "title": "Bhowanipore traditional walk",
+        "stops": [
+          "Bhowanipore Sarbojanin Durgotsab",
+          "Bhowanipore 75 Palli",
+          "Bhowanipore Swadhin Sangha",
+          "Bhowanipore Muktadal",
+          "Bhowanipore Rupchand"
+        ]
+      }
+    ],
+    "likesDisplay": "200+"
+  },
+  "18": {
+    "zone": "North",
+    "stops": 6,
+    "title": "Lake Town–Sreebhumi–Dum Dum Park",
+    "metro": "",
+    "description": "Important: Dum Dum Park is a separate neighbourhood from Dum Dum Station; this is not a station-exit walking circuit. Published location guides support the close grouping of the four Dum Dum Park stops.",
+    "start": "Lake Town",
+    "finish": "Jessore Road side; road connection to Dum Dum Railway/Metro Station.",
+    "earlyExits": "",
+    "sectionCount": 2,
+    "sections": [
+      {
+        "title": "Lake Town & Sreebhumi",
+        "stops": [
+          "Lake Town Adhibashi Brinda",
+          "Sreebhumi Sporting Club"
+        ]
+      },
+      {
+        "title": "Transfer north towards Dum Dum Park, then",
+        "stops": [
+          "Dum Dum Park Yubak Brinda",
+          "Dum Dum Park Sarbojanin Durga Puja Samity",
+          "Dum Dum Park Bharat Chakra",
+          "Dum Dum Park Tarun Sangha"
+        ]
+      }
+    ],
+    "likesDisplay": "100+",
+    "arrival": "Arrival: Bidhannagar Road Railway Station → road connection to Lake Town."
+  },
+  "19": {
+    "zone": "North",
+    "stops": 5,
+    "title": "Dum Dum arrival → Nagerbazar–Dum Dum Park",
+    "metro": "",
+    "description": "Northern rail arrival gateway straight into Dum Dum Park's award-winning artistic enclave.",
+    "start": "Dum Dum Railway/Metro Station",
+    "finish": "VIP Road side; road connection to Bidhannagar Road or Dum Dum.",
+    "earlyExits": "",
+    "sectionCount": 2,
+    "sections": [
+      {
+        "title": "Nagerbazar entry",
+        "stops": [
+          "Nagerbazar Sarbojanin"
+        ]
+      },
+      {
+        "title": "Local transfer into Dum Dum Park",
+        "stops": [
+          "Dum Dum Park Tarun Sangha",
+          "Dum Dum Park Bharat Chakra",
+          "Dum Dum Park Sarbojanin Durga Puja Samity",
+          "Dum Dum Park Yubak Brinda"
+        ]
+      }
+    ],
+    "likesDisplay": "175+",
+    "arrival": "Arrival: Dum Dum Railway/Metro Station → road connection towards Nagerbazar."
+  },
+  "20": {
+    "zone": "North",
+    "stops": 5,
+    "title": "Baranagar–Netaji Colony–Noapara",
+    "metro": "",
+    "description": "Use: A mixed walking-and-road route; Highland and Lowland are distinct stops.",
+    "start": "Baranagar Metro area",
+    "finish": "Road connection to Noapara Metro.",
+    "earlyExits": "",
+    "sectionCount": 2,
+    "sections": [
+      {
+        "title": "Baranagar to Sinthi",
+        "stops": [
+          "Baranagar Friend's Association Durga Puja",
+          "Deshapriyanagar Sadharan Durgotsab Sinthi More"
+        ]
+      },
+      {
+        "title": "Highland & Lowland Pujas",
+        "stops": [
+          "Baranagar Netaji Colony Sarbojanin Durga Puja Highland",
+          "Durga Bhavan (Baranagar Lowland Durga Puja)",
+          "Nawpara Dadabhai Sangha"
+        ]
+      }
+    ],
+    "likesDisplay": "175+",
+    "arrival": "Arrival: Baranagar Metro → road connection towards Nainan Para."
+  },
+  "21": {
+    "zone": "North",
+    "stops": 4,
+    "title": "Belgachia–Tala",
+    "metro": "",
+    "description": "Important: Select Tala Palli, not the similarly named Tala Pally record currently pinned near Naktala. Tala Prattoy is one of the highest footfall art destinations.",
+    "start": "Belgachia Metro",
+    "finish": "Road/walking connection towards Shyambazar Metro.",
+    "earlyExits": "",
+    "sectionCount": 1,
+    "sections": [
+      {
+        "title": "Tala Park circuit",
+        "stops": [
+          "Tala Prattoy",
+          "Tala Barowari Durgotsab",
+          "Tala Palli Sadharan Durgotsab Samity",
+          "Tala Friends Association"
+        ]
+      }
+    ],
+    "likesDisplay": "125+"
+  },
+  "22": {
+    "zone": "North",
+    "stops": 5,
+    "title": "Bagbazar traditional circuit",
+    "metro": "",
+    "description": "Use: Community pujas with one heritage-house stop (Haldar Bari). Kolkata's deepest century-old Sarbojanin traditions.",
+    "start": "Shyambazar Metro",
+    "finish": "Shobhabazar Sutanuti Metro.",
+    "earlyExits": "",
+    "sectionCount": 1,
+    "sections": [
+      {
+        "title": "Century-old Bagbazar loop",
+        "stops": [
+          "Naba Baghbazar Sarbajanin Durga Puja",
+          "Bagbazar Sarbojanin Durga Puja Mandap",
+          "Baghbazar Haldar Bari Puja",
+          "Kumortuli Sarbojonin Durgotsab",
+          "Jagat Mukherjee Park"
+        ]
+      }
+    ],
+    "likesDisplay": "150+"
+  },
+  "23": {
+    "zone": "North",
+    "stops": 5,
+    "title": "Sovabazar–Kumartuli–Ahiritola",
+    "metro": "",
+    "description": "Use: A riverside North Kolkata outing; heritage access applies to the first stop (Sovabazar Rajbari).",
+    "start": "Shobhabazar Sutanuti Metro",
+    "finish": "Road connection towards Girish Park, or return to Shobhabazar.",
+    "earlyExits": "",
+    "sectionCount": 1,
+    "sections": [
+      {
+        "title": "Clay artisans and historic riverfront",
+        "stops": [
+          "Sovabazar Rajbari (Boro Rajbari)",
+          "Kumartuli Park Sarbojanin Durgotsab",
+          "Hatkhola Gosaipara Sarbojonin Durgotsab",
+          "Ahirtola Sarbojanin Durgotsab Samity",
+          "Nimtala Sarbojanin Durga Puja"
+        ]
+      }
+    ],
+    "likesDisplay": "150+"
+  },
+  "24": {
+    "zone": "North",
+    "stops": 5,
+    "title": "Hatibagan compact circuit",
+    "metro": "",
+    "description": "Use: A compact alternative to the longer North Kolkata routes. Easily walkable with dense cultural stops.",
+    "start": "Shyambazar Metro",
+    "finish": "Shobhabazar Sutanuti Metro.",
+    "earlyExits": "",
+    "sectionCount": 1,
+    "sections": [
+      {
+        "title": "Hatibagan neighborhood lanes",
+        "stops": [
+          "Sikdar Bagan Sadharan Durgotsab",
+          "Nabin Pally Sarbojanin Durgotsav ( Hatibagan Nabinpally)",
+          "North Tridhara",
+          "Nalin Sarkar Street",
+          "Hatibagan Sarbojonin Durgotsab Committee"
+        ]
+      }
+    ],
+    "likesDisplay": "100+"
+  },
+  "25": {
+    "zone": "Central",
+    "stops": 3,
+    "title": "Central Kolkata big three",
+    "metro": "",
+    "description": "Use: Short in number, but potentially substantial in queueing time. Avoid marketing this as a guaranteed one-hour route. Peak crowd queues can exceed 2 hours at Santosh Mitra Square and College Square.",
+    "start": "MG Road Metro",
+    "finish": "Sealdah Railway/Metro Station.",
+    "earlyExits": "",
+    "sectionCount": 1,
+    "sections": [
+      {
+        "title": "Central colossal trio",
+        "stops": [
+          "Mohammad Ali Park",
+          "College Square Sarbojanin Durgotsab Committee",
+          "Santosh Mitra Square (Lebutala)"
+        ]
+      }
+    ],
+    "likesDisplay": "150+"
+  },
+  "26": {
+    "zone": "Central",
+    "stops": 6,
+    "title": "Girish Park–Maniktala",
+    "metro": "",
+    "description": "Use: A Central-to-North neighbourhood trail without adding the entire Hatibagan circuit. Renowned for metalwork and brass craftsmanship.",
+    "start": "Girish Park Metro",
+    "finish": "Maniktala; road connection to Girish Park or Sealdah.",
+    "earlyExits": "",
+    "sectionCount": 1,
+    "sections": [
+      {
+        "title": "Chorebagan and Maniktala",
+        "stops": [
+          "Chorebagan Sarbojanin Durgotsab Samity",
+          "Simla Byayam Samity",
+          "Manicktala Chaltabagan Loha Patty",
+          "Brindaban Matrimandir",
+          "Lalabagan Sarbojanin Durgotsab Samity",
+          "Lalabagan Yubakbrinda Nabankur Sangha"
+        ]
+      }
+    ],
+    "likesDisplay": "175+"
+  },
+  "27": {
+    "zone": "Heritage",
+    "stops": 6,
+    "title": "Central–Jorasanko bonedi trail",
+    "metro": "",
+    "description": "Release condition: Confirm each house's public visiting dates and entrance. Living history of Bengal's aristocratic merchant families with antique chandeliers and thakur dalans.",
+    "start": "Central Metro",
+    "finish": "Girish Park Metro.",
+    "earlyExits": "Muktaram Babu Street.",
+    "sectionCount": 1,
+    "sections": [
+      {
+        "title": "Bonedi zamindari courtyards",
+        "stops": [
+          "Badan Chand Roy Rajbari",
+          "Thanthania Dutta Bari",
+          "Chorbagan Chatterjee Bari",
+          "Chorbagan Mitra Bari",
+          "Jorasanko Shib Krishna Daw Bari",
+          "N C Daw (Bandukbari)"
+        ]
+      }
+    ],
+    "likesDisplay": "100+"
+  },
+  "28": {
+    "zone": "Heritage",
+    "stops": 6,
+    "title": "Bagbazar–Sovabazar bonedi trail",
+    "metro": "",
+    "description": "Living heritage trail across northern zamindar mansions dating back to the 18th and 19th centuries.",
+    "start": "Shyambazar Metro",
+    "finish": "Girish Park Metro.",
+    "earlyExits": "Beadon Street.",
+    "sectionCount": 1,
+    "sections": [
+      {
+        "title": "Northern zamindar courtyards",
+        "stops": [
+          "Baghbazar Haldar Bari Puja",
+          "Sovabazar Rajbari (Boro Rajbari)",
+          "Darjipara Mitra House",
+          "Chhatu Babu Latu Babu Thakur Bari (Ramdulal Nibas)",
+          "N C Daw (Bandukbari)",
+          "Jorasanko Shib Krishna Daw Bari"
+        ]
+      }
+    ],
+    "likesDisplay": "125+"
+  },
+  "29": {
+    "zone": "Howrah",
+    "stops": 6,
+    "title": "Howrah arrival → Salkia circuit",
+    "metro": "",
+    "description": "Use: A Howrah-side option for people who do not want to cross the river. Jatadhari Park is independently documented in Salkia.",
+    "start": "Howrah Railway Station area",
+    "finish": "Salkia; road connection back to Howrah Railway Station.",
+    "earlyExits": "Salkia Chowrasta.",
+    "sectionCount": 1,
+    "sections": [
+      {
+        "title": "Salkia community loop",
+        "stops": [
+          "Salkia Chatra Bayam Samity (Shishu Udyan)",
+          "Salkia Alapani",
+          "Salkia Sangha Shree Maidan",
+          "Salkia Sadharan Durga Puja (Jatadhari Park)",
+          "Salkia Bharat Sangha",
+          "Salkia Santi Sangha"
+        ]
+      }
+    ],
+    "likesDisplay": "100+",
+    "arrival": "Arrival: Howrah Railway Station → road connection towards Salkia."
+  },
+  "30": {
+    "zone": "East",
+    "stops": 5,
+    "title": "Salt Lake block-puja circuit",
+    "metro": "",
+    "description": "Use: Mixed walking and local transport between blocks. Planned township elegance, spacious open park pandals, and peaceful family darshan.",
+    "start": "Central Park Metro / Salt Lake FD Block",
+    "finish": "Road connection to Karunamoyee Metro.",
+    "earlyExits": "City Centre 1.",
+    "sectionCount": 1,
+    "sections": [
+      {
+        "title": "Salt Lake planned blocks",
+        "stops": [
+          "Salt Lake FD Block",
+          "CF Block Residents' Association Durga Puja Pandal",
+          "BH Block Durga Puja",
+          "Salt Lake BJ Block",
+          "AK Block Association Salt Lake"
+        ]
+      }
+    ],
+    "likesDisplay": "200+",
+    "arrival": "Arrival: Central Park Metro; local connection to FD Block."
+  }
+}
