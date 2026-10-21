@@ -17,26 +17,8 @@ Built and maintained as a non-commercial, volunteer-run project. Free for everyo
 - **Community archive** — photos, chronicles and visitor contributions
 - **Accounts** — optional Google sign-in to save pandals, trails and trips across devices
 
-## Local setup
-
-```bash
-npm install
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000).
-
-## Build and deploy
-
-```bash
-npm run build        # static export into out/
-npx wrangler deploy  # published to Cloudflare Workers
-```
-
-The site is a static export served through Cloudflare Workers. A Worker alongside it handles accounts, cloud saves, uploads and the AI planner.
-
 ## Credits
 
-Made by [Debopam Das](https://github.com/idk4whatamiusing) and [Saptarshi Mukherjee](https://github.com/Saptarshi2006), with Aditya Chatterjee, Soumyajit Dey and Sakshi Raj.
+Made by [Debopam Das](https://github.com/idk4whatamiusing) and [Saptarshi Mukherjee](https://github.com/Saptarshi2006), with Aditya Chatterjee, Soumyajit Dey, Sakshi Raj and Sreeja Saha.
 
 Content and imagery belong to their respective pandals, committees and artists.
