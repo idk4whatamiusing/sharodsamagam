@@ -19,6 +19,6 @@ Built and maintained as a non-commercial, volunteer-run project. Free for everyo
 
 ## Credits
 
-Made by [Debopam Das](https://github.com/idk4whatamiusing) and [Saptarshi Mukherjee](https://github.com/Saptarshi2006), with Aditya Chatterjee, Soumyajit Dey, Sakshi Raj and Sreeja Saha.
+Made by [Debopam Das](https://github.com/idk4whatamiusing) and [Saptarshi Mukherjee](https://github.com/Saptarshi2006), with [Aditya Chatterjee](https://github.com/Aace-Ex-ops), Soumyajit Dey, Sakshi Raj and Sreeja Saha.
 
 Content and imagery belong to their respective pandals, committees and artists.
