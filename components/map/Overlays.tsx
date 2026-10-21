@@ -336,6 +336,7 @@ export function MobilePanel({
   filters,
   trails,
   planner,
+  ai,
 }: {
   open: boolean;
   tab: MapTab;
@@ -344,10 +345,11 @@ export function MobilePanel({
   filters: ReactNode;
   trails: ReactNode;
   planner: ReactNode;
+  ai: ReactNode;
 }) {
   if (!open) return null;
   return (
-    <div className="fixed inset-0 z-[80] flex flex-col bg-[#FFFBF0] lg:hidden">
+    <div data-mobile-panel className="fixed inset-0 z-[80] flex flex-col bg-[#FFFBF0] lg:hidden">
       <div className="relative shrink-0 overflow-hidden bg-[#2C1210] px-3 pb-2 pt-[max(0.75rem,env(safe-area-inset-top))] text-[#FFFBF0]">
         <div className="absolute -right-8 -top-10 h-28 w-28 rounded-full border border-[#E5C880]/20" />
         <div className="relative flex items-center justify-between">
@@ -366,12 +368,13 @@ export function MobilePanel({
             <Icon name="close" size={14} />
           </button>
         </div>
-        <div className="relative mt-2 grid grid-cols-3 gap-1 rounded-xl border border-[#E5C880]/25 bg-white/5 p-1">
+        <div className="relative mt-2 grid grid-cols-4 gap-1 rounded-xl border border-[#E5C880]/25 bg-white/5 p-1">
           {(
             [
               ["filters", "Filter & POIs"],
               ["trails", "Curated Trails"],
               ["planner", "Route Planner"],
+              ["ai", "AI Planner"],
             ] as [MapTab, string][]
           ).map(([id, label]) => (
             <button
@@ -389,10 +392,14 @@ export function MobilePanel({
           ))}
         </div>
       </div>
-      <div className="min-h-0 flex-1 overflow-y-auto p-3 pb-[calc(5rem+env(safe-area-inset-bottom))]">
+      <div
+        data-mobile-panel-body
+        className="min-h-0 flex-1 overflow-y-auto p-3 pb-[calc(5rem+env(safe-area-inset-bottom))]"
+      >
         {tab === "filters" && filters}
         {tab === "trails" && trails}
         {tab === "planner" && planner}
+        {tab === "ai" && ai}
       </div>
     </div>
   );
@@ -440,7 +447,10 @@ export function RouteSheet({
             </button>
           </div>
         </div>
-        <div className="min-h-0 flex-1 overflow-y-auto px-3 pb-[calc(5rem+env(safe-area-inset-bottom))]">
+        <div
+          data-route-sheet-body
+          className="min-h-0 flex-1 overflow-y-auto px-3 pb-[calc(5rem+env(safe-area-inset-bottom))]"
+        >
           {children}
         </div>
       </div>

@@ -1,35 +1,27 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useAuth } from "../AuthProvider";
 import { signIn } from "../../lib/account";
 import { Icon, Spinner } from "./ui";
+import type { AiMessage } from "./aiChat";
 
-type PlanStop = {
-  id: string;
-  name: string;
-  kind: "pandal" | "poi";
-  lat: number | null;
-  lng: number | null;
-  zone: string;
-  locality: string;
-};
-
-type Plan = {
+export type AiPlan = {
   reply: string;
   clarify: string | null;
   notes: string;
   mode: "walk" | "drive" | "cycle" | "transit";
-  stops: PlanStop[];
-  meetingPoint: PlanStop | null;
+  stops: {
+    id: string;
+    name: string;
+    kind: "pandal" | "poi";
+    lat: number | null;
+    lng: number | null;
+    zone: string;
+    locality: string;
+  }[];
+  meetingPoint: { id: string; name: string } | null;
   ai: boolean;
-};
-
-type Message = {
-  id: string;
-  role: "user" | "assistant";
-  text: string;
-  plan?: Plan;
 };
 
 const CHIPS = [
@@ -40,35 +32,38 @@ const CHIPS = [
   "Meet a friend at Esplanade Metro, then see 4 pandals",
 ];
 
-const uuid = () =>
-  (typeof crypto !== "undefined" && "randomUUID" in crypto
-    ? crypto.randomUUID()
-    : Math.random().toString(36).slice(2));
-
 export function AiPlannerPanel({
-  onPlan,
+  messages,
+  input,
+  setInput,
+  busy,
+  error,
+  onSend,
+  onClear,
   plan,
   onShare,
   onOpenGoogle,
   onOpenApple,
   onSave,
+  onViewMap,
   saved,
-  onClear,
 }: {
-  onPlan: (plan: Plan) => void;
-  plan: Plan | null;
+  messages: AiMessage[];
+  input: string;
+  setInput: (value: string) => void;
+  busy: boolean;
+  error: string;
+  onSend: (text: string) => void;
+  onClear: () => void;
+  plan: AiPlan | null;
   onShare: () => void;
   onOpenGoogle: () => void;
   onOpenApple: () => void;
   onSave: () => void;
+  onViewMap: () => void;
   saved: boolean;
-  onClear: () => void;
 }) {
   const { account, ready } = useAuth();
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [input, setInput] = useState("");
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState("");
   const endRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -102,56 +97,6 @@ export function AiPlannerPanel({
     );
   }
 
-  const send = async (text: string) => {
-    const message = text.trim();
-    if (!message || busy) return;
-    setInput("");
-    setError("");
-    setMessages((previous) => [
-      ...previous,
-      { id: uuid(), role: "user", text: message },
-    ]);
-    setBusy(true);
-    try {
-      const res = await fetch("/api/plan", {
-        method: "POST",
-        credentials: "same-origin",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ message }),
-      });
-      if (res.status === 401) {
-        setError("Your session expired. Sign in again to plan.");
-        setBusy(false);
-        return;
-      }
-      if (!res.ok) {
-        const detail = await res.json().catch(() => ({}));
-        setError(
-          detail.error === "google_not_configured"
-            ? "Google sign-in is not configured on this deployment yet."
-            : "The planner could not answer that. Please try again."
-        );
-        setBusy(false);
-        return;
-      }
-      const next = (await res.json()) as Plan;
-      setMessages((previous) => [
-        ...previous,
-        {
-          id: uuid(),
-          role: "assistant",
-          text: next.clarify ? next.clarify : next.reply,
-          plan: next.clarify ? undefined : next,
-        },
-      ]);
-      if (!next.clarify && next.stops.length) onPlan(next);
-    } catch {
-      setError("The planner is unreachable right now. Please try again.");
-    } finally {
-      setBusy(false);
-    }
-  };
-
   return (
     <div className="flex h-full flex-col gap-2">
       <div className="flex items-start justify-between gap-2">
@@ -166,10 +111,7 @@ export function AiPlannerPanel({
         {messages.length > 0 && (
           <button
             type="button"
-            onClick={() => {
-              setMessages([]);
-              onClear();
-            }}
+            onClick={onClear}
             className="shrink-0 cursor-pointer rounded-lg border border-[#E5C880] px-2 py-1 font-mono text-[9px] font-bold text-[#B45309] transition-colors hover:border-[#D90429] hover:text-[#D90429]"
           >
             Clear
@@ -190,7 +132,7 @@ export function AiPlannerPanel({
                 <button
                   key={chip}
                   type="button"
-                  onClick={() => void send(chip)}
+                  onClick={() => onSend(chip)}
                   className="cursor-pointer rounded-full border border-[#E5C880] bg-white px-2 py-1 text-left font-mono text-[9px] font-semibold text-[#2C1210]/70 transition-colors hover:border-[#D90429] hover:text-[#D90429]"
                 >
                   {chip}
@@ -283,6 +225,13 @@ export function AiPlannerPanel({
             >
               Share
             </button>
+            <button
+              type="button"
+              onClick={onViewMap}
+              className="col-span-2 cursor-pointer rounded-lg border border-[#D90429]/40 bg-[#D90429]/5 px-2 py-1.5 font-mono text-[9px] font-bold text-[#D90429] transition-colors hover:bg-[#D90429]/10"
+            >
+              View on map
+            </button>
           </div>
         </div>
       )}
@@ -290,7 +239,7 @@ export function AiPlannerPanel({
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          void send(input);
+          onSend(input);
         }}
         className="flex shrink-0 items-center gap-1.5"
       >
@@ -312,5 +261,3 @@ export function AiPlannerPanel({
     </div>
   );
 }
-
-export type { Plan as AiPlan };

@@ -45,6 +45,7 @@ import {
 } from "./Overlays";
 import { useSaves } from "../useSaves";
 import { AiPlannerPanel } from "./AiPlannerPanel";
+import { useAiChat } from "./aiChat";
 import type { AiPlan } from "./AiPlannerPanel";
 import { Icon, Toast } from "./ui";
 
@@ -900,7 +901,13 @@ export default function MapApp() {
       }
       setPlannerStops(stops);
       setPlannerMode(plan.mode as TravelMode);
-      setTab("planner");
+      // On a phone the chat stays open so the answer is readable, and
+      // "View on map" hands the itinerary to the route sheet. On a desktop
+      // the sidebar switches to the planner, which shows the same route in
+      // full; the conversation is kept and comes back with the AI tab.
+      if (typeof window === "undefined" || window.innerWidth >= 1024) {
+        setTab("planner");
+      }
       // Draw the plan's own line first so the map answers immediately, then
       // let the router replace it with the real road geometry.
       const straight = straightLineStopMeters(stops) * 1.18;
@@ -917,6 +924,15 @@ export default function MapApp() {
       await generatePlannerRoute(stops, plan.mode as TravelMode);
     },
     [data, drawSegments, fitRoute, generatePlannerRoute, showToast]
+  );
+
+  const aiChat = useAiChat(
+    useCallback(
+      (plan: AiPlan) => {
+        void applyAiPlan(plan);
+      },
+      [applyAiPlan]
+    )
   );
 
   const openAiGoogleMaps = useCallback(() => {
@@ -1215,6 +1231,33 @@ export default function MapApp() {
     />
   ) : null;
 
+  const aiPanel = (
+    <AiPlannerPanel
+      messages={aiChat.messages}
+      input={aiChat.input}
+      setInput={aiChat.setInput}
+      busy={aiChat.busy}
+      error={aiChat.error}
+      onSend={(text) => void aiChat.send(text)}
+      onClear={() => {
+        aiChat.clear();
+        clearAiPlan();
+      }}
+      plan={aiPlan}
+      onShare={() => void shareAiPlan()}
+      onOpenGoogle={openAiGoogleMaps}
+      onOpenApple={openAiAppleMaps}
+      onSave={() => void savePlannerResult()}
+      onViewMap={() => {
+        if (typeof window !== "undefined" && window.innerWidth < 1024) {
+          setMobilePanelOpen(false);
+          setRouteSheetOpen(true);
+        }
+      }}
+      saved={plannerSaved}
+    />
+  );
+
   const plannerPanel = (
     <PlannerPanel
       stops={plannerStops}
@@ -1310,18 +1353,7 @@ export default function MapApp() {
             {data && tab === "filters" && filterPanel}
             {data && tab === "trails" && trailsPanel}
             {data && tab === "planner" && plannerPanel}
-            {data && tab === "ai" && (
-              <AiPlannerPanel
-                plan={aiPlan}
-                onPlan={(plan) => void applyAiPlan(plan)}
-                onShare={() => void shareAiPlan()}
-                onOpenGoogle={openAiGoogleMaps}
-                onOpenApple={openAiAppleMaps}
-                onSave={() => void savePlannerResult()}
-                saved={plannerSaved}
-                onClear={clearAiPlan}
-              />
-            )}
+            {data && tab === "ai" && aiPanel}
 
           </div>
           <InstallBanner />
@@ -1544,6 +1576,17 @@ export default function MapApp() {
           </button>
           <button
             type="button"
+            aria-label="Open the AI trip planner"
+            onClick={() => {
+              setTab("ai");
+              setMobilePanelOpen(true);
+            }}
+            className="absolute bottom-[180px] right-2.5 z-20 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-[#E5C880] bg-[#FFFBF0] text-[#D90429] shadow-lg active:scale-95 lg:hidden"
+          >
+            <Icon name="sparkle" size={16} />
+          </button>
+          <button
+            type="button"
             aria-label="Recenter map on my location"
             onClick={() => void recenter()}
             className="absolute bottom-[132px] right-2.5 z-20 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-[#E5C880] bg-[#FFFBF0] text-[#2C1210] shadow-lg active:scale-95 lg:hidden"
@@ -1638,6 +1681,7 @@ export default function MapApp() {
         filters={filterPanel}
         trails={trailsPanel}
         planner={plannerPanel}
+        ai={aiPanel}
       />
       <RouteSheet open={routeSheetOpen} onClose={() => setRouteSheetOpen(false)}>
         {plannerPanel}

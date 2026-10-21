@@ -22,7 +22,7 @@ export default function ProfilePage() {
 
   if (!ready) {
     return (
-      <main className="mx-auto max-w-3xl px-4 py-16 text-center font-mono text-xs text-[#B45309]">
+      <main className="mx-auto max-w-3xl px-4 pb-[calc(6rem+env(safe-area-inset-bottom))] pt-24 text-center font-mono text-xs text-[#B45309] sm:pt-28 lg:pt-32">
         Loading your profile...
       </main>
     );
@@ -30,7 +30,7 @@ export default function ProfilePage() {
 
   if (!account) {
     return (
-      <main className="mx-auto max-w-3xl px-4 py-16 text-center">
+      <main className="mx-auto max-w-3xl px-4 pb-[calc(6rem+env(safe-area-inset-bottom))] pt-24 text-center sm:pt-28 lg:pt-32">
         <span className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-[#D90429]/10 text-[#D90429]">
           <Icon name="users" size={24} />
         </span>
@@ -51,7 +51,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <main className="mx-auto max-w-4xl px-4 py-10 sm:py-14">
+    <main className="mx-auto max-w-4xl px-4 pb-[calc(6rem+env(safe-area-inset-bottom))] pt-24 sm:pt-28 lg:pt-32">
       <div className="rounded-3xl border border-[#E5C880] bg-[#FFFBF0] p-5 sm:p-7">
         <div className="flex flex-wrap items-center gap-3">
           {account.picture ? (

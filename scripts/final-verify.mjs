@@ -1819,6 +1819,49 @@ console.log("\n== ACCOUNT & AI PLANNER ==");
   }));
   ok(/planner/i.test(profile.heading), `the profile shows the account (${profile.heading})`);
 
+  // The profile page sits under the fixed navbar, so its content has to
+  // start below it.
+  const profileClear = await p.evaluate(() => {
+    const head = [...document.querySelectorAll("header")].find(
+      (h) => getComputedStyle(h).display !== "none" && h.getBoundingClientRect().height > 0
+    );
+    const hb = head.getBoundingClientRect();
+    const h1 = document.querySelector("h1");
+    return { headBottom: Math.round(hb.bottom), h1Top: Math.round(h1.getBoundingClientRect().top) };
+  });
+  ok(
+    profileClear.h1Top > profileClear.headBottom,
+    `the profile clears the fixed navbar (${profileClear.h1Top} > ${profileClear.headBottom})`
+  );
+  await p.close();
+
+  // The AI planner has to be reachable on a phone too.
+  const m = await b.newPage({ viewport: { width: 390, height: 844 } });
+  const merrs = [];
+  m.on("pageerror", (e) => merrs.push(e.message.slice(0, 100)));
+  m.on("console", (c) => c.type() === "error" && merrs.push(c.text().slice(0, 100)));
+  await ready(m, B + "/map/");
+  const aiButton = await m.locator('button[aria-label="Open the AI trip planner"]').count();
+  ok(aiButton === 1, "the map offers an AI planner button on a phone");
+  await m.locator('button[aria-label="Open the AI trip planner"]').click();
+  await m.waitForTimeout(600);
+  const mobileAi = await m.evaluate(() => {
+    const panel = document.querySelector("[data-mobile-panel]");
+    const body = document.querySelector("[data-mobile-panel-body]");
+    return {
+      open: !!body,
+      tabs: [...(panel?.querySelectorAll("button") || [])].map((b) => b.textContent.trim()),
+      signedOut: /sign in to plan/i.test(body?.textContent || ""),
+    };
+  });
+  ok(mobileAi.open, "the AI planner opens in the phone panel");
+  ok(
+    mobileAi.tabs.some((t) => /ai planner/i.test(t)),
+    `the phone panel has an AI Planner tab (${mobileAi.tabs.join("/")})`
+  );
+  ok(mobileAi.signedOut, "the phone AI planner asks signed-out visitors to sign in");
+  ok(merrs.length === 0, "mobile account console clean" + (merrs.length ? ": " + [...new Set(merrs)].join(" | ") : ""));
+
   // The deliberate anonymous calls above answer 401, and the browser logs
   // that as a console error. It is the expected answer, not a fault.
   const realErrs = errs.filter((e) => !/401/.test(e));
@@ -1826,7 +1869,6 @@ console.log("\n== ACCOUNT & AI PLANNER ==");
     realErrs.length === 0,
     "account console clean" + (realErrs.length ? ": " + [...new Set(realErrs)].join(" | ") : "")
   );
-  await p.close();
 }
 
 // ---------- page metadata ----------

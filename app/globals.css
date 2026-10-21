@@ -303,3 +303,11 @@ div[class*="bg-[#180A08]"] {
 [data-pillar-tabs] button[data-pillar-active="false"] .pillar-label {
   color: #b45309;
 }
+
+/* The phone sheets sit above the fixed bottom nav, and the original theme
+   re-declares the padding utilities after Tailwind, so the extra clearance
+   has to be pinned here or the last control ends up under the nav. */
+[data-mobile-panel-body],
+[data-route-sheet-body] {
+  padding-bottom: calc(5rem + env(safe-area-inset-bottom)) !important;
+}
