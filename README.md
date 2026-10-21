@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sharodsamagam
 
-## Getting Started
+**Live site: https://sharodsamagam.dpdns.org**
 
-First, run the development server:
+Sharodsamagam is a digital companion for Kolkata's Durga Puja — the festival inscribed by UNESCO as Intangible Cultural Heritage of Humanity. It gathers the pandal directory, curated parikrama trails, a live map, the Panzika almanac, festival guides and a community photo archive in one place, so pilgrims and visitors can plan a pandal-hopping trip without digging through scattered posts and notices.
+
+Built and maintained as a non-commercial, volunteer-run project. Free for everyone, no ads, no sign-up walls on the public content.
+
+## What's inside
+
+- **Pandal directory** — 776 pandals with zones, themes, ratings, heritage and crowd levels
+- **Interactive map** — every geocoded pandal, 30 curated trails, transit hubs and a route planner
+- **AI trip planner** — describe the trip you want, get a route drawn on the map with Google Maps and Apple Maps links
+- **Curated trails** — handcrafted walking, rail and heritage circuits with timings and stop-by-stop detail
+- **Panzika** — the day-by-day festival calendar
+- **Guides** — etiquette, photography, emergency desks, food trails and transit information
+- **Community archive** — photos, chronicles and visitor contributions
+- **Accounts** — optional Google sign-in to save pandals, trails and trips across devices
+
+## Local setup
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build and deploy
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build        # static export into out/
+npx wrangler deploy  # published to Cloudflare Workers
+```
 
-## Learn More
+The site is a static export served through Cloudflare Workers. A Worker alongside it handles accounts, cloud saves, uploads and the AI planner.
 
-To learn more about Next.js, take a look at the following resources:
+## Credits
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Made by [Debopam Das](https://github.com/idk4whatamiusing) and [Saptarshi Mukherjee](https://github.com/Saptarshi2006), with Aditya Chatterjee, Soumyajit Dey and Sakshi Raj.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Content and imagery belong to their respective pandals, committees and artists.
