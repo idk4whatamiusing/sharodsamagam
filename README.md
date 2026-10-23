@@ -23,6 +23,6 @@ MIT — see [LICENSE](LICENSE).
 
 ## Credits
 
-Made by [Debopam Das](https://github.com/idk4whatamiusing) and [Saptarshi Mukherjee](https://github.com/Saptarshi2006), with [Aditya Chatterjee](https://github.com/Aace-Ex-ops), Soumyajit Dey, [Sakshi Raj](https://github.com/sakshiraj7060-max) and [Sreeja Saha](https://github.com/uttamsaha3115-ai).
+Made by [Debopam Das](https://github.com/idk4whatamiusing) and [Saptarshi Mukherjee](https://github.com/Saptarshi2006), with [Aditya Chatterjee](https://github.com/Aace-Ex-ops), [Soumyajit Dey](https://github.com/deysoumyajit93-del), [Sakshi Raj](https://github.com/sakshiraj7060-max) and [Sreeja Saha](https://github.com/uttamsaha3115-ai).
 
 Content and imagery belong to their respective pandals, committees and artists.
